@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/emergency-training-poc/events/session_messages.schema.json",
+  "title": "SessionMessage",
+  "oneOf": [
+    { "$ref": "#/$defs/start_session_message" },
+    { "$ref": "#/$defs/action_message" },
+    { "$ref": "#/$defs/outcome_message" },
+    { "$ref": "#/$defs/session_started_message" },
+    { "$ref": "#/$defs/state_update_message" },
+    { "$ref": "#/$defs/scenario_ended_message" },
+    { "$ref": "#/$defs/error_message" }
+  ],
+  "$defs": {
+    "start_session_message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_type"],
+      "properties": {
+        "message_type": { "const": "start_session" },
+        "scenario_id": { "type": "string", "minLength": 1, "default": "smoke_inhalation_room_v0" }
+      }
+    },
+    "base": {
+      "type": "object",
+      "required": ["schema_version", "message_type", "session_id", "scenario_id", "message_id", "timestamp", "sequence_number"],
+      "properties": {
+        "schema_version": { "const": "0.1.0" },
+        "message_type": { "type": "string" },
+        "session_id": { "type": "string", "minLength": 1 },
+        "scenario_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sequence_number": { "type": "integer", "minimum": 1 },
+        "correlation_event_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "action_message": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["trainee_action"],
+          "properties": {
+            "schema_version": true,
+            "message_type": { "const": "trainee_action" },
+            "session_id": true,
+            "scenario_id": true,
+            "message_id": true,
+            "timestamp": true,
+            "sequence_number": true,
+            "correlation_event_id": true,
+            "trainee_action": { "$ref": "trainee_action_event.schema.json" }
+          }
+        }
+      ]
+    },
+    "outcome_message": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["correlation_event_id", "scenario_state", "validation_result"],
+          "properties": {
+            "schema_version": true,
+            "message_type": { "const": "scenario_outcome" },
+            "session_id": true,
+            "scenario_id": true,
+            "message_id": true,
+            "timestamp": true,
+            "sequence_number": true,
+            "correlation_event_id": true,
+            "scenario_state": { "$ref": "scenario_state.schema.json" },
+            "validation_result": { "$ref": "validation_result.schema.json" }
+          }
+        }
+      ]
+    },
+    "session_started_message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_type", "session_id", "scenario_id", "scenario_version", "sequence_number", "state"],
+      "properties": {
+        "message_type": { "const": "session_started" },
+        "session_id": { "type": "string", "minLength": 1 },
+        "scenario_id": { "type": "string", "minLength": 1 },
+        "scenario_version": { "type": "string", "minLength": 1 },
+        "sequence_number": { "const": 0 },
+        "state": { "type": "object" }
+      }
+    },
+    "state_update_message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_type", "session_id", "scenario_id", "sequence_number", "scenario_state", "validation_result"],
+      "properties": {
+        "message_type": { "const": "scenario_state_update" },
+        "session_id": { "type": "string", "minLength": 1 },
+        "scenario_id": { "type": "string", "minLength": 1 },
+        "sequence_number": { "type": "integer", "minimum": 1 },
+        "scenario_state": { "$ref": "scenario_state.schema.json" },
+        "validation_result": { "$ref": "validation_result.schema.json" }
+      }
+    },
+    "scenario_ended_message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_type", "session_id", "scenario_id", "sequence_number", "outcome", "final_state"],
+      "properties": {
+        "message_type": { "const": "scenario_ended" },
+        "session_id": { "type": "string", "minLength": 1 },
+        "scenario_id": { "type": "string", "minLength": 1 },
+        "sequence_number": { "type": "integer", "minimum": 1 },
+        "outcome": { "enum": ["completed", "stopped"] },
+        "final_state": { "type": "object" }
+      }
+    },
+    "error_message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_type", "code", "message"],
+      "properties": {
+        "message_type": { "const": "error" },
+        "code": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

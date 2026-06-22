@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/emergency-training-poc/events/validation_result.schema.json",
+  "title": "ValidationResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "session_id",
+    "scenario_id",
+    "event_id",
+    "timestamp",
+    "sequence_number",
+    "status",
+    "warnings",
+    "errors",
+    "notes",
+    "applied_rule_ids"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "session_id": { "type": "string", "minLength": 1 },
+    "scenario_id": { "type": "string", "minLength": 1 },
+    "event_id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "sequence_number": { "type": "integer", "minimum": 1 },
+    "status": { "enum": ["ok", "warning", "error"] },
+    "warnings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+    "errors": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+    "notes": { "type": "array", "items": { "type": "string" } },
+    "applied_rule_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 },
+        "rule_id": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

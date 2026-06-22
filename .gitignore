@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments and local configuration
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# Logs (retain repository guidance/placeholders)
+logs/*
+!logs/README.md
+!logs/.gitkeep
+!logs/sessions/
+logs/sessions/*
+!logs/sessions/.gitkeep
+*.log
+
+# Unreal Engine generated content
+unreal/**/Binaries/
+unreal/**/Build/
+unreal/**/DerivedDataCache/
+unreal/**/Intermediate/
+unreal/**/Saved/
+unreal/**/*.sln
+unreal/**/*.suo
+unreal/**/*.opensdf
+unreal/**/*.sdf
+
+# Generated assets (retain documentation/placeholders)
+assets/generated/*
+!assets/generated/README.md
+!assets/generated/.gitkeep
+
+# Editors
+.idea/
+.vscode/
+*.code-workspace
+*.swp
+*.swo
+
+# OS junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local tooling
+.cache/
+.tmp/

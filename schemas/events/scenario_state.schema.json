@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/emergency-training-poc/events/scenario_state.schema.json",
+  "title": "ScenarioState",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "session_id",
+    "scenario_id",
+    "event_id",
+    "timestamp",
+    "sequence_number",
+    "state",
+    "is_terminal",
+    "next_expected_actions"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "session_id": { "type": "string", "minLength": 1 },
+    "scenario_id": { "type": "string", "minLength": 1 },
+    "event_id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "sequence_number": { "type": "integer", "minimum": 0 },
+    "state": {
+      "type": "object",
+      "required": ["phase", "scene_assessed", "ppe_confirmed", "backup_requested", "occupant_removed", "scenario_outcome"],
+      "additionalProperties": true,
+      "properties": {
+        "phase": { "type": "string" },
+        "scene_assessed": { "type": "boolean" },
+        "ppe_confirmed": { "type": "boolean" },
+        "backup_requested": { "type": "boolean" },
+        "occupant_removed": { "type": "boolean" },
+        "scenario_outcome": { "enum": ["in_progress", "completed", "stopped"] }
+      }
+    },
+    "is_terminal": { "type": "boolean" },
+    "next_expected_actions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

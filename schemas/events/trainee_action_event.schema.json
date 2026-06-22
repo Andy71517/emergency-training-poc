@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/emergency-training-poc/events/trainee_action_event.schema.json",
+  "title": "TraineeActionEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "session_id",
+    "scenario_id",
+    "event_id",
+    "timestamp",
+    "actor_id",
+    "action_type",
+    "payload",
+    "sequence_number"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "session_id": { "type": "string", "minLength": 1 },
+    "scenario_id": { "type": "string", "minLength": 1 },
+    "event_id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "actor_id": { "type": "string", "minLength": 1 },
+    "action_type": { "type": "string", "minLength": 1 },
+    "payload": { "type": "object" },
+    "sequence_number": { "type": "integer", "minimum": 1 }
+  }
+}
