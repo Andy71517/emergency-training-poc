@@ -35,7 +35,9 @@ It currently checks:
 - ordered sequence numbers
 - duplicate event IDs
 - small JSON-shaped payloads
+- max active sessions
+- max actions per session
 
-The backend is still local-only. There is no authentication, authorization, TLS, database security, production rate limiting, or cloud hardening yet.
+The backend is still local-only. There is no authentication, authorization, TLS, database security, production rate limiting, time-based throttling, or cloud hardening yet.
 
 This backend only proves the local action-to-state-to-log loop. It uses in-memory sessions and local files. There is no authentication, database, external AI, clinical decision support, distributed networking, sensing, deployment, or Unreal-specific gameplay logic.

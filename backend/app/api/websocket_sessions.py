@@ -50,7 +50,10 @@ def create_websocket_router(session_manager: SessionManager) -> APIRouter:
         except ValidationError as error:
             await _send_error(websocket, "invalid_message", _validation_message(error))
             await websocket.close(code=1008)
-        except (SessionInputError, ValueError) as error:
+        except SessionInputError as error:
+            await _send_error(websocket, error.code, str(error))
+            await websocket.close(code=1008)
+        except ValueError as error:
             await _send_error(websocket, "session_error", str(error))
             await websocket.close(code=1008)
 
@@ -70,7 +73,7 @@ async def _process_action(
         await _send_error(websocket, "invalid_message", _validation_message(error))
         return False
     except SessionInputError as error:
-        await _send_error(websocket, "session_error", str(error))
+        await _send_error(websocket, error.code, str(error))
         return False
 
     await websocket.send_json(processed.update.model_dump(mode="json"))

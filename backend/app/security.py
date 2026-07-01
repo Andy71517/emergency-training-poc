@@ -21,6 +21,8 @@ MAX_PAYLOAD_KEYS = 20
 MAX_PAYLOAD_LIST_ITEMS = 20
 MAX_PAYLOAD_STRING_LENGTH = 500
 MAX_PAYLOAD_TOTAL_NODES = 80
+MAX_ACTIVE_SESSIONS = 20
+MAX_ACTIONS_PER_SESSION = 50
 
 _SAFE_IDENTIFIER_RE = re.compile(SAFE_IDENTIFIER_PATTERN)
 _SCENARIO_IDENTIFIER_RE = re.compile(SCENARIO_IDENTIFIER_PATTERN)
@@ -135,4 +137,3 @@ def _check_payload_value(
         return
 
     raise ValueError(f"{field_path} must contain only JSON-style values")
-

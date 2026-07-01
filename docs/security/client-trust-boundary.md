@@ -37,6 +37,8 @@ The backend checks:
 - safe action name format
 - sequence number order
 - duplicate event IDs
+- active session count
+- action count per session
 - session/scenario consistency
 - small JSON-shaped payloads
 
@@ -49,4 +51,3 @@ That does not mean it should become trusted.
 If a future client can directly edit scenario state, then a bug or malicious client could fake a clean training result. So even in the POC, the contract is clear:
 
 > Unreal displays state. The backend owns state.
-

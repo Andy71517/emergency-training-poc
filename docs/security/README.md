@@ -19,6 +19,8 @@ The backend now does a few starter checks:
 - checks session ID consistency between the URL, envelope, and event
 - checks ordered sequence numbers
 - rejects duplicate event IDs
+- limits active sessions
+- limits actions per session
 - keeps logs in `logs/sessions/`
 
 ## What this does not solve yet
@@ -28,7 +30,7 @@ This does not add:
 - authentication
 - authorization
 - TLS
-- rate limiting
+- real rate limiting
 - multi-user access control
 - secrets management
 - production deployment security
@@ -40,5 +42,6 @@ That is okay for this stage. This is a POC security floor, not the final securit
 - `poc-threat-model.md`: what could go wrong in the current local demo
 - `client-trust-boundary.md`: what the backend should and should not trust from clients
 - `logging-and-data-handling.md`: how local logs should be treated
+- `websocket-error-codes.md`: current client-facing WebSocket error codes
+- `demo-day-checklist.md`: quick checklist before presenting the demo
 - `security-roadmap.md`: how security should grow as the project grows
-

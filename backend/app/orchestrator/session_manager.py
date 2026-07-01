@@ -16,7 +16,12 @@ from backend.app.models.messages import (
 from backend.app.models.state import ScenarioState
 from backend.app.scenario_engine.engine import ScenarioEngine
 from backend.app.scenario_engine.loader import load_scenario
-from backend.app.security import ensure_safe_identifier, ensure_safe_scenario_id
+from backend.app.security import (
+    MAX_ACTIONS_PER_SESSION,
+    MAX_ACTIVE_SESSIONS,
+    ensure_safe_identifier,
+    ensure_safe_scenario_id,
+)
 from backend.app.validation.rules import load_rules
 from backend.app.validation.validator import ScenarioValidator
 
@@ -24,7 +29,9 @@ DEFAULT_LOG_DIRECTORY = Path(__file__).resolve().parents[3] / "logs" / "sessions
 
 
 class SessionInputError(ValueError):
-    pass
+    def __init__(self, message: str, code: str = "session_error") -> None:
+        super().__init__(message)
+        self.code = code
 
 
 @dataclass
@@ -47,9 +54,17 @@ class ProcessedAction:
 
 
 class SessionManager:
-    def __init__(self, log_directory: Path = DEFAULT_LOG_DIRECTORY) -> None:
+    def __init__(
+        self,
+        log_directory: Path = DEFAULT_LOG_DIRECTORY,
+        *,
+        max_active_sessions: int = MAX_ACTIVE_SESSIONS,
+        max_actions_per_session: int = MAX_ACTIONS_PER_SESSION,
+    ) -> None:
         self.logger = JsonlSessionLogger(log_directory)
         self.sessions: dict[str, SessionContext] = {}
+        self.max_active_sessions = max_active_sessions
+        self.max_actions_per_session = max_actions_per_session
 
     def start_session(
         self,
@@ -58,11 +73,22 @@ class SessionManager:
     ) -> SessionStartedMessage:
         try:
             ensure_safe_identifier(session_id, "session_id")
+        except ValueError as error:
+            raise SessionInputError(str(error), code="invalid_session_id") from error
+        try:
             ensure_safe_scenario_id(scenario_id)
         except ValueError as error:
-            raise SessionInputError(str(error)) from error
+            raise SessionInputError(str(error), code="invalid_scenario_id") from error
         if session_id in self.sessions:
-            raise SessionInputError(f"Session '{session_id}' is already active")
+            raise SessionInputError(
+                f"Session '{session_id}' is already active",
+                code="session_already_exists",
+            )
+        if self.active_session_count() >= self.max_active_sessions:
+            raise SessionInputError(
+                f"Active session limit reached: {self.max_active_sessions}",
+                code="active_session_limit_reached",
+            )
         scenario = load_scenario(scenario_id)
         engine = ScenarioEngine(scenario)
         context = SessionContext(
@@ -87,6 +113,9 @@ class SessionManager:
             state_snapshot=context.state,
         )
         return started
+
+    def active_session_count(self) -> int:
+        return sum(1 for context in self.sessions.values() if not context.ended)
 
     def process_action(self, session_id: str, message: TraineeActionMessage) -> ProcessedAction:
         context = self._context(session_id)
@@ -154,26 +183,46 @@ class SessionManager:
     def _check_message(self, context: SessionContext, message: TraineeActionMessage) -> None:
         event = message.trainee_action
         if context.ended:
-            raise SessionInputError("Scenario has already ended")
+            raise SessionInputError("Scenario has already ended", code="session_already_ended")
+        if context.sequence_number >= self.max_actions_per_session:
+            raise SessionInputError(
+                f"Action limit reached for this session: {self.max_actions_per_session}",
+                code="session_action_limit_reached",
+            )
         if message.session_id != context.session_id or event.session_id != context.session_id:
-            raise SessionInputError("Message session_id does not match the WebSocket session")
+            raise SessionInputError(
+                "Message session_id does not match the WebSocket session",
+                code="session_id_mismatch",
+            )
         if message.scenario_id != context.scenario_id or event.scenario_id != context.scenario_id:
-            raise SessionInputError("Message scenario_id does not match the active scenario")
+            raise SessionInputError(
+                "Message scenario_id does not match the active scenario",
+                code="scenario_id_mismatch",
+            )
         if message.sequence_number != event.sequence_number:
-            raise SessionInputError("Envelope and event sequence numbers do not match")
+            raise SessionInputError(
+                "Envelope and event sequence numbers do not match",
+                code="sequence_number_mismatch",
+            )
         expected = context.sequence_number + 1
         if event.sequence_number != expected:
-            raise SessionInputError(f"Expected sequence_number {expected}")
+            raise SessionInputError(
+                f"Expected sequence_number {expected}",
+                code="sequence_number_out_of_order",
+            )
         if event.event_id in context.event_ids:
-            raise SessionInputError("Duplicate event_id")
+            raise SessionInputError("Duplicate event_id", code="duplicate_event_id")
         if message.correlation_event_id not in {None, event.event_id}:
-            raise SessionInputError("correlation_event_id does not match event_id")
+            raise SessionInputError(
+                "correlation_event_id does not match event_id",
+                code="correlation_event_id_mismatch",
+            )
 
     def _context(self, session_id: str) -> SessionContext:
         try:
             return self.sessions[session_id]
         except KeyError as error:
-            raise SessionInputError(f"Unknown session '{session_id}'") from error
+            raise SessionInputError(f"Unknown session '{session_id}'", code="unknown_session") from error
 
     def _log(
         self,

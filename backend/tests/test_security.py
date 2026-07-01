@@ -67,6 +67,59 @@ def test_websocket_rejects_unsafe_session_id(tmp_path: Path) -> None:
         response = websocket.receive_json()
 
     assert response["message_type"] == "error"
-    assert response["code"] == "session_error"
+    assert response["code"] == "invalid_session_id"
     assert "session_id" in response["message"]
 
+
+def test_session_manager_limits_active_sessions(tmp_path: Path) -> None:
+    manager = SessionManager(tmp_path, max_active_sessions=1)
+    manager.start_session("session-one")
+
+    with pytest.raises(SessionInputError, match="Active session limit"):
+        manager.start_session("session-two")
+
+    assert manager.active_session_count() == 1
+
+
+def test_ended_sessions_do_not_count_against_active_session_limit(tmp_path: Path) -> None:
+    manager = SessionManager(tmp_path, max_active_sessions=1)
+    manager.start_session("session-one")
+    actions = [
+        "assess_scene",
+        "confirm_ppe",
+        "request_backup",
+        "move_obstacle",
+        "open_door",
+        "enter_room",
+        "remove_occupant",
+    ]
+    for sequence_number, action in enumerate(actions, start=1):
+        manager.process_action("session-one", action_message("session-one", action, sequence_number))
+
+    manager.start_session("session-two")
+
+    assert manager.active_session_count() == 1
+
+
+def test_session_manager_limits_actions_per_session(tmp_path: Path) -> None:
+    manager = SessionManager(tmp_path, max_actions_per_session=1)
+    manager.start_session("limited-session")
+    manager.process_action("limited-session", action_message("limited-session", "assess_scene", 1))
+
+    with pytest.raises(SessionInputError, match="Action limit"):
+        manager.process_action("limited-session", action_message("limited-session", "confirm_ppe", 2))
+
+
+def test_websocket_returns_specific_sequence_error_code(tmp_path: Path) -> None:
+    session_id = "sequence-error-test"
+    client = TestClient(create_app(tmp_path))
+
+    with client.websocket_connect(f"/ws/sessions/{session_id}") as websocket:
+        websocket.send_json({"message_type": "start_session"})
+        websocket.receive_json()
+        websocket.send_json(action_message(session_id, "confirm_ppe", 2).model_dump(mode="json"))
+        response = websocket.receive_json()
+
+    assert response["message_type"] == "error"
+    assert response["code"] == "sequence_number_out_of_order"
+    assert "Expected sequence_number 1" in response["message"]

@@ -78,7 +78,7 @@ Clients start by sending `{"message_type":"start_session"}` to `/ws/sessions/{se
 
 ## Security baseline
 
-The backend now has a small POC security baseline. It rejects strange IDs, unexpected message fields, path-like scenario names, and oversized/nested payloads.
+The backend now has a small POC security baseline. It rejects strange IDs, unexpected message fields, path-like scenario names, oversized/nested payloads, too many active sessions, and too many actions in one session.
 
 This does not make the app production-secure. There is still no authentication, authorization, TLS, rate limiting, cloud deployment, or real data handling policy.
 

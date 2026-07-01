@@ -13,15 +13,16 @@ Status: started.
 - reject unexpected fields
 - limit payload shape
 - keep logs in the intended folder
+- limit active local sessions
+- limit actions per session
+- return clearer WebSocket error codes
 - document what is not secure yet
 
 ## Stage 2: stronger local demo
 
 Add:
 
-- basic rate limits for WebSocket messages
-- max active sessions
-- clearer error codes
+- simple time-based message throttling if the local demo needs it
 - dependency audit command
 - security-focused tests for replay and logs
 - safer demo config defaults
@@ -65,4 +66,3 @@ Add:
 ## Not yet
 
 Do not add production auth, cloud deployment, or complex security frameworks while the repo is still proving the local backend loop.
-
