@@ -1,9 +1,11 @@
 from pathlib import Path
+import json
 
 from backend.app.orchestrator.session_manager import SessionManager
 from backend.app.scenario_engine.engine import ScenarioEngine
 from backend.app.scenario_engine.loader import load_scenario
 from backend.tests.conftest import action_message
+from jsonschema import Draft202012Validator
 
 
 def test_scenario_yaml_loads_and_initial_state_is_correct() -> None:
@@ -18,6 +20,20 @@ def test_scenario_yaml_loads_and_initial_state_is_correct() -> None:
     assert scenario.initial_state["environment"]["objects"]["wooden_chair_poc"]["blocks_path"] is True
     assert scenario.initial_state["environment"]["objects"]["entry_door_poc"]["open_state"] == "closed"
     assert scenario.initial_state["environment"]["objects"]["entry_door_poc"]["locked"] is False
+
+
+def test_environment_objects_follow_shared_contract() -> None:
+    scenario = load_scenario()
+    schema = json.loads(Path("schemas/events/environment_object.schema.json").read_text(encoding="utf-8"))
+    validator = Draft202012Validator(schema)
+
+    for object_id, object_state in scenario.initial_state["environment"]["objects"].items():
+        validator.validate(object_state)
+        assert object_id.endswith("_poc")
+        assert object_state["label"]
+        assert object_state["location"]
+        assert object_state["physics_enabled"] is False
+        assert "real" in object_state["physics_note"].lower()
 
 
 def test_happy_path_reaches_expected_final_state(tmp_path: Path) -> None:

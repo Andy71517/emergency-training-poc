@@ -6,6 +6,7 @@ They are the shared language between the fake trainee, backend, logs, scripts, a
 
 - `trainee_action_event`: one normalized trainee action
 - `scenario_state`: the backend-owned state after an action
+- `environment_object`: shared fields for simple scenario objects like chairs and doors
 - `validation_result`: the POC rule result for that action
 - `session_messages`: WebSocket messages for start, action, state update, end, and error
 

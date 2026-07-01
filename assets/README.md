@@ -8,4 +8,6 @@ When the project needs a first simple environmental-object candidate, use a wood
 
 Generated candidates and reviewed assets must stay separate. Before a future asset is used, it should have metadata, licensing/provenance review, technical checks, optimization, human review, and explicit approval.
 
+Generated assets should also pass the manual Blender review checklist in `assets/metadata/blender-review-checklist.md` before they are promoted.
+
 Visual assets should never define scenario rules. The backend owns scenario logic.

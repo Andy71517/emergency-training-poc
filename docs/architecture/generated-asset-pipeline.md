@@ -14,6 +14,7 @@ A future asset flow should include:
 
 - generation
 - metadata capture
+- manual Blender review
 - format checks
 - human safety and content review
 - optimization
@@ -21,3 +22,5 @@ A future asset flow should include:
 - explicit promotion into a reviewed folder
 
 A generated file is not approved just because it exists. Scenario correctness should never depend on visual details from generated assets.
+
+Use [environment-object-contract.md](environment-object-contract.md) for the backend object fields, and use the Blender checklist in `assets/metadata/blender-review-checklist.md` before any generated object is promoted.

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/emergency-training-poc/events/environment_object.schema.json",
+  "title": "EnvironmentObject",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["object_type", "label", "location", "blocks_path"],
+  "properties": {
+    "object_type": { "type": "string", "minLength": 1 },
+    "label": { "type": "string", "minLength": 1 },
+    "location": { "type": "string", "minLength": 1 },
+    "blocks_path": { "type": "boolean" },
+    "collision_enabled": { "type": "boolean" },
+    "collision_shape": { "type": "string" },
+    "mass_kg_estimate": { "type": "number", "minimum": 0 },
+    "physics_enabled": { "type": "boolean" },
+    "physics_note": { "type": "string" },
+    "force_preview": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "object_type": { "const": "wooden_chair" } },
+        "required": ["object_type"]
+      },
+      "then": {
+        "required": ["moved"],
+        "properties": {
+          "moved": { "type": "boolean" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "object_type": { "const": "door" } },
+        "required": ["object_type"]
+      },
+      "then": {
+        "required": ["open_state", "locked", "door_type"],
+        "properties": {
+          "open_state": { "enum": ["open", "closed"] },
+          "locked": { "type": "boolean" },
+          "door_type": { "type": "string", "minLength": 1 },
+          "hinge_side": { "type": "string" },
+          "swing_direction": { "type": "string" }
+        }
+      }
+    }
+  ]
+}

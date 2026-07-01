@@ -43,6 +43,7 @@
             "collision_enabled": true,
             "collision_shape": "box_preview",
             "mass_kg_estimate": 35,
+            "physics_enabled": false,
             "force_preview": {
               "push_forward": "opens_when_unlocked",
               "pull_backward": "limited_from_hall_side",
