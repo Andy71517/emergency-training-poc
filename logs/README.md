@@ -1,5 +1,9 @@
 # Local Session Logs
 
-The backend writes one JSON object per line (`.jsonl`) under `logs/sessions/` so attempted events, validation findings, and resulting states can be reviewed and replayed in order.
+The backend writes session logs as JSONL: one JSON object per line.
 
-Session logs may contain sensitive training observations in later experiments. They should remain local, are ignored by default, and generally must not be committed. `.gitkeep` exists only to retain this directory.
+Logs live under `logs/sessions/`. They include attempted actions, validation results, and state snapshots in order, so a session can be replayed or summarized later.
+
+Future logs may contain sensitive training observations. Keep them local. They are ignored by Git by default and generally should not be committed.
+
+`.gitkeep` only exists so the folder is present in the repo.

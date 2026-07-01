@@ -2,16 +2,16 @@
 
 ## Status
 
-Accepted for POC.
+Accepted for the POC.
 
 ## Context
 
-Non-deterministic generation would make transition defects, replay differences, and validation behavior difficult to isolate.
+LLMs can be useful later, but they add uncertainty. If state changes are generated unpredictably, bugs become harder to explain and replay.
 
 ## Decision
 
-Scenario state changes come only from versioned scenario data and deterministic code. No real LLM or external AI call is part of the first slice.
+For the first slice, scenario state changes come only from versioned scenario data and deterministic code. There are no real LLM or external AI calls.
 
 ## Consequences
 
-Runs are reproducible and testable. AI-assisted authoring or adaptation must later produce bounded proposals behind explicit review and contracts.
+Runs are easier to test, replay, and debug. If AI-assisted authoring or adaptation is added later, it should produce bounded suggestions that still go through review and contracts.

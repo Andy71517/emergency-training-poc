@@ -2,7 +2,7 @@ scenario_id: smoke_inhalation_room_v0
 title: "POC: Smoke Inhalation Room"
 version: "0.1.0"
 disclaimer: >-
-  Illustrative deterministic software scenario only; not medically or operationally authoritative.
+  Toy POC scenario only. Not medical guidance, firefighter/EMT protocol, or operational authority.
 
 initial_state:
   phase: awaiting_assessment
@@ -70,11 +70,11 @@ transition_rules:
 
 validation_hints:
   - rule_id: scene-assessment-first
-    description: "Flag actions taken before the scene assessment fixture step."
+    description: "Warn when a setup action happens before the scene has been assessed."
   - rule_id: entry-prerequisites
-    description: "Reject room entry until both POC prerequisite flags are true."
+    description: "Block room entry until the POC prerequisite flags are set."
   - rule_id: known-action-only
-    description: "Reject action types absent from allowed_actions."
+    description: "Block action names that are not listed in allowed_actions."
 
 end_conditions:
   - state_equals:
@@ -93,11 +93,11 @@ expected_happy_path:
 
 possible_unsafe_or_warning_paths:
   - actions: [enter_room]
-    expected_validation: fail
-    reason: "POC prerequisite flags have not been set."
+    expected_validation: error
+    reason: "The required POC setup flags have not been set."
   - actions: [assess_scene, enter_room]
-    expected_validation: fail
-    reason: "PPE and backup fixture steps are missing."
+    expected_validation: error
+    reason: "The PPE and backup setup steps are missing."
   - actions: [confirm_ppe]
     expected_validation: warning
-    reason: "Scene assessment fixture step was skipped."
+    reason: "The scene assessment step was skipped."

@@ -2,16 +2,16 @@
 
 ## Status
 
-Accepted for POC.
+Accepted for the POC.
 
 ## Context
 
-The word validation can imply medical, clinical, or operational correctness that this toy scenario cannot establish.
+The word "validation" can sound stronger than it is. In this repo, it does not mean clinical truth, safe field practice, or official protocol.
 
 ## Decision
 
-Validation reports conformance to named, versioned POC rules only. Messages and documentation must avoid clinical or protocol-authority claims.
+Validation only means the action matched or did not match named POC rules. Messages and docs should avoid clinical or protocol-authority claims.
 
 ## Consequences
 
-Results are suitable for software demonstrations and tests, not certification or real-world guidance. Any future authoritative use would require qualified domain governance and independent validation.
+The results are useful for software demos and tests. They are not certification, medical guidance, or real-world emergency guidance. Any future real-world use would need qualified domain review and independent validation.

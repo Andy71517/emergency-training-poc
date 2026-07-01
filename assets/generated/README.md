@@ -1,3 +1,7 @@
 # Generated Candidates
 
-Future unreviewed outputs from Hunyuan 3D or similar tools may be staged here temporarily. Contents are ignored by default and are not approved for client use merely because they exist.
+Future generated files may be staged here temporarily.
+
+If a first object candidate is needed later, prefer a simple wooden chair. Do not generate or commit it until the asset pipeline is intentionally being tested.
+
+Anything in this folder should be treated as unreviewed. A file is not approved for client use just because it exists here.

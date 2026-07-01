@@ -1,5 +1,15 @@
 # Future Unreal Client
 
-Unreal is a future presentation and input client, not the source of truth. It may render returned scenario state and submit normalized trainee actions, but the backend owns ordering, transitions, validation outcomes, and logs.
+Unreal is a future presentation and input client. It is not the source of truth.
 
-Sprint 0 creates no project, scene, gameplay logic, networking, projection mapping, or 3D content. `EmergencyTrainingClient/` is only a reserved location.
+Later, Unreal may render scenario state and send trainee actions back to the backend. The backend still owns ordering, state changes, validation results, and logs.
+
+This repo does not include an Unreal project, scene, gameplay logic, networking topology, projection mapping, sensing integration, or 3D content. `EmergencyTrainingClient/` is only a reserved location.
+
+The thin client contract lives here:
+
+- [contract/client-contract.md](contract/client-contract.md)
+- [contract/client-state-machine.md](contract/client-state-machine.md)
+- [contract/examples/](contract/examples/)
+
+Keep scenario authority, validation, logging, and review generation in the backend.

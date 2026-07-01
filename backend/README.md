@@ -1,17 +1,17 @@
-# Backend Vertical Slice
+# Backend
 
-This directory contains the local deterministic FastAPI proof of concept.
+This is the local FastAPI backend for the POC.
 
-Current responsibilities:
+It does a small set of things on purpose:
 
-- `GET /health` reports local service status.
-- `/ws/sessions/{session_id}` accepts a `start_session` handshake and ordered trainee actions.
-- The session manager coordinates YAML transitions, POC rule conformance, state updates, terminal messages, and JSONL records.
-- Replay and summary helpers consume the same logged contracts.
+- `GET /health` confirms the service is running.
+- `/ws/sessions/{session_id}` starts a session and receives ordered trainee actions.
+- The session manager applies scenario transitions, runs POC rule checks, sends state updates, and writes JSONL logs.
+- Replay and summary scripts read the same logs later.
 
-## Run locally
+## Run it locally
 
-From the repository root after installing `.[dev]`:
+From the repo root, after installing `.[dev]`:
 
 ```text
 python -m uvicorn backend.app.main:app --reload
@@ -19,6 +19,6 @@ python scripts/run_fake_trainee.py
 python -m pytest
 ```
 
-The WebSocket defaults to `smoke_inhalation_room_v0`; an alternate checked-in scenario may be named in the initial `start_session` message.
+The WebSocket defaults to `smoke_inhalation_room_v0`. A different checked-in scenario can be requested in the first `start_session` message.
 
-The backend currently proves only the local action-to-state-to-log loop. It has in-memory sessions and local files, with no authentication, database, external AI, clinical decision support, distributed networking, sensing, deployment, or Unreal-specific logic.
+This backend only proves the local action-to-state-to-log loop. It uses in-memory sessions and local files. There is no authentication, database, external AI, clinical decision support, distributed networking, sensing, deployment, or Unreal-specific gameplay logic.

@@ -1,7 +1,9 @@
 # Future Sensing Adapters
 
-**Status: future exploration; excluded from the POC.**
+**Status:** future idea, not part of this POC.
 
-Potential speech, gesture, location, equipment, or biometric inputs would require separate adapters that translate uncertain observations into explicit candidate trainee actions. Confidence, provenance, consent, privacy, calibration, and human confirmation would need dedicated design.
+One day, inputs might come from speech, gestures, location, equipment, or other sensors. Those inputs are messy, so they should not go straight into the scenario engine.
 
-Sprint 0 assumes manual or scripted actions only and makes no multimodal sensing claims.
+A future sensing adapter would translate an observation into a possible trainee action, along with details like confidence, source, timing, privacy handling, calibration, and whether a human confirmed it.
+
+For now, all actions are manual or scripted. This repo makes no multimodal sensing claims.

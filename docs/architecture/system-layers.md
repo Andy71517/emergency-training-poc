@@ -1,17 +1,19 @@
 # System Layers
 
-## Current target vertical slice
+This project is split into small layers so each part has one clear job.
 
-1. **API adapter** accepts client-neutral messages and rejects malformed envelopes.
-2. **Orchestrator** enforces session order and coordinates one event transaction.
-3. **Scenario engine** applies deterministic transitions from scenario data.
-4. **Validation layer** reports rule conformance; it does not determine clinical truth.
-5. **Models/contracts** represent events, state, and results consistently.
-6. **Logging adapter** appends event, validation, and resulting state to local JSONL.
-7. **Client adapter** returns a transport-neutral session message.
+## Current backend slice
 
-The first local vertical slice implements these layers with in-memory sessions and JSONL files.
+1. **API layer** receives WebSocket messages and rejects messages that do not match the contract.
+2. **Session manager** keeps actions in order for one session.
+3. **Scenario engine** applies the next state change from scenario data.
+4. **Validation layer** checks POC rules and returns `ok`, `warning`, or `error`.
+5. **Models and contracts** keep events, state, and messages shaped consistently.
+6. **Logger** writes each step to local JSONL for replay and review.
+7. **Client message layer** sends state back in a format any client can read.
 
-## Future layers
+The first slice uses in-memory sessions and local files. That is enough for the POC.
 
-Unreal presentation, remote transport, sensing adapters, AI-assisted authoring/adaptation, asset generation, and projection deployment remain behind adapters and are not part of the first vertical slice.
+## Future areas
+
+Unreal rendering, remote networking, sensing, AI-assisted authoring, asset generation, and projection deployment are future work. They should connect through clear contracts instead of owning scenario logic.

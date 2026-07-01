@@ -2,16 +2,16 @@
 
 ## Status
 
-Accepted for POC.
+Accepted for the POC.
 
 ## Context
 
-Backend, scripts, future Unreal, and future adapters need a shared vocabulary before their implementations diverge.
+The backend, scripts, future Unreal client, and future adapters all need to agree on the shape of messages. Without that, each part can drift in a different direction.
 
 ## Decision
 
-Version JSON Schemas and examples for actions, state, validation, and session envelopes before endpoint implementation.
+Keep JSON Schemas and examples for actions, state, validation results, and session messages.
 
 ## Consequences
 
-Clients can develop against fixtures and boundary tests can fail early. Schema evolution will require explicit compatibility decisions.
+Clients can build against fixtures, and tests can catch contract breaks early. If the schema changes later, compatibility has to be a deliberate choice.

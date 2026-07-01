@@ -1,6 +1,6 @@
 # Message Flow
 
-## Current local POC flow
+This is the main path through the POC.
 
 ```text
 fake/manual trainee
@@ -11,9 +11,16 @@ fake/manual trainee
   -> ValidationResult
   -> ScenarioState
   -> append SessionMessage record to JSONL
-  -> return client-neutral SessionMessage
+  -> return a client-ready SessionMessage
 ```
 
-The orchestrator should commit the event, validation outcome, and resulting state as one logical ordered record. Rejected or non-transitioning events are also logged with their unchanged state so review does not lose attempted actions.
+The session manager treats one action as one ordered step. It records the incoming action, validation result, and resulting state together.
 
-`session_id` groups a run, `event_id` provides event identity, and `sequence_number` establishes order. Timestamps support review but must not drive deterministic transitions.
+Rejected actions are logged too. That way review can show what was attempted, even when the scenario state did not move forward.
+
+Important IDs:
+
+- `session_id` groups one run.
+- `event_id` identifies one trainee action.
+- `sequence_number` defines the order.
+- `timestamp` helps review, but does not decide the scenario state.

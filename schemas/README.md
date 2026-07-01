@@ -1,10 +1,14 @@
 # Message Schemas
 
-Draft 2020-12 JSON Schemas define the POC boundary between a fake trainee, backend layers, logs, and a future Unreal client.
+These JSON Schemas describe the messages that move through the POC.
+
+They are the shared language between the fake trainee, backend, logs, scripts, and future Unreal client.
 
 - `trainee_action_event`: one normalized trainee action
-- `scenario_state`: authoritative state after processing an event
-- `validation_result`: conformance outcome for that event/transition
-- `session_messages`: WebSocket handshake, action, state-update, terminal, and error messages
+- `scenario_state`: the backend-owned state after an action
+- `validation_result`: the POC rule result for that action
+- `session_messages`: WebSocket messages for start, action, state update, end, and error
 
-Examples are illustrative fixtures. Schema version `0.1.0` may change during the POC; production compatibility is not promised. Validate both incoming and outgoing messages and preserve `event_id` plus `sequence_number` in logs.
+The examples are fixtures for development and tests. Schema version `0.1.0` can still change during the POC, so this is not a production compatibility promise.
+
+Always preserve `event_id` and `sequence_number` in logs. They make replay and review possible.

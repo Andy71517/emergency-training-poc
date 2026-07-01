@@ -1,7 +1,29 @@
 # Future Unreal Client
 
-**Status: future client; excluded from the POC implementation.**
+**Status:** future presentation client. The current repo only defines the contract.
 
-Unreal may eventually render scenario state, collect normalized trainee interactions, and display instructor-visible feedback. It should send contract-defined actions and consume contract-defined state; it must not own authoritative transitions, validation rules, or session logs.
+Unreal may eventually render scenario state, collect trainee interactions, and show feedback. For now, it should be treated as a future client, not the brain of the system.
 
-The first backend should remain testable with a Python fake trainee. No full Unreal scene, gameplay framework, or generated content is required now.
+The contract lives in `unreal/contract/`. You can exercise it with `scripts/run_unreal_contract_harness.py`.
+
+That harness behaves like a future thin Unreal shell:
+
+1. Open the WebSocket.
+2. Send `start_session`.
+3. Send one ordered action at a time.
+4. Receive state updates from the backend.
+5. Stop when `scenario_ended` arrives.
+
+No full Unreal scene, rendering layer, gameplay framework, networking topology, projection mapping, sensing integration, or generated content is required now.
+
+## Boundary rule
+
+Unreal may cache and display backend state. It must not invent or change scenario progress locally.
+
+The backend owns:
+
+- scenario transitions
+- validation results
+- end conditions
+- session logs
+- post-scenario review inputs

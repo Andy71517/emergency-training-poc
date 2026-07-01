@@ -1,0 +1,43 @@
+{
+  "message_type": "scenario_state_update",
+  "session_id": "unreal-contract-demo",
+  "scenario_id": "smoke_inhalation_room_v0",
+  "sequence_number": 1,
+  "scenario_state": {
+    "schema_version": "0.1.0",
+    "session_id": "unreal-contract-demo",
+    "scenario_id": "smoke_inhalation_room_v0",
+    "event_id": "event-contract-error-001",
+    "timestamp": "2026-07-01T09:01:00Z",
+    "sequence_number": 1,
+    "state": {
+      "phase": "not_started",
+      "scene_assessed": false,
+      "ppe_confirmed": false,
+      "backup_requested": false,
+      "occupant_removed": false,
+      "scenario_outcome": "in_progress"
+    },
+    "is_terminal": false,
+    "next_expected_actions": ["assess_scene"]
+  },
+  "validation_result": {
+    "schema_version": "0.1.0",
+    "session_id": "unreal-contract-demo",
+    "scenario_id": "smoke_inhalation_room_v0",
+    "event_id": "event-contract-error-001",
+    "timestamp": "2026-07-01T09:01:00Z",
+    "sequence_number": 1,
+    "status": "error",
+    "warnings": [],
+    "errors": [
+      {
+        "code": "entry_prerequisites_missing",
+        "message": "POC rule blocked entry because assessment, PPE, and backup were not all recorded.",
+        "rule_id": "entry-requires-assessment-ppe-backup"
+      }
+    ],
+    "notes": ["Validation is deterministic POC rule conformance, not clinical or operational authority."],
+    "applied_rule_ids": ["entry-requires-assessment-ppe-backup"]
+  }
+}

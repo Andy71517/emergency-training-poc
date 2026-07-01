@@ -1,8 +1,11 @@
-# Local POC Scripts
+# Local Scripts
 
-- `run_backend.sh`: start the local development server.
-- `run_fake_trainee.py`: submit happy and warning/error fixture sessions.
-- `replay_session.py LOG`: deterministically replay logged actions and verify snapshots.
-- `summarize_log.py LOG`: render a JSON post-scenario review.
+These scripts are small local helpers for running and checking the POC.
 
-They must remain local POC helpers and make no real AI, clinical, or operational claims.
+- `run_backend.sh`: starts the local backend.
+- `run_fake_trainee.py`: runs a happy-path session and a warning/error session.
+- `run_unreal_contract_harness.py`: tests the future Unreal WebSocket contract without rendering or gameplay.
+- `replay_session.py LOG`: replays logged actions and checks the recorded state snapshots.
+- `summarize_log.py LOG`: prints a short JSON review summary.
+
+Keep scripts local and boring. They should not call real AI services or make clinical, operational, or training-authority claims.

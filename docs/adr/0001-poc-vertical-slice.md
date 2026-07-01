@@ -2,16 +2,20 @@
 
 ## Status
 
-Accepted for POC.
+Accepted for the POC.
 
 ## Context
 
-The concept spans AI, simulation, sensing, rendering, networking, and deployment. Building across all of them would hide the core integration risk.
+The bigger idea touches AI, simulation, sensing, rendering, networking, and deployment. If we try to build all of that at once, we will not know whether the basic action-to-state loop actually works.
 
 ## Decision
 
-First prove one local loop from stub action through deterministic transition, validation, client-facing state, and append-only log.
+First, prove one local loop:
+
+```text
+stub action -> deterministic state update -> validation -> client message -> log
+```
 
 ## Consequences
 
-The POC yields an end-to-end seam early. Production concerns and richer interfaces remain intentionally unanswered.
+We get a real end-to-end path early. Bigger product questions stay parked until the core loop is solid.

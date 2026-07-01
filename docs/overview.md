@@ -1,11 +1,13 @@
 # POC Overview
 
-This POC isolates one question: can a trainee action pass through a deterministic backend and produce a validated, logged state message suitable for a future client?
+This POC answers one practical question:
 
-The backend will eventually accept a manual or scripted action, load the current session and scenario, apply exactly one transition, run scenario-specific conformance rules, persist an append-only JSONL record, and return the resulting state. The same input state and ordered events must produce the same output.
+Can a simple trainee action move through the backend and come out as checked, logged, client-ready scenario state?
 
-Sprint 0 contains contracts, scenario data, architectural boundaries, and placeholders only. It does not contain a working server or scenario engine.
+The current answer is yes, in a small local slice. The backend accepts manual or scripted actions, loads the scenario, applies one deterministic transition, checks the action against POC rules, writes a JSONL log entry, and sends the updated state back over WebSocket.
+
+“Deterministic” just means the same ordered inputs should always produce the same output. That makes the system easier to test, replay, and debug.
 
 ## Safety boundary
 
-All scenario content and validation rules are illustrative software test fixtures. They do not establish correct clinical care, firefighting tactics, certification readiness, or operational authority.
+The scenario and rules are software fixtures. They are useful for proving the code path, not for teaching real medical care, firefighting tactics, certification readiness, or field decisions.

@@ -1,25 +1,33 @@
 # POC Scope
 
-## In scope for the first vertical slice
+## In scope
 
-- One local process with a FastAPI health endpoint and WebSocket session endpoint
+- One local FastAPI backend
+- A health endpoint and a WebSocket session endpoint
 - Manual or scripted trainee actions
-- One deterministic YAML scenario
-- Ordered per-session transitions
-- Schema-validated messages
-- Rule-conformance results with warnings and errors
-- Final state returned in a client-neutral JSON shape
-- Append-only local JSONL session logging and replay
-- Unit and API tests for happy, warning, unsafe, and terminal paths
-
-## Sprint 0 deliverable
-
-Repository organization, message schemas, a toy scenario, rule fixtures, ADRs, and implementation placeholders.
+- One small YAML scenario
+- Ordered actions inside a session
+- Pydantic and JSON Schema message contracts
+- Rule checks that return `ok`, `warning`, or `error`
+- JSON state updates that any client can read
+- Local JSONL logs that can be replayed and summarized
+- Tests for happy paths, warnings, errors, determinism, logging, and WebSockets
+- A thin future-Unreal client contract, with no Unreal scene
 
 ## Out of scope
 
-Real AI calls, medical/operational authority, live sensors, multiplayer or distributed topology, Unreal gameplay, projection systems, 3D generation, production infrastructure, and field deployment.
+This repo is intentionally not doing:
+
+- Real AI or LLM calls
+- Medical or operational authority
+- Live sensors
+- Multiplayer or distributed networking
+- Unreal gameplay or rendering
+- Projection systems
+- 3D asset generation
+- Production infrastructure
+- Field deployment
 
 ## Success criterion
 
-A later local demo can submit ordered stub events and show deterministic state, validation, client output, and replayable log entries without external services.
+A local demo should be able to send ordered stub actions and show the full path: backend input, deterministic state update, validation result, client message, log entry, replay, and summary.

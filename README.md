@@ -1,8 +1,12 @@
 # Emergency Training Simulator POC
 
-First vertical-slice proof of concept for a deterministic, AI-ready emergency-response training simulator. This repository is not an operational training, medical, or incident-response system.
+This repo is a small proof of concept for an emergency-response training simulator idea.
 
-## What the POC must prove
+The goal is not to build the final product yet. The goal is to prove one simple loop: a trainee does something, the backend receives it, the scenario state changes in a predictable way, the result gets checked, the client receives the new state, and the session is logged for review.
+
+This is not a real training system, medical tool, firefighting authority, or incident-response system.
+
+## The loop we are proving
 
 ```text
 manual/stubbed trainee action
@@ -14,11 +18,11 @@ manual/stubbed trainee action
   -> event and outcome are logged for review
 ```
 
-The implementation uses one small deterministic scenario, a FastAPI WebSocket, and local JSONL logs. Future AI components may help author or adapt scenarios, but they are not required to prove this loop.
+Right now this uses one tiny scenario, a FastAPI WebSocket, deterministic Python code, and local JSONL logs. Future AI pieces might help create or adapt scenarios later, but this first version does not need real AI calls.
 
 ## Setup and run
 
-Python 3.11 or newer is required.
+Use Python 3.11 or newer.
 
 ```powershell
 python -m venv .venv
@@ -27,10 +31,16 @@ python -m pip install -e ".[dev]"
 python -m uvicorn backend.app.main:app --reload
 ```
 
-In another terminal, run the two scripted sessions:
+In another terminal, run the fake trainee demo:
 
 ```powershell
 python scripts/run_fake_trainee.py
+```
+
+To test the future Unreal client contract, without building an Unreal scene:
+
+```powershell
+python scripts/run_unreal_contract_harness.py
 ```
 
 Run tests and inspect a generated session log:
@@ -41,27 +51,30 @@ python scripts/replay_session.py logs/sessions/demo-happy.jsonl
 python scripts/summarize_log.py logs/sessions/demo-happy.jsonl
 ```
 
-Clients first send `{"message_type":"start_session"}` to `/ws/sessions/{session_id}` and then send ordered `trainee_action` envelopes. Generated session logs remain ignored under `logs/sessions/`.
+Clients start by sending `{"message_type":"start_session"}` to `/ws/sessions/{session_id}`. After that, they send ordered `trainee_action` messages. Generated session logs live under `logs/sessions/` and are ignored by Git.
 
-## Explicitly out of scope
+## What this repo is not doing
 
 - Real LLM or external API calls
-- Clinical validity or authoritative EMT/firefighter protocol
-- Production security, resilience, scaling, or deployment
-- Hub-and-spoke networking, projection mapping, or multimodal sensing
-- A full Unreal scene or generated 3D assets
+- Clinical validation or EMT/firefighter protocol authority
+- Production security, scaling, deployment, or cloud infrastructure
+- Hub-and-spoke networking
+- Projection mapping
+- Multimodal sensing
+- A full Unreal scene
+- Generated 3D assets
 - Autonomous evaluation of real responders
 
 ## Repository map
 
-- `backend/`: FastAPI vertical slice and tests
-- `schemas/`: versioned message contracts and examples
-- `scenarios/`: deterministic scenario definitions
-- `validation/`: POC rule-conformance definitions
-- `docs/`: scope, architecture, ADRs, and demo plan
-- `scripts/`: local run, replay, and review helpers
-- `logs/`: ignored local JSONL session logs
-- `unreal/`: placeholder for a future presentation client
-- `assets/`: placeholders for a future reviewed asset pipeline
+- `backend/`: FastAPI backend, deterministic engine, validation, logging, and tests
+- `schemas/`: JSON message contracts and examples
+- `scenarios/`: small scenario definitions
+- `validation/`: rule files for the toy scenario
+- `docs/`: scope, architecture notes, ADRs, and demo flow
+- `scripts/`: local demo, replay, summary, and contract helpers
+- `logs/`: local JSONL session logs, ignored by Git
+- `unreal/`: future Unreal client contract and placeholder folder
+- `assets/`: placeholder folders for a future reviewed asset pipeline
 
 Start with [docs/overview.md](docs/overview.md) and [docs/sprint-0-plan.md](docs/sprint-0-plan.md).

@@ -1,5 +1,11 @@
 # Asset Pipeline Placeholder
 
-No assets are generated in Sprint 0. These directories reserve a future reviewable pipeline for candidate output from Hunyuan 3D or similar tools.
+No assets are generated right now.
 
-Candidate generation must remain separate from reviewed content. Future promotion should require provenance/licensing metadata, technical checks, optimization, human review, and explicit approval. Visual assets must not encode authoritative scenario rules.
+These folders reserve space for a future asset review flow, possibly for candidate output from Hunyuan 3D or similar tools.
+
+When the project needs a first simple environmental-object candidate, use a wooden chair. It is more likely to appear in emergency-response training spaces than an abstract test object, and it will be more useful later for basic collision and physics checks.
+
+Generated candidates and reviewed assets must stay separate. Before a future asset is used, it should have metadata, licensing/provenance review, technical checks, optimization, human review, and explicit approval.
+
+Visual assets should never define scenario rules. The backend owns scenario logic.

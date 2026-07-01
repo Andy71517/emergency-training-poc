@@ -1,14 +1,16 @@
-# Future Vertical-Slice Demo Script
+# Demo Script
 
-This describes the next implementation demo; Sprint 0 does not execute it.
+Use this flow to show the POC without overselling it.
 
-1. Start the local backend with a fresh log directory.
-2. Create a session for `smoke_inhalation_room_v0`.
-3. Submit `assess_scene` as sequence 1 and display the updated state.
-4. Submit an intentionally premature `enter_room` action and display the warning/error without advancing unsafe state.
-5. Continue the expected happy path with ordered stub actions.
-6. Display the terminal scenario state and next expected actions.
-7. Show the client-neutral session response that a future Unreal client could consume.
-8. Replay the JSONL log and confirm the same final state and validation outcomes.
+1. Start the local backend.
+2. Open a session for `smoke_inhalation_room_v0`.
+3. Send `assess_scene` as the first action.
+4. Show the returned state update.
+5. Send an intentionally wrong action, like entering the room too early.
+6. Show the backend warning or error and confirm the state did not advance incorrectly.
+7. Run the happy path in order.
+8. Show the terminal scenario state.
+9. Show the JSONL log.
+10. Replay or summarize the log to prove the session can be reviewed later.
 
-Every screen should retain a visible disclaimer: illustrative POC behavior, not clinical or operational guidance.
+Keep the disclaimer visible in any demo: this is illustrative POC behavior, not clinical or operational guidance.

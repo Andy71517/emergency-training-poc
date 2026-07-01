@@ -1,3 +1,13 @@
 # Backend Tests
 
-The suite covers scenario loading, initial and terminal state, warning/error paths, determinism, JSONL output, review summaries, health, and the WebSocket action/state loop.
+The tests cover the POC loop from several angles:
+
+- scenario loading
+- initial and terminal state
+- warning and error paths
+- deterministic engine behavior
+- JSONL logging
+- review summaries
+- health endpoint
+- WebSocket action/state flow
+- future Unreal client contract examples

@@ -1,7 +1,9 @@
 # Future Projection Deployment
 
-**Status: future deployment research; excluded from the POC.**
+**Status:** future deployment research, not part of this POC.
 
-Projection mapping could later consume visual output from a client, but venue calibration, tracking, synchronization, brightness, safety, and redundancy are deployment concerns outside scenario logic.
+Projection mapping may become useful later, but it is a deployment problem, not scenario logic.
 
-The current repository defines no projection hardware, rendering layout, or mapping pipeline.
+A real projection setup would need venue calibration, tracking, synchronization, brightness checks, safety review, and backup plans. None of that belongs in the current backend slice.
+
+This repo defines no projection hardware, rendering layout, or mapping pipeline.

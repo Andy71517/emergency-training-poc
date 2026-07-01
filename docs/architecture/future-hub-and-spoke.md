@@ -1,7 +1,9 @@
-# Future Hub-and-Spoke Topology
+# Future Hub-and-Spoke Networking
 
-**Status: future exploration; excluded from the POC.**
+**Status:** future idea, not part of this POC.
 
-A later deployment may place an authoritative session service at a hub and connect presentation, instructor, sensor, and logging clients as spokes. Before that decision, the local vertical slice must prove stable contracts, ordering, idempotency expectations, reconnect behavior, and state snapshots.
+A later version might have one central service that owns the session, with other clients connected around it: Unreal, instructor tools, sensors, logging, or review screens.
 
-Sprint 0 does not select a broker, protocol, discovery mechanism, or distributed consistency model. No hub-and-spoke networking should be added to the first implementation.
+Not yet. First, the local backend needs stable messages, clear ordering, replayable logs, and simple reconnect expectations.
+
+This repo does not choose a broker, protocol, discovery system, or distributed consistency model. No hub-and-spoke networking belongs in the current build.

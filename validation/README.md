@@ -1,5 +1,7 @@
 # Validation
 
-Validation in this repository means conformance to explicit, versioned rules for a deterministic toy scenario. It does not establish clinical correctness, safe real-world practice, or EMT/firefighter protocol authority.
+Validation in this repo means one narrow thing: checking an action against explicit POC rules.
 
-The future validator should return structured `pass`, `warning`, or `fail` findings. A failed transition should leave authoritative scenario state unchanged while the attempt and result remain loggable.
+It does not establish clinical correctness, safe real-world practice, or EMT/firefighter protocol authority.
+
+The validator returns structured `ok`, `warning`, or `error` results. If a rule blocks a transition, the scenario state should stay unchanged, but the attempted action still gets logged for review.

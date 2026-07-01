@@ -1,3 +1,5 @@
 # Session Logging and Review
 
-Writes append-only JSONL records retaining input, validation, state, identifiers, and sequence. The review helper derives a concise post-scenario summary.
+The logger writes one JSON object per line so a session can be replayed later.
+
+Each record keeps the input message, validation result, state snapshot, IDs, and sequence number. The review helper turns those records into a short post-scenario summary.

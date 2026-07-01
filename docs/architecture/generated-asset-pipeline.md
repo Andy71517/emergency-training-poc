@@ -1,7 +1,19 @@
 # Future Generated-Asset Pipeline
 
-**Status: documentation only; no assets are generated in Sprint 0.**
+**Status:** documentation only. No assets are generated now.
 
-A later experiment may use Hunyuan 3D or similar tools to create candidate meshes. Candidates should move through generation, metadata capture, automated format checks, human safety/content review, optimization, provenance/licensing review, and explicit promotion into a reviewed area before client use.
+A later experiment might use Hunyuan 3D or similar tools to create candidate meshes. Those files should be treated as drafts until they pass review.
 
-Generated output must never be treated as approved by location alone. Scenario correctness must not depend on generated visual details.
+The first future POC object should be a simple wooden chair. A chair is realistic for the kinds of rooms this simulator cares about, and it gives future physics tests something useful to collide with, move, tip, or block.
+
+A future asset flow should include:
+
+- generation
+- metadata capture
+- format checks
+- human safety and content review
+- optimization
+- provenance and licensing review
+- explicit promotion into a reviewed folder
+
+A generated file is not approved just because it exists. Scenario correctness should never depend on visual details from generated assets.

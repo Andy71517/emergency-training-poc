@@ -1,7 +1,7 @@
 scenario_id: smoke_inhalation_room_v0
 scenario_version: "0.1.0"
 ruleset_version: "0.1.0"
-disclaimer: "POC rule conformance only; not clinical or operational validation."
+disclaimer: "POC rule checks only. Not clinical validation, operational guidance, or protocol authority."
 
 rules:
   - id: known-action-only
@@ -10,7 +10,7 @@ rules:
       action_type_not_in_scenario_allowed_actions: true
     result:
       code: unknown_action
-      message: "Action type is not defined by this POC scenario."
+      message: "This action name is not part of the POC scenario."
       blocks_transition: true
 
   - id: scene-assessment-first
@@ -20,7 +20,7 @@ rules:
       action_type_in: [confirm_ppe, request_backup]
     result:
       code: assessment_not_recorded
-      message: "The scene assessment fixture step has not been recorded."
+      message: "Scene assessment has not been recorded yet."
       blocks_transition: true
 
   - id: entry-prerequisites
@@ -32,7 +32,7 @@ rules:
         backup_requested: false
     result:
       code: entry_prerequisites_missing
-      message: "Required POC entry flags are incomplete."
+      message: "The POC setup flags required before room entry are incomplete."
       blocks_transition: true
 
   - id: removal-requires-entry
@@ -42,5 +42,5 @@ rules:
       state.phase_not: room_entered
     result:
       code: room_not_entered
-      message: "The room entry transition has not occurred."
+      message: "The scenario has not recorded room entry yet."
       blocks_transition: true
