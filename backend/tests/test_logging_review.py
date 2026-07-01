@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 from backend.app.logging.jsonl_logger import JsonlSessionLogger
-from backend.app.logging.review_summary import generate_review_summary
+from backend.app.logging.review_summary import format_review_summary, generate_review_summary
 from backend.app.orchestrator.session_manager import SessionManager
 from backend.tests.conftest import action_message
 
@@ -28,9 +28,17 @@ def test_review_summary_reports_actions_findings_and_end_state(tmp_path: Path) -
 
     assert summary["session_id"] == session_id
     assert summary["actions_taken"] == actions
+    assert summary["total_actions"] == 3
+    assert summary["validation_counts"]["warning"] >= 1
+    assert summary["action_timeline"][0]["action_type"] == "confirm_ppe"
+    assert summary["action_timeline"][0]["validation_status"] == "warning"
     assert summary["warnings"]
     assert summary["end_condition_reached"] is True
+    assert summary["scenario_outcome"] == "stopped"
+    assert summary["final_phase"] == "stopped"
     assert summary["final_state"]["scenario_outcome"] == "stopped"
+    assert summary["key_observations"]
+    assert summary["reviewer_takeaways"]
     chair = summary["environment_review"]["wooden_chair_poc"]
     assert chair["blocked_path"] is True
     assert chair["moved"] is False
@@ -41,3 +49,30 @@ def test_review_summary_reports_actions_findings_and_end_state(tmp_path: Path) -
     assert door["blocked_path"] is True
     assert door["locked"] is False
     assert door["door_type"] == "hinged_wooden_door_preview"
+
+
+def test_review_summary_formats_human_readable_debrief(tmp_path: Path) -> None:
+    manager = SessionManager(tmp_path)
+    session_id = "review-format-test"
+    manager.start_session(session_id)
+    actions = ["assess_scene", "stop_scenario"]
+    for sequence_number, action in enumerate(actions, start=1):
+        manager.process_action(session_id, action_message(session_id, action, sequence_number))
+
+    summary = generate_review_summary(tmp_path / f"{session_id}.jsonl")
+    rendered = format_review_summary(
+        summary,
+        replay_result={"verified": True, "events_replayed": 2},
+        label="demo review",
+        log_path=tmp_path / f"{session_id}.jsonl",
+        physics_preview="both",
+    )
+
+    assert "Post-scenario review" in rendered
+    assert "Session: demo review" in rendered
+    assert "Action timeline:" in rendered
+    assert "1. assess_scene -> ok" in rendered
+    assert "Environment cues:" in rendered
+    assert "Key observations:" in rendered
+    assert "Reviewer takeaways:" in rendered
+    assert "Replay verified: yes" in rendered

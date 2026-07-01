@@ -107,15 +107,16 @@ def test_review_report_formats_summary_and_replay_result() -> None:
 
     report = render_review_report(session=session, summary=summary, replay_result=replay_result)
 
+    assert "Post-scenario review" in report
     assert "Session: warning/error path" in report
-    assert "Actions: confirm_ppe" in report
+    assert "Actions reviewed: 1" in report
     assert "Replay verified: yes" in report
-    assert "Environment: wooden chair" in report
-    assert "Moved during scenario: yes" in report
-    assert "Environment: entry door" in report
-    assert "Open at end: yes" in report
+    assert "Wooden chair:" in report
+    assert "moved during scenario: yes" in report
+    assert "Entry door:" in report
+    assert "open at end: yes" in report
     assert "assessment_not_recorded: Scene assessment missing." in report
-    assert "validation here is POC rule checking" in report
+    assert "Reviewer takeaways:" in report
 
 
 def test_demo_does_not_require_generated_assets() -> None:

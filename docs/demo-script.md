@@ -16,7 +16,7 @@ The script:
 4. Runs a warning/error session.
 5. Writes JSONL logs for both sessions.
 6. Replays each log to prove deterministic behavior.
-7. Prints a short review summary for each session.
+7. Prints a sectioned review summary for each session.
 8. Shows the wooden-chair environment preview with physics disabled and enabled.
 9. Shows whether the chair was moved and whether the entry door was opened.
 
@@ -27,3 +27,5 @@ The door's open/closed state matters in the scenario. Door type, lock state, col
 The physics preview is only metadata. It does not generate a mesh, load an Unreal scene, run gravity, run collision, apply force, or simulate movement.
 
 Keep the disclaimer visible in any demo: this is illustrative POC behavior, not clinical or operational guidance.
+
+The review summary is the main proof point for Dr. Cameron: it should show that the system can explain what happened, not just that the demo ran.

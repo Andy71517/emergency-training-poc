@@ -21,7 +21,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from backend.app.adapters.manual_input_adapter import build_action_message  # noqa: E402
-from backend.app.logging.review_summary import generate_review_summary  # noqa: E402
+from backend.app.logging.review_summary import format_review_summary, generate_review_summary  # noqa: E402
 from scripts.replay_session import replay  # noqa: E402
 
 
@@ -203,63 +203,13 @@ def render_review_report(
     replay_result: dict[str, Any],
     physics_preview: PhysicsPreview = "both",
 ) -> str:
-    final_state = summary.get("final_state") or {}
-    warnings = summary.get("warnings") or []
-    errors = summary.get("errors") or []
-    lines = [
-        f"Session: {session.label} ({session.session_id})",
-        f"Log: {session.log_path}",
-        f"Actions: {', '.join(summary.get('actions_taken') or [])}",
-        f"Final phase: {final_state.get('phase', 'unknown')}",
-        f"End reached: {yes_no(bool(summary.get('end_condition_reached')))}",
-        f"Replay verified: {yes_no(bool(replay_result.get('verified')))}",
-        f"Events replayed: {replay_result.get('events_replayed', 0)}",
-        f"Physics preview shown: {physics_preview}",
-        *environment_lines(summary.get("environment_review") or {}),
-        f"Warnings: {len(warnings)}",
-        *[f"  - {finding_text(finding)}" for finding in warnings],
-        f"Errors: {len(errors)}",
-        *[f"  - {finding_text(finding)}" for finding in errors],
-        "Reminder: validation here is POC rule checking, not real emergency guidance.",
-    ]
-    return "\n".join(lines)
-
-
-def finding_text(finding: dict[str, Any]) -> str:
-    code = finding.get("code", "finding")
-    message = finding.get("message", "No message")
-    return f"{code}: {message}"
-
-
-def environment_lines(environment_review: dict[str, Any]) -> list[str]:
-    chair = environment_review.get("wooden_chair_poc")
-    door = environment_review.get("entry_door_poc")
-    lines: list[str] = []
-    if chair:
-        lines.extend(
-            [
-                "Environment: wooden chair",
-                f"  - Blocked path at end: {yes_no(bool(chair.get('blocked_path')))}",
-                f"  - Moved during scenario: {yes_no(bool(chair.get('moved')))}",
-                f"  - Scenario physics flag: {yes_no(bool(chair.get('physics_enabled')))}",
-                f"  - Gravity note: {chair.get('gravity_note')}",
-            ]
-        )
-    if door:
-        lines.extend(
-            [
-                "Environment: entry door",
-                f"  - Open at end: {yes_no(bool(door.get('open')))}",
-                f"  - Blocks path at end: {yes_no(bool(door.get('blocked_path')))}",
-                f"  - Locked metadata: {yes_no(bool(door.get('locked')))}",
-                f"  - Door type metadata: {door.get('door_type')}",
-            ]
-        )
-    return lines or ["Environment: no environment object state found"]
-
-
-def yes_no(value: bool) -> str:
-    return "yes" if value else "no"
+    return format_review_summary(
+        summary,
+        replay_result=replay_result,
+        label=session.label,
+        log_path=session.log_path,
+        physics_preview=physics_preview,
+    )
 
 
 async def run_demo(

@@ -30,6 +30,21 @@ The reviewer should be able to answer:
 - Did the scenario reach an end condition?
 - Can the session be replayed consistently?
 
+## Current review format
+
+The current review output is organized around:
+
+- session basics
+- action timeline
+- final state
+- environment cues
+- warnings
+- errors
+- key observations
+- reviewer takeaways
+
+See `review-summary-format.md` for the current format.
+
 ## What the review should avoid
 
 The review should avoid pretending to be:
@@ -53,4 +68,3 @@ Avoid:
 > The trainee failed the correct emergency protocol.
 
 The first sentence explains software behavior. The second overclaims.
-

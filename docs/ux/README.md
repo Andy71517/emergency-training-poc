@@ -33,5 +33,5 @@ That means the UX should help explain the project as an on-campus job/research-s
 - `trainee-flow.md`: what the trainee experience should become
 - `instructor-reviewer-flow.md`: what the instructor/reviewer should be able to inspect
 - `demo-ux-goals.md`: what the current demo should communicate
+- `review-summary-format.md`: how post-scenario review should explain what happened
 - `ux-principles.md`: simple design rules for future UI/client work
-
