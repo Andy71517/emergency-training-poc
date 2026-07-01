@@ -3,7 +3,7 @@
 << /Type /Catalog /Pages 2 0 R >>
 endobj
 2 0 obj
-<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R 23 0 R 25 0 R 27 0 R 29 0 R 31 0 R 33 0 R 35 0 R 37 0 R 39 0 R 41 0 R 43 0 R] /Count 20 >>
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R 23 0 R 25 0 R 27 0 R 29 0 R 31 0 R 33 0 R 35 0 R 37 0 R 39 0 R 41 0 R 43 0 R 45 0 R 47 0 R] /Count 22 >>
 endobj
 3 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
@@ -31,7 +31,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 1 of 20) Tj
+(Slide 1 of 22) Tj
 ET
 endstream
 endobj
@@ -69,7 +69,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 2 of 20) Tj
+(Slide 2 of 22) Tj
 ET
 endstream
 endobj
@@ -111,7 +111,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 3 of 20) Tj
+(Slide 3 of 22) Tj
 ET
 endstream
 endobj
@@ -151,7 +151,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 4 of 20) Tj
+(Slide 4 of 22) Tj
 ET
 endstream
 endobj
@@ -203,7 +203,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 5 of 20) Tj
+(Slide 5 of 22) Tj
 ET
 endstream
 endobj
@@ -249,7 +249,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 6 of 20) Tj
+(Slide 6 of 22) Tj
 ET
 endstream
 endobj
@@ -257,7 +257,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 14 0 R >>
 endobj
 16 0 obj
-<< /Length 640 >>
+<< /Length 688 >>
 stream
 BT
 /F1 26 Tf
@@ -285,6 +285,8 @@ BT
 0 -20 Td
 (  - POC validation rules) Tj
 0 -20 Td
+(  - basic POC security guardrails) Tj
+0 -20 Td
 (  - JSONL session logs) Tj
 0 -20 Td
 (  - replay and review scripts) Tj
@@ -299,7 +301,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 7 of 20) Tj
+(Slide 7 of 22) Tj
 ET
 endstream
 endobj
@@ -353,7 +355,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 8 of 20) Tj
+(Slide 8 of 22) Tj
 ET
 endstream
 endobj
@@ -397,7 +399,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 9 of 20) Tj
+(Slide 9 of 22) Tj
 ET
 endstream
 endobj
@@ -443,7 +445,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 10 of 20) Tj
+(Slide 10 of 22) Tj
 ET
 endstream
 endobj
@@ -493,7 +495,7 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 11 of 20) Tj
+(Slide 11 of 22) Tj
 ET
 endstream
 endobj
@@ -501,6 +503,102 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 24 0 R >>
 endobj
 26 0 obj
+<< /Length 605 >>
+stream
+BT
+/F1 26 Tf
+58 548 Td
+(Security baseline) Tj
+ET
+BT
+/F1 14 Tf
+58 492 Td
+() Tj
+0 -20 Td
+(The client is not trusted as the source of truth.) Tj
+0 -20 Td
+() Tj
+0 -20 Td
+(The client can say:) Tj
+0 -20 Td
+() Tj
+0 -20 Td
+("I want to attempt this action.") Tj
+0 -20 Td
+() Tj
+0 -20 Td
+(The backend decides:) Tj
+0 -20 Td
+() Tj
+0 -20 Td
+(  - what state changed) Tj
+0 -20 Td
+(  - whether the action was accepted) Tj
+0 -20 Td
+(  - whether warnings or errors exist) Tj
+0 -20 Td
+(  - whether the scenario ended) Tj
+0 -20 Td
+(  - what gets logged for review) Tj
+0 -20 Td
+ET
+BT
+/F1 10 Tf
+672 32 Td
+(Slide 12 of 22) Tj
+ET
+endstream
+endobj
+27 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 26 0 R >>
+endobj
+28 0 obj
+<< /Length 591 >>
+stream
+BT
+/F1 26 Tf
+58 548 Td
+(Current guardrails) Tj
+ET
+BT
+/F1 14 Tf
+58 492 Td
+() Tj
+0 -20 Td
+(The backend now rejects:) Tj
+0 -20 Td
+() Tj
+0 -20 Td
+(  - unexpected message fields) Tj
+0 -20 Td
+(  - weird or path-like IDs) Tj
+0 -20 Td
+(  - unsafe scenario IDs) Tj
+0 -20 Td
+(  - unsafe action names) Tj
+0 -20 Td
+(  - oversized or deeply nested payloads) Tj
+0 -20 Td
+(  - wrong sequence numbers) Tj
+0 -20 Td
+(  - duplicate event IDs) Tj
+0 -20 Td
+() Tj
+0 -20 Td
+(This is not production security yet. It is the first lock on the first door.) Tj
+0 -20 Td
+ET
+BT
+/F1 10 Tf
+672 32 Td
+(Slide 13 of 22) Tj
+ET
+endstream
+endobj
+29 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 28 0 R >>
+endobj
+30 0 obj
 << /Length 660 >>
 stream
 BT
@@ -545,14 +643,14 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 12 of 20) Tj
+(Slide 14 of 22) Tj
 ET
 endstream
 endobj
-27 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 26 0 R >>
+31 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 30 0 R >>
 endobj
-28 0 obj
+32 0 obj
 << /Length 725 >>
 stream
 BT
@@ -593,14 +691,14 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 13 of 20) Tj
+(Slide 15 of 22) Tj
 ET
 endstream
 endobj
-29 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 28 0 R >>
+33 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 32 0 R >>
 endobj
-30 0 obj
+34 0 obj
 << /Length 592 >>
 stream
 BT
@@ -639,14 +737,14 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 14 of 20) Tj
+(Slide 16 of 22) Tj
 ET
 endstream
 endobj
-31 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 30 0 R >>
+35 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 34 0 R >>
 endobj
-32 0 obj
+36 0 obj
 << /Length 696 >>
 stream
 BT
@@ -691,14 +789,14 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 15 of 20) Tj
+(Slide 17 of 22) Tj
 ET
 endstream
 endobj
-33 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 32 0 R >>
+37 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 36 0 R >>
 endobj
-34 0 obj
+38 0 obj
 << /Length 671 >>
 stream
 BT
@@ -739,15 +837,15 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 16 of 20) Tj
+(Slide 18 of 22) Tj
 ET
 endstream
 endobj
-35 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 34 0 R >>
+39 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 38 0 R >>
 endobj
-36 0 obj
-<< /Length 628 >>
+40 0 obj
+<< /Length 683 >>
 stream
 BT
 /F1 26 Tf
@@ -765,15 +863,17 @@ BT
 0 -20 Td
 (1. keep improving the backend contract) Tj
 0 -20 Td
-(2. add richer environment object fields carefully) Tj
+(2. keep tightening the security boundary) Tj
 0 -20 Td
-(3. keep replay and review as the proof point) Tj
+(3. add richer environment object fields carefully) Tj
 0 -20 Td
-(4. build tiny Unreal display tests only when needed) Tj
+(4. keep replay and review as the proof point) Tj
 0 -20 Td
-(5. review generated assets manually before using them) Tj
+(5. build tiny Unreal display tests only when needed) Tj
 0 -20 Td
-(6. add physics only after object state is clean) Tj
+(6. review generated assets manually before using them) Tj
+0 -20 Td
+(7. add physics only after object state is clean) Tj
 0 -20 Td
 () Tj
 0 -20 Td
@@ -783,14 +883,14 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 17 of 20) Tj
+(Slide 19 of 22) Tj
 ET
 endstream
 endobj
-37 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 36 0 R >>
+41 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 40 0 R >>
 endobj
-38 0 obj
+42 0 obj
 << /Length 669 >>
 stream
 BT
@@ -829,15 +929,15 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 18 of 20) Tj
+(Slide 20 of 22) Tj
 ET
 endstream
 endobj
-39 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 38 0 R >>
+43 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 42 0 R >>
 endobj
-40 0 obj
-<< /Length 607 >>
+44 0 obj
+<< /Length 649 >>
 stream
 BT
 /F1 26 Tf
@@ -867,6 +967,8 @@ BT
 0 -20 Td
 (  - a cloud deployment) Tj
 0 -20 Td
+(  - a production-secure app) Tj
+0 -20 Td
 () Tj
 0 -20 Td
 (It is a strong first loop.) Tj
@@ -879,14 +981,14 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 19 of 20) Tj
+(Slide 21 of 22) Tj
 ET
 endstream
 endobj
-41 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 40 0 R >>
+45 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 44 0 R >>
 endobj
-42 0 obj
+46 0 obj
 << /Length 607 >>
 stream
 BT
@@ -931,61 +1033,65 @@ ET
 BT
 /F1 10 Tf
 672 32 Td
-(Slide 20 of 20) Tj
+(Slide 22 of 22) Tj
 ET
 endstream
 endobj
-43 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 42 0 R >>
+47 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 46 0 R >>
 endobj
 xref
-0 44
+0 48
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
-0000000247 00000 n 
-0000000317 00000 n 
-0000000649 00000 n 
-0000000775 00000 n 
-0000001319 00000 n 
-0000001445 00000 n 
-0000002015 00000 n 
-0000002141 00000 n 
-0000002701 00000 n 
-0000002829 00000 n 
-0000003499 00000 n 
-0000003627 00000 n 
-0000004267 00000 n 
-0000004395 00000 n 
-0000005086 00000 n 
-0000005214 00000 n 
-0000005926 00000 n 
-0000006054 00000 n 
-0000006603 00000 n 
-0000006731 00000 n 
-0000007413 00000 n 
-0000007541 00000 n 
-0000008231 00000 n 
-0000008359 00000 n 
-0000009070 00000 n 
-0000009198 00000 n 
-0000009974 00000 n 
-0000010102 00000 n 
-0000010745 00000 n 
-0000010873 00000 n 
-0000011620 00000 n 
-0000011748 00000 n 
-0000012470 00000 n 
-0000012598 00000 n 
-0000013277 00000 n 
-0000013405 00000 n 
-0000014125 00000 n 
-0000014253 00000 n 
-0000014911 00000 n 
-0000015039 00000 n 
-0000015697 00000 n 
+0000000261 00000 n 
+0000000331 00000 n 
+0000000663 00000 n 
+0000000789 00000 n 
+0000001333 00000 n 
+0000001459 00000 n 
+0000002029 00000 n 
+0000002155 00000 n 
+0000002715 00000 n 
+0000002843 00000 n 
+0000003513 00000 n 
+0000003641 00000 n 
+0000004281 00000 n 
+0000004409 00000 n 
+0000005148 00000 n 
+0000005276 00000 n 
+0000005988 00000 n 
+0000006116 00000 n 
+0000006665 00000 n 
+0000006793 00000 n 
+0000007475 00000 n 
+0000007603 00000 n 
+0000008293 00000 n 
+0000008421 00000 n 
+0000009077 00000 n 
+0000009205 00000 n 
+0000009847 00000 n 
+0000009975 00000 n 
+0000010686 00000 n 
+0000010814 00000 n 
+0000011590 00000 n 
+0000011718 00000 n 
+0000012361 00000 n 
+0000012489 00000 n 
+0000013236 00000 n 
+0000013364 00000 n 
+0000014086 00000 n 
+0000014214 00000 n 
+0000014948 00000 n 
+0000015076 00000 n 
+0000015796 00000 n 
+0000015924 00000 n 
+0000016624 00000 n 
+0000016752 00000 n 
+0000017410 00000 n 
 trailer
-<< /Size 44 /Root 1 0 R >>
+<< /Size 48 /Root 1 0 R >>
 startxref
-15825
+17538
 %%EOF

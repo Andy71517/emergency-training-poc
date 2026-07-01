@@ -12,4 +12,6 @@ They are the shared language between the fake trainee, backend, logs, scripts, a
 
 The examples are fixtures for development and tests. Schema version `0.1.0` can still change during the POC, so this is not a production compatibility promise.
 
+Inbound IDs use a deliberately small character set: letters, numbers, underscores, and hyphens. Scenario IDs use lowercase letters, numbers, and underscores. Optional action payloads should stay small and JSON-shaped.
+
 Always preserve `event_id` and `sequence_number` in logs. They make replay and review possible.

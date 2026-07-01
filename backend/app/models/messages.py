@@ -3,10 +3,11 @@
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from backend.app.models.events import TraineeActionEvent
 from backend.app.models.state import ScenarioState
+from backend.app.security import SCHEMA_VERSION, ensure_safe_identifier, ensure_safe_scenario_id
 from backend.app.validation.models import ValidationResult
 
 
@@ -16,11 +17,16 @@ class StartSessionMessage(BaseModel):
     message_type: Literal["start_session"]
     scenario_id: str = "smoke_inhalation_room_v0"
 
+    @field_validator("scenario_id")
+    @classmethod
+    def _safe_scenario_id(cls, value: str) -> str:
+        return ensure_safe_scenario_id(value)
+
 
 class TraineeActionMessage(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    schema_version: str = "0.1.0"
+    schema_version: Literal["0.1.0"] = SCHEMA_VERSION
     message_type: Literal["trainee_action"]
     session_id: str
     scenario_id: str
@@ -29,6 +35,18 @@ class TraineeActionMessage(BaseModel):
     sequence_number: int = Field(ge=1)
     correlation_event_id: str | None = None
     trainee_action: TraineeActionEvent
+
+    @field_validator("session_id", "message_id", "correlation_event_id")
+    @classmethod
+    def _safe_identifier(cls, value: str | None, info: object) -> str | None:
+        if value is None:
+            return value
+        return ensure_safe_identifier(value, info.field_name)
+
+    @field_validator("scenario_id")
+    @classmethod
+    def _safe_scenario_id(cls, value: str) -> str:
+        return ensure_safe_scenario_id(value)
 
 
 class SessionStartedMessage(BaseModel):

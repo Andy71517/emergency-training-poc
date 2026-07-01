@@ -6,6 +6,7 @@ from typing import Any
 import yaml
 
 from backend.app.scenario_engine.models import EndCondition, ScenarioDefinition, TransitionRule
+from backend.app.security import ensure_safe_scenario_id
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_SCENARIO_DIRECTORY = REPOSITORY_ROOT / "scenarios"
@@ -30,6 +31,10 @@ def load_scenario(
 ) -> ScenarioDefinition:
     """Load a scenario by identifier without allowing path traversal."""
 
+    try:
+        ensure_safe_scenario_id(scenario_id)
+    except ValueError as error:
+        raise ScenarioLoadError(str(error)) from error
     path = (scenario_directory / f"{scenario_id}.yaml").resolve()
     if path.parent != scenario_directory.resolve():
         raise ScenarioLoadError("Invalid scenario identifier")

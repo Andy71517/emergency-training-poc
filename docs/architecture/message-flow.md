@@ -6,6 +6,7 @@ This is the main path through the POC.
 fake/manual trainee
   -> TraineeActionEvent
   -> API schema check
+  -> POC input guardrails
   -> per-session sequence check
   -> deterministic transition
   -> ValidationResult

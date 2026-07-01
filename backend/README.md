@@ -21,4 +21,21 @@ python -m pytest
 
 The WebSocket defaults to `smoke_inhalation_room_v0`. A different checked-in scenario can be requested in the first `start_session` message.
 
+## Current security baseline
+
+This backend treats clients as untrusted input sources.
+
+It currently checks:
+
+- expected message shape
+- unsupported extra fields
+- safe session, message, event, and actor IDs
+- safe scenario IDs
+- safe action names
+- ordered sequence numbers
+- duplicate event IDs
+- small JSON-shaped payloads
+
+The backend is still local-only. There is no authentication, authorization, TLS, database security, production rate limiting, or cloud hardening yet.
+
 This backend only proves the local action-to-state-to-log loop. It uses in-memory sessions and local files. There is no authentication, database, external AI, clinical decision support, distributed networking, sensing, deployment, or Unreal-specific gameplay logic.

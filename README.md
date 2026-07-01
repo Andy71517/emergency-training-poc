@@ -76,6 +76,14 @@ Clients start by sending `{"message_type":"start_session"}` to `/ws/sessions/{se
 - Real physics simulation
 - Autonomous evaluation of real responders
 
+## Security baseline
+
+The backend now has a small POC security baseline. It rejects strange IDs, unexpected message fields, path-like scenario names, and oversized/nested payloads.
+
+This does not make the app production-secure. There is still no authentication, authorization, TLS, rate limiting, cloud deployment, or real data handling policy.
+
+Start with [docs/security/README.md](docs/security/README.md) for the current trust boundary.
+
 ## Repository map
 
 - `backend/`: FastAPI backend, deterministic engine, validation, logging, and tests
@@ -83,6 +91,7 @@ Clients start by sending `{"message_type":"start_session"}` to `/ws/sessions/{se
 - `scenarios/`: small scenario definitions
 - `validation/`: rule files for the toy scenario
 - `docs/`: scope, architecture notes, ADRs, and demo flow
+- `docs/security/`: POC threat model, client trust boundary, and security roadmap
 - `scripts/`: local demo, replay, summary, and contract helpers
 - `logs/`: local JSONL session logs, ignored by Git
 - `unreal/`: future Unreal client contract and placeholder folder

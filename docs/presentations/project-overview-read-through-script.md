@@ -56,6 +56,22 @@ For a training system, that is really useful early on because it makes testing, 
 
 I am intentionally not using randomness, real AI calls, or external APIs in this slice. Those can come later, once the basic trust layer is solid.
 
+## Security baseline
+
+I also added the first security baseline.
+
+The simple version is: the client can ask to attempt an action, but the backend decides what actually happened.
+
+That matters because a future Unreal client should not be able to say, "trust me, the scenario is complete," or "trust me, there were no warnings."
+
+The backend owns the session state, validation result, final outcome, log entries, replay result, and review summary.
+
+Right now, the backend rejects unexpected fields, weird IDs, path-like scenario names, unsafe action names, oversized payloads, wrong sequence numbers, and duplicate event IDs.
+
+This is not production security yet. There is no authentication, authorization, TLS, cloud hardening, or real user data policy.
+
+But it is the first lock on the first door, and it sets the right habit before the project gets bigger.
+
 ## The current scenario
 
 The current scenario is a tiny smoke-inhalation room POC.
@@ -138,9 +154,11 @@ The next goal is to keep strengthening the display contract and environment obje
 
 I want the future Unreal side to have a very boring job at first: connect, receive state, show clear text, and send simple inputs.
 
-Once that contract is stable, then it makes sense to install Unreal Engine, bring in Blender, experiment with generated assets, and eventually test physics.
+At the same time, I want to keep tightening the security boundary so a future client is useful without becoming too trusted.
 
-Basically: backend truth first, display second, assets third, physics after the object model is stable.
+Once those contracts are stable, then it makes sense to install Unreal Engine, bring in Blender, experiment with generated assets, and eventually test physics.
+
+Basically: backend truth first, security boundary close behind it, display second, assets third, physics after the object model is stable.
 
 ## Ideal end result
 

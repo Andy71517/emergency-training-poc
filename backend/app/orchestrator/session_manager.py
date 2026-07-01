@@ -16,6 +16,7 @@ from backend.app.models.messages import (
 from backend.app.models.state import ScenarioState
 from backend.app.scenario_engine.engine import ScenarioEngine
 from backend.app.scenario_engine.loader import load_scenario
+from backend.app.security import ensure_safe_identifier, ensure_safe_scenario_id
 from backend.app.validation.rules import load_rules
 from backend.app.validation.validator import ScenarioValidator
 
@@ -55,6 +56,11 @@ class SessionManager:
         session_id: str,
         scenario_id: str = "smoke_inhalation_room_v0",
     ) -> SessionStartedMessage:
+        try:
+            ensure_safe_identifier(session_id, "session_id")
+            ensure_safe_scenario_id(scenario_id)
+        except ValueError as error:
+            raise SessionInputError(str(error)) from error
         if session_id in self.sessions:
             raise SessionInputError(f"Session '{session_id}' is already active")
         scenario = load_scenario(scenario_id)

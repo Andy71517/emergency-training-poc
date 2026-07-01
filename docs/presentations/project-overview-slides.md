@@ -89,6 +89,7 @@ It includes:
 - WebSocket session endpoint
 - deterministic scenario engine
 - POC validation rules
+- basic POC security guardrails
 - JSONL session logs
 - replay and review scripts
 - one-command local demo
@@ -160,6 +161,40 @@ It does not mean:
 - real-world incident command advice
 
 This line matters because the POC should be useful without pretending to be official.
+
+---
+
+# Security baseline
+
+The client is not trusted as the source of truth.
+
+The client can say:
+
+"I want to attempt this action."
+
+The backend decides:
+
+- what state changed
+- whether the action was accepted
+- whether warnings or errors exist
+- whether the scenario ended
+- what gets logged for review
+
+---
+
+# Current guardrails
+
+The backend now rejects:
+
+- unexpected message fields
+- weird or path-like IDs
+- unsafe scenario IDs
+- unsafe action names
+- oversized or deeply nested payloads
+- wrong sequence numbers
+- duplicate event IDs
+
+This is not production security yet. It is the first lock on the first door.
 
 ---
 
@@ -255,11 +290,12 @@ Basically: make the future Unreal side boring first, then make it visual later.
 Near-term steps:
 
 1. keep improving the backend contract
-2. add richer environment object fields carefully
-3. keep replay and review as the proof point
-4. build tiny Unreal display tests only when needed
-5. review generated assets manually before using them
-6. add physics only after object state is clean
+2. keep tightening the security boundary
+3. add richer environment object fields carefully
+4. keep replay and review as the proof point
+5. build tiny Unreal display tests only when needed
+6. review generated assets manually before using them
+7. add physics only after object state is clean
 
 This keeps the project from turning into soup.
 
@@ -292,6 +328,7 @@ This is not:
 - a production Unreal build
 - a sensor platform
 - a cloud deployment
+- a production-secure app
 
 It is a strong first loop.
 

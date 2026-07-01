@@ -52,7 +52,7 @@ This is the heartbeat of the repo.
 
 This is the progress slide.
 
-The backend is no longer just docs. It has a FastAPI WebSocket, deterministic scenario engine, validation, logging, replay, review, and a local demo command.
+The backend is no longer just docs. It has a FastAPI WebSocket, deterministic scenario engine, validation, basic security guardrails, logging, replay, review, and a local demo command.
 
 Keep the phrasing grounded. It works locally. It proves the loop. It does not claim more than that.
 
@@ -84,7 +84,25 @@ Validation means rule-conformance for this toy scenario. It does not mean offici
 
 This is important because the project can be technically useful while still being honest about its limits.
 
-## 12. Sample demo result: happy path
+## 12. Security baseline
+
+Explain the security idea in plain language.
+
+The client is allowed to request an action. The backend decides what actually happened.
+
+That means a future Unreal client should not directly edit scenario state, validation results, final outcome, or review logs.
+
+This is the trust boundary.
+
+## 13. Current guardrails
+
+Keep this practical.
+
+The current backend rejects unexpected fields, weird IDs, path-like scenario names, unsafe action names, oversized payloads, wrong sequence numbers, and duplicate event IDs.
+
+Also say clearly that this is not production security yet. It is just the first reasonable security floor for a local POC.
+
+## 14. Sample demo result: happy path
 
 Describe what the good run proves.
 
@@ -92,7 +110,7 @@ The trainee follows the expected order. The chair is moved. The door is opened. 
 
 That is the "green path."
 
-## 13. Sample demo result: warning/error path
+## 15. Sample demo result: warning/error path
 
 Describe what the bad run proves.
 
@@ -100,7 +118,7 @@ The trainee tries to move too fast or ignores an environmental cue. The backend 
 
 This matters because mistakes are part of training.
 
-## 14. Unreal client contract
+## 16. Unreal client contract
 
 Make this distinction clear:
 
@@ -108,7 +126,7 @@ Unreal will display and send input. It should not decide scenario truth.
 
 The repo already has a contract and a Python harness that behaves like the future Unreal client, but there is no scene yet.
 
-## 15. Asset pipeline direction
+## 17. Asset pipeline direction
 
 Explain the asset plan without claiming assets exist.
 
@@ -116,19 +134,19 @@ Tools like Hunyuan 3D may help generate candidates later, but every asset should
 
 For now, the chair and door are scenario objects, not meshes.
 
-## 16. Next goal
+## 18. Next goal
 
 The next goal is making the display contract stronger.
 
 That means a future Unreal client can show state clearly without owning the logic. Text-only debug display first. 2D UI and 3D visuals later.
 
-## 17. How I get there
+## 19. How I get there
 
 This is the roadmap slide.
 
-Emphasize controlled steps. Keep the backend clean. Add fields carefully. Keep replay and review strong. Only then bring in Unreal, Blender, generated assets, and physics.
+Emphasize controlled steps. Keep the backend clean. Keep tightening the security boundary. Add fields carefully. Keep replay and review strong. Only then bring in Unreal, Blender, generated assets, and physics.
 
-## 18. Ideal end result
+## 20. Ideal end result
 
 Describe the bigger picture.
 
@@ -136,18 +154,18 @@ The dream is an adaptive training simulator where scenarios respond to trainee a
 
 But again: that is the direction, not the current claim.
 
-## 19. What this is not
+## 21. What this is not
 
 This is the honesty slide.
 
 Say what it is not so the audience trusts what it is.
 
-It is not certified, not medical guidance, not a production simulator, and not a real physics engine.
+It is not certified, not medical guidance, not a production simulator, not production-secure, and not a real physics engine.
 
-## 20. Closing
+## 22. Closing
 
 End with the ordering principle:
 
-Prove the loop first. Then replay and review. Then client display. Then richer objects. Then Unreal, Blender, generated assets, and physics.
+Prove the loop first. Then replay and review. Then client display. Then security guardrails. Then richer objects. Then Unreal, Blender, generated assets, and physics.
 
 The closer can be: one monster at a time.

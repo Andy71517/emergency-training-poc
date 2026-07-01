@@ -17,13 +17,37 @@
   ],
   "properties": {
     "schema_version": { "const": "0.1.0" },
-    "session_id": { "type": "string", "minLength": 1 },
-    "scenario_id": { "type": "string", "minLength": 1 },
-    "event_id": { "type": "string", "minLength": 1 },
+    "session_id": { "$ref": "#/$defs/safe_identifier" },
+    "scenario_id": { "$ref": "#/$defs/scenario_identifier" },
+    "event_id": { "$ref": "#/$defs/safe_identifier" },
     "timestamp": { "type": "string", "format": "date-time" },
-    "actor_id": { "type": "string", "minLength": 1 },
-    "action_type": { "type": "string", "minLength": 1 },
-    "payload": { "type": "object" },
+    "actor_id": { "$ref": "#/$defs/safe_identifier" },
+    "action_type": { "$ref": "#/$defs/action_type" },
+    "payload": { "$ref": "#/$defs/safe_payload" },
     "sequence_number": { "type": "integer", "minimum": 1 }
+  },
+  "$defs": {
+    "safe_identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "scenario_identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "action_type": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "safe_payload": {
+      "type": "object",
+      "maxProperties": 20
+    }
   }
 }

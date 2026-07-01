@@ -20,8 +20,9 @@ Recommended flow:
 6. Current scenario
 7. Environment cues
 8. Validation boundary
-9. Next goal
-10. Closing
+9. Security baseline
+10. Next goal
+11. Closing
 
 The remaining slides are useful backup slides. They are there if someone asks about Unreal, assets, sample results, or long-term direction.
 
@@ -41,6 +42,7 @@ Demo flow:
 4. Point at the replay verification.
 5. Point at the review summary.
 6. Point out the chair and door environment cues.
+7. Mention that the backend owns the result; the client only requests actions.
 
 The main sentence for the demo:
 
@@ -88,4 +90,3 @@ The current PDF is intentionally plain because it is generated without extra dep
 If this becomes a real presentation deliverable, the next step should be a designed version in PowerPoint, Google Slides, Canva, or a Markdown slide tool like Marp.
 
 The content is already structured for that. The visual pass can come after the wording feels right.
-

@@ -5,6 +5,8 @@ from pathlib import Path
 from threading import Lock
 from typing import Any
 
+from backend.app.security import ensure_safe_identifier
+
 
 class JsonlSessionLogger:
     def __init__(self, log_directory: Path) -> None:
@@ -13,9 +15,7 @@ class JsonlSessionLogger:
         self._lock = Lock()
 
     def path_for(self, session_id: str) -> Path:
-        safe_id = "".join(character for character in session_id if character.isalnum() or character in "-_")
-        if not safe_id or safe_id != session_id:
-            raise ValueError("session_id contains unsupported filename characters")
+        safe_id = ensure_safe_identifier(session_id, "session_id")
         return self.log_directory / f"{safe_id}.jsonl"
 
     def append(self, session_id: str, entry: dict[str, Any]) -> Path:
