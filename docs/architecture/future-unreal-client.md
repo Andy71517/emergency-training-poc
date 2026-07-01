@@ -16,6 +16,8 @@ That harness behaves like a future thin Unreal shell:
 
 No full Unreal scene, rendering layer, gameplay framework, networking topology, projection mapping, sensing integration, or generated content is required now.
 
+The next Unreal step is a text-only debug display. It should show backend state such as phase, validation status, chair moved/not moved, door open/closed, and path blocked/not blocked. Use `scripts/preview_unreal_display.py` to preview that display from a JSONL log before Unreal exists.
+
 ## Boundary rule
 
 Unreal may cache and display backend state. It must not invent or change scenario progress locally.

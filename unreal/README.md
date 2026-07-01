@@ -10,6 +10,7 @@ The thin client contract lives here:
 
 - [contract/client-contract.md](contract/client-contract.md)
 - [contract/client-state-machine.md](contract/client-state-machine.md)
+- [contract/state-display-contract.md](contract/state-display-contract.md)
 - [contract/examples/](contract/examples/)
 
 Keep scenario authority, validation, logging, and review generation in the backend.

@@ -17,4 +17,5 @@ The client must not own scenario transitions, validation rules, trainee scoring,
 
 - `client-contract.md`: how the WebSocket session works.
 - `client-state-machine.md`: the smallest useful client-side state machine.
+- `state-display-contract.md`: what the first text-only Unreal debug panel should show.
 - `examples/`: example JSON messages for review and tests.
