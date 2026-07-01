@@ -12,3 +12,12 @@ Why this object:
 - It is simple enough to review without turning the POC into an asset-production project.
 
 Do not generate, import, or approve a chair asset yet. This note only records the preferred first candidate.
+
+## Physics preview modes
+
+The local demo can show the chair in two static preview modes:
+
+- `physics_enabled: false`: the chair is visual/context metadata only.
+- `physics_enabled: true`: the chair is marked as a future physics candidate for later collision, tipping, blocked movement, mass, and placement checks.
+
+Neither mode runs a physics engine. No mesh, collision shape, Unreal import, or generated asset exists yet.

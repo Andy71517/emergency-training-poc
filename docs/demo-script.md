@@ -2,15 +2,23 @@
 
 Use this flow to show the POC without overselling it.
 
-1. Start the local backend.
-2. Open a session for `smoke_inhalation_room_v0`.
-3. Send `assess_scene` as the first action.
-4. Show the returned state update.
-5. Send an intentionally wrong action, like entering the room too early.
-6. Show the backend warning or error and confirm the state did not advance incorrectly.
-7. Run the happy path in order.
-8. Show the terminal scenario state.
-9. Show the JSONL log.
-10. Replay or summarize the log to prove the session can be reviewed later.
+## One-command local demo
+
+```powershell
+python scripts/run_local_demo.py
+```
+
+The script:
+
+1. Checks whether the backend is healthy.
+2. Starts a local backend if needed.
+3. Runs a happy-path session.
+4. Runs a warning/error session.
+5. Writes JSONL logs for both sessions.
+6. Replays each log to prove deterministic behavior.
+7. Prints a short review summary for each session.
+8. Shows the wooden-chair environment preview with physics disabled and enabled.
+
+The physics preview is only metadata. It does not generate a mesh, load an Unreal scene, run collision, or simulate movement.
 
 Keep the disclaimer visible in any demo: this is illustrative POC behavior, not clinical or operational guidance.

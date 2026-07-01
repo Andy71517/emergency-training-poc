@@ -31,6 +31,14 @@ python -m pip install -e ".[dev]"
 python -m uvicorn backend.app.main:app --reload
 ```
 
+For the cleanest end-to-end walkthrough, run the one-command local demo:
+
+```powershell
+python scripts/run_local_demo.py
+```
+
+It starts the backend if needed, runs demo sessions, replays the logs, prints review summaries, and shows the wooden-chair environment preview with physics disabled and enabled.
+
 In another terminal, run the fake trainee demo:
 
 ```powershell
@@ -63,6 +71,7 @@ Clients start by sending `{"message_type":"start_session"}` to `/ws/sessions/{se
 - Multimodal sensing
 - A full Unreal scene
 - Generated 3D assets
+- Real physics simulation
 - Autonomous evaluation of real responders
 
 ## Repository map
