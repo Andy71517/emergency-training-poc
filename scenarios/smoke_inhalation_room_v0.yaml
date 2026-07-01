@@ -10,6 +10,7 @@ initial_state:
   ppe_confirmed: false
   backup_requested: false
   path_blocked: true
+  door_open: false
   occupant_removed: false
   scenario_outcome: in_progress
   environment:
@@ -22,12 +23,32 @@ initial_state:
         moved: false
         physics_enabled: false
         physics_note: "Preview metadata only. No real gravity, collision, or physics simulation."
+      entry_door_poc:
+        object_type: door
+        label: Entry door
+        location: room_entry
+        blocks_path: true
+        open_state: closed
+        locked: false
+        door_type: hinged_wooden_door_preview
+        hinge_side: left
+        swing_direction: inward
+        collision_enabled: true
+        collision_shape: box_preview
+        mass_kg_estimate: 35
+        force_preview:
+          push_forward: opens_when_unlocked
+          pull_backward: limited_from_hall_side
+          push_left: blocked_by_hinge
+          push_right: blocked_by_frame
+        physics_note: "Metadata only. No real door physics, forces, locks, or collision simulation."
 
 allowed_actions:
   - assess_scene
   - confirm_ppe
   - request_backup
   - move_obstacle
+  - open_door
   - enter_room
   - remove_occupant
   - stop_scenario
@@ -66,12 +87,23 @@ transition_rules:
       environment.objects.wooden_chair_poc.moved: true
       environment.objects.wooden_chair_poc.location: clear_of_entry_path
 
+  - id: open-entry-door
+    when:
+      scene_assessed: true
+      action_type: open_door
+      environment.objects.entry_door_poc.open_state: closed
+    set:
+      door_open: true
+      environment.objects.entry_door_poc.blocks_path: false
+      environment.objects.entry_door_poc.open_state: open
+
   - id: enter-room-after-prerequisites
     when:
       scene_assessed: true
       ppe_confirmed: true
       backup_requested: true
       path_blocked: false
+      door_open: true
       action_type: enter_room
     set:
       phase: room_entered
@@ -101,6 +133,8 @@ validation_hints:
     description: "Block action names that are not listed in allowed_actions."
   - rule_id: environmental-cue-not-cleared
     description: "Warn when the trainee tries to enter while the wooden chair still blocks the path."
+  - rule_id: entry-door-still-closed
+    description: "Warn when the trainee tries to enter while the entry door is still closed."
 
 end_conditions:
   - state_equals:
@@ -115,6 +149,7 @@ expected_happy_path:
   - confirm_ppe
   - request_backup
   - move_obstacle
+  - open_door
   - enter_room
   - remove_occupant
 
@@ -131,3 +166,6 @@ possible_unsafe_or_warning_paths:
   - actions: [assess_scene, confirm_ppe, request_backup, enter_room]
     expected_validation: warning
     reason: "The wooden chair still blocks the entry path."
+  - actions: [assess_scene, confirm_ppe, request_backup, move_obstacle, enter_room]
+    expected_validation: warning
+    reason: "The entry door is still closed."

@@ -92,6 +92,12 @@ def test_review_report_formats_summary_and_replay_result() -> None:
                 "moved": True,
                 "physics_enabled": False,
                 "gravity_note": "Mass alone does not simulate gravity.",
+            },
+            "entry_door_poc": {
+                "open": True,
+                "blocked_path": False,
+                "locked": False,
+                "door_type": "hinged_wooden_door_preview",
             }
         },
         "warnings": [{"code": "assessment_not_recorded", "message": "Scene assessment missing."}],
@@ -106,6 +112,8 @@ def test_review_report_formats_summary_and_replay_result() -> None:
     assert "Replay verified: yes" in report
     assert "Environment: wooden chair" in report
     assert "Moved during scenario: yes" in report
+    assert "Environment: entry door" in report
+    assert "Open at end: yes" in report
     assert "assessment_not_recorded: Scene assessment missing." in report
     assert "validation here is POC rule checking" in report
 

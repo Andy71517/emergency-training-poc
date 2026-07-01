@@ -32,6 +32,7 @@
         "ppe_confirmed": { "type": "boolean" },
         "backup_requested": { "type": "boolean" },
         "path_blocked": { "type": "boolean" },
+        "door_open": { "type": "boolean" },
         "occupant_removed": { "type": "boolean" },
         "scenario_outcome": { "enum": ["in_progress", "completed", "stopped"] },
         "environment": {
@@ -52,6 +53,26 @@
                     "blocks_path": { "type": "boolean" },
                     "moved": { "type": "boolean" },
                     "physics_enabled": { "type": "boolean" },
+                    "physics_note": { "type": "string" }
+                  }
+                },
+                "entry_door_poc": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "object_type": { "const": "door" },
+                    "label": { "type": "string" },
+                    "location": { "type": "string" },
+                    "blocks_path": { "type": "boolean" },
+                    "open_state": { "enum": ["open", "closed"] },
+                    "locked": { "type": "boolean" },
+                    "door_type": { "type": "string" },
+                    "hinge_side": { "type": "string" },
+                    "swing_direction": { "type": "string" },
+                    "collision_enabled": { "type": "boolean" },
+                    "collision_shape": { "type": "string" },
+                    "mass_kg_estimate": { "type": "number" },
+                    "force_preview": { "type": "object" },
                     "physics_note": { "type": "string" }
                   }
                 }

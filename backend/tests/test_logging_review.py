@@ -36,3 +36,8 @@ def test_review_summary_reports_actions_findings_and_end_state(tmp_path: Path) -
     assert chair["moved"] is False
     assert chair["physics_enabled"] is False
     assert "Mass alone" in chair["gravity_note"]
+    door = summary["environment_review"]["entry_door_poc"]
+    assert door["open"] is False
+    assert door["blocked_path"] is True
+    assert door["locked"] is False
+    assert door["door_type"] == "hinged_wooden_door_preview"

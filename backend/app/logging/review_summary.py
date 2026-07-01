@@ -53,15 +53,12 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
 
 
 def environment_review(state: dict[str, Any]) -> dict[str, Any]:
-    chair = (
-        state.get("environment", {})
-        .get("objects", {})
-        .get("wooden_chair_poc", {})
-    )
-    if not chair:
-        return {}
-    return {
-        "wooden_chair_poc": {
+    objects = state.get("environment", {}).get("objects", {})
+    chair = objects.get("wooden_chair_poc", {})
+    door = objects.get("entry_door_poc", {})
+    review: dict[str, Any] = {}
+    if chair:
+        review["wooden_chair_poc"] = {
             "label": chair.get("label", "Wooden chair"),
             "location": chair.get("location"),
             "blocked_path": bool(chair.get("blocks_path")),
@@ -70,4 +67,20 @@ def environment_review(state: dict[str, Any]) -> dict[str, Any]:
             "physics_note": chair.get("physics_note"),
             "gravity_note": "Mass alone does not simulate gravity; real gravity needs a physics engine later.",
         }
-    }
+    if door:
+        review["entry_door_poc"] = {
+            "label": door.get("label", "Entry door"),
+            "location": door.get("location"),
+            "open": door.get("open_state") == "open",
+            "open_state": door.get("open_state"),
+            "blocked_path": bool(door.get("blocks_path")),
+            "locked": bool(door.get("locked")),
+            "door_type": door.get("door_type"),
+            "hinge_side": door.get("hinge_side"),
+            "swing_direction": door.get("swing_direction"),
+            "collision_enabled": bool(door.get("collision_enabled")),
+            "mass_kg_estimate": door.get("mass_kg_estimate"),
+            "force_preview": door.get("force_preview", {}),
+            "physics_note": door.get("physics_note"),
+        }
+    return review

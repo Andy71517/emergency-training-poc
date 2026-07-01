@@ -32,6 +32,7 @@ HAPPY_ACTIONS = [
     "confirm_ppe",
     "request_backup",
     "move_obstacle",
+    "open_door",
     "enter_room",
     "remove_occupant",
 ]
@@ -41,6 +42,7 @@ WARNING_ERROR_ACTIONS = [
     "assess_scene",
     "confirm_ppe",
     "request_backup",
+    "move_obstacle",
     "enter_room",
     "stop_scenario",
 ]
@@ -231,15 +233,29 @@ def finding_text(finding: dict[str, Any]) -> str:
 
 def environment_lines(environment_review: dict[str, Any]) -> list[str]:
     chair = environment_review.get("wooden_chair_poc")
-    if not chair:
-        return ["Environment: no wooden chair state found"]
-    return [
-        "Environment: wooden chair",
-        f"  - Blocked path at end: {yes_no(bool(chair.get('blocked_path')))}",
-        f"  - Moved during scenario: {yes_no(bool(chair.get('moved')))}",
-        f"  - Scenario physics flag: {yes_no(bool(chair.get('physics_enabled')))}",
-        f"  - Gravity note: {chair.get('gravity_note')}",
-    ]
+    door = environment_review.get("entry_door_poc")
+    lines: list[str] = []
+    if chair:
+        lines.extend(
+            [
+                "Environment: wooden chair",
+                f"  - Blocked path at end: {yes_no(bool(chair.get('blocked_path')))}",
+                f"  - Moved during scenario: {yes_no(bool(chair.get('moved')))}",
+                f"  - Scenario physics flag: {yes_no(bool(chair.get('physics_enabled')))}",
+                f"  - Gravity note: {chair.get('gravity_note')}",
+            ]
+        )
+    if door:
+        lines.extend(
+            [
+                "Environment: entry door",
+                f"  - Open at end: {yes_no(bool(door.get('open')))}",
+                f"  - Blocks path at end: {yes_no(bool(door.get('blocked_path')))}",
+                f"  - Locked metadata: {yes_no(bool(door.get('locked')))}",
+                f"  - Door type metadata: {door.get('door_type')}",
+            ]
+        )
+    return lines or ["Environment: no environment object state found"]
 
 
 def yes_no(value: bool) -> str:

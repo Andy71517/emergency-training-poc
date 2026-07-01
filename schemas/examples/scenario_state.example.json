@@ -11,6 +11,7 @@
     "ppe_confirmed": false,
     "backup_requested": false,
     "path_blocked": true,
+    "door_open": false,
     "occupant_removed": false,
     "scenario_outcome": "in_progress",
     "environment": {
@@ -23,6 +24,27 @@
           "moved": false,
           "physics_enabled": false,
           "physics_note": "Preview metadata only. No real gravity, collision, or physics simulation."
+        },
+        "entry_door_poc": {
+          "object_type": "door",
+          "label": "Entry door",
+          "location": "room_entry",
+          "blocks_path": true,
+          "open_state": "closed",
+          "locked": false,
+          "door_type": "hinged_wooden_door_preview",
+          "hinge_side": "left",
+          "swing_direction": "inward",
+          "collision_enabled": true,
+          "collision_shape": "box_preview",
+          "mass_kg_estimate": 35,
+          "force_preview": {
+            "push_forward": "opens_when_unlocked",
+            "pull_backward": "limited_from_hall_side",
+            "push_left": "blocked_by_hinge",
+            "push_right": "blocked_by_frame"
+          },
+          "physics_note": "Metadata only. No real door physics, forces, locks, or collision simulation."
         }
       }
     }

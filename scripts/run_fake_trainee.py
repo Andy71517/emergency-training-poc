@@ -49,7 +49,15 @@ async def main(base_url: str) -> None:
     await run_session(
         base_url,
         "demo-happy",
-        ["assess_scene", "confirm_ppe", "request_backup", "move_obstacle", "enter_room", "remove_occupant"],
+        [
+            "assess_scene",
+            "confirm_ppe",
+            "request_backup",
+            "move_obstacle",
+            "open_door",
+            "enter_room",
+            "remove_occupant",
+        ],
     )
     await run_session(
         base_url,
