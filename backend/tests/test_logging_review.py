@@ -31,3 +31,8 @@ def test_review_summary_reports_actions_findings_and_end_state(tmp_path: Path) -
     assert summary["warnings"]
     assert summary["end_condition_reached"] is True
     assert summary["final_state"]["scenario_outcome"] == "stopped"
+    chair = summary["environment_review"]["wooden_chair_poc"]
+    assert chair["blocked_path"] is True
+    assert chair["moved"] is False
+    assert chair["physics_enabled"] is False
+    assert "Mass alone" in chair["gravity_note"]

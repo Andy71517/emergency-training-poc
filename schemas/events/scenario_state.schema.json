@@ -31,8 +31,34 @@
         "scene_assessed": { "type": "boolean" },
         "ppe_confirmed": { "type": "boolean" },
         "backup_requested": { "type": "boolean" },
+        "path_blocked": { "type": "boolean" },
         "occupant_removed": { "type": "boolean" },
-        "scenario_outcome": { "enum": ["in_progress", "completed", "stopped"] }
+        "scenario_outcome": { "enum": ["in_progress", "completed", "stopped"] },
+        "environment": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "objects": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "wooden_chair_poc": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "object_type": { "const": "wooden_chair" },
+                    "label": { "type": "string" },
+                    "location": { "type": "string" },
+                    "blocks_path": { "type": "boolean" },
+                    "moved": { "type": "boolean" },
+                    "physics_enabled": { "type": "boolean" },
+                    "physics_note": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "is_terminal": { "type": "boolean" },

@@ -10,9 +10,23 @@
     "scene_assessed": true,
     "ppe_confirmed": false,
     "backup_requested": false,
+    "path_blocked": true,
     "occupant_removed": false,
-    "scenario_outcome": "in_progress"
+    "scenario_outcome": "in_progress",
+    "environment": {
+      "objects": {
+        "wooden_chair_poc": {
+          "object_type": "wooden_chair",
+          "label": "Wooden chair",
+          "location": "near_room_entry",
+          "blocks_path": true,
+          "moved": false,
+          "physics_enabled": false,
+          "physics_note": "Preview metadata only. No real gravity, collision, or physics simulation."
+        }
+      }
+    }
   },
   "is_terminal": false,
-  "next_expected_actions": ["confirm_ppe", "request_backup"]
+  "next_expected_actions": ["confirm_ppe", "request_backup", "move_obstacle"]
 }

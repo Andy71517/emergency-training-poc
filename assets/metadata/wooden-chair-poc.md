@@ -11,7 +11,7 @@ Why this object:
 - It can later support basic physics checks: collision, tipping, blocking movement, mass assumptions, and object placement.
 - It is simple enough to review without turning the POC into an asset-production project.
 
-Do not generate, import, or approve a chair asset yet. This note only records the preferred first candidate.
+The current scenario can refer to the chair as environment state, but there is still no generated or approved chair asset.
 
 ## Physics preview modes
 
@@ -21,3 +21,5 @@ The local demo can show the chair in two static preview modes:
 - `physics_enabled: true`: the chair is marked as a future physics candidate for later collision, tipping, blocked movement, mass, and placement checks.
 
 Neither mode runs a physics engine. No mesh, collision shape, Unreal import, or generated asset exists yet.
+
+Mass is not enough to cover gravity. Mass is only one value a future physics body might need. Real gravity behavior also needs a physics engine, collision shape, object transform, constraints, material/friction settings, and a scene that updates over time. None of that exists in this POC yet.

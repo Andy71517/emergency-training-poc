@@ -19,6 +19,7 @@ DEFAULT_ACTIONS = [
     "assess_scene",
     "confirm_ppe",
     "request_backup",
+    "move_obstacle",
     "enter_room",
     "remove_occupant",
 ]

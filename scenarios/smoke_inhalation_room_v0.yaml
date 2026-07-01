@@ -9,13 +9,25 @@ initial_state:
   scene_assessed: false
   ppe_confirmed: false
   backup_requested: false
+  path_blocked: true
   occupant_removed: false
   scenario_outcome: in_progress
+  environment:
+    objects:
+      wooden_chair_poc:
+        object_type: wooden_chair
+        label: Wooden chair
+        location: near_room_entry
+        blocks_path: true
+        moved: false
+        physics_enabled: false
+        physics_note: "Preview metadata only. No real gravity, collision, or physics simulation."
 
 allowed_actions:
   - assess_scene
   - confirm_ppe
   - request_backup
+  - move_obstacle
   - enter_room
   - remove_occupant
   - stop_scenario
@@ -43,11 +55,23 @@ transition_rules:
     set:
       backup_requested: true
 
+  - id: move-wooden-chair-obstacle
+    when:
+      scene_assessed: true
+      action_type: move_obstacle
+      environment.objects.wooden_chair_poc.blocks_path: true
+    set:
+      path_blocked: false
+      environment.objects.wooden_chair_poc.blocks_path: false
+      environment.objects.wooden_chair_poc.moved: true
+      environment.objects.wooden_chair_poc.location: clear_of_entry_path
+
   - id: enter-room-after-prerequisites
     when:
       scene_assessed: true
       ppe_confirmed: true
       backup_requested: true
+      path_blocked: false
       action_type: enter_room
     set:
       phase: room_entered
@@ -75,6 +99,8 @@ validation_hints:
     description: "Block room entry until the POC prerequisite flags are set."
   - rule_id: known-action-only
     description: "Block action names that are not listed in allowed_actions."
+  - rule_id: environmental-cue-not-cleared
+    description: "Warn when the trainee tries to enter while the wooden chair still blocks the path."
 
 end_conditions:
   - state_equals:
@@ -88,6 +114,7 @@ expected_happy_path:
   - assess_scene
   - confirm_ppe
   - request_backup
+  - move_obstacle
   - enter_room
   - remove_occupant
 
@@ -101,3 +128,6 @@ possible_unsafe_or_warning_paths:
   - actions: [confirm_ppe]
     expected_validation: warning
     reason: "The scene assessment step was skipped."
+  - actions: [assess_scene, confirm_ppe, request_backup, enter_room]
+    expected_validation: warning
+    reason: "The wooden chair still blocks the entry path."

@@ -4,6 +4,7 @@ from copy import deepcopy
 from typing import Any
 
 from backend.app.scenario_engine.models import ScenarioDefinition, TransitionCandidate
+from backend.app.scenario_engine.state_paths import MISSING, get_path, set_path
 
 
 class ScenarioEngine:
@@ -19,7 +20,8 @@ class ScenarioEngine:
         for rule in self.scenario.transition_rules:
             if self._matches(rule.when, state, action_type):
                 candidate = deepcopy(state)
-                candidate.update(deepcopy(rule.updates))
+                for path, value in rule.updates.items():
+                    set_path(candidate, path, value)
                 return TransitionCandidate(candidate, rule.rule_id)
         return TransitionCandidate(
             deepcopy(state),
@@ -53,6 +55,6 @@ class ScenarioEngine:
     @staticmethod
     def _matches_state(conditions: dict[str, Any], state: dict[str, Any]) -> bool:
         return all(
-            key == "action_type" or state.get(key) == expected
+            key == "action_type" or get_path(state, key, MISSING) == expected
             for key, expected in conditions.items()
         )

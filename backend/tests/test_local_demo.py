@@ -72,6 +72,7 @@ def test_chair_preview_supports_disabled_enabled_and_both() -> None:
     assert "Wooden chair" in rendered
     assert "No mesh is generated or loaded." in rendered
     assert "future physics candidate preview" in rendered
+    assert "Mass alone does not cover gravity" in rendered
 
 
 def test_review_report_formats_summary_and_replay_result() -> None:
@@ -85,6 +86,14 @@ def test_review_report_formats_summary_and_replay_result() -> None:
         "actions_taken": ["confirm_ppe"],
         "final_state": {"phase": "stopped"},
         "end_condition_reached": True,
+        "environment_review": {
+            "wooden_chair_poc": {
+                "blocked_path": False,
+                "moved": True,
+                "physics_enabled": False,
+                "gravity_note": "Mass alone does not simulate gravity.",
+            }
+        },
         "warnings": [{"code": "assessment_not_recorded", "message": "Scene assessment missing."}],
         "errors": [{"code": "entry_prerequisites_missing", "message": "Setup flags missing."}],
     }
@@ -95,6 +104,8 @@ def test_review_report_formats_summary_and_replay_result() -> None:
     assert "Session: warning/error path" in report
     assert "Actions: confirm_ppe" in report
     assert "Replay verified: yes" in report
+    assert "Environment: wooden chair" in report
+    assert "Moved during scenario: yes" in report
     assert "assessment_not_recorded: Scene assessment missing." in report
     assert "validation here is POC rule checking" in report
 

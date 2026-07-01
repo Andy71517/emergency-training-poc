@@ -17,7 +17,7 @@ rules:
     severity: warning
     when:
       state.scene_assessed: false
-      action_type_in: [confirm_ppe, request_backup]
+      action_type_in: [confirm_ppe, request_backup, move_obstacle]
     result:
       code: assessment_not_recorded
       message: "Scene assessment has not been recorded yet."
@@ -33,6 +33,19 @@ rules:
     result:
       code: entry_prerequisites_missing
       message: "The POC setup flags required before room entry are incomplete."
+      blocks_transition: true
+
+  - id: environmental-cue-not-cleared
+    severity: warning
+    when:
+      action_type: enter_room
+      state.scene_assessed: true
+      state.ppe_confirmed: true
+      state.backup_requested: true
+      state.environment.objects.wooden_chair_poc.blocks_path: true
+    result:
+      code: environmental_cue_not_cleared
+      message: "The wooden chair still blocks the entry path. Move the obstacle before entering."
       blocks_transition: true
 
   - id: removal-requires-entry

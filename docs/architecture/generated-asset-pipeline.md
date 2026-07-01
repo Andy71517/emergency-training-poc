@@ -6,6 +6,8 @@ A later experiment might use Hunyuan 3D or similar tools to create candidate mes
 
 The first future POC object should be a simple wooden chair. A chair is realistic for the kinds of rooms this simulator cares about, and it gives future physics tests something useful to collide with, move, tip, or block.
 
+For physics later, mass is not enough by itself. Gravity needs a real physics body, collision shape, scene transform, material/friction settings, and an engine that updates the object over time. The current repo only records preview metadata.
+
 A future asset flow should include:
 
 - generation

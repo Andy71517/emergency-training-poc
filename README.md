@@ -39,6 +39,8 @@ python scripts/run_local_demo.py
 
 It starts the backend if needed, runs demo sessions, replays the logs, prints review summaries, and shows the wooden-chair environment preview with physics disabled and enabled.
 
+The toy smoke-room scenario now includes a wooden chair near the entry path. The happy path moves it with `move_obstacle` before entering. If the trainee ignores the chair and tries to enter while it still blocks the path, the backend returns a warning and does not advance the room-entry step.
+
 In another terminal, run the fake trainee demo:
 
 ```powershell

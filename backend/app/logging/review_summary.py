@@ -44,8 +44,30 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
         "session_id": entries[0].get("session_id"),
         "scenario_id": entries[0].get("scenario_id"),
         "final_state": final_state,
+        "environment_review": environment_review(final_state),
         "actions_taken": actions,
         "warnings": warnings,
         "errors": errors,
         "end_condition_reached": end_reached,
+    }
+
+
+def environment_review(state: dict[str, Any]) -> dict[str, Any]:
+    chair = (
+        state.get("environment", {})
+        .get("objects", {})
+        .get("wooden_chair_poc", {})
+    )
+    if not chair:
+        return {}
+    return {
+        "wooden_chair_poc": {
+            "label": chair.get("label", "Wooden chair"),
+            "location": chair.get("location"),
+            "blocked_path": bool(chair.get("blocks_path")),
+            "moved": bool(chair.get("moved")),
+            "physics_enabled": bool(chair.get("physics_enabled")),
+            "physics_note": chair.get("physics_note"),
+            "gravity_note": "Mass alone does not simulate gravity; real gravity needs a physics engine later.",
+        }
     }

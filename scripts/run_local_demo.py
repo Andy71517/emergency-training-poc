@@ -27,8 +27,23 @@ from scripts.replay_session import replay  # noqa: E402
 
 DEFAULT_HTTP_URL = "http://127.0.0.1:8765"
 DEFAULT_LOG_DIRECTORY = Path("logs") / "sessions"
-HAPPY_ACTIONS = ["assess_scene", "confirm_ppe", "request_backup", "enter_room", "remove_occupant"]
-WARNING_ERROR_ACTIONS = ["confirm_ppe", "enter_room", "assess_scene", "stop_scenario"]
+HAPPY_ACTIONS = [
+    "assess_scene",
+    "confirm_ppe",
+    "request_backup",
+    "move_obstacle",
+    "enter_room",
+    "remove_occupant",
+]
+WARNING_ERROR_ACTIONS = [
+    "confirm_ppe",
+    "enter_room",
+    "assess_scene",
+    "confirm_ppe",
+    "request_backup",
+    "enter_room",
+    "stop_scenario",
+]
 PhysicsPreview = Literal["disabled", "enabled", "both"]
 
 
@@ -148,7 +163,7 @@ def chair_previews(mode: PhysicsPreview) -> list[dict[str, Any]]:
                 "role": "visual/context preview only",
                 "notes": [
                     "No mesh is generated or loaded.",
-                    "No collision, mass, tipping, or movement is simulated.",
+                    "No gravity, collision, mass, tipping, or movement is simulated.",
                 ],
             }
         )
@@ -162,6 +177,7 @@ def chair_previews(mode: PhysicsPreview) -> list[dict[str, Any]]:
                 "notes": [
                     "Intended future checks: collision, tipping, blocked movement, and placement.",
                     "Mass/material values are assumptions to review later, not active simulation.",
+                    "Mass alone does not cover gravity; real gravity needs a physics engine later.",
                 ],
             }
         )
@@ -183,6 +199,7 @@ def render_review_report(
     session: DemoSession,
     summary: dict[str, Any],
     replay_result: dict[str, Any],
+    physics_preview: PhysicsPreview = "both",
 ) -> str:
     final_state = summary.get("final_state") or {}
     warnings = summary.get("warnings") or []
@@ -195,6 +212,8 @@ def render_review_report(
         f"End reached: {yes_no(bool(summary.get('end_condition_reached')))}",
         f"Replay verified: {yes_no(bool(replay_result.get('verified')))}",
         f"Events replayed: {replay_result.get('events_replayed', 0)}",
+        f"Physics preview shown: {physics_preview}",
+        *environment_lines(summary.get("environment_review") or {}),
         f"Warnings: {len(warnings)}",
         *[f"  - {finding_text(finding)}" for finding in warnings],
         f"Errors: {len(errors)}",
@@ -208,6 +227,19 @@ def finding_text(finding: dict[str, Any]) -> str:
     code = finding.get("code", "finding")
     message = finding.get("message", "No message")
     return f"{code}: {message}"
+
+
+def environment_lines(environment_review: dict[str, Any]) -> list[str]:
+    chair = environment_review.get("wooden_chair_poc")
+    if not chair:
+        return ["Environment: no wooden chair state found"]
+    return [
+        "Environment: wooden chair",
+        f"  - Blocked path at end: {yes_no(bool(chair.get('blocked_path')))}",
+        f"  - Moved during scenario: {yes_no(bool(chair.get('moved')))}",
+        f"  - Scenario physics flag: {yes_no(bool(chair.get('physics_enabled')))}",
+        f"  - Gravity note: {chair.get('gravity_note')}",
+    ]
 
 
 def yes_no(value: bool) -> str:
@@ -249,7 +281,14 @@ async def run_demo(
             print(f"Received {len(messages)} WebSocket messages")
             replay_result = replay(session.log_path)
             summary = generate_review_summary(session.log_path)
-            print(render_review_report(session=session, summary=summary, replay_result=replay_result))
+            print(
+                render_review_report(
+                    session=session,
+                    summary=summary,
+                    replay_result=replay_result,
+                    physics_preview=physics_preview,
+                )
+            )
         return 0
     finally:
         if started_process is not None and not keep_backend_running:

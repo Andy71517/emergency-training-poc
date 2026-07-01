@@ -19,6 +19,8 @@ The script:
 7. Prints a short review summary for each session.
 8. Shows the wooden-chair environment preview with physics disabled and enabled.
 
-The physics preview is only metadata. It does not generate a mesh, load an Unreal scene, run collision, or simulate movement.
+The happy path moves the wooden chair before entering the room. The warning/error path tries to enter while the chair still blocks the path, so the backend shows a warning and keeps the state from advancing.
+
+The physics preview is only metadata. It does not generate a mesh, load an Unreal scene, run gravity, run collision, or simulate movement.
 
 Keep the disclaimer visible in any demo: this is illustrative POC behavior, not clinical or operational guidance.

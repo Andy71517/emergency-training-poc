@@ -2,15 +2,28 @@
   "message_type": "scenario_ended",
   "session_id": "unreal-contract-demo",
   "scenario_id": "smoke_inhalation_room_v0",
-  "sequence_number": 5,
+  "sequence_number": 6,
   "outcome": "completed",
   "final_state": {
-    "phase": "complete",
+    "phase": "occupant_removed",
     "scene_assessed": true,
     "ppe_confirmed": true,
     "backup_requested": true,
-    "entered_room": true,
+    "path_blocked": false,
     "occupant_removed": true,
-    "scenario_outcome": "completed"
+    "scenario_outcome": "completed",
+    "environment": {
+      "objects": {
+        "wooden_chair_poc": {
+          "object_type": "wooden_chair",
+          "label": "Wooden chair",
+          "location": "clear_of_entry_path",
+          "blocks_path": false,
+          "moved": true,
+          "physics_enabled": false,
+          "physics_note": "Preview metadata only. No real gravity, collision, or physics simulation."
+        }
+      }
+    }
   }
 }

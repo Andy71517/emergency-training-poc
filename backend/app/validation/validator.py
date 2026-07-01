@@ -4,6 +4,7 @@ from typing import Any
 
 from backend.app.models.events import TraineeActionEvent
 from backend.app.scenario_engine.models import ScenarioDefinition
+from backend.app.scenario_engine.state_paths import MISSING, get_path
 from backend.app.validation.models import (
     ValidationEvaluation,
     ValidationFinding,
@@ -100,10 +101,10 @@ class ScenarioValidator:
                 if state.get("phase") == expected:
                     return False
             elif key.startswith("state."):
-                if state.get(key.removeprefix("state.")) != expected:
+                if get_path(state, key.removeprefix("state."), MISSING) != expected:
                     return False
             elif key == "any_state_equals":
-                if not any(state.get(name) == value for name, value in expected.items()):
+                if not any(get_path(state, name, MISSING) == value for name, value in expected.items()):
                     return False
             elif key == "minimum_sequence_number":
                 if event.sequence_number >= int(expected):
