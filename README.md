@@ -56,7 +56,10 @@ python scripts/run_unreal_contract_harness.py
 Run tests and inspect a generated session log:
 
 ```powershell
-python -m pytest
+python -m pytest -q
+python -m ruff check backend scripts
+python -m compileall -q backend scripts docs\presentations\build_pdf.py
+python scripts\check_json_files.py
 python scripts/replay_session.py logs/sessions/demo-happy.jsonl
 python scripts/summarize_log.py logs/sessions/demo-happy.jsonl
 ```
@@ -91,6 +94,7 @@ Start with [docs/security/README.md](docs/security/README.md) for the current tr
 - `scenarios/`: small scenario definitions
 - `validation/`: rule files for the toy scenario
 - `docs/`: scope, architecture notes, ADRs, and demo flow
+- `docs/development/`: local development and lightweight CI notes
 - `docs/security/`: POC threat model, client trust boundary, and security roadmap
 - `scripts/`: local demo, replay, summary, and contract helpers
 - `logs/`: local JSONL session logs, ignored by Git
