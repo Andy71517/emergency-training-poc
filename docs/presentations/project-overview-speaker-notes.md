@@ -12,7 +12,15 @@ Say that this is a proof-of-concept for an AI-driven adaptive emergency-response
 
 The point of this presentation is to show the project path so far.
 
-## 2. The short version
+## 2. First audience
+
+This slide sets the tone.
+
+Say that the first audience is Dr. Cameron, so the presentation is meant to work as a clear project/job progress update.
+
+The point is not to sell a finished product. The point is to show careful engineering progress: what exists, what it proves, what is still out of scope, and what should come next.
+
+## 3. The short version
 
 Explain the core idea in normal language.
 
@@ -20,13 +28,13 @@ The system takes a trainee action, updates the scenario, checks the result, send
 
 This is the first real foundation. Everything else depends on this working cleanly.
 
-## 3. Why this project exists
+## 4. Why this project exists
 
 Talk about training as a feedback problem.
 
 Training is not only about making a cool simulation. It is about repeatable practice and useful review. If the system cannot explain what happened afterward, it is not very useful for learning.
 
-## 4. The problem I am avoiding
+## 5. The problem I am avoiding
 
 This is where you can be a little funny.
 
@@ -34,13 +42,13 @@ It is tempting to start with the shiny stuff: Unreal, AI, 3D models, sensors, ph
 
 So the project starts with a boring but important question: can the system keep the truth straight?
 
-## 5. How I started
+## 6. How I started
 
 Describe Sprint 0 as setting up the project rails.
 
 The first pass was docs, schemas, scenario files, validation rules, placeholders, and architecture notes. That might sound slow, but it made the next steps safer and cleaner.
 
-## 6. The POC loop
+## 7. The POC loop
 
 Walk through the loop slowly.
 
@@ -48,7 +56,7 @@ Manual action comes in. Backend receives it. Engine updates scenario state. Vali
 
 This is the heartbeat of the repo.
 
-## 7. Where I am now
+## 8. Where I am now
 
 This is the progress slide.
 
@@ -56,19 +64,19 @@ The backend is no longer just docs. It has a FastAPI WebSocket, deterministic sc
 
 Keep the phrasing grounded. It works locally. It proves the loop. It does not claim more than that.
 
-## 8. Current scenario
+## 9. Current scenario
 
 Explain that the first scenario is intentionally tiny.
 
 It is a smoke-room style software scenario with a simple happy path. The point is not to teach real response protocol. The point is to exercise the code path.
 
-## 9. Environment cues
+## 10. Environment cues
 
 The wooden chair and entry door matter because they make the room state visible to the backend.
 
 The chair can block the path. The door can be closed. These are simple, obvious environmental cues that the system should not ignore.
 
-## 10. Why the chair and door matter
+## 11. Why the chair and door matter
 
 This is the bridge to future physics and Unreal.
 
@@ -76,7 +84,7 @@ Right now, these objects are metadata and state. Later, they can grow into riche
 
 The key is that the backend already knows they exist.
 
-## 11. Validation boundary
+## 12. Validation boundary
 
 Be direct here.
 
@@ -84,7 +92,7 @@ Validation means rule-conformance for this toy scenario. It does not mean offici
 
 This is important because the project can be technically useful while still being honest about its limits.
 
-## 12. Security baseline
+## 13. Security baseline
 
 Explain the security idea in plain language.
 
@@ -94,7 +102,7 @@ That means a future Unreal client should not directly edit scenario state, valid
 
 This is the trust boundary.
 
-## 13. Current guardrails
+## 14. Current guardrails
 
 Keep this practical.
 
@@ -102,7 +110,7 @@ The current backend rejects unexpected fields, weird IDs, path-like scenario nam
 
 Also say clearly that this is not production security yet. It is just the first reasonable security floor for a local POC.
 
-## 14. Sample demo result: happy path
+## 15. Sample demo result: happy path
 
 Describe what the good run proves.
 
@@ -110,7 +118,7 @@ The trainee follows the expected order. The chair is moved. The door is opened. 
 
 That is the "green path."
 
-## 15. Sample demo result: warning/error path
+## 16. Sample demo result: warning/error path
 
 Describe what the bad run proves.
 
@@ -118,7 +126,7 @@ The trainee tries to move too fast or ignores an environmental cue. The backend 
 
 This matters because mistakes are part of training.
 
-## 16. Unreal client contract
+## 17. Unreal client contract
 
 Make this distinction clear:
 
@@ -126,7 +134,7 @@ Unreal will display and send input. It should not decide scenario truth.
 
 The repo already has a contract and a Python harness that behaves like the future Unreal client, but there is no scene yet.
 
-## 17. Asset pipeline direction
+## 18. Asset pipeline direction
 
 Explain the asset plan without claiming assets exist.
 
@@ -134,19 +142,19 @@ Tools like Hunyuan 3D may help generate candidates later, but every asset should
 
 For now, the chair and door are scenario objects, not meshes.
 
-## 18. Next goal
+## 19. Next goal
 
 The next goal is making the display contract stronger.
 
 That means a future Unreal client can show state clearly without owning the logic. Text-only debug display first. 2D UI and 3D visuals later.
 
-## 19. How I get there
+## 20. How I get there
 
 This is the roadmap slide.
 
 Emphasize controlled steps. Keep the backend clean. Keep tightening the security boundary. Add fields carefully. Keep replay and review strong. Only then bring in Unreal, Blender, generated assets, and physics.
 
-## 20. Ideal end result
+## 21. Ideal end result
 
 Describe the bigger picture.
 
@@ -154,7 +162,7 @@ The dream is an adaptive training simulator where scenarios respond to trainee a
 
 But again: that is the direction, not the current claim.
 
-## 21. What this is not
+## 22. What this is not
 
 This is the honesty slide.
 
@@ -162,10 +170,20 @@ Say what it is not so the audience trusts what it is.
 
 It is not certified, not medical guidance, not a production simulator, not production-secure, and not a real physics engine.
 
-## 22. Closing
+## 23. Closing
 
 End with the ordering principle:
 
 Prove the loop first. Then replay and review. Then client display. Then security guardrails. Then richer objects. Then Unreal, Blender, generated assets, and physics.
 
 The closer can be: one monster at a time.
+
+## 24. Best 10-minute demo flow
+
+This is the practical ending if Dr. Cameron asks how you would present it live.
+
+Use 5 minutes for the story and 5 minutes for proof on screen.
+
+The key sentence is:
+
+The backend can keep track of what happened, explain it afterward, and leave room for Unreal, UX, and physics later.

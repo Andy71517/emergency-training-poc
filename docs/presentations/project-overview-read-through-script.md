@@ -6,6 +6,8 @@ This is a full spoken version of the project update. It is written to sound natu
 
 Hey everyone. This project is a proof-of-concept for an AI-driven adaptive emergency-response training simulator.
 
+I am framing this mainly for Dr. Cameron, so I am treating it like a project progress update: what I built, what it proves, what it does not prove yet, and what the next careful step should be.
+
 The easiest way to explain it is this: I am not trying to build the final simulator in one jump. I am trying to prove the core loop first.
 
 That loop is: a trainee does something, the backend receives it, the scenario changes, the system checks what happened, the client gets the new state, and the session gets logged so someone can review it later.
@@ -185,3 +187,7 @@ That foundation is small, but it is strong enough to build on.
 And from here, the plan is to keep adding one careful layer at a time.
 
 One monster at a time.
+
+If I were presenting this live, I would keep it simple: about five minutes explaining the loop and the scope, then about five minutes running the local demo.
+
+The main thing I would want Dr. Cameron to see is that the foundation works: the backend can receive actions, update state, check the result, log it, replay it, and explain it afterward.

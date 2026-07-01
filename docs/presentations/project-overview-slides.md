@@ -6,6 +6,22 @@ Proof-of-concept project update
 
 ---
 
+# First audience
+
+This update is framed for Dr. Cameron.
+
+The goal is to show:
+
+- what I built
+- what it proves
+- what it does not prove yet
+- why the build order is careful
+- what the next useful step is
+
+This is more on-campus project update than startup pitch.
+
+---
+
 # The short version
 
 I am building a small backend-first proof of concept for emergency-response training.
@@ -351,3 +367,16 @@ Then, add richer objects.
 Then, when the foundation is stable, start wrestling with Unreal, Blender, generated assets, and physics.
 
 One monster at a time.
+
+---
+
+# Best 10-minute demo flow
+
+For Dr. Cameron:
+
+- 5 minutes: explain the loop, scope, and trust boundary
+- 5 minutes: run the local demo and point at replay/review
+
+The core takeaway should be:
+
+The backend can keep track of what happened, explain it afterward, and leave room for Unreal/UX/physics later.

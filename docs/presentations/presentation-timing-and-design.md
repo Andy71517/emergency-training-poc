@@ -4,6 +4,8 @@ This deck is meant to work as a 5-minute project explanation plus a 5-minute dem
 
 That shape fits the project well because the slides explain the "why," and the demo proves the loop instead of just talking about it.
 
+The first audience is Dr. Cameron, so the presentation should feel like a clear on-campus project update first and a pitch deck second.
+
 ## Suggested timing
 
 ### 5-minute presentation

@@ -96,6 +96,7 @@ Start with [docs/security/README.md](docs/security/README.md) for the current tr
 - `docs/`: scope, architecture notes, ADRs, and demo flow
 - `docs/development/`: local development and lightweight CI notes
 - `docs/security/`: POC threat model, client trust boundary, and security roadmap
+- `docs/ux/`: trainee, reviewer, and demo experience notes
 - `scripts/`: local demo, replay, summary, and contract helpers
 - `logs/`: local JSONL session logs, ignored by Git
 - `unreal/`: future Unreal client contract and placeholder folder

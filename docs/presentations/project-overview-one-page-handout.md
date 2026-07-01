@@ -4,6 +4,8 @@
 
 This repo is a backend-first proof of concept for an AI-driven adaptive emergency-response training simulator.
 
+The first audience is Dr. Cameron, so the project is framed as an on-campus job/research-style progress update: what I built, what it proves, what it does not prove yet, and what the next careful step is.
+
 It proves a small but important loop:
 
 ```text
@@ -87,3 +89,12 @@ Near-term focus:
 ## Ideal end result
 
 The long-term goal is an adaptive training simulator where environment cues matter, instructors can review sessions clearly, and future AI/3D/Unreal pieces support the training experience without hiding the system logic.
+
+## Suggested 10-minute presentation
+
+- 5 minutes: explain the loop, scope, validation boundary, and security boundary
+- 5 minutes: run the local demo and point at replay/review
+
+Main takeaway:
+
+> The backend can keep track of what happened, explain it afterward, and leave room for Unreal, UX, assets, and physics later.
