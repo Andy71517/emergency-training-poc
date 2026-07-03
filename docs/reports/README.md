@@ -15,6 +15,8 @@ Use:
 - `emergency-training-poc-report.pdf`: generated report PDF
 - `build_report_pdf.py`: small no-dependency report PDF builder
 
+The report PDF is denser than the meeting deck. It is meant to be submitted or read directly, while the presentation PDF is meant to be talked through in a meeting.
+
 ## Rebuild the report PDF
 
 From the repo root:
@@ -22,4 +24,3 @@ From the repo root:
 ```powershell
 python docs/reports/build_report_pdf.py
 ```
-

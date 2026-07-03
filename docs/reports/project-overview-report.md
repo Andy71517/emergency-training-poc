@@ -2,6 +2,22 @@
 
 Prepared as a project progress report for Dr. Cameron.
 
+## Table of contents
+
+1. Executive summary
+2. Full project north star
+3. Architecture at a glance
+4. Current POC scope
+5. Why backend-first
+6. Current implementation
+7. Review and replay as the proof point
+8. Validation boundary
+9. Security and trust boundary
+10. Relationship to future Unreal work
+11. Relationship to future assets and physics
+12. Two-track roadmap
+13. Recommended next steps
+
 ## Executive summary
 
 The long-term project vision is an AI-driven, real-time adaptive emergency-response training platform for firefighters and EMTs. The full system points toward agentic AI scenario generation, immersive training rooms, physical mannequins, multimodal sensing, structured verification and validation, scalable hub-and-spoke deployment, and post-scenario review.
@@ -28,6 +44,31 @@ trainee speaks, moves, and performs procedures
 Future capabilities include AI and agentic scenario adaptation, multimodal sensing, projection mapping, mannequin integration, cloud services, distributed training sites, and validation against structured clinical or training references.
 
 Those are future full-system goals. They are not current repo capabilities.
+
+## Architecture at a glance
+
+The full project vision and the current POC can be understood as two connected layers:
+
+```text
+Full-system direction
+  AI scenario generation
+  + immersive rooms
+  + multimodal sensing
+  + validation framework
+  + hub-and-spoke deployment
+        |
+        v
+Current POC foundation
+  manual action
+  -> backend event
+  -> deterministic state update
+  -> POC validation
+  -> client state message
+  -> JSONL log
+  -> replay and review
+```
+
+The current repo builds the lower layer first so that future AI, sensing, Unreal, and deployment work have a trusted state and review foundation.
 
 ## Current POC scope
 
@@ -215,4 +256,3 @@ This repo is small on purpose.
 It does not try to be the final adaptive training platform yet. It proves the first trustworthy backend loop: action in, state update, validation result, client message, log, replay, and review.
 
 That foundation is what makes the larger project believable.
-

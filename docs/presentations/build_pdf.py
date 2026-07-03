@@ -23,6 +23,7 @@ BODY_Y = 468
 LINE_HEIGHT = 14.5
 MAX_BODY_CHARS = 96
 MAX_BODY_LINES = 29
+CONTENT_BOTTOM_Y = 82
 
 COLOR_BACKGROUND = (0.985, 0.976, 0.945)
 COLOR_HEADER = (0.055, 0.105, 0.165)
@@ -147,6 +148,12 @@ def _text(
 def _content_stream(title: str, body: list[str], page_number: int, total_pages: int) -> bytes:
     title = _clean_for_pdf(title)
     lines = [_clean_for_pdf(line) for line in _format_body(body)]
+    visible_line_count = sum(1 for line in lines if line)
+    dynamic_line_height = LINE_HEIGHT
+    if 0 < visible_line_count <= 16:
+        available_height = BODY_Y - CONTENT_BOTTOM_Y
+        dynamic_line_height = min(24, max(LINE_HEIGHT, available_height / (visible_line_count + 1)))
+    body_size = 12.2 if visible_line_count <= 12 else 11.3
 
     commands: list[str] = [
         _rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, COLOR_BACKGROUND),
@@ -193,7 +200,7 @@ def _content_stream(title: str, body: list[str], page_number: int, total_pages: 
 
         is_code = line.startswith("    ")
         font = "F2" if is_code else "F1"
-        size = 9.5 if is_code else 11.3
+        size = 9.5 if is_code else body_size
         color = COLOR_MUTED_ACCENT if is_code else COLOR_BODY
         x = MARGIN_X + (10 if line.startswith("  - ") else 0)
 
@@ -201,7 +208,7 @@ def _content_stream(title: str, body: list[str], page_number: int, total_pages: 
             commands.append(_rect(MARGIN_X - 6, y - 3, PAGE_WIDTH - (MARGIN_X * 2) + 12, 13, COLOR_CODE_BG))
 
         commands.extend(_text(x=x, y=y, value=line, font=font, size=size, color=color))
-        y -= LINE_HEIGHT
+        y -= dynamic_line_height
         rendered_lines += 1
 
     commands.append(_rect(MARGIN_X, 44, PAGE_WIDTH - (MARGIN_X * 2), 1.2, (0.78, 0.76, 0.70)))

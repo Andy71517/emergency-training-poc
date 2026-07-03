@@ -267,7 +267,7 @@ That review trail is one of the most important parts of the POC.
 
 # Sample review output
 
-This is the kind of output I want Dr. Cameron to see:
+Audience context: this is the proof point behind the demo.
 
 ```text
 Post-scenario review
@@ -287,7 +287,9 @@ Key observations:
   - The entry door ended closed or blocking the path.
 ```
 
-The point is not "the demo ran." The point is "the system can explain what happened."
+The point is not "the demo ran."
+
+The point is "the system can explain what happened."
 
 ---
 

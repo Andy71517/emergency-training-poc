@@ -195,6 +195,60 @@ def page_stream(page: list[tuple[float, Line]], page_number: int, total_pages: i
     return ("\n".join(commands) + "\n").encode("latin-1", "replace")
 
 
+def cover_stream(total_pages: int) -> bytes:
+    commands: list[str] = [
+        _rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, (0.985, 0.976, 0.945)),
+        _rect(0, PAGE_HEIGHT - 178, PAGE_WIDTH, 178, COLOR_HEADER),
+        _rect(0, PAGE_HEIGHT - 178, 14, 178, COLOR_ACCENT),
+        *_text(
+            MARGIN_X,
+            PAGE_HEIGHT - 78,
+            Line("Emergency Training", font="F3", size=26, color=(1, 1, 1)),
+        ),
+        *_text(
+            MARGIN_X,
+            PAGE_HEIGHT - 111,
+            Line("Simulator POC Report", font="F3", size=26, color=(1, 1, 1)),
+        ),
+        *_text(
+            MARGIN_X,
+            PAGE_HEIGHT - 144,
+            Line(
+                "Backend-first foundation toward the full adaptive training platform",
+                size=11,
+                color=(0.78, 0.84, 0.88),
+            ),
+        ),
+        _rect(MARGIN_X, 494, PAGE_WIDTH - (MARGIN_X * 2), 2, COLOR_ACCENT),
+        *_text(
+            MARGIN_X,
+            452,
+            Line("Prepared as a project progress report for Dr. Cameron.", size=12.5),
+        ),
+        *_text(
+            MARGIN_X,
+            426,
+            Line("Current repo focus: trusted backend loop, replay, and review.", size=12.5),
+        ),
+        *_text(
+            MARGIN_X,
+            400,
+            Line("Full direction: AI adaptation, immersive environments, sensing, and validation.", size=12.5),
+        ),
+        *_text(
+            MARGIN_X,
+            120,
+            Line(
+                "Boundary: this is a POC report, not clinical or operational guidance.",
+                size=9.5,
+                color=COLOR_MUTED,
+            ),
+        ),
+        *_text(PAGE_WIDTH - 96, 28, Line(f"1/{total_pages}", size=8.5, color=COLOR_MUTED)),
+    ]
+    return ("\n".join(commands) + "\n").encode("latin-1", "replace")
+
+
 def build_pdf(pages: list[list[tuple[float, Line]]]) -> bytes:
     objects: list[bytes] = []
 
@@ -209,8 +263,12 @@ def build_pdf(pages: list[list[tuple[float, Line]]]) -> bytes:
     font_bold_id = add_object(b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>")
 
     page_ids: list[int] = []
-    for index, page in enumerate(pages, start=1):
-        stream = page_stream(page, index, len(pages))
+    total_pages = len(pages) + 1
+    streams = [cover_stream(total_pages)] + [
+        page_stream(page, index, total_pages)
+        for index, page in enumerate(pages, start=2)
+    ]
+    for stream in streams:
         stream_id = add_object(
             b"<< /Length "
             + str(len(stream)).encode("ascii")
@@ -260,9 +318,8 @@ def main() -> None:
     markdown = REPORT_MD.read_text(encoding="utf-8")
     pages = paginate(markdown_to_lines(markdown))
     OUTPUT_PDF.write_bytes(build_pdf(pages))
-    print(f"Wrote {OUTPUT_PDF} ({len(pages)} pages)")
+    print(f"Wrote {OUTPUT_PDF} ({len(pages) + 1} pages)")
 
 
 if __name__ == "__main__":
     main()
-

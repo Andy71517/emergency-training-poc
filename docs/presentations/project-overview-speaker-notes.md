@@ -140,6 +140,8 @@ This matters because mistakes are part of training.
 
 This is one of the strongest slides for Dr. Cameron.
 
+Presenter note: the slide should not sound like private self-talk. Frame it as context for the audience: this output is the proof point behind the demo.
+
 Say that this is the difference between a toy demo and a useful training foundation.
 
 A toy demo says: "It ran."
