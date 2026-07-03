@@ -41,10 +41,17 @@ Entry door:
 - `hinge_side`: metadata only for now
 - `swing_direction`: metadata only for now
 
+Smoke/visibility cue:
+
+- `observed`: whether the cue has been checked in the POC scenario
+- `visibility_level`: simple state label, not a real visibility model
+- `cue_note`: plain-language boundary note
+
 ## Current scenario objects
 
 - `wooden_chair_poc`: starts near the entry path and blocks movement until `move_obstacle`.
 - `entry_door_poc`: starts closed and blocks room entry until `open_door`.
+- `smoke_visibility_cue_poc`: starts unchecked and must be checked with `check_visibility` before room entry.
 
 ## Blender review rule
 

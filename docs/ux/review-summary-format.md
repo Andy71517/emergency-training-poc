@@ -31,14 +31,15 @@ A good review should answer:
 The human-readable review is organized as:
 
 1. Session basics
-2. Final state and outcome
-3. Replay verification
-4. Action timeline
-5. Environment cues
-6. Warnings
-7. Errors
-8. Key observations
-9. Reviewer takeaways
+2. Plain-English "what happened" headline
+3. Review snapshot
+4. Replay verification
+5. Action timeline
+6. Environment cues
+7. Warnings
+8. Errors
+9. Key observations
+10. Reviewer takeaways
 
 ## Why this format works
 
@@ -51,6 +52,7 @@ Facts:
 - final phase
 - environment object state
 - replay result
+- whether cue checks like chair, door, and smoke/visibility were handled
 
 Interpretation:
 
@@ -64,6 +66,10 @@ This keeps the review useful without pretending to be clinical scoring, firefigh
 Good:
 
 > The trainee attempted to enter while the entry door was still closed, so the POC validation layer returned a warning and the scenario did not advance.
+
+Also good:
+
+> The trainee cleared the chair and opened the door, but attempted entry before checking the smoke/visibility cue. The POC validation layer returned a warning and kept the scenario from advancing.
 
 Avoid:
 
@@ -84,4 +90,3 @@ For raw structured JSON:
 ```powershell
 python scripts\summarize_log.py logs\sessions\<session-id>.jsonl --json
 ```
-

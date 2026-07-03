@@ -90,6 +90,7 @@ def test_ended_sessions_do_not_count_against_active_session_limit(tmp_path: Path
         "request_backup",
         "move_obstacle",
         "open_door",
+        "check_visibility",
         "enter_room",
         "remove_occupant",
     ]

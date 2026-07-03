@@ -27,6 +27,7 @@ def test_review_summary_reports_actions_findings_and_end_state(tmp_path: Path) -
     summary = generate_review_summary(tmp_path / f"{session_id}.jsonl")
 
     assert summary["session_id"] == session_id
+    assert summary["review_headline"]
     assert summary["actions_taken"] == actions
     assert summary["total_actions"] == 3
     assert summary["validation_counts"]["warning"] >= 1
@@ -49,6 +50,9 @@ def test_review_summary_reports_actions_findings_and_end_state(tmp_path: Path) -
     assert door["blocked_path"] is True
     assert door["locked"] is False
     assert door["door_type"] == "hinged_wooden_door_preview"
+    visibility = summary["environment_review"]["smoke_visibility_cue_poc"]
+    assert visibility["observed"] is False
+    assert visibility["visibility_level"] == "low"
 
 
 def test_review_summary_formats_human_readable_debrief(tmp_path: Path) -> None:
@@ -70,9 +74,12 @@ def test_review_summary_formats_human_readable_debrief(tmp_path: Path) -> None:
 
     assert "Post-scenario review" in rendered
     assert "Session: demo review" in rendered
+    assert "What happened:" in rendered
+    assert "Review snapshot:" in rendered
     assert "Action timeline:" in rendered
     assert "1. assess_scene -> ok" in rendered
     assert "Environment cues:" in rendered
+    assert "Smoke/visibility cue:" in rendered
     assert "Key observations:" in rendered
     assert "Reviewer takeaways:" in rendered
     assert "Replay verified: yes" in rendered

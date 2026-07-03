@@ -17,7 +17,7 @@ rules:
     severity: warning
     when:
       state.scene_assessed: false
-      action_type_in: [confirm_ppe, request_backup, move_obstacle, open_door]
+      action_type_in: [confirm_ppe, request_backup, move_obstacle, open_door, check_visibility]
     result:
       code: assessment_not_recorded
       message: "Scene assessment has not been recorded yet."
@@ -60,6 +60,21 @@ rules:
     result:
       code: entry_door_still_closed
       message: "The entry door is still closed. Open the door before entering."
+      blocks_transition: true
+
+  - id: visibility-cue-not-checked
+    severity: warning
+    when:
+      action_type: enter_room
+      state.scene_assessed: true
+      state.ppe_confirmed: true
+      state.backup_requested: true
+      state.environment.objects.wooden_chair_poc.blocks_path: false
+      state.environment.objects.entry_door_poc.open_state: open
+      state.environment.objects.smoke_visibility_cue_poc.observed: false
+    result:
+      code: visibility_cue_not_checked
+      message: "The smoke/visibility cue has not been checked in this POC scenario."
       blocks_transition: true
 
   - id: removal-requires-entry

@@ -12,6 +12,7 @@
     "backup_requested": false,
     "path_blocked": true,
     "door_open": false,
+    "visibility_checked": false,
     "occupant_removed": false,
     "scenario_outcome": "in_progress",
     "environment": {
@@ -46,10 +47,21 @@
             "push_right": "blocked_by_frame"
           },
           "physics_note": "Metadata only. No real door physics, forces, locks, or collision simulation."
+        },
+        "smoke_visibility_cue_poc": {
+          "object_type": "visibility_cue",
+          "label": "Smoke/visibility cue",
+          "location": "room_entry_view",
+          "blocks_path": false,
+          "observed": false,
+          "visibility_level": "low",
+          "cue_note": "POC cue only. Checking visibility does not represent real smoke behavior or operational guidance.",
+          "physics_enabled": false,
+          "physics_note": "Metadata only. No real smoke simulation, lighting model, air movement, or particle physics."
         }
       }
     }
   },
   "is_terminal": false,
-  "next_expected_actions": ["confirm_ppe", "request_backup", "move_obstacle"]
+  "next_expected_actions": ["confirm_ppe", "request_backup", "move_obstacle", "open_door", "check_visibility"]
 }

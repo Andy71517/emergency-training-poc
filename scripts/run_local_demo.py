@@ -33,6 +33,7 @@ HAPPY_ACTIONS = [
     "request_backup",
     "move_obstacle",
     "open_door",
+    "check_visibility",
     "enter_room",
     "remove_occupant",
 ]
@@ -43,6 +44,7 @@ WARNING_ERROR_ACTIONS = [
     "confirm_ppe",
     "request_backup",
     "move_obstacle",
+    "open_door",
     "enter_room",
     "stop_scenario",
 ]

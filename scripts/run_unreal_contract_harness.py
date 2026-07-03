@@ -21,6 +21,7 @@ DEFAULT_ACTIONS = [
     "request_backup",
     "move_obstacle",
     "open_door",
+    "check_visibility",
     "enter_room",
     "remove_occupant",
 ]

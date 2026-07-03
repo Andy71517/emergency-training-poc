@@ -98,7 +98,15 @@ def test_review_report_formats_summary_and_replay_result() -> None:
                 "blocked_path": False,
                 "locked": False,
                 "door_type": "hinged_wooden_door_preview",
-            }
+            },
+            "smoke_visibility_cue_poc": {
+                "label": "Smoke/visibility cue",
+                "observed": False,
+                "visibility_level": "low",
+                "blocked_path": False,
+                "physics_enabled": False,
+                "cue_note": "POC cue only.",
+            },
         },
         "warnings": [{"code": "assessment_not_recorded", "message": "Scene assessment missing."}],
         "errors": [{"code": "entry_prerequisites_missing", "message": "Setup flags missing."}],
@@ -115,6 +123,8 @@ def test_review_report_formats_summary_and_replay_result() -> None:
     assert "moved during scenario: yes" in report
     assert "Entry door:" in report
     assert "open at end: yes" in report
+    assert "Smoke/visibility cue:" in report
+    assert "checked during scenario: no" in report
     assert "assessment_not_recorded: Scene assessment missing." in report
     assert "Reviewer takeaways:" in report
 

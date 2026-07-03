@@ -17,9 +17,13 @@ def test_scenario_yaml_loads_and_initial_state_is_correct() -> None:
     assert scenario.initial_state["scene_assessed"] is False
     assert scenario.initial_state["path_blocked"] is True
     assert scenario.initial_state["door_open"] is False
+    assert scenario.initial_state["visibility_checked"] is False
     assert scenario.initial_state["environment"]["objects"]["wooden_chair_poc"]["blocks_path"] is True
     assert scenario.initial_state["environment"]["objects"]["entry_door_poc"]["open_state"] == "closed"
     assert scenario.initial_state["environment"]["objects"]["entry_door_poc"]["locked"] is False
+    visibility = scenario.initial_state["environment"]["objects"]["smoke_visibility_cue_poc"]
+    assert visibility["observed"] is False
+    assert visibility["visibility_level"] == "low"
 
 
 def test_environment_objects_follow_shared_contract() -> None:
@@ -46,6 +50,7 @@ def test_happy_path_reaches_expected_final_state(tmp_path: Path) -> None:
         "request_backup",
         "move_obstacle",
         "open_door",
+        "check_visibility",
         "enter_room",
         "remove_occupant",
     ]
@@ -60,10 +65,13 @@ def test_happy_path_reaches_expected_final_state(tmp_path: Path) -> None:
     assert result.update.scenario_state.state["occupant_removed"] is True
     chair = result.update.scenario_state.state["environment"]["objects"]["wooden_chair_poc"]
     door = result.update.scenario_state.state["environment"]["objects"]["entry_door_poc"]
+    visibility = result.update.scenario_state.state["environment"]["objects"]["smoke_visibility_cue_poc"]
     assert chair["blocks_path"] is False
     assert chair["moved"] is True
     assert door["open_state"] == "open"
     assert door["locked"] is False
+    assert visibility["observed"] is True
+    assert visibility["visibility_level"] == "checked_low_visibility"
     assert result.ended is not None
     assert result.ended.outcome == "completed"
 
@@ -103,6 +111,22 @@ def test_open_door_updates_door_state_without_using_lock_metadata(tmp_path: Path
     assert door["door_type"] == "hinged_wooden_door_preview"
 
 
+def test_check_visibility_marks_smoke_visibility_cue_observed(tmp_path: Path) -> None:
+    manager = SessionManager(tmp_path)
+    session_id = "visibility-check-test"
+    manager.start_session(session_id)
+    manager.process_action(session_id, action_message(session_id, "assess_scene", 1))
+
+    result = manager.process_action(session_id, action_message(session_id, "check_visibility", 2))
+    state = result.update.scenario_state.state
+    visibility = state["environment"]["objects"]["smoke_visibility_cue_poc"]
+
+    assert result.update.validation_result.status == "ok"
+    assert state["visibility_checked"] is True
+    assert visibility["observed"] is True
+    assert visibility["visibility_level"] == "checked_low_visibility"
+
+
 def test_entering_before_moving_chair_produces_warning_without_transition(tmp_path: Path) -> None:
     manager = SessionManager(tmp_path)
     session_id = "chair-warning-test"
@@ -135,6 +159,32 @@ def test_entering_before_opening_door_produces_warning_without_transition(tmp_pa
     assert result.update.validation_result.warnings[0].code == "entry_door_still_closed"
     assert result.update.scenario_state.state["phase"] == "scene_assessed"
     assert result.update.scenario_state.state["door_open"] is False
+
+
+def test_entering_before_checking_visibility_produces_warning_without_transition(
+    tmp_path: Path,
+) -> None:
+    manager = SessionManager(tmp_path)
+    session_id = "visibility-warning-test"
+    manager.start_session(session_id)
+    actions = [
+        "assess_scene",
+        "confirm_ppe",
+        "request_backup",
+        "move_obstacle",
+        "open_door",
+        "enter_room",
+    ]
+
+    result = None
+    for sequence_number, action in enumerate(actions, start=1):
+        result = manager.process_action(session_id, action_message(session_id, action, sequence_number))
+
+    assert result is not None
+    assert result.update.validation_result.status == "warning"
+    assert result.update.validation_result.warnings[0].code == "visibility_cue_not_checked"
+    assert result.update.scenario_state.state["phase"] == "scene_assessed"
+    assert result.update.scenario_state.state["visibility_checked"] is False
 
 
 def test_wrong_sequence_produces_warning_or_error_without_transition(tmp_path: Path) -> None:
@@ -171,6 +221,7 @@ def test_engine_is_deterministic_for_ordered_actions() -> None:
         "request_backup",
         "move_obstacle",
         "open_door",
+        "check_visibility",
         "enter_room",
         "remove_occupant",
     ]

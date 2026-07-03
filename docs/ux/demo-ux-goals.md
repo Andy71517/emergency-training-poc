@@ -20,7 +20,7 @@ The demo should show:
 - logs are written
 - replay verification passes
 - review summaries are readable
-- chair and door state are visible in the review
+- chair, door, and smoke/visibility cue state are visible in the review
 - security boundaries exist at the client/backend edge
 
 ## What Dr. Cameron should be able to notice
@@ -43,4 +43,3 @@ The demo succeeds if someone can say:
 3. I can see why the backend comes before Unreal.
 4. I can see how replay and review support training.
 5. I can see the next step.
-

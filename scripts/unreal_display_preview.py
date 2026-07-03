@@ -82,6 +82,21 @@ def object_display_rows(environment_review: dict[str, Any]) -> list[dict[str, An
                 },
             }
         )
+    visibility = environment_review.get("smoke_visibility_cue_poc")
+    if visibility:
+        observed = bool(visibility.get("observed"))
+        rows.append(
+            {
+                "object_id": "smoke_visibility_cue_poc",
+                "label": visibility.get("label", "Smoke/visibility cue"),
+                "display": "checked" if observed else "unchecked",
+                "blocks_path": bool(visibility.get("blocked_path")),
+                "metadata": {
+                    "visibility_level": visibility.get("visibility_level"),
+                    "physics_enabled": bool(visibility.get("physics_enabled")),
+                },
+            }
+        )
     return rows
 
 

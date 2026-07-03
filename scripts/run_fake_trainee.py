@@ -55,6 +55,7 @@ async def main(base_url: str) -> None:
             "request_backup",
             "move_obstacle",
             "open_door",
+            "check_visibility",
             "enter_room",
             "remove_occupant",
         ],
@@ -62,7 +63,17 @@ async def main(base_url: str) -> None:
     await run_session(
         base_url,
         "demo-warning-error",
-        ["confirm_ppe", "enter_room", "assess_scene", "stop_scenario"],
+        [
+            "confirm_ppe",
+            "enter_room",
+            "assess_scene",
+            "confirm_ppe",
+            "request_backup",
+            "move_obstacle",
+            "open_door",
+            "enter_room",
+            "stop_scenario",
+        ],
     )
 
 

@@ -61,9 +61,15 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
         end_reached = end_reached or entry.get("event_type") == "scenario_ended"
 
     review = environment_review(final_state)
+    headline = review_headline(
+        validation_counts=validation_counts,
+        end_reached=end_reached,
+        final_phase=final_state.get("phase"),
+    )
     return {
         "session_id": entries[0].get("session_id"),
         "scenario_id": entries[0].get("scenario_id"),
+        "review_headline": headline,
         "scenario_outcome": final_state.get("scenario_outcome"),
         "final_phase": final_state.get("phase"),
         "final_state": final_state,
@@ -89,6 +95,7 @@ def environment_review(state: dict[str, Any]) -> dict[str, Any]:
     objects = state.get("environment", {}).get("objects", {})
     chair = objects.get("wooden_chair_poc", {})
     door = objects.get("entry_door_poc", {})
+    visibility = objects.get("smoke_visibility_cue_poc", {})
     review: dict[str, Any] = {}
     if chair:
         review["wooden_chair_poc"] = {
@@ -116,7 +123,33 @@ def environment_review(state: dict[str, Any]) -> dict[str, Any]:
             "force_preview": door.get("force_preview", {}),
             "physics_note": door.get("physics_note"),
         }
+    if visibility:
+        review["smoke_visibility_cue_poc"] = {
+            "label": visibility.get("label", "Smoke/visibility cue"),
+            "location": visibility.get("location"),
+            "observed": bool(visibility.get("observed")),
+            "visibility_level": visibility.get("visibility_level"),
+            "blocked_path": bool(visibility.get("blocks_path")),
+            "cue_note": visibility.get("cue_note"),
+            "physics_enabled": bool(visibility.get("physics_enabled")),
+            "physics_note": visibility.get("physics_note"),
+        }
     return review
+
+
+def review_headline(
+    *,
+    validation_counts: dict[str, int],
+    end_reached: bool,
+    final_phase: str | None,
+) -> str:
+    if validation_counts.get("error"):
+        return "The run included an error that stopped at least one attempted action."
+    if validation_counts.get("warning"):
+        return "The run completed with POC warnings worth discussing in review."
+    if end_reached:
+        return "The run reached an end condition without recorded POC findings."
+    return f"The run ended in phase '{final_phase or 'unknown'}' without reaching an end condition."
 
 
 def key_observations(
@@ -148,6 +181,12 @@ def key_observations(
         observations.append(
             "The entry door ended "
             + ("open." if door.get("open") else "closed or blocking the path.")
+        )
+    visibility = environment.get("smoke_visibility_cue_poc")
+    if visibility:
+        observations.append(
+            "The smoke/visibility cue was "
+            + ("checked before the final state." if visibility.get("observed") else "still unchecked at the end.")
         )
     return observations
 
@@ -188,17 +227,20 @@ def format_review_summary(
         f"Session: {label or summary.get('session_id', 'unknown')}",
         f"Session ID: {summary.get('session_id', 'unknown')}",
         f"Scenario: {summary.get('scenario_id', 'unknown')}",
+        f"What happened: {summary.get('review_headline', 'No headline generated.')}",
     ]
     if log_path is not None:
         lines.append(f"Log: {log_path}")
     lines.extend(
         [
-            f"Final phase: {summary.get('final_phase') or 'unknown'}",
-            f"Scenario outcome: {summary.get('scenario_outcome') or 'unknown'}",
-            f"End condition reached: {yes_no(bool(summary.get('end_condition_reached')))}",
-            f"Actions reviewed: {action_count}",
+            "",
+            "Review snapshot:",
+            f"  - Final phase: {summary.get('final_phase') or 'unknown'}",
+            f"  - Scenario outcome: {summary.get('scenario_outcome') or 'unknown'}",
+            f"  - End condition reached: {yes_no(bool(summary.get('end_condition_reached')))}",
+            f"  - Actions reviewed: {action_count}",
             (
-                "Validation counts: "
+                "  - Validation counts: "
                 f"ok={validation_counts.get('ok', 0)}, "
                 f"warning={validation_counts.get('warning', 0)}, "
                 f"error={validation_counts.get('error', 0)}"
@@ -208,12 +250,12 @@ def format_review_summary(
     if replay_result is not None:
         lines.extend(
             [
-                f"Replay verified: {yes_no(bool(replay_result.get('verified')))}",
-                f"Events replayed: {replay_result.get('events_replayed', 0)}",
+                f"  - Replay verified: {yes_no(bool(replay_result.get('verified')))}",
+                f"  - Events replayed: {replay_result.get('events_replayed', 0)}",
             ]
         )
     if physics_preview is not None:
-        lines.append(f"Physics preview shown: {physics_preview}")
+        lines.append(f"  - Physics preview shown: {physics_preview}")
 
     lines.extend(["", "Action timeline:"])
     action_timeline = summary.get("action_timeline") or []
@@ -255,6 +297,7 @@ def format_review_summary(
 def environment_lines(environment: dict[str, Any]) -> list[str]:
     chair = environment.get("wooden_chair_poc")
     door = environment.get("entry_door_poc")
+    visibility = environment.get("smoke_visibility_cue_poc")
     lines: list[str] = []
     if chair:
         lines.extend(
@@ -274,6 +317,16 @@ def environment_lines(environment: dict[str, Any]) -> list[str]:
                 f"    - blocks path at end: {yes_no(bool(door.get('blocked_path')))}",
                 f"    - locked metadata: {yes_no(bool(door.get('locked')))}",
                 f"    - door type metadata: {door.get('door_type')}",
+            ]
+        )
+    if visibility:
+        lines.extend(
+            [
+                "  - Smoke/visibility cue:",
+                f"    - checked during scenario: {yes_no(bool(visibility.get('observed')))}",
+                f"    - visibility level marker: {visibility.get('visibility_level')}",
+                f"    - physics flag: {yes_no(bool(visibility.get('physics_enabled')))}",
+                f"    - cue note: {visibility.get('cue_note')}",
             ]
         )
     return lines or ["  - no environment object state found"]

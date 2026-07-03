@@ -33,6 +33,7 @@
         "backup_requested": { "type": "boolean" },
         "path_blocked": { "type": "boolean" },
         "door_open": { "type": "boolean" },
+        "visibility_checked": { "type": "boolean" },
         "occupant_removed": { "type": "boolean" },
         "scenario_outcome": { "enum": ["in_progress", "completed", "stopped"] },
         "environment": {
@@ -73,6 +74,21 @@
                     "collision_shape": { "type": "string" },
                     "mass_kg_estimate": { "type": "number" },
                     "force_preview": { "type": "object" },
+                    "physics_note": { "type": "string" }
+                  }
+                },
+                "smoke_visibility_cue_poc": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "object_type": { "const": "visibility_cue" },
+                    "label": { "type": "string" },
+                    "location": { "type": "string" },
+                    "blocks_path": { "type": "boolean" },
+                    "observed": { "type": "boolean" },
+                    "visibility_level": { "type": "string" },
+                    "cue_note": { "type": "string" },
+                    "physics_enabled": { "type": "boolean" },
                     "physics_note": { "type": "string" }
                   }
                 }

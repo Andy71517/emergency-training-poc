@@ -11,6 +11,7 @@ initial_state:
   backup_requested: false
   path_blocked: true
   door_open: false
+  visibility_checked: false
   occupant_removed: false
   scenario_outcome: in_progress
   environment:
@@ -43,6 +44,16 @@ initial_state:
           push_left: blocked_by_hinge
           push_right: blocked_by_frame
         physics_note: "Metadata only. No real door physics, forces, locks, or collision simulation."
+      smoke_visibility_cue_poc:
+        object_type: visibility_cue
+        label: Smoke/visibility cue
+        location: room_entry_view
+        blocks_path: false
+        observed: false
+        visibility_level: low
+        cue_note: "POC cue only. Checking visibility does not represent real smoke behavior or operational guidance."
+        physics_enabled: false
+        physics_note: "Metadata only. No real smoke simulation, lighting model, air movement, or particle physics."
 
 allowed_actions:
   - assess_scene
@@ -50,6 +61,7 @@ allowed_actions:
   - request_backup
   - move_obstacle
   - open_door
+  - check_visibility
   - enter_room
   - remove_occupant
   - stop_scenario
@@ -98,6 +110,16 @@ transition_rules:
       environment.objects.entry_door_poc.blocks_path: false
       environment.objects.entry_door_poc.open_state: open
 
+  - id: check-smoke-visibility-cue
+    when:
+      scene_assessed: true
+      action_type: check_visibility
+      environment.objects.smoke_visibility_cue_poc.observed: false
+    set:
+      visibility_checked: true
+      environment.objects.smoke_visibility_cue_poc.observed: true
+      environment.objects.smoke_visibility_cue_poc.visibility_level: checked_low_visibility
+
   - id: enter-room-after-prerequisites
     when:
       scene_assessed: true
@@ -105,6 +127,7 @@ transition_rules:
       backup_requested: true
       path_blocked: false
       door_open: true
+      visibility_checked: true
       action_type: enter_room
     set:
       phase: room_entered
@@ -136,6 +159,8 @@ validation_hints:
     description: "Warn when the trainee tries to enter while the wooden chair still blocks the path."
   - rule_id: entry-door-still-closed
     description: "Warn when the trainee tries to enter while the entry door is still closed."
+  - rule_id: visibility-cue-not-checked
+    description: "Warn when the trainee tries to enter after clearing the path and door but before checking the smoke/visibility cue."
 
 end_conditions:
   - state_equals:
@@ -151,6 +176,7 @@ expected_happy_path:
   - request_backup
   - move_obstacle
   - open_door
+  - check_visibility
   - enter_room
   - remove_occupant
 
@@ -170,3 +196,6 @@ possible_unsafe_or_warning_paths:
   - actions: [assess_scene, confirm_ppe, request_backup, move_obstacle, enter_room]
     expected_validation: warning
     reason: "The entry door is still closed."
+  - actions: [assess_scene, confirm_ppe, request_backup, move_obstacle, open_door, enter_room]
+    expected_validation: warning
+    reason: "The smoke/visibility cue has not been checked."

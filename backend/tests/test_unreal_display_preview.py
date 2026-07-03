@@ -25,6 +25,13 @@ def test_unreal_display_state_maps_chair_and_door() -> None:
                 "locked": False,
                 "door_type": "hinged_wooden_door_preview",
             },
+            "smoke_visibility_cue_poc": {
+                "label": "Smoke/visibility cue",
+                "observed": True,
+                "visibility_level": "checked_low_visibility",
+                "blocked_path": False,
+                "physics_enabled": False,
+            },
         },
     )
 
@@ -42,6 +49,13 @@ def test_unreal_display_state_maps_chair_and_door() -> None:
             "display": "open",
             "blocks_path": False,
             "metadata": {"locked": False, "door_type": "hinged_wooden_door_preview"},
+        },
+        {
+            "object_id": "smoke_visibility_cue_poc",
+            "label": "Smoke/visibility cue",
+            "display": "checked",
+            "blocks_path": False,
+            "metadata": {"visibility_level": "checked_low_visibility", "physics_enabled": False},
         },
     ]
 
@@ -67,6 +81,12 @@ def test_unreal_debug_panel_renders_warnings_and_errors() -> None:
                 "locked": False,
                 "door_type": "hinged_wooden_door_preview",
             },
+            "smoke_visibility_cue_poc": {
+                "label": "Smoke/visibility cue",
+                "observed": False,
+                "visibility_level": "low",
+                "blocked_path": False,
+            },
         },
     )
 
@@ -75,6 +95,7 @@ def test_unreal_debug_panel_renders_warnings_and_errors() -> None:
     assert "Unreal debug display preview" in panel
     assert "Wooden chair: moved aside (not blocking path)" in panel
     assert "Entry door: closed (blocking path)" in panel
+    assert "Smoke/visibility cue: unchecked (not blocking path)" in panel
     assert "entry_door_still_closed: Open the door before entering." in panel
     assert "entry_prerequisites_missing: Setup flags are incomplete." in panel
     assert "Unreal must not own scenario logic." in panel

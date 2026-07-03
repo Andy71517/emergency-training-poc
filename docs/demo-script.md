@@ -18,11 +18,11 @@ The script:
 6. Replays each log to prove deterministic behavior.
 7. Prints a sectioned review summary for each session.
 8. Shows the wooden-chair environment preview with physics disabled and enabled.
-9. Shows whether the chair was moved and whether the entry door was opened.
+9. Shows whether the chair was moved, whether the entry door was opened, and whether the smoke/visibility cue was checked.
 
-The happy path moves the wooden chair and opens the entry door before entering the room. The warning/error path tries to enter while an environmental cue is still unresolved, so the backend shows a warning and keeps the state from advancing.
+The happy path moves the wooden chair, opens the entry door, and checks the smoke/visibility cue before entering the room. The warning/error path tries to enter while an environmental cue is still unresolved, so the backend shows a warning and keeps the state from advancing.
 
-The door's open/closed state matters in the scenario. Door type, lock state, collision shape, mass, hinge side, swing direction, and force directions are metadata only for now.
+The door's open/closed state and the smoke/visibility cue's checked/unchecked state matter in the scenario. Door type, lock state, collision shape, mass, hinge side, swing direction, force directions, and real smoke behavior are metadata only for now.
 
 The physics preview is only metadata. It does not generate a mesh, load an Unreal scene, run gravity, run collision, apply force, or simulate movement.
 
