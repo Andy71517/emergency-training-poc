@@ -25,10 +25,10 @@ From the repo root:
 python docs/reports/build_report_pdf.py
 ```
 
-For general audience/client/future-teammate-facing Markdown-to-PDF copies across the repo, run:
+For the small generated submission packet, run:
 
 ```powershell
 python scripts/build_doc_pdfs.py
 ```
 
-Use the report builder for the polished submit-ready report. Use the general builder for everyday documentation PDFs. Folder READMEs stay readable on GitHub and do not need PDF copies.
+Use the report builder for the standalone polished report. Use the packet builder when you want the official four-PDF packet to submit or share. Folder READMEs stay readable on GitHub and do not need PDF copies.

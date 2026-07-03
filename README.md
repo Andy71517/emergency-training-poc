@@ -72,9 +72,16 @@ Clients start by sending `{"message_type":"start_session"}` to `/ws/sessions/{se
 
 ## Documentation PDFs
 
-Markdown files are the editable source. PDFs are the shareable reading copies for audience/client/future-teammate-facing docs.
+Markdown files are the editable source. The submission packet PDFs are the clean shareable copies for Dr. Cameron, reviewers, clients, or future teammates.
 
-When an important Markdown doc changes, rebuild the PDF copies:
+The official packet should stay small. Right now it contains four PDFs:
+
+- project overview report
+- one-page handout
+- roadmap
+- full project vision
+
+When an important packet-facing Markdown doc changes, rebuild the packet:
 
 ```powershell
 python scripts/build_doc_pdfs.py
@@ -117,8 +124,8 @@ Start with [docs/security/README.md](docs/security/README.md) for the current tr
 - `docs/`: scope, architecture notes, ADRs, and demo flow
 - `docs/development/`: local development and lightweight CI notes
 - `docs/reference/`: source/reference docs for the larger project vision
-- `docs/pdf/`: generated PDF copies of audience/client/future-teammate-facing docs
 - `docs/reports/`: denser submit-ready written reports and report PDFs
+- `docs/submission-packet/`: official small generated PDF packet for sharing or submission
 - `docs/security/`: POC threat model, client trust boundary, and security roadmap
 - `docs/ux/`: trainee, reviewer, and demo experience notes
 - `scripts/`: local demo, replay, summary, and contract helpers

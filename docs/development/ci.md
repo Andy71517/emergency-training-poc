@@ -29,7 +29,7 @@ python -m compileall -q backend scripts docs\presentations\build_pdf.py docs\rep
 python scripts\check_json_files.py
 ```
 
-When audience/client/future-teammate-facing Markdown docs change, also rebuild the PDF copies:
+When packet-facing Markdown docs change, also rebuild the PDF packet:
 
 ```powershell
 python scripts\build_doc_pdfs.py
