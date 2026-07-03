@@ -1,8 +1,10 @@
 # Project presentation package
 
-This folder contains a beginner-friendly presentation package for the emergency training simulator POC.
+This folder contains the meeting/presentation package for the emergency training simulator POC.
 
 Use it when you need to explain the project to a class, campus job reviewer, advisor, lab group, or early stakeholder.
+
+This is the talk-through deck. For the denser submit-ready report, see `docs/reports/`.
 
 ## Files
 
@@ -11,7 +13,7 @@ Use it when you need to explain the project to a class, campus job reviewer, adv
 - `project-overview-read-through-script.md`: a spoken script in a natural, chill tone
 - `project-overview-one-page-handout.md`: short handout version
 - `presentation-timing-and-design.md`: suggested 5-minute talk, 5-minute demo flow, and slide design direction
-- `emergency-training-poc-overview.pdf`: generated PDF deck
+- `emergency-training-poc-overview.pdf`: generated PDF version of the slide deck
 - `build_pdf.py`: small no-dependency PDF builder for this deck
 
 ## Rebuild the PDF
@@ -22,4 +24,4 @@ From the repo root:
 python docs/presentations/build_pdf.py
 ```
 
-The PDF is intentionally simple. It is meant to be readable, easy to share, and easy to regenerate without installing presentation software.
+This PDF is a deck export. It is meant for meetings and talk-throughs, not as the full submit-ready report.

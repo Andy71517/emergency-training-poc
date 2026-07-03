@@ -26,9 +26,25 @@ This is more on-campus project update than startup pitch.
 
 I am building a small backend-first proof of concept for emergency-response training.
 
-The first goal is not realism.
+The full project goal is a real-time adaptive training platform with AI, immersive environments, sensing, validation, and scalable deployment.
 
-The first goal is proof that a trainee action can move through the system, update a scenario, get checked, get logged, and be reviewed later.
+The current repo is the first foundation step: prove that an action can move through the backend, update state, get checked, get logged, and be reviewed later.
+
+---
+
+# Full-system north star
+
+The larger project eventually points toward:
+
+- agentic AI scenario generation
+- real-time scenario adaptation
+- immersive rooms and mannequins
+- multimodal sensing
+- structured verification and validation
+- hub-and-spoke deployment
+- instructor review and continuous improvement
+
+This POC does not build all of that yet. It builds the first trusted loop underneath it.
 
 ---
 

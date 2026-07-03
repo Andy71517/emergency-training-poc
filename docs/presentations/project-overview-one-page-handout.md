@@ -6,6 +6,8 @@ This repo is a backend-first proof of concept for an AI-driven adaptive emergenc
 
 The first audience is Dr. Cameron, so the project is framed as an on-campus job/research-style progress update: what I built, what it proves, what it does not prove yet, and what the next careful step is.
 
+The full project vision is larger than this repo. It points toward AI-driven scenario adaptation, immersive environments, multimodal sensing, validation, and scalable deployment. This repo proves the first backend/replay/review foundation underneath that larger direction.
+
 It proves a small but important loop:
 
 ```text

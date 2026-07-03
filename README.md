@@ -1,8 +1,10 @@
 # Emergency Training Simulator POC
 
-This repo is a small proof of concept for an emergency-response training simulator idea.
+This repo is a small proof of concept for a much larger emergency-response training simulator vision.
 
-The goal is not to build the final product yet. The goal is to prove one simple loop: a trainee does something, the backend receives it, the scenario state changes in a predictable way, the result gets checked, the client receives the new state, and the session is logged for review.
+The long-term project goal is an AI-driven, adaptive emergency-response training platform with immersive environments, trainee sensing, validation, and scalable deployment.
+
+The goal of this repo is not to build that final product yet. The goal is to prove one simple foundation loop: a trainee does something, the backend receives it, the scenario state changes in a predictable way, the result gets checked, the client receives the new state, and the session is logged for review.
 
 This is not a real training system, medical tool, firefighting authority, or incident-response system.
 
@@ -19,6 +21,8 @@ manual/stubbed trainee action
 ```
 
 Right now this uses one tiny scenario, a FastAPI WebSocket, deterministic Python code, and local JSONL logs. Future AI pieces might help create or adapt scenarios later, but this first version does not need real AI calls.
+
+For the full north-star project vision, see [docs/full-project-vision.md](docs/full-project-vision.md). For the split between current POC work and future full-system work, see [docs/roadmap.md](docs/roadmap.md).
 
 ## Setup and run
 
@@ -95,6 +99,8 @@ Start with [docs/security/README.md](docs/security/README.md) for the current tr
 - `validation/`: rule files for the toy scenario
 - `docs/`: scope, architecture notes, ADRs, and demo flow
 - `docs/development/`: local development and lightweight CI notes
+- `docs/reference/`: source/reference docs for the larger project vision
+- `docs/reports/`: denser submit-ready written reports and report PDFs
 - `docs/security/`: POC threat model, client trust boundary, and security roadmap
 - `docs/ux/`: trainee, reviewer, and demo experience notes
 - `scripts/`: local demo, replay, summary, and contract helpers
@@ -102,4 +108,4 @@ Start with [docs/security/README.md](docs/security/README.md) for the current tr
 - `unreal/`: future Unreal client contract and placeholder folder
 - `assets/`: placeholder folders for a future reviewed asset pipeline
 
-Start with [docs/overview.md](docs/overview.md) and [docs/sprint-0-plan.md](docs/sprint-0-plan.md).
+Start with [docs/full-project-vision.md](docs/full-project-vision.md), [docs/overview.md](docs/overview.md), and [docs/roadmap.md](docs/roadmap.md).

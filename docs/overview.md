@@ -1,6 +1,8 @@
 # POC Overview
 
-This POC answers one practical question:
+This POC is the first foundation step toward the larger AI-driven emergency-response training platform described in [full-project-vision.md](full-project-vision.md).
+
+The POC answers one practical question:
 
 Can a simple trainee action move through the backend and come out as checked, logged, client-ready scenario state?
 
@@ -11,3 +13,11 @@ The current answer is yes, in a small local slice. The backend accepts manual or
 ## Safety boundary
 
 The scenario and rules are software fixtures. They are useful for proving the code path, not for teaching real medical care, firefighting tactics, certification readiness, or field decisions.
+
+## Full vision boundary
+
+The larger project eventually points toward AI adaptation, immersive deployment, validation frameworks, trainee sensing, and hub-and-spoke scaling.
+
+Those are future goals.
+
+This repo currently proves the smallest backend loop that those future layers will need.
