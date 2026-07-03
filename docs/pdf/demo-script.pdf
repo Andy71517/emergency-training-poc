@@ -1,0 +1,277 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 886 >>
+stream
+0.985 0.976 0.945 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 614.0 612.0 178.0 re f
+0.950 0.420 0.160 rg
+0.0 614.0 14.0 178.0 re f
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 714.0 Td
+(Emergency Training) Tj
+ET
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 681.0 Td
+(Simulator POC) Tj
+ET
+BT
+/F1 11.0 Tf
+0.780 0.840 0.880 rg
+54.0 648.0 Td
+(Markdown documentation PDF copy) Tj
+ET
+0.950 0.420 0.160 rg
+54.0 494.0 504.0 2.0 re f
+BT
+/F3 17.0 Tf
+0.055 0.105 0.165 rg
+54.0 452.0 Td
+(Demo Script) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 420.0 Td
+(Source: docs/demo-script.md) Tj
+ET
+BT
+/F1 11.5 Tf
+0.080 0.090 0.100 rg
+54.0 368.0 Td
+(Markdown stays editable. This PDF is the reading/share copy.) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 338.0 Td
+(Boundary: this project is still a POC, not operational guidance.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(1/2) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 3224 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(Demo Script) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(2/2) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F3 21.0 Tf
+0.055 0.105 0.165 rg
+54.0 718.0 Td
+(Demo Script) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 687.0 Td
+(Use this flow to show the POC without overselling it.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 657.8 Td
+(One-command local demo) Tj
+ET
+0.940 0.935 0.910 rg
+48.0 635.8 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 638.8 Td
+(python scripts/run_local_demo.py) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 627.3 Td
+(The script:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 608.1 Td
+(1. Checks whether the backend is healthy.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 595.6 Td
+(2. Starts a local backend if needed.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 583.1 Td
+(3. Runs a happy-path session.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 570.6 Td
+(4. Runs a warning/error session.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 558.1 Td
+(5. Writes JSONL logs for both sessions.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 545.6 Td
+(6. Replays each log to prove deterministic behavior.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 533.1 Td
+(7. Prints a sectioned review summary for each session.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 520.6 Td
+(8. Shows the wooden-chair environment preview with physics disabled and enabled.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 508.1 Td
+(9. Shows whether the chair was moved and whether the entry door was opened.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 495.6 Td
+(The happy path moves the wooden chair and opens the entry door before entering the room. The) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 482.4 Td
+(warning/error path tries to enter while an environmental cue is still unresolved, so the) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 469.2 Td
+(backend shows a warning and keeps the state from advancing.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 450.0 Td
+(The door's open/closed state matters in the scenario. Door type, lock state, collision) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 436.8 Td
+(shape, mass, hinge side, swing direction, and force directions are metadata only for now.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 417.6 Td
+(The physics preview is only metadata. It does not generate a mesh, load an Unreal scene, run) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 404.4 Td
+(gravity, run collision, apply force, or simulate movement.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 385.2 Td
+(Keep the disclaimer visible in any demo: this is illustrative POC behavior, not clinical or) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 372.0 Td
+(operational guidance.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 352.8 Td
+(The review summary is the main proof point for Dr. Cameron: it should show that the system) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 339.6 Td
+(can explain what happened, not just that the demo ran.) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000259 00000 n 
+0000000334 00000 n 
+0000001270 00000 n 
+0000001416 00000 n 
+0000004691 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+4837
+%%EOF

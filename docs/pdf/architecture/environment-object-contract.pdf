@@ -1,0 +1,347 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 931 >>
+stream
+0.985 0.976 0.945 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 614.0 612.0 178.0 re f
+0.950 0.420 0.160 rg
+0.0 614.0 14.0 178.0 re f
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 714.0 Td
+(Emergency Training) Tj
+ET
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 681.0 Td
+(Simulator POC) Tj
+ET
+BT
+/F1 11.0 Tf
+0.780 0.840 0.880 rg
+54.0 648.0 Td
+(Markdown documentation PDF copy) Tj
+ET
+0.950 0.420 0.160 rg
+54.0 494.0 504.0 2.0 re f
+BT
+/F3 17.0 Tf
+0.055 0.105 0.165 rg
+54.0 452.0 Td
+(Environment Object Contract) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 420.0 Td
+(Source: docs/architecture/environment-object-contract.md) Tj
+ET
+BT
+/F1 11.5 Tf
+0.080 0.090 0.100 rg
+54.0 368.0 Td
+(Markdown stays editable. This PDF is the reading/share copy.) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 338.0 Td
+(Boundary: this project is still a POC, not operational guidance.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(1/2) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 4197 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(Environment Object Contract) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(2/2) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F3 21.0 Tf
+0.055 0.105 0.165 rg
+54.0 718.0 Td
+(Environment Object Contract) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 687.0 Td
+(This contract keeps environment objects shaped the same way across the backend, logs,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 673.8 Td
+(reviews, and future clients.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 654.6 Td
+(The backend still owns scenario state. These objects are not real 3D assets and do not run) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 641.4 Td
+(real physics.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 612.2 Td
+(Required shared fields) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 593.2 Td
+(Every environment object should include:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 574.0 Td
+(- object_id: the key used in environment.objects) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 561.5 Td
+(- object_type: what kind of object it is, like wooden_chair or door) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 549.0 Td
+(- label: short human-readable name) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 536.5 Td
+(- location: simple scenario location label) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 524.0 Td
+(- blocks_path: whether it currently blocks movement) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 501.5 Td
+(Optional shared metadata) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 482.5 Td
+(Use these when helpful:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 463.3 Td
+(- collision_enabled: future-facing collision note) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 450.8 Td
+(- collision_shape: simple future collision shape label) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 438.3 Td
+(- mass_kg_estimate: rough future mass estimate) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 425.8 Td
+(- physics_enabled: whether the scenario claims active physics; currently false) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 413.3 Td
+(- physics_note: plain-language note about what is and is not simulated) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 400.8 Td
+(- force_preview: future-facing notes about possible push/pull directions) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 388.3 Td
+(These fields are metadata only right now. They do not create real gravity, collision, mass,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 375.1 Td
+(or force behavior.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 345.9 Td
+(Current object-specific fields) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 326.9 Td
+(Wooden chair:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 307.7 Td
+(- moved: whether the chair has been moved aside) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 295.2 Td
+(Entry door:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 276.0 Td
+(- open_state: closed or open) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 263.5 Td
+(- locked: metadata only for now) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 251.0 Td
+(- door_type: metadata only for now) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 238.5 Td
+(- hinge_side: metadata only for now) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 226.0 Td
+(- swing_direction: metadata only for now) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 203.5 Td
+(Current scenario objects) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 184.5 Td
+(- wooden_chair_poc: starts near the entry path and blocks movement until move_obstacle.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 172.0 Td
+(- entry_door_poc: starts closed and blocks room entry until open_door.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 149.5 Td
+(Blender review rule) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 130.5 Td
+(When generated assets are introduced later, no asset should enter assets/reviewed/ or Unreal) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 117.3 Td
+(until it passes a manual Blender review checklist.) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000259 00000 n 
+0000000334 00000 n 
+0000001315 00000 n 
+0000001461 00000 n 
+0000005709 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+5855
+%%EOF

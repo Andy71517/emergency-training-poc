@@ -1,0 +1,325 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 923 >>
+stream
+0.985 0.976 0.945 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 614.0 612.0 178.0 re f
+0.950 0.420 0.160 rg
+0.0 614.0 14.0 178.0 re f
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 714.0 Td
+(Emergency Training) Tj
+ET
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 681.0 Td
+(Simulator POC) Tj
+ET
+BT
+/F1 11.0 Tf
+0.780 0.840 0.880 rg
+54.0 648.0 Td
+(Markdown documentation PDF copy) Tj
+ET
+0.950 0.420 0.160 rg
+54.0 494.0 504.0 2.0 re f
+BT
+/F3 17.0 Tf
+0.055 0.105 0.165 rg
+54.0 452.0 Td
+(Logging and data handling) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 420.0 Td
+(Source: docs/security/logging-and-data-handling.md) Tj
+ET
+BT
+/F1 11.5 Tf
+0.080 0.090 0.100 rg
+54.0 368.0 Td
+(Markdown stays editable. This PDF is the reading/share copy.) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 338.0 Td
+(Boundary: this project is still a POC, not operational guidance.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(1/2) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 3398 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(Logging and data handling) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(2/2) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F3 21.0 Tf
+0.055 0.105 0.165 rg
+54.0 718.0 Td
+(Logging and data handling) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 687.0 Td
+(The POC writes local JSONL session logs under:) Tj
+ET
+0.940 0.935 0.910 rg
+48.0 664.8 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 667.8 Td
+(logs/sessions/) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 656.3 Td
+(JSONL means one JSON object per line. It is useful for replay because each event can be read) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 643.1 Td
+(in order.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 613.9 Td
+(Current log contents) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 594.9 Td
+(Logs may include:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 575.7 Td
+(- timestamp) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 563.2 Td
+(- session ID) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 550.7 Td
+(- scenario ID) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 538.2 Td
+(- sequence number) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 525.7 Td
+(- event type) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 513.2 Td
+(- inbound trainee action message) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 500.7 Td
+(- validation result) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 488.2 Td
+(- state snapshot) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 465.7 Td
+(Current privacy rule) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 446.7 Td
+(Do not put real personal, medical, patient, trainee, or operational data into this POC.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 427.5 Td
+(The demo uses stubbed data only.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 398.3 Td
+(Git rule) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 379.3 Td
+(Session logs should usually not be committed.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 360.1 Td
+(The repo keeps logs/sessions/ ignored so local demo runs do not accidentally become repo) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 346.9 Td
+(history.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 317.7 Td
+(Future questions) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 298.7 Td
+(Before this becomes anything beyond local demo work, I need answers for:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 279.5 Td
+(- What data is allowed in logs?) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 267.0 Td
+(- How long should logs be kept?) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 254.5 Td
+(- Who can read logs?) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 242.0 Td
+(- How are logs deleted?) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 229.5 Td
+(- Should logs be anonymized?) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 217.0 Td
+(- Should review summaries hide raw event details?) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 204.5 Td
+(- How do I handle real trainee names, if they ever appear?) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 182.0 Td
+(Simple rule for now) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 163.0 Td
+(Use fake IDs. Keep logs local. Do not store real emergency, patient, or trainee data.) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000259 00000 n 
+0000000334 00000 n 
+0000001307 00000 n 
+0000001453 00000 n 
+0000004902 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+5048
+%%EOF

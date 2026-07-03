@@ -1,0 +1,1145 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R] /Count 6 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 921 >>
+stream
+0.985 0.976 0.945 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 614.0 612.0 178.0 re f
+0.950 0.420 0.160 rg
+0.0 614.0 14.0 178.0 re f
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 714.0 Td
+(Emergency Training) Tj
+ET
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 681.0 Td
+(Simulator POC) Tj
+ET
+BT
+/F1 11.0 Tf
+0.780 0.840 0.880 rg
+54.0 648.0 Td
+(Markdown documentation PDF copy) Tj
+ET
+0.950 0.420 0.160 rg
+54.0 494.0 504.0 2.0 re f
+BT
+/F3 17.0 Tf
+0.055 0.105 0.165 rg
+54.0 452.0 Td
+(Speaker notes) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 420.0 Td
+(Source: docs/presentations/project-overview-speaker-notes.md) Tj
+ET
+BT
+/F1 11.5 Tf
+0.080 0.090 0.100 rg
+54.0 368.0 Td
+(Markdown stays editable. This PDF is the reading/share copy.) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 338.0 Td
+(Boundary: this project is still a POC, not operational guidance.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(1/6) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 4416 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(Speaker notes) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(2/6) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F3 21.0 Tf
+0.055 0.105 0.165 rg
+54.0 718.0 Td
+(Speaker notes) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 687.0 Td
+(These notes match project-overview-slides.md.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 667.8 Td
+(The tone is meant to be clear, casual, and confident. More campus project presentation than) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 654.6 Td
+(Shark Tank. A little pitch energy is fine, but the main vibe is: "Here is what I built, here) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 641.4 Td
+(is why I built it in this order, and here is what comes next.") Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 612.2 Td
+(1. Emergency Training Simulator POC) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 593.2 Td
+(Start simple.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 574.0 Td
+(Say that this is a proof-of-concept for an AI-driven adaptive emergency-response training) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 560.8 Td
+(simulator. Then immediately make the scope clear: this is not the final system, not clinical) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 547.6 Td
+(guidance, and not operational authority.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 528.4 Td
+(The point of this presentation is to show the project path so far.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 499.2 Td
+(2. First audience) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 480.2 Td
+(This slide sets the tone.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 461.0 Td
+(Say that the first audience is Dr. Cameron, so the presentation is meant to work as a clear) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 447.8 Td
+(project/job progress update.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 428.6 Td
+(The point is not to sell a finished product. The point is to show careful engineering) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 415.4 Td
+(progress: what exists, what it proves, what is still out of scope, and what should come) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 402.2 Td
+(next.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 373.0 Td
+(3. The short version) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 354.0 Td
+(Explain the core idea in normal language.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 334.8 Td
+(The full system vision is much bigger than the repo: AI, immersive environments, sensing,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 321.6 Td
+(validation, deployment, and review.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 302.4 Td
+(The current repo is the first foundation step. It takes a trainee action, updates the) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 289.2 Td
+(scenario, checks the result, sends state to a client, and logs the session for review.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 270.0 Td
+(This is the first real foundation. Everything else depends on this working cleanly.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 240.8 Td
+(4. Full-system north star) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 221.8 Td
+(This slide connects the POC to the bigger project overview.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 202.6 Td
+(Say that the full system eventually includes agentic AI, immersive rooms, sensing,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 189.4 Td
+(validation, hub-and-spoke deployment, and instructor review.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 170.2 Td
+(Then make the boundary clear: this repo does not claim those features yet. It proves the) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 157.0 Td
+(first trusted backend loop that those later layers will need.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 127.8 Td
+(5. Why this project exists) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 108.8 Td
+(Talk about training as a feedback problem.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 89.6 Td
+(Training is not only about making a cool simulation. It is about repeatable practice and) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 76.4 Td
+(useful review. If the system cannot explain what happened afterward, it is not very useful) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 4035 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(Speaker notes) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(3/6) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 724.0 Td
+(for learning.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 694.8 Td
+(6. The problem I am avoiding) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 675.8 Td
+(This is where you can be a little funny.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 656.6 Td
+(It is tempting to start with the shiny stuff: Unreal, AI, 3D models, sensors, physics, all) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 643.4 Td
+(of it. But if the backend is messy, the shiny layer just hides the mess.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 624.2 Td
+(So the project starts with a boring but important question: can the system keep the truth) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 611.0 Td
+(straight?) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 581.8 Td
+(7. How I started) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 562.8 Td
+(Describe Sprint 0 as setting up the project rails.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 543.6 Td
+(The first pass was docs, schemas, scenario files, validation rules, placeholders, and) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 530.4 Td
+(architecture notes. That might sound slow, but it made the next steps safer and cleaner.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 501.2 Td
+(8. The POC loop) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 482.2 Td
+(Walk through the loop slowly.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 463.0 Td
+(Manual action comes in. Backend receives it. Engine updates scenario state. Validation) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 449.8 Td
+(checks the state. Client gets an update. Log gets written. Review can explain it later.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 430.6 Td
+(This is the heartbeat of the repo.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 401.4 Td
+(9. Where I am now) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 382.4 Td
+(This is the progress slide.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 363.2 Td
+(The backend is no longer just docs. It has a FastAPI WebSocket, deterministic scenario) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 350.0 Td
+(engine, validation, basic security guardrails, logging, replay, review, and a local demo) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 336.8 Td
+(command.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 317.6 Td
+(Keep the phrasing grounded. It works locally. It proves the loop. It does not claim more) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 304.4 Td
+(than that.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 275.2 Td
+(10. Current scenario) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 256.2 Td
+(Explain that the first scenario is intentionally tiny.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 237.0 Td
+(It is a smoke-room style software scenario with a simple happy path. The point is not to) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 223.8 Td
+(teach real response protocol. The point is to exercise the code path.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 194.6 Td
+(11. Environment cues) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 175.6 Td
+(The wooden chair and entry door matter because they make the room state visible to the) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 162.4 Td
+(backend.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 143.2 Td
+(The chair can block the path. The door can be closed. These are simple, obvious) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 130.0 Td
+(environmental cues that the system should not ignore.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 100.8 Td
+(12. Why the chair and door matter) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 81.8 Td
+(This is the bridge to future physics and Unreal.) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 4153 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(Speaker notes) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(4/6) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 724.0 Td
+(Right now, these objects are metadata and state. Later, they can grow into richer objects) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 710.8 Td
+(with collision, mass, force direction, gravity notes, and display behavior.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 691.6 Td
+(The key is that the backend already knows they exist.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 662.4 Td
+(13. Validation boundary) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 643.4 Td
+(Be direct here.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 624.2 Td
+(Validation means rule-conformance for this toy scenario. It does not mean official medical) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 611.0 Td
+(or firefighting correctness.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 591.8 Td
+(This is important because the project can be technically useful while still being honest) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 578.6 Td
+(about its limits.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 549.4 Td
+(14. Security baseline) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 530.4 Td
+(Explain the security idea in plain language.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 511.2 Td
+(The client is allowed to request an action. The backend decides what actually happened.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 492.0 Td
+(That means a future Unreal client should not directly edit scenario state, validation) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 478.8 Td
+(results, final outcome, or review logs.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 459.6 Td
+(This is the trust boundary.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 430.4 Td
+(15. Current guardrails) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 411.4 Td
+(Keep this practical.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 392.2 Td
+(The current backend rejects unexpected fields, weird IDs, path-like scenario names, unsafe) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 379.0 Td
+(action names, oversized payloads, wrong sequence numbers, and duplicate event IDs.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 359.8 Td
+(Also say clearly that this is not production security yet. It is just the first reasonable) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 346.6 Td
+(security floor for a local POC.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 317.4 Td
+(16. Sample demo result: happy path) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 298.4 Td
+(Describe what the good run proves.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 279.2 Td
+(The trainee follows the expected order. The chair is moved. The door is opened. The final) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 266.0 Td
+(state reaches the end condition. The replay passes. The review is clean.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 246.8 Td
+(That is the "green path.") Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 217.6 Td
+(17. Sample demo result: warning/error path) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 198.6 Td
+(Describe what the bad run proves.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 179.4 Td
+(The trainee tries to move too fast or ignores an environmental cue. The backend warns or) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 166.2 Td
+(errors. The state does not advance incorrectly. The log still records the attempt.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 147.0 Td
+(This matters because mistakes are part of training.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 117.8 Td
+(18. Sample review output) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 98.8 Td
+(This is one of the strongest slides for Dr. Cameron.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 79.6 Td
+(Presenter note: the slide should not sound like private self-talk. Frame it as context for) Tj
+ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 4061 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(Speaker notes) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(5/6) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 724.0 Td
+(the audience: this output is the proof point behind the demo.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 704.8 Td
+(Say that this is the difference between a toy demo and a useful training foundation.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 685.6 Td
+(A toy demo says: "It ran.") Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 666.4 Td
+(This review says: "Here is what happened, in order, with warnings, errors, replay) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 653.2 Td
+(verification, and environment cues.") Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 634.0 Td
+(The key phrase is: the system can explain what happened.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 604.8 Td
+(19. Unreal client contract) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 585.8 Td
+(Make this distinction clear:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 566.6 Td
+(Unreal will display and send input. It should not decide scenario truth.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 547.4 Td
+(The repo already has a contract and a Python harness that behaves like the future Unreal) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 534.2 Td
+(client, but there is no scene yet.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 505.0 Td
+(20. Asset pipeline direction) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 486.0 Td
+(Explain the asset plan without claiming assets exist.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 466.8 Td
+(Tools like Hunyuan 3D may help generate candidates later, but every asset should go through) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 453.6 Td
+(manual Blender review before it becomes part of the Unreal side.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 434.4 Td
+(For now, the chair and door are scenario objects, not meshes.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 405.2 Td
+(21. Next goal) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 386.2 Td
+(The next goal is making the display contract stronger.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 367.0 Td
+(That means a future Unreal client can show state clearly without owning the logic. Text-only) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 353.8 Td
+(debug display first. 2D UI and 3D visuals later.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 324.6 Td
+(22. How I get there) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 305.6 Td
+(This is the roadmap slide.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 286.4 Td
+(Emphasize controlled steps. Keep the backend clean. Keep tightening the security boundary.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 273.2 Td
+(Add fields carefully. Keep replay and review strong. Only then bring in Unreal, Blender,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 260.0 Td
+(generated assets, and physics.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 230.8 Td
+(23. Ideal end result) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 211.8 Td
+(Describe the bigger picture.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 192.6 Td
+(The dream is an adaptive training simulator where scenarios respond to trainee actions,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 179.4 Td
+(environmental cues matter, instructors can review sessions, and AI helps create safe) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 166.2 Td
+(training content.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 147.0 Td
+(But again: that is the direction, not the current claim.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 117.8 Td
+(24. What this is not) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 98.8 Td
+(This is the honesty slide.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 79.6 Td
+(Say what it is not so the audience trusts what it is.) Tj
+ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Length 1761 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(Speaker notes) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(6/6) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 724.0 Td
+(It is not certified, not medical guidance, not a production simulator, not production-) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 710.8 Td
+(secure, and not a real physics engine.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 681.6 Td
+(25. Closing) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 662.6 Td
+(End with the ordering principle:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 643.4 Td
+(Prove the loop first. Then replay and review. Then client display. Then security guardrails.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 630.2 Td
+(Then richer objects. Then Unreal, Blender, generated assets, and physics.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 611.0 Td
+(The closer can be: one monster at a time.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 581.8 Td
+(26. Best 10-minute demo flow) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 562.8 Td
+(This is the practical ending if Dr. Cameron asks how you would present it live.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 543.6 Td
+(Use 5 minutes for the story and 5 minutes for proof on screen.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 524.4 Td
+(The key sentence is:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 505.2 Td
+(The backend can keep track of what happened, explain it afterward, and leave room for) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 492.0 Td
+(Unreal, UX, and physics later.) Tj
+ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 16 0 R >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000149 00000 n 
+0000000219 00000 n 
+0000000287 00000 n 
+0000000362 00000 n 
+0000001333 00000 n 
+0000001479 00000 n 
+0000005946 00000 n 
+0000006092 00000 n 
+0000010179 00000 n 
+0000010327 00000 n 
+0000014532 00000 n 
+0000014680 00000 n 
+0000018793 00000 n 
+0000018941 00000 n 
+0000020754 00000 n 
+trailer
+<< /Size 18 /Root 1 0 R >>
+startxref
+20902
+%%EOF

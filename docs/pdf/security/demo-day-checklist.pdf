@@ -1,0 +1,451 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 918 >>
+stream
+0.985 0.976 0.945 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 614.0 612.0 178.0 re f
+0.950 0.420 0.160 rg
+0.0 614.0 14.0 178.0 re f
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 714.0 Td
+(Emergency Training) Tj
+ET
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 681.0 Td
+(Simulator POC) Tj
+ET
+BT
+/F1 11.0 Tf
+0.780 0.840 0.880 rg
+54.0 648.0 Td
+(Markdown documentation PDF copy) Tj
+ET
+0.950 0.420 0.160 rg
+54.0 494.0 504.0 2.0 re f
+BT
+/F3 17.0 Tf
+0.055 0.105 0.165 rg
+54.0 452.0 Td
+(Demo-day security checklist) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 420.0 Td
+(Source: docs/security/demo-day-checklist.md) Tj
+ET
+BT
+/F1 11.5 Tf
+0.080 0.090 0.100 rg
+54.0 368.0 Td
+(Markdown stays editable. This PDF is the reading/share copy.) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 338.0 Td
+(Boundary: this project is still a POC, not operational guidance.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(1/3) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 4524 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(Demo-day security checklist) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(2/3) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F3 21.0 Tf
+0.055 0.105 0.165 rg
+54.0 718.0 Td
+(Demo-day security checklist) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 687.0 Td
+(Use this before showing the POC to someone else.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 667.8 Td
+(This checklist is not production security. It is a quick way to keep the local demo clean,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 654.6 Td
+(predictable, and honest.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 625.4 Td
+(Before the demo) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 606.4 Td
+(- Pull the latest main.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 593.9 Td
+(- Create or activate the virtual environment.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 581.4 Td
+(- Install dev dependencies if needed.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 568.9 Td
+(- Run the tests.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 556.4 Td
+(- Run the one-command demo once by yourself.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 543.9 Td
+(- Clear old demo logs if they might confuse the walkthrough.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 531.4 Td
+(- Make sure no real trainee, patient, emergency, or personal data is in the demo.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 518.9 Td
+(Useful commands:) Tj
+ET
+0.940 0.935 0.910 rg
+48.0 496.7 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 499.7 Td
+(python -m pytest -q) Tj
+ET
+0.940 0.935 0.910 rg
+48.0 485.2 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 488.2 Td
+(python -m ruff check backend scripts) Tj
+ET
+0.940 0.935 0.910 rg
+48.0 473.7 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 476.7 Td
+(python -m compileall -q backend scripts docs\\presentations\\build_pdf.py) Tj
+ET
+0.940 0.935 0.910 rg
+48.0 462.2 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 465.2 Td
+(python scripts\\run_local_demo.py) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 443.7 Td
+(During the demo) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 424.7 Td
+(- Say clearly that this is a local POC.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 412.2 Td
+(- Say clearly that validation means POC rule checking, not real emergency guidance.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 399.7 Td
+(- Show that the backend owns the scenario state.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 387.2 Td
+(- Show that the client only sends requested actions.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 374.7 Td
+(- Show replay and review as the proof point.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 362.2 Td
+(- Avoid changing scenario files live unless that is the demo topic.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 339.7 Td
+(Input safety) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 320.7 Td
+(The backend currently rejects:) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 301.5 Td
+(- unexpected message fields) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 289.0 Td
+(- weird or path-like IDs) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 276.5 Td
+(- unsafe scenario IDs) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 264.0 Td
+(- unsafe action names) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 251.5 Td
+(- oversized or deeply nested payloads) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 239.0 Td
+(- wrong sequence numbers) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 226.5 Td
+(- duplicate event IDs) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 214.0 Td
+(- too many active sessions) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 201.5 Td
+(- too many actions in one session) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 179.0 Td
+(Log safety) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 160.0 Td
+(- Logs are local JSONL files under logs/sessions/.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 147.5 Td
+(- Logs should generally not be committed.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 135.0 Td
+(- Use fake IDs only.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 122.5 Td
+(- Do not use real incident, medical, trainee, or patient data.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 100.0 Td
+(If something breaks) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 81.0 Td
+(Keep it simple:) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 940 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(Demo-day security checklist) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(3/3) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 724.0 Td
+(1. Stop the backend.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 711.5 Td
+(2. Rerun tests.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 699.0 Td
+(3. Rerun python scripts\\run_local_demo.py.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 686.5 Td
+(4. If a log looks confusing, start a fresh demo with a new session ID.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 674.0 Td
+(Do not explain a broken local demo as if it proves real training behavior. It only proves) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 660.8 Td
+(the POC code path.) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000128 00000 n 
+0000000198 00000 n 
+0000000266 00000 n 
+0000000341 00000 n 
+0000001309 00000 n 
+0000001455 00000 n 
+0000006030 00000 n 
+0000006176 00000 n 
+0000007167 00000 n 
+trailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+7315
+%%EOF

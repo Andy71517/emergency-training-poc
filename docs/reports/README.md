@@ -24,3 +24,11 @@ From the repo root:
 ```powershell
 python docs/reports/build_report_pdf.py
 ```
+
+For general audience/client/future-teammate-facing Markdown-to-PDF copies across the repo, run:
+
+```powershell
+python scripts/build_doc_pdfs.py
+```
+
+Use the report builder for the polished submit-ready report. Use the general builder for everyday documentation PDFs. Folder READMEs stay readable on GitHub and do not need PDF copies.

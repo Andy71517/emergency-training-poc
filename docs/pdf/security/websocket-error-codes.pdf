@@ -1,0 +1,327 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 915 >>
+stream
+0.985 0.976 0.945 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 614.0 612.0 178.0 re f
+0.950 0.420 0.160 rg
+0.0 614.0 14.0 178.0 re f
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 714.0 Td
+(Emergency Training) Tj
+ET
+BT
+/F3 26.0 Tf
+1.000 1.000 1.000 rg
+54.0 681.0 Td
+(Simulator POC) Tj
+ET
+BT
+/F1 11.0 Tf
+0.780 0.840 0.880 rg
+54.0 648.0 Td
+(Markdown documentation PDF copy) Tj
+ET
+0.950 0.420 0.160 rg
+54.0 494.0 504.0 2.0 re f
+BT
+/F3 17.0 Tf
+0.055 0.105 0.165 rg
+54.0 452.0 Td
+(WebSocket error codes) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 420.0 Td
+(Source: docs/security/websocket-error-codes.md) Tj
+ET
+BT
+/F1 11.5 Tf
+0.080 0.090 0.100 rg
+54.0 368.0 Td
+(Markdown stays editable. This PDF is the reading/share copy.) Tj
+ET
+BT
+/F1 10.5 Tf
+0.380 0.400 0.430 rg
+54.0 338.0 Td
+(Boundary: this project is still a POC, not operational guidance.) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(1/2) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 4345 >>
+stream
+1.000 1.000 1.000 rg
+0.0 0.0 612.0 792.0 re f
+0.055 0.105 0.165 rg
+0.0 748.0 612.0 44.0 re f
+0.950 0.420 0.160 rg
+0.0 748.0 8.0 44.0 re f
+BT
+/F3 10.0 Tf
+1.000 1.000 1.000 rg
+54.0 765.0 Td
+(WebSocket error codes) Tj
+ET
+BT
+/F1 8.5 Tf
+0.380 0.400 0.430 rg
+516.0 28.0 Td
+(2/2) Tj
+ET
+0.780 0.760 0.700 rg
+54.0 48.0 504.0 1.0 re f
+BT
+/F3 21.0 Tf
+0.055 0.105 0.165 rg
+54.0 718.0 Td
+(WebSocket error codes) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 687.0 Td
+(The WebSocket endpoint returns simple error messages when a client sends something the) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 673.8 Td
+(backend cannot accept.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 654.6 Td
+(The shape is:) Tj
+ET
+0.940 0.935 0.910 rg
+48.0 632.4 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 635.4 Td
+({) Tj
+ET
+0.940 0.935 0.910 rg
+48.0 620.9 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 623.9 Td
+("message_type": "error",) Tj
+ET
+0.940 0.935 0.910 rg
+48.0 609.4 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 612.4 Td
+("code": "sequence_number_out_of_order",) Tj
+ET
+0.940 0.935 0.910 rg
+48.0 597.9 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 600.9 Td
+("message": "Expected sequence_number 1") Tj
+ET
+0.940 0.935 0.910 rg
+48.0 586.4 516.0 11.0 re f
+BT
+/F2 8.8 Tf
+0.140 0.280 0.380 rg
+54.0 589.4 Td
+(}) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 577.9 Td
+(The code is for software. The message is for a human reading the demo output.) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 548.7 Td
+(Current codes) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 529.7 Td
+(| Code | Meaning | | --- | --- | | invalid_initial_message | First message was not) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 516.5 Td
+(start_session or trainee_action. | | invalid_message | Message shape failed Pydantic) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 503.3 Td
+(validation. | | unsupported_message | Message type is not supported in the current WebSocket) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 490.1 Td
+(loop. | | invalid_session_id | Session ID has unsafe characters or is too long. | |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 476.9 Td
+(invalid_scenario_id | Scenario ID has unsafe characters or is too long. | |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 463.7 Td
+(session_already_exists | A session with that ID already exists in this backend process. | |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 450.5 Td
+(active_session_limit_reached | Too many active sessions are already open. | |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 437.3 Td
+(session_already_ended | The client tried to continue after the scenario ended. | |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 424.1 Td
+(session_action_limit_reached | The session has already accepted the max number of actions. |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 410.9 Td
+(| session_id_mismatch | URL, envelope, and event session IDs do not match. | |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 397.7 Td
+(scenario_id_mismatch | Message scenario ID does not match the active scenario. | |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 384.5 Td
+(sequence_number_mismatch | Envelope and event sequence numbers do not match each other. | |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 371.3 Td
+(sequence_number_out_of_order | The client skipped or repeated the next expected sequence) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 358.1 Td
+(number. | | duplicate_event_id | The event ID was already used in this session. | |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 344.9 Td
+(correlation_event_id_mismatch | Correlation ID does not match the trainee action event ID. |) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 331.7 Td
+(| unknown_session | The backend does not know that session ID. | | session_error | Fallback) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 318.5 Td
+(for an unexpected session-level problem. |) Tj
+ET
+BT
+/F3 14.5 Tf
+0.055 0.105 0.165 rg
+54.0 289.3 Td
+(Important note) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 270.3 Td
+(These errors are local POC guardrails.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 251.1 Td
+(They do not replace authentication, authorization, TLS, production rate limiting, or) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.090 0.100 rg
+54.0 237.9 Td
+(deployment security.) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000259 00000 n 
+0000000334 00000 n 
+0000001299 00000 n 
+0000001445 00000 n 
+0000005841 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+5987
+%%EOF

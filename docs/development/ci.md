@@ -16,6 +16,7 @@ It checks:
 - Ruff linting
 - Python compile check
 - JSON parse check for checked-in schemas/examples/contracts
+- Documentation PDF builder compile check
 
 ## Commands
 
@@ -24,8 +25,16 @@ These are the same checks to run locally:
 ```powershell
 python -m pytest -q
 python -m ruff check backend scripts
-python -m compileall -q backend scripts docs\presentations\build_pdf.py
+python -m compileall -q backend scripts docs\presentations\build_pdf.py docs\reports\build_report_pdf.py
 python scripts\check_json_files.py
+```
+
+When audience/client/future-teammate-facing Markdown docs change, also rebuild the PDF copies:
+
+```powershell
+python scripts\build_doc_pdfs.py
+python docs\presentations\build_pdf.py
+python docs\reports\build_report_pdf.py
 ```
 
 ## What CI does not do yet
@@ -50,4 +59,3 @@ Those can come later when the project has something production-like to deploy or
 CI is useful even in a POC because it catches simple mistakes early.
 
 If tests, lint, compile, and JSON parsing pass, I know the repo is still in a decent state before showing it to someone else.
-

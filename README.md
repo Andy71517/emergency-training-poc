@@ -62,13 +62,30 @@ Run tests and inspect a generated session log:
 ```powershell
 python -m pytest -q
 python -m ruff check backend scripts
-python -m compileall -q backend scripts docs\presentations\build_pdf.py
+python -m compileall -q backend scripts docs\presentations\build_pdf.py docs\reports\build_report_pdf.py
 python scripts\check_json_files.py
 python scripts/replay_session.py logs/sessions/demo-happy.jsonl
 python scripts/summarize_log.py logs/sessions/demo-happy.jsonl
 ```
 
 Clients start by sending `{"message_type":"start_session"}` to `/ws/sessions/{session_id}`. After that, they send ordered `trainee_action` messages. Generated session logs live under `logs/sessions/` and are ignored by Git.
+
+## Documentation PDFs
+
+Markdown files are the editable source. PDFs are the shareable reading copies for audience/client/future-teammate-facing docs.
+
+When an important Markdown doc changes, rebuild the PDF copies:
+
+```powershell
+python scripts/build_doc_pdfs.py
+```
+
+The meeting deck and submit-ready report also have their own polished PDF builders:
+
+```powershell
+python docs/presentations/build_pdf.py
+python docs/reports/build_report_pdf.py
+```
 
 ## What this repo is not doing
 
@@ -100,6 +117,7 @@ Start with [docs/security/README.md](docs/security/README.md) for the current tr
 - `docs/`: scope, architecture notes, ADRs, and demo flow
 - `docs/development/`: local development and lightweight CI notes
 - `docs/reference/`: source/reference docs for the larger project vision
+- `docs/pdf/`: generated PDF copies of audience/client/future-teammate-facing docs
 - `docs/reports/`: denser submit-ready written reports and report PDFs
 - `docs/security/`: POC threat model, client trust boundary, and security roadmap
 - `docs/ux/`: trainee, reviewer, and demo experience notes

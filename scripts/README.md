@@ -9,7 +9,16 @@ These scripts are small local helpers for running and checking the POC.
 - `preview_unreal_display.py LOG`: prints the future Unreal text-only debug display from a session log.
 - `replay_session.py LOG`: replays logged actions and checks the recorded state snapshots.
 - `summarize_log.py LOG`: prints a short JSON review summary.
+- `build_doc_pdfs.py`: builds PDF copies of audience/client/future-teammate-facing Markdown docs under `docs/pdf/`.
 
 Start with `run_local_demo.py` when you want to show the whole loop. Use the other scripts when you want to inspect one piece at a time.
+
+When an important Markdown doc changes, run:
+
+```powershell
+python scripts/build_doc_pdfs.py
+```
+
+That keeps the readable PDFs in sync with the editable docs. Folder READMEs stay as GitHub docs and do not need PDF copies.
 
 Keep scripts local and boring. They should not call real AI services, generate assets, run real physics, or make clinical, operational, or training-authority claims.
