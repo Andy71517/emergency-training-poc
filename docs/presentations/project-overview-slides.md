@@ -249,6 +249,32 @@ That review trail is one of the most important parts of the POC.
 
 ---
 
+# Sample review output
+
+This is the kind of output I want Dr. Cameron to see:
+
+```text
+Post-scenario review
+Session: warning/error path
+Final phase: stopped
+Actions reviewed: 8
+Validation counts: ok=5, warning=2, error=1
+Replay verified: yes
+
+Action timeline:
+  1. confirm_ppe -> warning
+  2. enter_room -> error
+  7. enter_room -> warning
+
+Key observations:
+  - The log captured 8 trainee actions in order.
+  - The entry door ended closed or blocking the path.
+```
+
+The point is not "the demo ran." The point is "the system can explain what happened."
+
+---
+
 # Unreal client contract
 
 Unreal is treated as a future client, not the source of truth.

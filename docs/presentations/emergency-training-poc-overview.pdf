@@ -3,1187 +3,2425 @@
 << /Type /Catalog /Pages 2 0 R >>
 endobj
 2 0 obj
-<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R 23 0 R 25 0 R 27 0 R 29 0 R 31 0 R 33 0 R 35 0 R 37 0 R 39 0 R 41 0 R 43 0 R 45 0 R 47 0 R 49 0 R 51 0 R] /Count 24 >>
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R 23 0 R 25 0 R 27 0 R 29 0 R 31 0 R 33 0 R 35 0 R 37 0 R 39 0 R 41 0 R 43 0 R 45 0 R 47 0 R 49 0 R 51 0 R 53 0 R 55 0 R] /Count 25 >>
 endobj
 3 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
 endobj
 4 0 obj
-<< /Length 282 >>
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 827 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
 (Emergency Training Simulator POC) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
 (AI-driven adaptive emergency-response training simulator) Tj
-0 -20 Td
-() Tj
-0 -20 Td
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
 (Proof-of-concept project update) Tj
-0 -20 Td
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 1 of 24) Tj
-ET
-endstream
-endobj
-5 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
-endobj
-6 0 obj
-<< /Length 542 >>
-stream
-BT
-/F1 26 Tf
-58 548 Td
-(First audience) Tj
-ET
-BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(This update is framed for Dr. Cameron.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The goal is to show:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - what I built) Tj
-0 -20 Td
-(  - what it proves) Tj
-0 -20 Td
-(  - what it does not prove yet) Tj
-0 -20 Td
-(  - why the build order is careful) Tj
-0 -20 Td
-(  - what the next useful step is) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(This is more on-campus project update than startup pitch.) Tj
-0 -20 Td
-ET
-BT
-/F1 10 Tf
-672 32 Td
-(Slide 2 of 24) Tj
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(1/25) Tj
 ET
 endstream
 endobj
 7 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
 endobj
 8 0 obj
-<< /Length 494 >>
+<< /Length 1321 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(The short version) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(First audience) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(I am building a small backend-first proof of concept for emergency-response) Tj
-0 -20 Td
-(training.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The first goal is not realism.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The first goal is proof that a trainee action can move through the system,) Tj
-0 -20 Td
-(update a scenario, get checked, get logged, and be reviewed later.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 3 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(This update is framed for Dr. Cameron.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(The goal is to show:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 415.0 Td
+(  - what I built) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 400.5 Td
+(  - what it proves) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 386.0 Td
+(  - what it does not prove yet) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 371.5 Td
+(  - why the build order is careful) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 357.0 Td
+(  - what the next useful step is) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 334.5 Td
+(This is more on-campus project update than startup pitch.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(2/25) Tj
 ET
 endstream
 endobj
 9 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
 endobj
 10 0 obj
-<< /Length 520 >>
+<< /Length 1098 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Why this project exists) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(The short version) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(Emergency training is hard to scale because good practice needs:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - clear scenarios) Tj
-0 -20 Td
-(  - visible consequences) Tj
-0 -20 Td
-(  - instructor review) Tj
-0 -20 Td
-(  - repeatable sessions) Tj
-0 -20 Td
-(  - room for environmental cues) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(This POC starts with the smallest useful version of that loop.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 4 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(I am building a small backend-first proof of concept for emergency-response training.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(The first goal is not realism.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 415.0 Td
+(The first goal is proof that a trainee action can move through the system, update a scenario,) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 400.5 Td
+(get checked, get logged, and be reviewed later.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(3/25) Tj
 ET
 endstream
 endobj
 11 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
 endobj
 12 0 obj
-<< /Length 509 >>
+<< /Length 1270 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(The problem I am avoiding) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Why this project exists) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(It would be easy to jump straight into Unreal, AI agents, 3D assets, sensors,) Tj
-0 -20 Td
-(and physics.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(That would look cooler early, but it would hide the hardest question:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(Can the system keep a clean, trusted record of what happened?) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(So the backend comes first.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 5 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(Emergency training is hard to scale because good practice needs:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 437.5 Td
+(  - clear scenarios) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 423.0 Td
+(  - visible consequences) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 408.5 Td
+(  - instructor review) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 394.0 Td
+(  - repeatable sessions) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 379.5 Td
+(  - room for environmental cues) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 357.0 Td
+(This POC starts with the smallest useful version of that loop.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(4/25) Tj
 ET
 endstream
 endobj
 13 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 12 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
 endobj
 14 0 obj
-<< /Length 619 >>
+<< /Length 1098 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(How I started) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(The problem I am avoiding) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(Sprint 0 was repo bootstrapping.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(I created:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - project docs) Tj
-0 -20 Td
-(  - architecture notes) Tj
-0 -20 Td
-(  - message schemas) Tj
-0 -20 Td
-(  - scenario files) Tj
-0 -20 Td
-(  - validation rules) Tj
-0 -20 Td
-(  - backend placeholders) Tj
-0 -20 Td
-(  - Unreal placeholder docs) Tj
-0 -20 Td
-(  - asset pipeline placeholders) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The goal was to set the rails before writing real behavior.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 6 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(It would be easy to jump straight into Unreal, AI agents, 3D assets, sensors, and physics.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(That would look cooler early, but it would hide the hardest question:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 415.0 Td
+(Can the system keep a clean, trusted record of what happened?) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 392.5 Td
+(So the backend comes first.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(5/25) Tj
 ET
 endstream
 endobj
 15 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 14 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 14 0 R >>
 endobj
 16 0 obj
-<< /Length 589 >>
+<< /Length 1530 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(The POC loop) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(How I started) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The main loop is:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(    manual or stubbed trainee action) Tj
-0 -20 Td
-(    -> backend receives event) Tj
-0 -20 Td
-(    -> scenario engine updates state) Tj
-0 -20 Td
-(    -> validation rules check it) Tj
-0 -20 Td
-(    -> client receives state) Tj
-0 -20 Td
-(    -> JSONL log is written) Tj
-0 -20 Td
-(    -> replay and review summarize the session) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(That is the heartbeat of the whole project.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 7 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(Sprint 0 was repo bootstrapping.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(I created:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 415.0 Td
+(  - project docs) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 400.5 Td
+(  - architecture notes) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 386.0 Td
+(  - message schemas) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 371.5 Td
+(  - scenario files) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 357.0 Td
+(  - validation rules) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 342.5 Td
+(  - backend placeholders) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 328.0 Td
+(  - Unreal placeholder docs) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 313.5 Td
+(  - asset pipeline placeholders) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 291.0 Td
+(The goal was to set the rails before writing real behavior.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(6/25) Tj
 ET
 endstream
 endobj
 17 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 16 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 16 0 R >>
 endobj
 18 0 obj
-<< /Length 688 >>
+<< /Length 1756 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Where I am now) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(The POC loop) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The repo now has a working backend slice.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(It includes:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - FastAPI health endpoint) Tj
-0 -20 Td
-(  - WebSocket session endpoint) Tj
-0 -20 Td
-(  - deterministic scenario engine) Tj
-0 -20 Td
-(  - POC validation rules) Tj
-0 -20 Td
-(  - basic POC security guardrails) Tj
-0 -20 Td
-(  - JSONL session logs) Tj
-0 -20 Td
-(  - replay and review scripts) Tj
-0 -20 Td
-(  - one-command local demo) Tj
-0 -20 Td
-(  - future Unreal client contract) Tj
-0 -20 Td
-(  - text-only Unreal display preview) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 8 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The main loop is:) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 434.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 437.5 Td
+(    manual or stubbed trainee action) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 420.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 423.0 Td
+(    -> backend receives event) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 405.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 408.5 Td
+(    -> scenario engine updates state) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 391.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 394.0 Td
+(    -> validation rules check it) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 376.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 379.5 Td
+(    -> client receives state) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 362.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 365.0 Td
+(    -> JSONL log is written) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 347.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 350.5 Td
+(    -> replay and review summarize the session) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 328.0 Td
+(That is the heartbeat of the whole project.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(7/25) Tj
 ET
 endstream
 endobj
 19 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 18 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 18 0 R >>
 endobj
 20 0 obj
-<< /Length 661 >>
+<< /Length 1658 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Current scenario) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Where I am now) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The first scenario is a tiny smoke-inhalation room POC.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(It is intentionally small.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The happy path is:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(1. assess the scene) Tj
-0 -20 Td
-(2. confirm PPE) Tj
-0 -20 Td
-(3. request backup) Tj
-0 -20 Td
-(4. move the wooden chair) Tj
-0 -20 Td
-(5. open the entry door) Tj
-0 -20 Td
-(6. enter the room) Tj
-0 -20 Td
-(7. remove the occupant) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(This is not real emergency guidance. It is a software test scenario.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 9 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The repo now has a working backend slice.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(It includes:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 415.0 Td
+(  - FastAPI health endpoint) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 400.5 Td
+(  - WebSocket session endpoint) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 386.0 Td
+(  - deterministic scenario engine) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 371.5 Td
+(  - POC validation rules) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 357.0 Td
+(  - basic POC security guardrails) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 342.5 Td
+(  - JSONL session logs) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 328.0 Td
+(  - replay and review scripts) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 313.5 Td
+(  - one-command local demo) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 299.0 Td
+(  - future Unreal client contract) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 284.5 Td
+(  - text-only Unreal display preview) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(8/25) Tj
 ET
 endstream
 endobj
 21 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 20 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 20 0 R >>
 endobj
 22 0 obj
-<< /Length 499 >>
+<< /Length 1557 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Environment cues) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Current scenario) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The scenario now includes two environment objects:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - `wooden_chair_poc`) Tj
-0 -20 Td
-(  - `entry_door_poc`) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The chair can block the path.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The door can be open or closed.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The backend tracks these as state, not as 3D gameplay objects.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 10 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The first scenario is a tiny smoke-inhalation room POC.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(It is intentionally small.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 415.0 Td
+(The happy path is:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 392.5 Td
+(1. assess the scene) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 378.0 Td
+(2. confirm PPE) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 363.5 Td
+(3. request backup) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 349.0 Td
+(4. move the wooden chair) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 334.5 Td
+(5. open the entry door) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 320.0 Td
+(6. enter the room) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 305.5 Td
+(7. remove the occupant) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 283.0 Td
+(This is not real emergency guidance. It is a software test scenario.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(9/25) Tj
 ET
 endstream
 endobj
 23 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 22 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 22 0 R >>
 endobj
 24 0 obj
-<< /Length 631 >>
+<< /Length 1175 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Why the chair and door matter) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Environment cues) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(These objects prove a useful idea:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The simulator should not ignore the room.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(If a trainee rushes past a blocked path or closed door, the system can warn) Tj
-0 -20 Td
-(them.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(Right now that warning is simple rule-checking.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(Later, richer object detail can support collision, mass, force direction,) Tj
-0 -20 Td
-(gravity notes, and Unreal display behavior.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 11 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The scenario now includes two environment objects:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 437.5 Td
+(  - `wooden_chair_poc`) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 423.0 Td
+(  - `entry_door_poc`) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 400.5 Td
+(The chair can block the path.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 378.0 Td
+(The door can be open or closed.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 355.5 Td
+(The backend tracks these as state, not as 3D gameplay objects.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(10/25) Tj
 ET
 endstream
 endobj
 25 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 24 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 24 0 R >>
 endobj
 26 0 obj
-<< /Length 639 >>
+<< /Length 1293 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Validation boundary) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Why the chair and door matter) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(Validation in this repo means:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-("Did the action follow this toy scenario's rules?") Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(It does not mean:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - medical correctness) Tj
-0 -20 Td
-(  - firefighter protocol authority) Tj
-0 -20 Td
-(  - EMT certification guidance) Tj
-0 -20 Td
-(  - real-world incident command advice) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(This line matters because the POC should be useful without pretending to be) Tj
-0 -20 Td
-(official.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 12 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(These objects prove a useful idea:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(The simulator should not ignore the room.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 415.0 Td
+(If a trainee rushes past a blocked path or closed door, the system can warn them.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 392.5 Td
+(Right now that warning is simple rule-checking.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 370.0 Td
+(Later, richer object detail can support collision, mass, force direction, gravity notes, and) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 355.5 Td
+(Unreal display behavior.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(11/25) Tj
 ET
 endstream
 endobj
 27 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 26 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 26 0 R >>
 endobj
 28 0 obj
-<< /Length 605 >>
+<< /Length 1389 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Security baseline) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Validation boundary) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The client is not trusted as the source of truth.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The client can say:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-("I want to attempt this action.") Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The backend decides:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - what state changed) Tj
-0 -20 Td
-(  - whether the action was accepted) Tj
-0 -20 Td
-(  - whether warnings or errors exist) Tj
-0 -20 Td
-(  - whether the scenario ended) Tj
-0 -20 Td
-(  - what gets logged for review) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 13 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(Validation in this repo means:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+("Did the action follow this toy scenario's rules?") Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 415.0 Td
+(It does not mean:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 392.5 Td
+(  - medical correctness) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 378.0 Td
+(  - firefighter protocol authority) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 363.5 Td
+(  - EMT certification guidance) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 349.0 Td
+(  - real-world incident command advice) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 326.5 Td
+(This line matters because the POC should be useful without pretending to be official.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(12/25) Tj
 ET
 endstream
 endobj
 29 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 28 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 28 0 R >>
 endobj
 30 0 obj
-<< /Length 591 >>
+<< /Length 1413 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Current guardrails) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Security baseline) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The backend now rejects:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - unexpected message fields) Tj
-0 -20 Td
-(  - weird or path-like IDs) Tj
-0 -20 Td
-(  - unsafe scenario IDs) Tj
-0 -20 Td
-(  - unsafe action names) Tj
-0 -20 Td
-(  - oversized or deeply nested payloads) Tj
-0 -20 Td
-(  - wrong sequence numbers) Tj
-0 -20 Td
-(  - duplicate event IDs) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(This is not production security yet. It is the first lock on the first door.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 14 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The client is not trusted as the source of truth.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(The client can say:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 415.0 Td
+("I want to attempt this action.") Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 392.5 Td
+(The backend decides:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 370.0 Td
+(  - what state changed) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 355.5 Td
+(  - whether the action was accepted) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 341.0 Td
+(  - whether warnings or errors exist) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 326.5 Td
+(  - whether the scenario ended) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 312.0 Td
+(  - what gets logged for review) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(13/25) Tj
 ET
 endstream
 endobj
 31 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 30 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 30 0 R >>
 endobj
 32 0 obj
-<< /Length 660 >>
+<< /Length 1429 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Sample demo result: happy path) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Current guardrails) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The happy path proves the full loop.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(Expected review:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - final state: occupant removed) Tj
-0 -20 Td
-(  - chair moved: yes) Tj
-0 -20 Td
-(  - door opened: yes) Tj
-0 -20 Td
-(  - warnings: none) Tj
-0 -20 Td
-(  - errors: none) Tj
-0 -20 Td
-(  - end condition reached: yes) Tj
-0 -20 Td
-(  - replay verification: passed) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(This shows the backend can accept good ordered actions and produce a clean) Tj
-0 -20 Td
-(review.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 15 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The backend now rejects:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 437.5 Td
+(  - unexpected message fields) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 423.0 Td
+(  - weird or path-like IDs) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 408.5 Td
+(  - unsafe scenario IDs) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 394.0 Td
+(  - unsafe action names) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 379.5 Td
+(  - oversized or deeply nested payloads) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 365.0 Td
+(  - wrong sequence numbers) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 350.5 Td
+(  - duplicate event IDs) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 328.0 Td
+(This is not production security yet. It is the first lock on the first door.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(14/25) Tj
 ET
 endstream
 endobj
 33 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 32 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 32 0 R >>
 endobj
 34 0 obj
-<< /Length 725 >>
+<< /Length 1513 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Sample demo result: warning/error path) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Sample demo result: happy path) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The warning path proves the system can catch bad order or ignored cues.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(Example review:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - trainee tries to enter too early) Tj
-0 -20 Td
-(  - chair or door cue is still unresolved) Tj
-0 -20 Td
-(  - validation returns warnings or errors) Tj
-0 -20 Td
-(  - state does not advance incorrectly) Tj
-0 -20 Td
-(  - log still records what was attempted) Tj
-0 -20 Td
-(  - replay can explain what happened later) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(That review trail is one of the most important parts of the POC.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 16 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The happy path proves the full loop.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(Expected review:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 415.0 Td
+(  - final state: occupant removed) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 400.5 Td
+(  - chair moved: yes) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 386.0 Td
+(  - door opened: yes) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 371.5 Td
+(  - warnings: none) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 357.0 Td
+(  - errors: none) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 342.5 Td
+(  - end condition reached: yes) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 328.0 Td
+(  - replay verification: passed) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 305.5 Td
+(This shows the backend can accept good ordered actions and produce a clean review.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(15/25) Tj
 ET
 endstream
 endobj
 35 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 34 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 34 0 R >>
 endobj
 36 0 obj
-<< /Length 592 >>
+<< /Length 1548 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Unreal client contract) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Sample demo result: warning/error path) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(Unreal is treated as a future client, not the source of truth.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(For now, the repo defines:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - WebSocket lifecycle) Tj
-0 -20 Td
-(  - example session messages) Tj
-0 -20 Td
-(  - client-side state machine) Tj
-0 -20 Td
-(  - text-only display contract) Tj
-0 -20 Td
-(  - Python harness that behaves like a future Unreal client) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(No Unreal scene is built yet.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 17 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The warning path proves the system can catch bad order or ignored cues.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(Example review:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 415.0 Td
+(  - trainee tries to enter too early) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 400.5 Td
+(  - chair or door cue is still unresolved) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 386.0 Td
+(  - validation returns warnings or errors) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 371.5 Td
+(  - state does not advance incorrectly) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 357.0 Td
+(  - log still records what was attempted) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 342.5 Td
+(  - replay can explain what happened later) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 320.0 Td
+(That review trail is one of the most important parts of the POC.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(16/25) Tj
 ET
 endstream
 endobj
 37 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 36 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 36 0 R >>
 endobj
 38 0 obj
-<< /Length 696 >>
+<< /Length 2647 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Asset pipeline direction) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Sample review output) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(Future assets may come from tools like Hunyuan 3D, Blender, or similar) Tj
-0 -20 Td
-(workflows.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(But the repo does not generate assets yet.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The planned pipeline is:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(    candidate asset) Tj
-0 -20 Td
-(    -> manual Blender review) Tj
-0 -20 Td
-(    -> metadata check) Tj
-0 -20 Td
-(    -> approved/reviewed asset folder) Tj
-0 -20 Td
-(    -> Unreal import later) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The current chair and door are metadata and scenario objects only.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 18 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(This is the kind of output I want Dr. Cameron to see:) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 434.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 437.5 Td
+(    Post-scenario review) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 420.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 423.0 Td
+(    Session: warning/error path) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 405.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 408.5 Td
+(    Final phase: stopped) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 391.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 394.0 Td
+(    Actions reviewed: 8) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 376.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 379.5 Td
+(    Validation counts: ok=5, warning=2, error=1) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 362.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 365.0 Td
+(    Replay verified: yes) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 339.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 342.5 Td
+(    Action timeline:) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 325.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 328.0 Td
+(    1. confirm_ppe -> warning) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 310.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 313.5 Td
+(    2. enter_room -> error) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 296.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 299.0 Td
+(    7. enter_room -> warning) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 273.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 276.5 Td
+(    Key observations:) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 259.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 262.0 Td
+(    - The log captured 8 trainee actions in order.) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 244.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 247.5 Td
+(    - The entry door ended closed or blocking the path.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 225.0 Td
+(The point is not "the demo ran." The point is "the system can explain what happened.") Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(17/25) Tj
 ET
 endstream
 endobj
 39 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 38 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 38 0 R >>
 endobj
 40 0 obj
-<< /Length 671 >>
+<< /Length 1371 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Next goal) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Unreal client contract) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The next useful goal is a thin display-side demo contract.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(That means:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - keep backend authority) Tj
-0 -20 Td
-(  - keep scenario logic in Python) Tj
-0 -20 Td
-(  - let a future client display state clearly) Tj
-0 -20 Td
-(  - show environment cues in a simple text debug panel) Tj
-0 -20 Td
-(  - avoid 3D and physics until the data contract is stable) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(Basically: make the future Unreal side boring first, then make it visual) Tj
-0 -20 Td
-(later.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 19 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(Unreal is treated as a future client, not the source of truth.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(For now, the repo defines:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 415.0 Td
+(  - WebSocket lifecycle) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 400.5 Td
+(  - example session messages) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 386.0 Td
+(  - client-side state machine) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 371.5 Td
+(  - text-only display contract) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 357.0 Td
+(  - Python harness that behaves like a future Unreal client) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 334.5 Td
+(No Unreal scene is built yet.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(18/25) Tj
 ET
 endstream
 endobj
 41 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 40 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 40 0 R >>
 endobj
 42 0 obj
-<< /Length 683 >>
+<< /Length 1725 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(How I get there) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Asset pipeline direction) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(Near-term steps:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(1. keep improving the backend contract) Tj
-0 -20 Td
-(2. keep tightening the security boundary) Tj
-0 -20 Td
-(3. add richer environment object fields carefully) Tj
-0 -20 Td
-(4. keep replay and review as the proof point) Tj
-0 -20 Td
-(5. build tiny Unreal display tests only when needed) Tj
-0 -20 Td
-(6. review generated assets manually before using them) Tj
-0 -20 Td
-(7. add physics only after object state is clean) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(This keeps the project from turning into soup.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 20 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(Future assets may come from tools like Hunyuan 3D, Blender, or similar workflows.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(But the repo does not generate assets yet.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 415.0 Td
+(The planned pipeline is:) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 389.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 392.5 Td
+(    candidate asset) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 375.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 378.0 Td
+(    -> manual Blender review) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 360.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 363.5 Td
+(    -> metadata check) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 346.0 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 349.0 Td
+(    -> approved/reviewed asset folder) Tj
+ET
+0.930 0.925 0.900 rg
+56.0 331.5 680.0 13.0 re f
+BT
+/F2 9.5 Tf
+0.180 0.390 0.550 rg
+62.0 334.5 Td
+(    -> Unreal import later) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 312.0 Td
+(The current chair and door are metadata and scenario objects only.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(19/25) Tj
 ET
 endstream
 endobj
 43 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 42 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 42 0 R >>
 endobj
 44 0 obj
-<< /Length 669 >>
+<< /Length 1436 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Ideal end result) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Next goal) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The ideal system is an adaptive training simulator where:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - trainees act inside a scenario) Tj
-0 -20 Td
-(  - the room state changes) Tj
-0 -20 Td
-(  - environmental cues matter) Tj
-0 -20 Td
-(  - instructors can review what happened) Tj
-0 -20 Td
-(  - AI helps generate or adapt safe training content) Tj
-0 -20 Td
-(  - Unreal displays the state) Tj
-0 -20 Td
-(  - logs support learning and debriefing) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(That is the long-term picture, not what I claim to have today.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 21 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The next useful goal is a thin display-side demo contract.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(That means:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 415.0 Td
+(  - keep backend authority) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 400.5 Td
+(  - keep scenario logic in Python) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 386.0 Td
+(  - let a future client display state clearly) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 371.5 Td
+(  - show environment cues in a simple text debug panel) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 357.0 Td
+(  - avoid 3D and physics until the data contract is stable) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 334.5 Td
+(Basically: make the future Unreal side boring first, then make it visual later.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(20/25) Tj
 ET
 endstream
 endobj
 45 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 44 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 44 0 R >>
 endobj
 46 0 obj
-<< /Length 649 >>
+<< /Length 1521 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(What this is not) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(How I get there) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(This is not:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - a certified training system) Tj
-0 -20 Td
-(  - a medical decision tool) Tj
-0 -20 Td
-(  - a firefighter protocol engine) Tj
-0 -20 Td
-(  - a real physics simulator) Tj
-0 -20 Td
-(  - a production Unreal build) Tj
-0 -20 Td
-(  - a sensor platform) Tj
-0 -20 Td
-(  - a cloud deployment) Tj
-0 -20 Td
-(  - a production-secure app) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(It is a strong first loop.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(And that is exactly what it should be right now.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 22 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(Near-term steps:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(1. keep improving the backend contract) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 423.0 Td
+(2. keep tightening the security boundary) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 408.5 Td
+(3. add richer environment object fields carefully) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 394.0 Td
+(4. keep replay and review as the proof point) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 379.5 Td
+(5. build tiny Unreal display tests only when needed) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 365.0 Td
+(6. review generated assets manually before using them) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 350.5 Td
+(7. add physics only after object state is clean) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 328.0 Td
+(This keeps the project from turning into soup.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(21/25) Tj
 ET
 endstream
 endobj
 47 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 46 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 46 0 R >>
 endobj
 48 0 obj
-<< /Length 607 >>
+<< /Length 1507 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Closing) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Ideal end result) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(The project is moving in the right order:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(First, prove the loop.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(Then, prove replay and review.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(Then, prove client display.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(Then, add richer objects.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(Then, when the foundation is stable, start wrestling with Unreal, Blender,) Tj
-0 -20 Td
-(generated assets, and physics.) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(One monster at a time.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 23 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The ideal system is an adaptive training simulator where:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 437.5 Td
+(  - trainees act inside a scenario) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 423.0 Td
+(  - the room state changes) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 408.5 Td
+(  - environmental cues matter) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 394.0 Td
+(  - instructors can review what happened) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 379.5 Td
+(  - AI helps generate or adapt safe training content) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 365.0 Td
+(  - Unreal displays the state) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 350.5 Td
+(  - logs support learning and debriefing) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 328.0 Td
+(That is the long-term picture, not what I claim to have today.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(22/25) Tj
 ET
 endstream
 endobj
 49 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 48 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 48 0 R >>
 endobj
 50 0 obj
-<< /Length 549 >>
+<< /Length 1560 >>
 stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
 BT
-/F1 26 Tf
-58 548 Td
-(Best 10-minute demo flow) Tj
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(What this is not) Tj
 ET
 BT
-/F1 14 Tf
-58 492 Td
-() Tj
-0 -20 Td
-(For Dr. Cameron:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(  - 5 minutes: explain the loop, scope, and trust boundary) Tj
-0 -20 Td
-(  - 5 minutes: run the local demo and point at replay/review) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The core takeaway should be:) Tj
-0 -20 Td
-() Tj
-0 -20 Td
-(The backend can keep track of what happened, explain it afterward, and leave) Tj
-0 -20 Td
-(room for Unreal/UX/physics later.) Tj
-0 -20 Td
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
 ET
 BT
-/F1 10 Tf
-672 32 Td
-(Slide 24 of 24) Tj
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(This is not:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 437.5 Td
+(  - a certified training system) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 423.0 Td
+(  - a medical decision tool) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 408.5 Td
+(  - a firefighter protocol engine) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 394.0 Td
+(  - a real physics simulator) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 379.5 Td
+(  - a production Unreal build) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 365.0 Td
+(  - a sensor platform) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 350.5 Td
+(  - a cloud deployment) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 336.0 Td
+(  - a production-secure app) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 313.5 Td
+(It is a strong first loop.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 291.0 Td
+(And that is exactly what it should be right now.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(23/25) Tj
 ET
 endstream
 endobj
 51 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R >> >> /Contents 50 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 50 0 R >>
+endobj
+52 0 obj
+<< /Length 1341 >>
+stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
+BT
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Closing) Tj
+ET
+BT
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(The project is moving in the right order:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 437.5 Td
+(First, prove the loop.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 415.0 Td
+(Then, prove replay and review.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 392.5 Td
+(Then, prove client display.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 370.0 Td
+(Then, add richer objects.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 347.5 Td
+(Then, when the foundation is stable, start wrestling with Unreal, Blender, generated assets, and) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 333.0 Td
+(physics.) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 310.5 Td
+(One monster at a time.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(24/25) Tj
+ET
+endstream
+endobj
+53 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 52 0 R >>
+endobj
+54 0 obj
+<< /Length 1240 >>
+stream
+0.985 0.976 0.945 rg
+0.0 0.0 792.0 612.0 re f
+0.055 0.105 0.165 rg
+0.0 504.0 792.0 108.0 re f
+0.950 0.420 0.160 rg
+0.0 504.0 11.0 108.0 re f
+0.950 0.420 0.160 rg
+62.0 486.0 668.0 4.0 re f
+BT
+/F3 24.0 Tf
+1.000 1.000 1.000 rg
+62.0 564.0 Td
+(Best 10-minute demo flow) Tj
+ET
+BT
+/F1 9.5 Tf
+0.780 0.840 0.880 rg
+62.0 536.0 Td
+(Emergency Training Simulator POC / backend-first local proof) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 460.0 Td
+(For Dr. Cameron:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 437.5 Td
+(  - 5 minutes: explain the loop, scope, and trust boundary) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+72.0 423.0 Td
+(  - 5 minutes: run the local demo and point at replay/review) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 400.5 Td
+(The core takeaway should be:) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 378.0 Td
+(The backend can keep track of what happened, explain it afterward, and leave room for) Tj
+ET
+BT
+/F1 11.3 Tf
+0.090 0.110 0.130 rg
+62.0 363.5 Td
+(Unreal/UX/physics later.) Tj
+ET
+0.780 0.760 0.700 rg
+62.0 44.0 668.0 1.2 re f
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+62.0 27.0 Td
+(POC only - not clinical, operational, or production guidance) Tj
+ET
+BT
+/F1 8.5 Tf
+0.420 0.450 0.480 rg
+668.0 27.0 Td
+(25/25) Tj
+ET
+endstream
+endobj
+55 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 54 0 R >>
 endobj
 xref
-0 52
+0 56
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
-0000000275 00000 n 
-0000000345 00000 n 
-0000000677 00000 n 
-0000000803 00000 n 
-0000001395 00000 n 
-0000001521 00000 n 
-0000002065 00000 n 
-0000002191 00000 n 
-0000002762 00000 n 
-0000002890 00000 n 
-0000003450 00000 n 
-0000003578 00000 n 
-0000004248 00000 n 
-0000004376 00000 n 
-0000005016 00000 n 
-0000005144 00000 n 
-0000005883 00000 n 
-0000006011 00000 n 
-0000006723 00000 n 
-0000006851 00000 n 
-0000007401 00000 n 
-0000007529 00000 n 
-0000008211 00000 n 
-0000008339 00000 n 
-0000009029 00000 n 
-0000009157 00000 n 
-0000009813 00000 n 
-0000009941 00000 n 
-0000010583 00000 n 
-0000010711 00000 n 
-0000011422 00000 n 
-0000011550 00000 n 
-0000012326 00000 n 
-0000012454 00000 n 
-0000013097 00000 n 
-0000013225 00000 n 
-0000013972 00000 n 
-0000014100 00000 n 
-0000014822 00000 n 
-0000014950 00000 n 
-0000015684 00000 n 
-0000015812 00000 n 
-0000016532 00000 n 
-0000016660 00000 n 
-0000017360 00000 n 
-0000017488 00000 n 
-0000018146 00000 n 
-0000018274 00000 n 
-0000018874 00000 n 
+0000000283 00000 n 
+0000000353 00000 n 
+0000000421 00000 n 
+0000000496 00000 n 
+0000001373 00000 n 
+0000001519 00000 n 
+0000002891 00000 n 
+0000003037 00000 n 
+0000004187 00000 n 
+0000004335 00000 n 
+0000005657 00000 n 
+0000005805 00000 n 
+0000006955 00000 n 
+0000007103 00000 n 
+0000008685 00000 n 
+0000008833 00000 n 
+0000010641 00000 n 
+0000010789 00000 n 
+0000012499 00000 n 
+0000012647 00000 n 
+0000014256 00000 n 
+0000014404 00000 n 
+0000015631 00000 n 
+0000015779 00000 n 
+0000017124 00000 n 
+0000017272 00000 n 
+0000018713 00000 n 
+0000018861 00000 n 
+0000020326 00000 n 
+0000020474 00000 n 
+0000021955 00000 n 
+0000022103 00000 n 
+0000023668 00000 n 
+0000023816 00000 n 
+0000025416 00000 n 
+0000025564 00000 n 
+0000028263 00000 n 
+0000028411 00000 n 
+0000029834 00000 n 
+0000029982 00000 n 
+0000031759 00000 n 
+0000031907 00000 n 
+0000033395 00000 n 
+0000033543 00000 n 
+0000035116 00000 n 
+0000035264 00000 n 
+0000036823 00000 n 
+0000036971 00000 n 
+0000038583 00000 n 
+0000038731 00000 n 
+0000040124 00000 n 
+0000040272 00000 n 
+0000041564 00000 n 
 trailer
-<< /Size 52 /Root 1 0 R >>
+<< /Size 56 /Root 1 0 R >>
 startxref
-19002
+41712
 %%EOF

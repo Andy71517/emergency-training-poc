@@ -1,8 +1,8 @@
-"""Build a simple PDF deck from project-overview-slides.md.
+"""Build a styled PDF deck from project-overview-slides.md.
 
 This script intentionally uses only the Python standard library.
-It is not a full presentation engine. It creates a readable PDF that is
-easy to share without adding another dependency to the POC.
+It is not a full presentation engine, but it creates a denser, cleaner PDF
+that is easy to share without adding another dependency to the POC.
 """
 
 from __future__ import annotations
@@ -18,11 +18,19 @@ OUTPUT_PDF = HERE / "emergency-training-poc-overview.pdf"
 
 PAGE_WIDTH = 792
 PAGE_HEIGHT = 612
-MARGIN_X = 58
-TITLE_Y = 548
-BODY_Y = 492
-LINE_HEIGHT = 20
-MAX_BODY_CHARS = 78
+MARGIN_X = 62
+BODY_Y = 468
+LINE_HEIGHT = 14.5
+MAX_BODY_CHARS = 96
+MAX_BODY_LINES = 29
+
+COLOR_BACKGROUND = (0.985, 0.976, 0.945)
+COLOR_HEADER = (0.055, 0.105, 0.165)
+COLOR_ACCENT = (0.95, 0.42, 0.16)
+COLOR_MUTED_ACCENT = (0.18, 0.39, 0.55)
+COLOR_BODY = (0.09, 0.11, 0.13)
+COLOR_MUTED = (0.42, 0.45, 0.48)
+COLOR_CODE_BG = (0.93, 0.925, 0.90)
 
 
 def _clean_for_pdf(text: str) -> str:
@@ -103,39 +111,119 @@ def _format_body(lines: list[str]) -> list[str]:
     return formatted
 
 
+def _rgb(color: tuple[float, float, float]) -> str:
+    return f"{color[0]:.3f} {color[1]:.3f} {color[2]:.3f}"
+
+
+def _rect(
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+    color: tuple[float, float, float],
+) -> str:
+    return f"{_rgb(color)} rg\n{x:.1f} {y:.1f} {width:.1f} {height:.1f} re f"
+
+
+def _text(
+    *,
+    x: float,
+    y: float,
+    value: str,
+    font: str,
+    size: float,
+    color: tuple[float, float, float],
+) -> list[str]:
+    return [
+        "BT",
+        f"/{font} {size:.1f} Tf",
+        f"{_rgb(color)} rg",
+        f"{x:.1f} {y:.1f} Td",
+        f"({_escape_pdf_text(value)}) Tj",
+        "ET",
+    ]
+
+
 def _content_stream(title: str, body: list[str], page_number: int, total_pages: int) -> bytes:
     title = _clean_for_pdf(title)
     lines = [_clean_for_pdf(line) for line in _format_body(body)]
 
     commands: list[str] = [
-        "BT",
-        "/F1 26 Tf",
-        f"{MARGIN_X} {TITLE_Y} Td",
-        f"({_escape_pdf_text(title)}) Tj",
-        "ET",
-        "BT",
-        "/F1 14 Tf",
-        f"{MARGIN_X} {BODY_Y} Td",
+        _rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, COLOR_BACKGROUND),
+        _rect(0, PAGE_HEIGHT - 108, PAGE_WIDTH, 108, COLOR_HEADER),
+        _rect(0, PAGE_HEIGHT - 108, 11, 108, COLOR_ACCENT),
+        _rect(MARGIN_X, PAGE_HEIGHT - 126, PAGE_WIDTH - (MARGIN_X * 2), 4, COLOR_ACCENT),
+        *_text(
+            x=MARGIN_X,
+            y=PAGE_HEIGHT - 48,
+            value=title,
+            font="F3",
+            size=24,
+            color=(1, 1, 1),
+        ),
+        *_text(
+            x=MARGIN_X,
+            y=PAGE_HEIGHT - 76,
+            value="Emergency Training Simulator POC / backend-first local proof",
+            font="F1",
+            size=9.5,
+            color=(0.78, 0.84, 0.88),
+        ),
     ]
 
-    y_lines = 0
+    y = BODY_Y
+    rendered_lines = 0
     for line in lines:
-        if y_lines > 19:
-            commands.append(f"(...) Tj")
+        if rendered_lines >= MAX_BODY_LINES:
+            commands.extend(
+                _text(
+                    x=MARGIN_X,
+                    y=y,
+                    value="...",
+                    font="F1",
+                    size=11,
+                    color=COLOR_MUTED,
+                )
+            )
             break
-        commands.append(f"({_escape_pdf_text(line)}) Tj")
-        commands.append(f"0 -{LINE_HEIGHT} Td")
-        y_lines += 1
 
+        if not line:
+            y -= 8
+            continue
+
+        is_code = line.startswith("    ")
+        font = "F2" if is_code else "F1"
+        size = 9.5 if is_code else 11.3
+        color = COLOR_MUTED_ACCENT if is_code else COLOR_BODY
+        x = MARGIN_X + (10 if line.startswith("  - ") else 0)
+
+        if is_code:
+            commands.append(_rect(MARGIN_X - 6, y - 3, PAGE_WIDTH - (MARGIN_X * 2) + 12, 13, COLOR_CODE_BG))
+
+        commands.extend(_text(x=x, y=y, value=line, font=font, size=size, color=color))
+        y -= LINE_HEIGHT
+        rendered_lines += 1
+
+    commands.append(_rect(MARGIN_X, 44, PAGE_WIDTH - (MARGIN_X * 2), 1.2, (0.78, 0.76, 0.70)))
     commands.extend(
-        [
-            "ET",
-            "BT",
-            "/F1 10 Tf",
-            f"{PAGE_WIDTH - 120} 32 Td",
-            f"(Slide {page_number} of {total_pages}) Tj",
-            "ET",
-        ]
+        _text(
+            x=MARGIN_X,
+            y=27,
+            value="POC only - not clinical, operational, or production guidance",
+            font="F1",
+            size=8.5,
+            color=COLOR_MUTED,
+        )
+    )
+    commands.extend(
+        _text(
+            x=PAGE_WIDTH - 124,
+            y=27,
+            value=f"{page_number}/{total_pages}",
+            font="F1",
+            size=8.5,
+            color=COLOR_MUTED,
+        )
     )
     return ("\n".join(commands) + "\n").encode("latin-1", "replace")
 
@@ -149,7 +237,9 @@ def _build_pdf(slides: list[tuple[str, list[str]]]) -> bytes:
 
     catalog_id = add_object(b"<< /Type /Catalog /Pages 2 0 R >>")
     pages_id = add_object(b"")
-    font_id = add_object(b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>")
+    font_regular_id = add_object(b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>")
+    font_mono_id = add_object(b"<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>")
+    font_bold_id = add_object(b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>")
 
     page_ids: list[int] = []
     for index, (title, body) in enumerate(slides, start=1):
@@ -165,7 +255,11 @@ def _build_pdf(slides: list[tuple[str, list[str]]]) -> bytes:
             (
                 f"<< /Type /Page /Parent {pages_id} 0 R "
                 f"/MediaBox [0 0 {PAGE_WIDTH} {PAGE_HEIGHT}] "
-                f"/Resources << /Font << /F1 {font_id} 0 R >> >> "
+                f"/Resources << /Font << "
+                f"/F1 {font_regular_id} 0 R "
+                f"/F2 {font_mono_id} 0 R "
+                f"/F3 {font_bold_id} 0 R "
+                f">> >> "
                 f"/Contents {stream_id} 0 R >>"
             ).encode("ascii")
         )
@@ -210,4 +304,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

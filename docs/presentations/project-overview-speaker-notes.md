@@ -126,7 +126,19 @@ The trainee tries to move too fast or ignores an environmental cue. The backend 
 
 This matters because mistakes are part of training.
 
-## 17. Unreal client contract
+## 17. Sample review output
+
+This is one of the strongest slides for Dr. Cameron.
+
+Say that this is the difference between a toy demo and a useful training foundation.
+
+A toy demo says: "It ran."
+
+This review says: "Here is what happened, in order, with warnings, errors, replay verification, and environment cues."
+
+The key phrase is: the system can explain what happened.
+
+## 18. Unreal client contract
 
 Make this distinction clear:
 
@@ -134,7 +146,7 @@ Unreal will display and send input. It should not decide scenario truth.
 
 The repo already has a contract and a Python harness that behaves like the future Unreal client, but there is no scene yet.
 
-## 18. Asset pipeline direction
+## 19. Asset pipeline direction
 
 Explain the asset plan without claiming assets exist.
 
@@ -142,19 +154,19 @@ Tools like Hunyuan 3D may help generate candidates later, but every asset should
 
 For now, the chair and door are scenario objects, not meshes.
 
-## 19. Next goal
+## 20. Next goal
 
 The next goal is making the display contract stronger.
 
 That means a future Unreal client can show state clearly without owning the logic. Text-only debug display first. 2D UI and 3D visuals later.
 
-## 20. How I get there
+## 21. How I get there
 
 This is the roadmap slide.
 
 Emphasize controlled steps. Keep the backend clean. Keep tightening the security boundary. Add fields carefully. Keep replay and review strong. Only then bring in Unreal, Blender, generated assets, and physics.
 
-## 21. Ideal end result
+## 22. Ideal end result
 
 Describe the bigger picture.
 
@@ -162,7 +174,7 @@ The dream is an adaptive training simulator where scenarios respond to trainee a
 
 But again: that is the direction, not the current claim.
 
-## 22. What this is not
+## 23. What this is not
 
 This is the honesty slide.
 
@@ -170,7 +182,7 @@ Say what it is not so the audience trusts what it is.
 
 It is not certified, not medical guidance, not a production simulator, not production-secure, and not a real physics engine.
 
-## 23. Closing
+## 24. Closing
 
 End with the ordering principle:
 
@@ -178,7 +190,7 @@ Prove the loop first. Then replay and review. Then client display. Then security
 
 The closer can be: one monster at a time.
 
-## 24. Best 10-minute demo flow
+## 25. Best 10-minute demo flow
 
 This is the practical ending if Dr. Cameron asks how you would present it live.
 
