@@ -1,34 +1,48 @@
-# Presentation timing and slide design
+# Presentation timing and design
 
-This deck is meant to work as a 5-minute project explanation plus a 5-minute demo.
+This deck is for a live meeting. It is not the submit-ready report and it is not the submission packet.
 
-That shape fits the project well because the slides explain the "why," and the demo proves the loop instead of just talking about it.
+Use the files this way:
 
-The first audience is Dr. Cameron, so the presentation should feel like a clear on-campus project update first and a pitch deck second.
+- `docs/submission-packet/`: send or submit
+- `project-overview-slides.md`: talk through live
+- `project-overview-speaker-notes.md`: presenter context
+- `project-overview-read-through-script.md`: practice script
+- `python scripts/run_local_demo.py`: proof on screen
 
-## Suggested timing
+## Target timing
 
-### 5-minute presentation
+Aim for:
 
-Use about 8 to 10 slides live.
+- 5 minutes of slides
+- 5 minutes of demo
 
-Recommended flow:
+That gives enough time to explain the idea without turning the meeting into a lecture.
 
-1. Title and short version
-2. Why this project exists
-3. The problem I am avoiding
-4. The POC loop
-5. Where I am now
-6. Current scenario
-7. Environment cues
-8. Validation boundary
-9. Security baseline
-10. Next goal
-11. Closing
+## Live slide flow
 
-The remaining slides are useful backup slides. They are there if someone asks about Unreal, assets, sample results, or long-term direction.
+Use the full deck, but move quickly.
 
-### 5-minute demo
+1. Title
+2. Short version
+3. Why this project exists
+4. Trap I am avoiding
+5. Core loop
+6. What works now
+7. Current demo scenario
+8. Chair and door
+9. Review as proof point
+10. Trust boundary
+11. Security baseline
+12. Future Unreal role
+13. Packet vs deck
+14. Next steps
+15. Demo plan
+16. Closing
+
+If time is tight, skip slides 11, 12, and 13 live. Keep them ready for questions.
+
+## Demo flow
 
 Run:
 
@@ -36,59 +50,56 @@ Run:
 python scripts/run_local_demo.py
 ```
 
-Demo flow:
+Show:
 
-1. Show the backend starts or is detected.
-2. Show the happy path.
-3. Show the warning/error path.
-4. Point at the replay verification.
-5. Point at the review summary.
-6. Point out the chair and door environment cues.
-7. Mention that the backend owns the result; the client only requests actions.
+1. backend starts or is detected
+2. happy path session
+3. warning/error session
+4. replay verification
+5. review summary
+6. chair and door cue status
 
-The main sentence for the demo:
+Main demo sentence:
 
-> This is the proof point: actions go in, state comes out, and the log can explain what happened later.
+> The important part is not only that the demo ran. It is that the system can explain what happened afterward.
 
-## Slide design direction
+## Design direction
 
-Keep the design simple and clean.
+Use the deck like a conversation aid.
 
-The project is technical, so the slides should feel readable and trustworthy instead of flashy.
+Good slide rules:
 
-Recommended style:
-
-- dark background or soft off-white background
 - one main idea per slide
-- large titles
-- short bullets
-- simple diagrams instead of dense paragraphs
-- code blocks only when they explain the loop clearly
-- no stock emergency imagery unless it is subtle and not dramatic
+- short bullets only
+- no dense paragraphs
+- no tiny code blocks
+- leave breathing room
+- explain details out loud, not on the slide
 
-## Visual theme
+## Visual style
 
-A good visual direction would be:
+Use:
 
-- charcoal / near-black background
-- warm orange accent for emergency/training energy
-- muted blue accent for backend/system trust
-- simple line icons for backend, client, log, replay, and environment objects
+- azure blue for backend/trust/system structure
+- amber for attention, warnings, and emergency-training energy
+- off-white or very light blue backgrounds
+- simple dividers and accent bars
 
-This keeps it grounded. Not too corporate, not too cyberpunk, not too "Hollywood firefighter poster."
+Avoid:
 
-## Slide layout idea
+- dramatic emergency stock imagery
+- fake clinical authority
+- cyberpunk dashboards
+- slides that look like reports pasted into PDF form
 
-Use three slide types:
+## Presenter style
 
-1. Story slides: one sentence plus two or three bullets.
-2. System slides: small flow diagram plus short explanation.
-3. Demo slides: expected output, warnings, final state, and replay result.
+Keep the voice grounded:
 
-## Design note for later
+- "Here is what I built."
+- "Here is what it proves."
+- "Here is what it does not prove yet."
+- "Here is why I built it in this order."
+- "Here is the next careful step."
 
-The current PDF is intentionally plain because it is generated without extra dependencies.
-
-If this becomes a real presentation deliverable, the next step should be a designed version in PowerPoint, Google Slides, Canva, or a Markdown slide tool like Marp.
-
-The content is already structured for that. The visual pass can come after the wording feels right.
+That should land well with Dr. Cameron because it shows progress and judgment, not just ambition.

@@ -1,8 +1,8 @@
 """Build a styled PDF deck from project-overview-slides.md.
 
 This script intentionally uses only the Python standard library.
-It is not a full presentation engine, but it creates a denser, cleaner PDF
-that is easy to share without adding another dependency to the POC.
+It is not a full presentation engine, but it creates a clean meeting deck PDF
+without adding another dependency to the POC.
 """
 
 from __future__ import annotations
@@ -20,18 +20,20 @@ PAGE_WIDTH = 792
 PAGE_HEIGHT = 612
 MARGIN_X = 62
 BODY_Y = 468
-LINE_HEIGHT = 14.5
-MAX_BODY_CHARS = 96
-MAX_BODY_LINES = 29
+LINE_HEIGHT = 18
+MAX_BODY_CHARS = 78
+MAX_BODY_LINES = 20
 CONTENT_BOTTOM_Y = 82
 
-COLOR_BACKGROUND = (0.985, 0.976, 0.945)
-COLOR_HEADER = (0.055, 0.105, 0.165)
-COLOR_ACCENT = (0.95, 0.42, 0.16)
-COLOR_MUTED_ACCENT = (0.18, 0.39, 0.55)
+COLOR_BACKGROUND = (0.975, 0.988, 1.000)
+COLOR_HEADER = (0.02, 0.17, 0.31)
+COLOR_AZURE = (0.02, 0.29, 0.52)
+COLOR_ACCENT = (0.96, 0.58, 0.12)
+COLOR_MUTED_ACCENT = (0.16, 0.36, 0.53)
 COLOR_BODY = (0.09, 0.11, 0.13)
 COLOR_MUTED = (0.42, 0.45, 0.48)
-COLOR_CODE_BG = (0.93, 0.925, 0.90)
+COLOR_CODE_BG = (0.92, 0.96, 0.98)
+COLOR_PANEL = (1.0, 1.0, 1.0)
 
 
 def _clean_for_pdf(text: str) -> str:
@@ -150,31 +152,42 @@ def _content_stream(title: str, body: list[str], page_number: int, total_pages: 
     lines = [_clean_for_pdf(line) for line in _format_body(body)]
     visible_line_count = sum(1 for line in lines if line)
     dynamic_line_height = LINE_HEIGHT
-    if 0 < visible_line_count <= 16:
+    if 0 < visible_line_count <= 12:
         available_height = BODY_Y - CONTENT_BOTTOM_Y
-        dynamic_line_height = min(24, max(LINE_HEIGHT, available_height / (visible_line_count + 1)))
-    body_size = 12.2 if visible_line_count <= 12 else 11.3
+        dynamic_line_height = min(28, max(LINE_HEIGHT, available_height / (visible_line_count + 1)))
+    body_size = 14.2 if visible_line_count <= 10 else 12.8
 
     commands: list[str] = [
         _rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, COLOR_BACKGROUND),
-        _rect(0, PAGE_HEIGHT - 108, PAGE_WIDTH, 108, COLOR_HEADER),
-        _rect(0, PAGE_HEIGHT - 108, 11, 108, COLOR_ACCENT),
-        _rect(MARGIN_X, PAGE_HEIGHT - 126, PAGE_WIDTH - (MARGIN_X * 2), 4, COLOR_ACCENT),
+        _rect(0, PAGE_HEIGHT - 112, PAGE_WIDTH, 112, COLOR_HEADER),
+        _rect(0, PAGE_HEIGHT - 112, PAGE_WIDTH, 6, COLOR_ACCENT),
+        _rect(0, 0, 14, PAGE_HEIGHT, (0.89, 0.96, 1.00)),
+        _rect(MARGIN_X, 72, PAGE_WIDTH - (MARGIN_X * 2), 410, COLOR_PANEL),
+        _rect(MARGIN_X, 72, 5, 410, COLOR_ACCENT),
         *_text(
             x=MARGIN_X,
             y=PAGE_HEIGHT - 48,
             value=title,
             font="F3",
-            size=24,
+            size=25,
             color=(1, 1, 1),
         ),
         *_text(
             x=MARGIN_X,
             y=PAGE_HEIGHT - 76,
-            value="Emergency Training Simulator POC / backend-first local proof",
+            value="Meeting deck / backend-first local proof",
             font="F1",
             size=9.5,
             color=(0.78, 0.84, 0.88),
+        ),
+        _rect(PAGE_WIDTH - 130, PAGE_HEIGHT - 95, 66, 18, COLOR_ACCENT),
+        *_text(
+            x=PAGE_WIDTH - 118,
+            y=PAGE_HEIGHT - 89,
+            value="POC",
+            font="F3",
+            size=8.8,
+            color=COLOR_HEADER,
         ),
     ]
 
@@ -202,10 +215,12 @@ def _content_stream(title: str, body: list[str], page_number: int, total_pages: 
         font = "F2" if is_code else "F1"
         size = 9.5 if is_code else body_size
         color = COLOR_MUTED_ACCENT if is_code else COLOR_BODY
-        x = MARGIN_X + (10 if line.startswith("  - ") else 0)
+        x = MARGIN_X + 24 + (10 if line.startswith("  - ") else 0)
 
         if is_code:
-            commands.append(_rect(MARGIN_X - 6, y - 3, PAGE_WIDTH - (MARGIN_X * 2) + 12, 13, COLOR_CODE_BG))
+            commands.append(
+                _rect(MARGIN_X + 16, y - 4, PAGE_WIDTH - (MARGIN_X * 2) - 26, 16, COLOR_CODE_BG)
+            )
 
         commands.extend(_text(x=x, y=y, value=line, font=font, size=size, color=color))
         y -= dynamic_line_height
