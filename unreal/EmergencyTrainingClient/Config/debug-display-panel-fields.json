@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1.0",
+  "panel_name": "EmergencyTrainingDebugDisplay",
+  "data_contract": "../../contract/debug-display-state.schema.json",
+  "layout": {
+    "mode": "text_debug",
+    "header_fields": [
+      "session_id",
+      "scenario_id",
+      "phase",
+      "validation_status",
+      "status_line"
+    ],
+    "list_sections": [
+      "warnings",
+      "errors",
+      "objects"
+    ],
+    "object_row_fields": [
+      "alert_level",
+      "label",
+      "display",
+      "blocks_path"
+    ]
+  },
+  "alert_levels": {
+    "normal": "show plainly",
+    "attention": "visually call out in the debug panel"
+  },
+  "boundaries": [
+    "Display backend-owned state only.",
+    "Do not change scenario state locally.",
+    "Do not run validation or scoring in Unreal.",
+    "Do not simulate physics in this slice.",
+    "Do not load generated assets in this slice."
+  ]
+}

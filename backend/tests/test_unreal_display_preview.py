@@ -134,3 +134,21 @@ def test_checked_in_display_examples_follow_schema() -> None:
 
     for path in Path("unreal/contract/examples").glob("*display_state*.json"):
         validator.validate(json.loads(path.read_text(encoding="utf-8")))
+
+
+def test_unreal_starter_samples_match_contract_examples() -> None:
+    pairs = [
+        (
+            Path("unreal/contract/examples/display_state.example.json"),
+            Path("unreal/EmergencyTrainingClient/Data/display_state.sample.json"),
+        ),
+        (
+            Path("unreal/contract/examples/warning_display_state.example.json"),
+            Path("unreal/EmergencyTrainingClient/Data/warning_display_state.sample.json"),
+        ),
+    ]
+
+    for source, starter_sample in pairs:
+        assert json.loads(starter_sample.read_text(encoding="utf-8")) == json.loads(
+            source.read_text(encoding="utf-8")
+        )

@@ -8,6 +8,14 @@ The first Unreal slice should be a text-only debug display. It should render the
 
 This repo does not include an Unreal project, scene, gameplay logic, networking topology, projection mapping, sensing integration, or 3D content. `EmergencyTrainingClient/` is only a reserved location.
 
+`EmergencyTrainingClient/` now includes a tiny starter scaffold for that future debug display:
+
+- local sample display-state JSON
+- a panel-field config
+- beginner notes for the first Unreal implementation pass
+
+It is still not a full Unreal project.
+
 The thin client contract lives here:
 
 - [contract/client-contract.md](contract/client-contract.md)
