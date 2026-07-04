@@ -1,8 +1,11 @@
 {
+  "schema_version": "0.1.0",
+  "display_mode": "text_debug",
   "session_id": "demo-happy",
   "scenario_id": "smoke_inhalation_room_v0",
   "phase": "room_entered",
   "validation_status": "ok",
+  "status_line": "room_entered / ok / no findings",
   "warnings": [],
   "errors": [],
   "objects": [
@@ -11,6 +14,7 @@
       "label": "Wooden chair",
       "display": "moved aside",
       "blocks_path": false,
+      "alert_level": "normal",
       "metadata": {
         "location": "clear_of_entry_path",
         "physics_enabled": false
@@ -21,9 +25,21 @@
       "label": "Entry door",
       "display": "open",
       "blocks_path": false,
+      "alert_level": "normal",
       "metadata": {
         "locked": false,
         "door_type": "hinged_wooden_door_preview"
+      }
+    },
+    {
+      "object_id": "smoke_visibility_cue_poc",
+      "label": "Smoke/visibility cue",
+      "display": "checked",
+      "blocks_path": false,
+      "alert_level": "normal",
+      "metadata": {
+        "visibility_level": "checked_low_visibility",
+        "physics_enabled": false
       }
     }
   ]

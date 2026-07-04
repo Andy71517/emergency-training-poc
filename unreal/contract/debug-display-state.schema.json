@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/emergency-training-poc/unreal/debug-display-state.schema.json",
+  "title": "UnrealDebugDisplayState",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "display_mode",
+    "session_id",
+    "scenario_id",
+    "phase",
+    "validation_status",
+    "status_line",
+    "warnings",
+    "errors",
+    "objects"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "display_mode": { "const": "text_debug" },
+    "session_id": { "type": "string", "minLength": 1 },
+    "scenario_id": { "type": "string", "minLength": 1 },
+    "phase": { "type": "string", "minLength": 1 },
+    "validation_status": { "enum": ["ok", "warning", "error", "unknown"] },
+    "status_line": { "type": "string", "minLength": 1 },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["object_id", "label", "display", "blocks_path", "alert_level", "metadata"],
+        "properties": {
+          "object_id": { "type": "string", "minLength": 1 },
+          "label": { "type": "string", "minLength": 1 },
+          "display": { "type": "string", "minLength": 1 },
+          "blocks_path": { "type": "boolean" },
+          "alert_level": { "enum": ["normal", "attention"] },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  }
+}

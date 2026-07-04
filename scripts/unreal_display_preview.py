@@ -40,13 +40,18 @@ def build_display_state(
     errors: list[dict[str, Any]],
     environment_review: dict[str, Any],
 ) -> dict[str, Any]:
+    warning_text = [finding_text(finding) for finding in warnings]
+    error_text = [finding_text(finding) for finding in errors]
     return {
+        "schema_version": "0.1.0",
+        "display_mode": "text_debug",
         "session_id": session_id,
         "scenario_id": scenario_id,
         "phase": phase,
         "validation_status": validation_status,
-        "warnings": [finding_text(finding) for finding in warnings],
-        "errors": [finding_text(finding) for finding in errors],
+        "status_line": status_line(phase, validation_status, warning_text, error_text),
+        "warnings": warning_text,
+        "errors": error_text,
         "objects": object_display_rows(environment_review),
     }
 
@@ -61,6 +66,7 @@ def object_display_rows(environment_review: dict[str, Any]) -> list[dict[str, An
                 "label": chair.get("label", "Wooden chair"),
                 "display": "moved aside" if chair.get("moved") else "still in path",
                 "blocks_path": bool(chair.get("blocked_path")),
+                "alert_level": "attention" if chair.get("blocked_path") else "normal",
                 "metadata": {
                     "location": chair.get("location"),
                     "physics_enabled": bool(chair.get("physics_enabled")),
@@ -76,6 +82,7 @@ def object_display_rows(environment_review: dict[str, Any]) -> list[dict[str, An
                 "label": door.get("label", "Entry door"),
                 "display": open_state,
                 "blocks_path": bool(door.get("blocked_path")),
+                "alert_level": "attention" if door.get("blocked_path") else "normal",
                 "metadata": {
                     "locked": bool(door.get("locked")),
                     "door_type": door.get("door_type"),
@@ -91,6 +98,7 @@ def object_display_rows(environment_review: dict[str, Any]) -> list[dict[str, An
                 "label": visibility.get("label", "Smoke/visibility cue"),
                 "display": "checked" if observed else "unchecked",
                 "blocks_path": bool(visibility.get("blocked_path")),
+                "alert_level": "normal" if observed else "attention",
                 "metadata": {
                     "visibility_level": visibility.get("visibility_level"),
                     "physics_enabled": bool(visibility.get("physics_enabled")),
@@ -107,6 +115,7 @@ def render_debug_panel(display_state: dict[str, Any]) -> str:
         f"Scenario: {display_state['scenario_id']}",
         f"Phase: {display_state['phase']}",
         f"Validation: {display_state['validation_status']}",
+        f"Status: {display_state['status_line']}",
         "",
         "Objects:",
     ]
@@ -115,7 +124,10 @@ def render_debug_panel(display_state: dict[str, Any]) -> str:
         lines.append("- no environment objects found")
     for object_row in objects:
         blocking = "blocking path" if object_row["blocks_path"] else "not blocking path"
-        lines.append(f"- {object_row['label']}: {object_row['display']} ({blocking})")
+        lines.append(
+            f"- [{object_row['alert_level']}] "
+            f"{object_row['label']}: {object_row['display']} ({blocking})"
+        )
 
     warnings = display_state.get("warnings") or []
     errors = display_state.get("errors") or []
@@ -132,3 +144,16 @@ def finding_text(finding: dict[str, Any]) -> str:
     code = finding.get("code", "finding")
     message = finding.get("message", "No message")
     return f"{code}: {message}"
+
+
+def status_line(
+    phase: str,
+    validation_status: str,
+    warnings: list[str],
+    errors: list[str],
+) -> str:
+    if errors:
+        return f"{phase} / {validation_status} / {len(errors)} error(s)"
+    if warnings:
+        return f"{phase} / {validation_status} / {len(warnings)} warning(s)"
+    return f"{phase} / {validation_status} / no findings"

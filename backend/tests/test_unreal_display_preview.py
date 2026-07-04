@@ -1,3 +1,8 @@
+import json
+from pathlib import Path
+
+from jsonschema import Draft202012Validator
+
 from scripts.unreal_display_preview import build_display_state, render_debug_panel
 
 
@@ -35,12 +40,16 @@ def test_unreal_display_state_maps_chair_and_door() -> None:
         },
     )
 
+    assert display_state["schema_version"] == "0.1.0"
+    assert display_state["display_mode"] == "text_debug"
+    assert display_state["status_line"] == "room_entered / ok / no findings"
     assert display_state["objects"] == [
         {
             "object_id": "wooden_chair_poc",
             "label": "Wooden chair",
             "display": "moved aside",
             "blocks_path": False,
+            "alert_level": "normal",
             "metadata": {"location": "clear_of_entry_path", "physics_enabled": False},
         },
         {
@@ -48,6 +57,7 @@ def test_unreal_display_state_maps_chair_and_door() -> None:
             "label": "Entry door",
             "display": "open",
             "blocks_path": False,
+            "alert_level": "normal",
             "metadata": {"locked": False, "door_type": "hinged_wooden_door_preview"},
         },
         {
@@ -55,6 +65,7 @@ def test_unreal_display_state_maps_chair_and_door() -> None:
             "label": "Smoke/visibility cue",
             "display": "checked",
             "blocks_path": False,
+            "alert_level": "normal",
             "metadata": {"visibility_level": "checked_low_visibility", "physics_enabled": False},
         },
     ]
@@ -93,9 +104,10 @@ def test_unreal_debug_panel_renders_warnings_and_errors() -> None:
     panel = render_debug_panel(display_state)
 
     assert "Unreal debug display preview" in panel
-    assert "Wooden chair: moved aside (not blocking path)" in panel
-    assert "Entry door: closed (blocking path)" in panel
-    assert "Smoke/visibility cue: unchecked (not blocking path)" in panel
+    assert "Status: scene_assessed / warning / 1 error(s)" in panel
+    assert "[normal] Wooden chair: moved aside (not blocking path)" in panel
+    assert "[attention] Entry door: closed (blocking path)" in panel
+    assert "[attention] Smoke/visibility cue: unchecked (not blocking path)" in panel
     assert "entry_door_still_closed: Open the door before entering." in panel
     assert "entry_prerequisites_missing: Setup flags are incomplete." in panel
     assert "Unreal must not own scenario logic." in panel
@@ -114,3 +126,11 @@ def test_unreal_display_handles_missing_objects() -> None:
 
     assert display_state["objects"] == []
     assert "no environment objects found" in render_debug_panel(display_state)
+
+
+def test_checked_in_display_examples_follow_schema() -> None:
+    schema = json.loads(Path("unreal/contract/debug-display-state.schema.json").read_text(encoding="utf-8"))
+    validator = Draft202012Validator(schema)
+
+    for path in Path("unreal/contract/examples").glob("*display_state*.json"):
+        validator.validate(json.loads(path.read_text(encoding="utf-8")))
