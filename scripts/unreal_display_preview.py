@@ -105,7 +105,41 @@ def object_display_rows(environment_review: dict[str, Any]) -> list[dict[str, An
                 },
             }
         )
+    for object_id, object_state in (environment_review.get("other_environment_objects") or {}).items():
+        rows.append(generic_object_row(object_id, object_state))
     return rows
+
+
+def generic_object_row(object_id: str, object_state: dict[str, Any]) -> dict[str, Any]:
+    display = generic_object_display(object_state)
+    blocks_path = bool(object_state.get("blocked_path"))
+    moved = object_state.get("moved")
+    if moved is False and object_state.get("object_type") in {"obstacle", "wooden_chair"}:
+        blocks_path = True
+    return {
+        "object_id": object_id,
+        "label": object_state.get("label", object_id),
+        "display": display,
+        "blocks_path": blocks_path,
+        "alert_level": "attention" if blocks_path else "normal",
+        "metadata": {
+            "object_type": object_state.get("object_type"),
+            "location": object_state.get("location"),
+            "physics_enabled": bool(object_state.get("physics_enabled")),
+        },
+    }
+
+
+def generic_object_display(object_state: dict[str, Any]) -> str:
+    if object_state.get("open_state"):
+        return str(object_state["open_state"])
+    if object_state.get("moved") is True:
+        return "moved aside"
+    if object_state.get("moved") is False:
+        return "still in path"
+    if object_state.get("blocked_path"):
+        return "blocking path"
+    return str(object_state.get("object_type") or "tracked")
 
 
 def render_debug_panel(display_state: dict[str, Any]) -> str:

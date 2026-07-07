@@ -16,6 +16,15 @@ This repo does not include an Unreal project, scene, gameplay logic, networking 
 
 It is still not a full Unreal project.
 
+The next Unreal step is sample JSON first:
+
+- create a blank Blueprint project
+- read one checked-in display-state JSON file
+- show a text-only debug panel
+- keep all scenario authority in the backend
+
+See [EmergencyTrainingClient/Docs/read-sample-json-debug-panel.md](EmergencyTrainingClient/Docs/read-sample-json-debug-panel.md).
+
 The thin client contract lives here:
 
 - [contract/client-contract.md](contract/client-contract.md)

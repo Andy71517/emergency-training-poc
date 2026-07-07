@@ -22,7 +22,9 @@ The backend remains the source of truth.
 
 - `Config/debug-display-panel-fields.json`: the fields the first text panel should render.
 - `Docs/debug-display-starter.md`: beginner-friendly notes for the first Unreal implementation pass.
+- `Docs/read-sample-json-debug-panel.md`: step-by-step guide for the first Unreal sample-JSON display test.
 - `Data/display_state.sample.json`: local copy of the clean display payload.
 - `Data/warning_display_state.sample.json`: local copy of the warning display payload.
+- `Data/hallway_display_state.sample.json`: local copy of the blocked-exit hallway display payload.
 
 These files are here so the future Unreal work has a tiny target before any scene work starts.

@@ -128,6 +128,50 @@ def test_unreal_display_handles_missing_objects() -> None:
     assert "no environment objects found" in render_debug_panel(display_state)
 
 
+def test_unreal_display_maps_generic_hallway_objects() -> None:
+    display_state = build_display_state(
+        session_id="demo-hallway",
+        scenario_id="blocked_exit_hallway_v0",
+        phase="scene_assessed",
+        validation_status="warning",
+        warnings=[
+            {
+                "code": "environment_not_monitored",
+                "message": "The ongoing hallway environment cue has not been checked before guidance.",
+            }
+        ],
+        errors=[],
+        environment_review={
+            "other_environment_objects": {
+                "collapsed_bookshelf_poc": {
+                    "label": "Collapsed bookshelf",
+                    "object_type": "obstacle",
+                    "location": "clear_of_primary_exit_path",
+                    "blocked_path": False,
+                    "moved": True,
+                    "physics_enabled": False,
+                }
+            }
+        },
+    )
+
+    assert display_state["objects"] == [
+        {
+            "object_id": "collapsed_bookshelf_poc",
+            "label": "Collapsed bookshelf",
+            "display": "moved aside",
+            "blocks_path": False,
+            "alert_level": "normal",
+            "metadata": {
+                "object_type": "obstacle",
+                "location": "clear_of_primary_exit_path",
+                "physics_enabled": False,
+            },
+        }
+    ]
+    assert "[normal] Collapsed bookshelf: moved aside" in render_debug_panel(display_state)
+
+
 def test_checked_in_display_examples_follow_schema() -> None:
     schema = json.loads(Path("unreal/contract/debug-display-state.schema.json").read_text(encoding="utf-8"))
     validator = Draft202012Validator(schema)
@@ -145,6 +189,10 @@ def test_unreal_starter_samples_match_contract_examples() -> None:
         (
             Path("unreal/contract/examples/warning_display_state.example.json"),
             Path("unreal/EmergencyTrainingClient/Data/warning_display_state.sample.json"),
+        ),
+        (
+            Path("unreal/contract/examples/hallway_display_state.example.json"),
+            Path("unreal/EmergencyTrainingClient/Data/hallway_display_state.sample.json"),
         ),
     ]
 

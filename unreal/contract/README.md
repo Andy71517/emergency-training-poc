@@ -19,4 +19,4 @@ The client must not own scenario transitions, validation rules, trainee scoring,
 - `client-state-machine.md`: the smallest useful client-side state machine.
 - `state-display-contract.md`: what the first text-only Unreal debug panel should show.
 - `debug-display-state.schema.json`: JSON schema for the simplified text debug-display state.
-- `examples/`: example JSON messages for review and tests.
+- `examples/`: example JSON messages for review and tests, including smoke-room and blocked-exit hallway display-state samples.

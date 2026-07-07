@@ -1,0 +1,63 @@
+{
+  "schema_version": "0.1.0",
+  "display_mode": "text_debug",
+  "session_id": "demo-hallway",
+  "scenario_id": "blocked_exit_hallway_v0",
+  "phase": "scene_assessed",
+  "validation_status": "warning",
+  "status_line": "scene_assessed / warning / 1 warning(s)",
+  "warnings": [
+    "environment_not_monitored: The ongoing hallway environment cue has not been checked before guidance."
+  ],
+  "errors": [],
+  "objects": [
+    {
+      "object_id": "collapsed_bookshelf_poc",
+      "label": "Collapsed bookshelf",
+      "display": "moved aside",
+      "blocks_path": false,
+      "alert_level": "normal",
+      "metadata": {
+        "object_type": "obstacle",
+        "location": "clear_of_primary_exit_path",
+        "physics_enabled": false
+      }
+    },
+    {
+      "object_id": "hallway_exit_door_poc",
+      "label": "Hallway exit door",
+      "display": "open",
+      "blocks_path": false,
+      "alert_level": "normal",
+      "metadata": {
+        "object_type": "door",
+        "location": "secondary_exit",
+        "physics_enabled": false
+      }
+    },
+    {
+      "object_id": "hallway_haze_cue_poc",
+      "label": "Hallway smoke/haze cue",
+      "display": "checked",
+      "blocks_path": false,
+      "alert_level": "normal",
+      "metadata": {
+        "object_type": "visibility_cue",
+        "location": "hallway_midpoint",
+        "physics_enabled": false
+      }
+    },
+    {
+      "object_id": "environment_monitor_cue",
+      "label": "Ongoing hallway monitor",
+      "display": "unchecked",
+      "blocks_path": false,
+      "alert_level": "attention",
+      "metadata": {
+        "object_type": "review_cue",
+        "location": "hallway",
+        "physics_enabled": false
+      }
+    }
+  ]
+}

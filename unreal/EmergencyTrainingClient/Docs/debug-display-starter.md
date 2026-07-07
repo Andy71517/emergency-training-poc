@@ -49,8 +49,11 @@ For the first pass, Unreal can load one of the local sample files:
 
 - `Data/display_state.sample.json`
 - `Data/warning_display_state.sample.json`
+- `Data/hallway_display_state.sample.json`
 
 Later, Unreal should receive this state through the backend WebSocket contract.
+
+For the first actual Unreal setup, use `read-sample-json-debug-panel.md`.
 
 ## Boundary
 
