@@ -27,6 +27,7 @@ These are the milestones for this repository right now.
 - local demo abuse guardrails
 - lightweight GitHub Actions CI
 - UX docs for Dr. Cameron as first audience
+- Dr. Cameron review rubric and scope-control rubric
 - improved post-scenario review format
 - project presentation package and PDF
 
@@ -36,7 +37,6 @@ These are the milestones for this repository right now.
 - add richer instructor/reviewer examples
 - strengthen the future Unreal text debug contract
 - add clearer message-contract versioning notes
-- add a small evaluation rubric for Dr. Cameron
 - keep scenario logic deterministic and backend-owned
 
 ### Later POC
@@ -120,4 +120,3 @@ If a feature changes scenario truth, validation, or review, build it in the back
 If a feature only displays state or captures input, it can live in a future client layer.
 
 That keeps the system explainable as it grows.
-

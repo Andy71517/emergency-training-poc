@@ -30,6 +30,7 @@ That means the UX should help explain the project as an on-campus job/research-s
 ## Files
 
 - `audience-dr-cameron.md`: how to frame the demo for the first reviewer
+- `dr-cameron-review-rubric.md`: how to review the current POC and its intentional boundaries
 - `trainee-flow.md`: what the trainee experience should become
 - `instructor-reviewer-flow.md`: what the instructor/reviewer should be able to inspect
 - `demo-ux-goals.md`: what the current demo should communicate

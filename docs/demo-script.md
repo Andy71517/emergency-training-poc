@@ -31,3 +31,5 @@ The physics preview is only metadata. It does not generate a mesh, load an Unrea
 Keep the disclaimer visible in any demo: this is illustrative POC behavior, not clinical or operational guidance.
 
 The review summary is the main proof point for Dr. Cameron: it should show that the system can explain what happened, what cues were noticed or missed, and why the backend flagged the run.
+
+After the demo, use `docs/ux/dr-cameron-review-rubric.md` to discuss what the POC proves, what is still rough, and what has been intentionally avoided for now.

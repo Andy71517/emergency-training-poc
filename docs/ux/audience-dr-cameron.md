@@ -30,6 +30,8 @@ The best framing is:
 
 > Here is the foundation I built, here is what it proves, and here is why the next step is safe.
 
+Use `dr-cameron-review-rubric.md` after the demo to make the discussion concrete. It gives a simple way to judge what the POC proves, what is still rough, and what was intentionally avoided.
+
 ## What not to do
 
 Do not pitch this as a finished simulator.
@@ -55,5 +57,4 @@ Use 5 minutes for explanation and 5 minutes for demo.
 4. Point out replay verification.
 5. Point out review summaries.
 6. Point out warnings/errors when cues are ignored.
-7. End with the next step.
-
+7. Use the review rubric to discuss what is proven and what should come next.
