@@ -1,10 +1,10 @@
-# Read a sample JSON debug panel in Unreal
+# Read a sample debug panel in Unreal
 
 This is the first Unreal step.
 
 The goal is boring on purpose:
 
-> Unreal reads a checked-in JSON file and shows the backend-owned state as text.
+> Unreal shows backend-owned state as text.
 
 Do not build a real scene yet.
 
@@ -28,7 +28,21 @@ Unreal only shows the state it receives.
 
 ## Files to start with
 
-Use one of these local sample files:
+Start with the text bridge:
+
+```text
+Data/hallway_debug_panel.sample.txt
+```
+
+That file is generated from backend-shaped JSON. It lets Unreal prove the display path before it has to parse JSON.
+
+Refresh it from the repo root with:
+
+```powershell
+python scripts/write_unreal_debug_text.py
+```
+
+The source JSON files are:
 
 ```text
 Data/display_state.sample.json
@@ -46,6 +60,12 @@ You can preview the same display from Python before touching Unreal:
 
 ```powershell
 python scripts/preview_unreal_display.py --display-state unreal/EmergencyTrainingClient/Data/hallway_display_state.sample.json
+```
+
+And you can write the exact text file Unreal should show:
+
+```powershell
+python scripts/write_unreal_debug_text.py --stdout
 ```
 
 ## Suggested Unreal setup
@@ -98,8 +118,8 @@ One simple way to build this:
 3. Add a large Text widget.
 4. Add a variable named `DebugText`.
 5. Bind the Text widget to `DebugText`.
-6. Load one sample JSON file.
-7. Convert the important fields into one readable string.
+6. Load `Data/hallway_debug_panel.sample.txt`.
+7. Put that file content into one readable string.
 8. Set `DebugText`.
 9. Add the widget to the viewport on Begin Play.
 
@@ -111,7 +131,9 @@ If it looks like a console panel, that is fine.
 
 Do not try to support every future field.
 
-Only parse:
+For the text bridge, Unreal does not need to parse these fields yet. It only displays the finished text.
+
+When Unreal is ready to parse JSON directly, only parse:
 
 - `session_id`
 - `scenario_id`
@@ -132,7 +154,7 @@ That is enough for the first proof.
 The Unreal debug display is good enough when:
 
 - it opens without needing the backend
-- it reads one checked-in sample JSON file
+- it reads the checked-in text bridge file
 - it shows session/scenario/phase/status text
 - it lists warnings and errors
 - it lists object rows
@@ -143,7 +165,15 @@ The Unreal debug display is good enough when:
 
 ## After this works
 
-Only after the sample JSON display works, the next step is live backend connection:
+Only after the text bridge works, the next step is direct JSON parsing:
+
+```text
+display-state JSON
+  -> Unreal parser
+  -> same text panel
+```
+
+After that works, the next step is live backend connection:
 
 ```text
 backend WebSocket

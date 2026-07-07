@@ -4,6 +4,7 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 
 from scripts.unreal_display_preview import build_display_state, render_debug_panel
+from scripts.write_unreal_debug_text import debug_text_from_display_state, write_debug_text
 
 
 def test_unreal_display_state_maps_chair_and_door() -> None:
@@ -200,3 +201,24 @@ def test_unreal_starter_samples_match_contract_examples() -> None:
         assert json.loads(starter_sample.read_text(encoding="utf-8")) == json.loads(
             source.read_text(encoding="utf-8")
         )
+
+
+def test_unreal_debug_text_bridge_writes_sample_text(tmp_path: Path) -> None:
+    source = Path("unreal/EmergencyTrainingClient/Data/hallway_display_state.sample.json")
+    output = tmp_path / "hallway_debug_panel.sample.txt"
+
+    debug_text = write_debug_text(source, output)
+
+    assert output.read_text(encoding="utf-8") == debug_text + "\n"
+    assert "Session: demo-hallway" in debug_text
+    assert "[attention] Ongoing hallway monitor: unchecked" in debug_text
+    assert "Unreal must not own scenario logic." in debug_text
+
+
+def test_checked_in_unreal_debug_text_matches_json_bridge() -> None:
+    source = Path("unreal/EmergencyTrainingClient/Data/hallway_display_state.sample.json")
+    checked_in_text = Path("unreal/EmergencyTrainingClient/Data/hallway_debug_panel.sample.txt")
+
+    assert checked_in_text.read_text(encoding="utf-8").strip() == debug_text_from_display_state(
+        source
+    )

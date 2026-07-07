@@ -2,7 +2,7 @@
 
 This folder is reserved for the future Unreal client.
 
-For now, it contains only a tiny debug-display starter scaffold. It is not a real Unreal project yet.
+For now, it contains only a tiny debug-display starter scaffold. It is not a full Unreal project yet.
 
 Do not add a full scene, assets, gameplay logic, physics, sensing, projection mapping, or generated content here yet.
 
@@ -10,11 +10,12 @@ Do not add a full scene, assets, gameplay logic, physics, sensing, projection ma
 
 The first Unreal goal should be boring on purpose:
 
-1. Load a debug-display JSON payload.
-2. Show it as text.
-3. Highlight rows with `alert_level: attention`.
-4. Do not change scenario state locally.
-5. Do not simulate physics or load meshes.
+1. Show a hardcoded debug text panel.
+2. Load a generated `.txt` file that was made from backend-shaped JSON.
+3. Later, parse the JSON directly.
+4. Highlight rows with `alert_level: attention`.
+5. Do not change scenario state locally.
+6. Do not simulate physics or load meshes.
 
 The backend remains the source of truth.
 
@@ -26,5 +27,12 @@ The backend remains the source of truth.
 - `Data/display_state.sample.json`: local copy of the clean display payload.
 - `Data/warning_display_state.sample.json`: local copy of the warning display payload.
 - `Data/hallway_display_state.sample.json`: local copy of the blocked-exit hallway display payload.
+- `Data/hallway_debug_panel.sample.txt`: simple text generated from the hallway JSON sample.
 
 These files are here so the future Unreal work has a tiny target before any scene work starts.
+
+To refresh the sample text from JSON:
+
+```powershell
+python scripts/write_unreal_debug_text.py
+```

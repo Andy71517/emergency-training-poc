@@ -8,11 +8,26 @@ These scripts are small local helpers for running and checking the POC.
 - `run_unreal_contract_harness.py`: tests the future Unreal WebSocket contract without rendering or gameplay.
 - `preview_unreal_display.py LOG`: prints the future Unreal text-only debug display from a session log. Add `--json` to print the simplified display-state contract.
 - `preview_unreal_display.py --display-state PATH`: previews a checked-in Unreal display-state sample JSON before building it in Unreal.
+- `write_unreal_debug_text.py`: turns a display-state JSON file into a simple `.txt` file that Unreal can show before it parses JSON directly.
 - `replay_session.py LOG`: replays logged actions and checks the recorded state snapshots.
 - `summarize_log.py LOG`: prints a short JSON review summary.
 - `build_doc_pdfs.py`: builds the small PDF submission packet under `docs/submission-packet/`.
 
 Start with `run_local_demo.py` when you want to show the whole loop. Use the other scripts when you want to inspect one piece at a time.
+
+For the first Unreal debug panel, the easiest path is:
+
+```powershell
+python scripts/write_unreal_debug_text.py
+```
+
+That refreshes:
+
+```text
+unreal/EmergencyTrainingClient/Data/hallway_debug_panel.sample.txt
+```
+
+Unreal can read that text file before it learns how to parse the full JSON contract.
 
 When a packet-facing Markdown doc changes, run:
 

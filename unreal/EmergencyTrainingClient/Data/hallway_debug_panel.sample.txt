@@ -1,0 +1,19 @@
+Unreal debug display preview
+Session: demo-hallway
+Scenario: blocked_exit_hallway_v0
+Phase: scene_assessed
+Validation: warning
+Status: scene_assessed / warning / 1 warning(s)
+
+Objects:
+- [normal] Collapsed bookshelf: moved aside (not blocking path)
+- [normal] Hallway exit door: open (not blocking path)
+- [normal] Hallway smoke/haze cue: checked (not blocking path)
+- [attention] Ongoing hallway monitor: unchecked (not blocking path)
+
+Warnings: 1
+- environment_not_monitored: The ongoing hallway environment cue has not been checked before guidance.
+
+Errors: 0
+
+Text-only preview. Unreal must not own scenario logic.

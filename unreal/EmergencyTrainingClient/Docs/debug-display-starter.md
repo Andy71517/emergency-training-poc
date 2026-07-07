@@ -4,6 +4,18 @@ This is the first tiny Unreal-facing implementation note.
 
 The goal is not to build the simulator yet. The goal is only to prove that Unreal can display backend-owned state.
 
+The easiest path is text first, JSON second.
+
+That means:
+
+```text
+backend-shaped JSON
+-> generated debug text
+-> Unreal text panel
+```
+
+This avoids getting stuck on JSON parsing before the display idea is proven.
+
 ## What to build first in Unreal
 
 Build a plain text debug panel that can show:
@@ -45,13 +57,23 @@ Do not build:
 
 ## Data source
 
-For the first pass, Unreal can load one of the local sample files:
+For the first pass, Unreal can load this simple text file:
+
+- `Data/hallway_debug_panel.sample.txt`
+
+That text file is generated from:
 
 - `Data/display_state.sample.json`
 - `Data/warning_display_state.sample.json`
 - `Data/hallway_display_state.sample.json`
 
-Later, Unreal should receive this state through the backend WebSocket contract.
+To refresh the text file:
+
+```powershell
+python scripts/write_unreal_debug_text.py
+```
+
+Later, Unreal can parse the JSON directly. After that, Unreal should receive this state through the backend WebSocket contract.
 
 For the first actual Unreal setup, use `read-sample-json-debug-panel.md`.
 
