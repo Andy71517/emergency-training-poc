@@ -10,4 +10,6 @@ Generated candidates and reviewed assets must stay separate. Before a future ass
 
 Generated assets should also pass the manual Blender review checklist in `assets/metadata/blender-review-checklist.md` before they are promoted.
 
+Use `assets/metadata/asset-review-workflow.md` for the future review flow and `assets/metadata/asset-review-template.md` for future candidate metadata.
+
 Visual assets should never define scenario rules. The backend owns scenario logic.

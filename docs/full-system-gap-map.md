@@ -36,7 +36,7 @@ This is useful for Dr. Cameron because it shows the project is moving toward the
 | Hub-and-spoke deployment | Documented only as future architecture. | No cloud, regional hub, spoke sites, caching, failover, or distributed sync. | Stay local until auth, logging, state contracts, and deployment needs are clearer. |
 | Centralized instructor support | Review docs exist, but no instructor dashboard. | No live instructor UI, session controls, multi-site supervision, or role model. | Start with an instructor/reviewer checklist and later a simple review dashboard concept. |
 | Accessibility and tiered deployment | Mentioned in docs only. | No low-cost deployment profiles or hardware tiers. | Draft high-fidelity, medium, and low-cost configuration profiles later. |
-| Generated assets | Placeholder pipeline only. | No Hunyuan 3D outputs, Blender review, licensing review, or Unreal import. | Write the Blender/manual review checklist before generating assets. |
+| Generated assets | Placeholder pipeline plus Blender/manual review workflow. | No Hunyuan 3D outputs, reviewed meshes, licensing review on a real asset, or Unreal import. | Generate or source one tiny candidate only after the checklist is accepted. |
 | Real physics | Metadata preview only. | No gravity, collision, mass, tipping, force, or physics engine behavior. | Define object metadata needs, then test one reviewed object in Unreal later. |
 | Production security | Small local POC guardrails only. | No auth, TLS, user roles, real rate limiting, cloud hardening, or data governance. | Keep local security boundaries documented; add production security only when deployment becomes real. |
 
@@ -92,7 +92,7 @@ The next steps should stay small:
 1. Add this gap map. Done.
 2. Add a second deterministic scenario. Done.
 3. Build a text-only Unreal debug display.
-4. Add the Blender/manual asset review checklist.
+4. Add the Blender/manual asset review checklist. Done.
 5. Only then begin tiny experiments with generated assets or richer Unreal display.
 
 This order keeps the project understandable.

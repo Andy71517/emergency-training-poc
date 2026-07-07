@@ -131,6 +131,6 @@ Start with [docs/security/README.md](docs/security/README.md) for the current tr
 - `scripts/`: local demo, replay, summary, and contract helpers
 - `logs/`: local JSONL session logs, ignored by Git
 - `unreal/`: future Unreal client contract and placeholder folder
-- `assets/`: placeholder folders for a future reviewed asset pipeline
+- `assets/`: placeholder folders and review docs for a future generated/reviewed asset pipeline
 
 Start with [docs/full-project-vision.md](docs/full-project-vision.md), [docs/overview.md](docs/overview.md), [docs/roadmap.md](docs/roadmap.md), and [docs/full-system-gap-map.md](docs/full-system-gap-map.md).

@@ -23,4 +23,12 @@ A future asset flow should include:
 
 A generated file is not approved just because it exists. Scenario correctness should never depend on visual details from generated assets.
 
-Use [environment-object-contract.md](environment-object-contract.md) for the backend object fields, and use the Blender checklist in `assets/metadata/blender-review-checklist.md` before any generated object is promoted.
+Use [environment-object-contract.md](environment-object-contract.md) for the backend object fields.
+
+Use these asset docs before any generated object is promoted:
+
+- `assets/metadata/asset-review-workflow.md`
+- `assets/metadata/asset-review-template.md`
+- `assets/metadata/blender-review-checklist.md`
+
+The checklist exists now so the project is ready for a future asset experiment. It does not mean any generated asset has been created, reviewed, or approved.
