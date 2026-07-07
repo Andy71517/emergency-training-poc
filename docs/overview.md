@@ -21,3 +21,5 @@ The larger project eventually points toward AI adaptation, immersive deployment,
 Those are future goals.
 
 This repo currently proves the smallest backend loop that those future layers will need.
+
+Use [full-system-gap-map.md](full-system-gap-map.md) to see how the current POC maps back to the full project overview and what is still missing.

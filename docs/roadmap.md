@@ -6,6 +6,8 @@ That separation matters.
 
 The full project vision is large. The current repo should grow toward it carefully, one trusted layer at a time.
 
+For a direct comparison between the original full-system goals, the current repo, the remaining gaps, and the safest next experiments, see [full-system-gap-map.md](full-system-gap-map.md).
+
 ## Track 1: Current POC milestones
 
 These are the milestones for this repository right now.
@@ -28,6 +30,8 @@ These are the milestones for this repository right now.
 - lightweight GitHub Actions CI
 - UX docs for Dr. Cameron as first audience
 - Dr. Cameron review rubric and scope-control rubric
+- full-system gap map
+- second deterministic toy scenario
 - improved post-scenario review format
 - project presentation package and PDF
 
@@ -41,7 +45,6 @@ These are the milestones for this repository right now.
 
 ### Later POC
 
-- add another deterministic toy scenario
 - add more environment objects with obvious state
 - add richer replay comparison reports
 - add configurable local scenarios

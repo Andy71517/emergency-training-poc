@@ -22,7 +22,7 @@ manual/stubbed trainee action
 
 Right now this uses one tiny scenario, a FastAPI WebSocket, deterministic Python code, and local JSONL logs. Future AI pieces might help create or adapt scenarios later, but this first version does not need real AI calls.
 
-For the full north-star project vision, see [docs/full-project-vision.md](docs/full-project-vision.md). For the split between current POC work and future full-system work, see [docs/roadmap.md](docs/roadmap.md).
+For the full north-star project vision, see [docs/full-project-vision.md](docs/full-project-vision.md). For the split between current POC work and future full-system work, see [docs/roadmap.md](docs/roadmap.md). For a direct comparison between the original full-system goals and the current repo, see [docs/full-system-gap-map.md](docs/full-system-gap-map.md).
 
 ## Setup and run
 
@@ -43,7 +43,7 @@ python scripts/run_local_demo.py
 
 It starts the backend if needed, runs demo sessions, replays the logs, prints review summaries, and shows the wooden-chair environment preview with physics disabled and enabled.
 
-The toy smoke-room scenario now tracks a few simple environment cues: room scan, door check, chair/path blockage, door open/closed state, communication, smoke/visibility, ongoing environment monitoring, exit path status, and occupant search. The happy path records those cues in order before removing the occupant. If the trainee skips a cue, the backend returns a POC warning or error and the review explains what happened in plain English.
+The repo now has two deterministic toy scenarios: a smoke-room scenario and a blocked-exit hallway scenario. They track simple environment cues like scans, doors, obstacles, communication, visibility, environment monitoring, exit path status, and occupant handling. If the trainee skips a cue, the backend returns a POC warning or error and the review explains what happened in plain English.
 
 In another terminal, run the fake trainee demo:
 
@@ -133,4 +133,4 @@ Start with [docs/security/README.md](docs/security/README.md) for the current tr
 - `unreal/`: future Unreal client contract and placeholder folder
 - `assets/`: placeholder folders for a future reviewed asset pipeline
 
-Start with [docs/full-project-vision.md](docs/full-project-vision.md), [docs/overview.md](docs/overview.md), and [docs/roadmap.md](docs/roadmap.md).
+Start with [docs/full-project-vision.md](docs/full-project-vision.md), [docs/overview.md](docs/overview.md), [docs/roadmap.md](docs/roadmap.md), and [docs/full-system-gap-map.md](docs/full-system-gap-map.md).

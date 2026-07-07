@@ -1,0 +1,295 @@
+scenario_id: blocked_exit_hallway_v0
+title: "POC: Blocked Exit Hallway"
+version: "0.1.0"
+disclaimer: >-
+  Toy POC scenario only. Not medical guidance, firefighter/EMT protocol, or operational authority.
+
+initial_state:
+  phase: awaiting_assessment
+  scene_assessed: false
+  hallway_scanned: false
+  ppe_confirmed: false
+  backup_requested: false
+  status_communicated: false
+  visibility_checked: false
+  secondary_exit_identified: false
+  primary_exit_blocked: true
+  exit_door_checked: false
+  exit_door_open: false
+  exit_route_selected: false
+  environment_monitored: false
+  occupant_guided: false
+  scenario_outcome: in_progress
+  environment:
+    smoke_density: light_haze_preview
+    visibility_level: limited_preview
+    exit_path_clear: false
+    notes: "Deterministic POC hallway cues only. These are not sensor readings or operational guidance."
+    cues:
+      hallway_scan:
+        label: Hallway scan
+        observed: false
+        note: "POC cue for noticing hallway conditions before moving toward an exit."
+      visibility_check:
+        label: Visibility check
+        observed: false
+        note: "POC cue only. This does not model real smoke behavior."
+      secondary_exit:
+        label: Secondary exit
+        observed: false
+        note: "POC cue for identifying another route when the primary path is blocked."
+      status_communication:
+        label: Status communication
+        observed: false
+        note: "POC cue for recording whether status was communicated."
+      environment_monitor:
+        label: Ongoing hallway monitor
+        observed: false
+        note: "POC cue for checking hallway conditions before guiding the occupant."
+    objects:
+      collapsed_bookshelf_poc:
+        object_type: obstacle
+        label: Collapsed bookshelf
+        location: primary_exit_path
+        blocks_path: true
+        moved: false
+        collision_enabled: true
+        collision_shape: box_preview
+        mass_kg_estimate: 45
+        physics_enabled: false
+        physics_note: "Metadata only. No real gravity, collision, tipping, or force simulation."
+      hallway_exit_door_poc:
+        object_type: door
+        label: Hallway exit door
+        location: secondary_exit
+        blocks_path: true
+        open_state: closed
+        locked: false
+        door_type: hinged_metal_door_preview
+        hinge_side: right
+        swing_direction: outward
+        collision_enabled: true
+        collision_shape: box_preview
+        mass_kg_estimate: 55
+        physics_enabled: false
+        physics_note: "Metadata only. No real door physics, locks, forces, or collision simulation."
+      hallway_haze_cue_poc:
+        object_type: visibility_cue
+        label: Hallway smoke/haze cue
+        location: hallway_midpoint
+        blocks_path: false
+        observed: false
+        visibility_level: limited
+        cue_note: "POC cue only. Checking visibility does not represent real smoke behavior or operational guidance."
+        physics_enabled: false
+        physics_note: "Metadata only. No real smoke simulation, lighting model, air movement, or particle physics."
+
+allowed_actions:
+  - assess_scene
+  - scan_hallway
+  - confirm_ppe
+  - request_backup
+  - communicate_status
+  - check_visibility
+  - identify_secondary_exit
+  - move_obstacle
+  - check_exit_door
+  - open_exit_door
+  - monitor_environment
+  - guide_occupant_to_exit
+  - stop_scenario
+
+transition_rules:
+  - id: assess-scene
+    when:
+      phase: awaiting_assessment
+      action_type: assess_scene
+    set:
+      phase: scene_assessed
+      scene_assessed: true
+
+  - id: scan-hallway
+    when:
+      scene_assessed: true
+      hallway_scanned: false
+      action_type: scan_hallway
+    set:
+      hallway_scanned: true
+      environment.cues.hallway_scan.observed: true
+      environment.smoke_density: light_haze_preview_observed
+
+  - id: confirm-ppe
+    when:
+      scene_assessed: true
+      ppe_confirmed: false
+      action_type: confirm_ppe
+    set:
+      ppe_confirmed: true
+
+  - id: request-backup
+    when:
+      scene_assessed: true
+      backup_requested: false
+      action_type: request_backup
+    set:
+      backup_requested: true
+
+  - id: communicate-status
+    when:
+      scene_assessed: true
+      status_communicated: false
+      action_type: communicate_status
+    set:
+      status_communicated: true
+      environment.cues.status_communication.observed: true
+
+  - id: check-visibility
+    when:
+      scene_assessed: true
+      hallway_scanned: true
+      visibility_checked: false
+      action_type: check_visibility
+    set:
+      visibility_checked: true
+      environment.cues.visibility_check.observed: true
+      environment.objects.hallway_haze_cue_poc.observed: true
+      environment.objects.hallway_haze_cue_poc.visibility_level: checked_limited_visibility
+      environment.visibility_level: checked_limited_visibility
+
+  - id: identify-secondary-exit
+    when:
+      scene_assessed: true
+      hallway_scanned: true
+      secondary_exit_identified: false
+      action_type: identify_secondary_exit
+    set:
+      secondary_exit_identified: true
+      environment.cues.secondary_exit.observed: true
+
+  - id: move-collapsed-bookshelf
+    when:
+      scene_assessed: true
+      hallway_scanned: true
+      action_type: move_obstacle
+      environment.objects.collapsed_bookshelf_poc.blocks_path: true
+    set:
+      primary_exit_blocked: false
+      environment.exit_path_clear: false
+      environment.objects.collapsed_bookshelf_poc.blocks_path: false
+      environment.objects.collapsed_bookshelf_poc.moved: true
+      environment.objects.collapsed_bookshelf_poc.location: clear_of_primary_exit_path
+
+  - id: check-exit-door
+    when:
+      scene_assessed: true
+      hallway_scanned: true
+      exit_door_checked: false
+      action_type: check_exit_door
+    set:
+      exit_door_checked: true
+
+  - id: open-exit-door
+    when:
+      scene_assessed: true
+      hallway_scanned: true
+      exit_door_checked: true
+      exit_door_open: false
+      action_type: open_exit_door
+    set:
+      exit_door_open: true
+      exit_route_selected: true
+      environment.exit_path_clear: true
+      environment.objects.hallway_exit_door_poc.blocks_path: false
+      environment.objects.hallway_exit_door_poc.open_state: open
+
+  - id: monitor-environment
+    when:
+      scene_assessed: true
+      hallway_scanned: true
+      environment_monitored: false
+      action_type: monitor_environment
+    set:
+      environment_monitored: true
+      environment.cues.environment_monitor.observed: true
+
+  - id: guide-occupant-to-exit
+    when:
+      scene_assessed: true
+      hallway_scanned: true
+      ppe_confirmed: true
+      backup_requested: true
+      status_communicated: true
+      visibility_checked: true
+      secondary_exit_identified: true
+      primary_exit_blocked: false
+      exit_door_checked: true
+      exit_door_open: true
+      environment_monitored: true
+      action_type: guide_occupant_to_exit
+    set:
+      phase: occupant_exited
+      occupant_guided: true
+      scenario_outcome: completed
+
+  - id: stop-scenario
+    when:
+      action_type: stop_scenario
+    set:
+      phase: stopped
+      scenario_outcome: stopped
+
+validation_hints:
+  - rule_id: scene-assessment-first
+    description: "Warn when a setup or hallway action happens before the scene has been assessed."
+  - rule_id: hallway-scan-before-environment-work
+    description: "Warn when hallway/object/exit actions happen before the hallway scan cue is recorded."
+  - rule_id: guide-prerequisites
+    description: "Block occupant guidance until the POC setup flags are set."
+  - rule_id: exit-door-check-before-open
+    description: "Warn when the exit door is opened before its POC check cue is recorded."
+  - rule_id: exit-route-cues-before-guidance
+    description: "Warn when the occupant is guided before exit route cues are resolved."
+  - rule_id: environment-monitor-before-guidance
+    description: "Warn when the occupant is guided before the hallway environment monitor cue is recorded."
+
+end_conditions:
+  - state_equals:
+      scenario_outcome: completed
+    label: completed
+  - state_equals:
+      scenario_outcome: stopped
+    label: stopped
+
+expected_happy_path:
+  - assess_scene
+  - scan_hallway
+  - confirm_ppe
+  - request_backup
+  - communicate_status
+  - check_visibility
+  - identify_secondary_exit
+  - move_obstacle
+  - check_exit_door
+  - open_exit_door
+  - monitor_environment
+  - guide_occupant_to_exit
+
+possible_unsafe_or_warning_paths:
+  - actions: [guide_occupant_to_exit]
+    expected_validation: error
+    reason: "The required POC setup flags have not been set."
+  - actions: [assess_scene, move_obstacle]
+    expected_validation: warning
+    reason: "The hallway scan cue was skipped before moving an environment object."
+  - actions: [assess_scene, scan_hallway, open_exit_door]
+    expected_validation: warning
+    reason: "The exit door check cue was skipped before opening the door."
+  - actions: [assess_scene, scan_hallway, confirm_ppe, request_backup, move_obstacle, check_exit_door, open_exit_door, check_visibility, identify_secondary_exit, monitor_environment, guide_occupant_to_exit]
+    expected_validation: warning
+    reason: "The communication cue has not been recorded."
+  - actions: [assess_scene, scan_hallway, confirm_ppe, request_backup, communicate_status, check_visibility, identify_secondary_exit, check_exit_door, open_exit_door, monitor_environment, guide_occupant_to_exit]
+    expected_validation: warning
+    reason: "The primary exit obstacle has not been cleared."
+  - actions: [assess_scene, scan_hallway, confirm_ppe, request_backup, communicate_status, check_visibility, identify_secondary_exit, move_obstacle, check_exit_door, open_exit_door, guide_occupant_to_exit]
+    expected_validation: warning
+    reason: "The hallway environment monitor cue has not been recorded."

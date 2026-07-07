@@ -6,6 +6,8 @@ The full project is bigger than the current POC.
 
 The current repo is the first small foundation step toward that larger system.
 
+For a side-by-side map of full-system goals, current repo status, open gaps, and safe next experiments, see [full-system-gap-map.md](full-system-gap-map.md).
+
 ## North-star goal
 
 The long-term goal is an AI-driven, real-time adaptive emergency-response training platform for firefighters and EMTs.
@@ -153,4 +155,3 @@ Do not describe the current repo as having:
 - cloud deployment
 
 The current POC is valuable because it is smaller, testable, replayable, and honest.
-
