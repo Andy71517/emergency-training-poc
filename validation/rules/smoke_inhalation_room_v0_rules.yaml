@@ -11,17 +11,57 @@ rules:
     result:
       code: unknown_action
       message: "This action name is not part of the POC scenario."
+      instructor_note: "For the demo, this means the backend rejected an action outside the agreed message contract."
       blocks_transition: true
 
   - id: scene-assessment-first
     severity: warning
     when:
       state.scene_assessed: false
-      action_type_in: [confirm_ppe, request_backup, move_obstacle, open_door, check_visibility]
+      action_type_in:
+        - scan_room
+        - check_door
+        - confirm_ppe
+        - request_backup
+        - communicate_status
+        - move_obstacle
+        - open_door
+        - check_visibility
+        - monitor_environment
+        - enter_room
+        - locate_occupant
+        - remove_occupant
+        - retreat_and_reassess
     result:
       code: assessment_not_recorded
       message: "Scene assessment has not been recorded yet."
+      instructor_note: "This is a POC reminder that the trainee should first record awareness of the scene before the backend accepts setup or entry actions."
       blocks_transition: true
+
+  - id: room-scan-before-object-work
+    severity: warning
+    when:
+      state.scene_assessed: true
+      state.room_scanned: false
+      action_type_in: [move_obstacle, open_door, check_visibility, monitor_environment, enter_room]
+    result:
+      code: room_scan_not_recorded
+      message: "The room scan cue has not been recorded before acting on the environment."
+      instructor_note: "This helps the review show whether the trainee noticed the room before touching objects or moving toward entry."
+      blocks_transition: true
+
+  - id: check-door-before-opening
+    severity: warning
+    when:
+      action_type: open_door
+      state.scene_assessed: true
+      state.room_scanned: true
+      state.door_checked: false
+    result:
+      code: door_check_not_recorded
+      message: "The door was opened before the POC door check cue was recorded."
+      instructor_note: "This is not a real entry tactic. It only shows that the backend can notice a skipped door-condition cue."
+      blocks_transition: false
 
   - id: entry-prerequisites
     severity: error
@@ -33,6 +73,22 @@ rules:
     result:
       code: entry_prerequisites_missing
       message: "The POC setup flags required before room entry are incomplete."
+      instructor_note: "The backend blocked entry because one or more basic setup flags were still false in the toy scenario state."
+      blocks_transition: true
+
+  - id: communication-before-entry
+    severity: warning
+    when:
+      action_type: enter_room
+      state.scene_assessed: true
+      state.room_scanned: true
+      state.ppe_confirmed: true
+      state.backup_requested: true
+      state.status_communicated: false
+    result:
+      code: status_not_communicated
+      message: "The status communication cue has not been recorded before entry."
+      instructor_note: "This gives the post-scenario review a clear place to discuss communication as a tracked training cue."
       blocks_transition: true
 
   - id: environmental-cue-not-cleared
@@ -40,12 +96,15 @@ rules:
     when:
       action_type: enter_room
       state.scene_assessed: true
+      state.room_scanned: true
       state.ppe_confirmed: true
       state.backup_requested: true
+      state.status_communicated: true
       state.environment.objects.wooden_chair_poc.blocks_path: true
     result:
       code: environmental_cue_not_cleared
       message: "The wooden chair still blocks the entry path. Move the obstacle before entering."
+      instructor_note: "The review should show that an environmental object was noticed but not cleared before entry was attempted."
       blocks_transition: true
 
   - id: entry-door-still-closed
@@ -53,13 +112,16 @@ rules:
     when:
       action_type: enter_room
       state.scene_assessed: true
+      state.room_scanned: true
       state.ppe_confirmed: true
       state.backup_requested: true
+      state.status_communicated: true
       state.environment.objects.wooden_chair_poc.blocks_path: false
       state.environment.objects.entry_door_poc.open_state: closed
     result:
       code: entry_door_still_closed
       message: "The entry door is still closed. Open the door before entering."
+      instructor_note: "Door state is backend metadata in this slice, so this warning is about state tracking, not real door tactics."
       blocks_transition: true
 
   - id: visibility-cue-not-checked
@@ -67,22 +129,45 @@ rules:
     when:
       action_type: enter_room
       state.scene_assessed: true
+      state.room_scanned: true
       state.ppe_confirmed: true
       state.backup_requested: true
+      state.status_communicated: true
       state.environment.objects.wooden_chair_poc.blocks_path: false
       state.environment.objects.entry_door_poc.open_state: open
       state.environment.objects.smoke_visibility_cue_poc.observed: false
     result:
       code: visibility_cue_not_checked
       message: "The smoke/visibility cue has not been checked in this POC scenario."
+      instructor_note: "This warning exists so the review does not ignore environmental cues like smoke and visibility."
+      blocks_transition: true
+
+  - id: environment-monitor-before-entry
+    severity: warning
+    when:
+      action_type: enter_room
+      state.scene_assessed: true
+      state.room_scanned: true
+      state.ppe_confirmed: true
+      state.backup_requested: true
+      state.status_communicated: true
+      state.environment.objects.wooden_chair_poc.blocks_path: false
+      state.environment.objects.entry_door_poc.open_state: open
+      state.environment.objects.smoke_visibility_cue_poc.observed: true
+      state.environment_monitored: false
+    result:
+      code: environment_not_monitored
+      message: "The ongoing environment cue has not been checked before entry."
+      instructor_note: "This keeps changing environmental cues visible in the review without pretending to simulate smoke, heat, or sensors."
       blocks_transition: true
 
   - id: removal-requires-entry
     severity: error
     when:
       action_type: remove_occupant
-      state.phase_not: room_entered
+      state.occupant_located: false
     result:
-      code: room_not_entered
-      message: "The scenario has not recorded room entry yet."
+      code: occupant_not_located
+      message: "The POC occupant search cue has not been recorded yet."
+      instructor_note: "The backend requires locate_occupant before remove_occupant so the review can explain the search step."
       blocks_transition: true

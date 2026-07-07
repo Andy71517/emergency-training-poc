@@ -39,6 +39,7 @@ class ScenarioValidator:
                     code=rule.code,
                     message=rule.message,
                     rule_id=rule.rule_id,
+                    instructor_note=rule.instructor_note,
                 )
                 (errors if rule.severity == "error" else warnings).append(finding)
                 applied.append(rule.rule_id)

@@ -8,6 +8,7 @@ It does a small set of things on purpose:
 - `/ws/sessions/{session_id}` starts a session and receives ordered trainee actions.
 - The session manager applies scenario transitions, runs POC rule checks, sends state updates, and writes JSONL logs.
 - Replay and summary scripts read the same logs later.
+- The current smoke-room scenario tracks simple environment cues like room scan, door check, communication, visibility, environment monitoring, exit path status, and occupant search.
 
 ## Run it locally
 

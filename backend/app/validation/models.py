@@ -12,6 +12,7 @@ class ValidationFinding(BaseModel):
     code: str
     message: str
     rule_id: str | None = None
+    instructor_note: str | None = None
 
 
 class ValidationResult(BaseModel):

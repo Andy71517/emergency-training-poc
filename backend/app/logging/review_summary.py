@@ -92,11 +92,27 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
 
 
 def environment_review(state: dict[str, Any]) -> dict[str, Any]:
-    objects = state.get("environment", {}).get("objects", {})
+    environment = state.get("environment", {})
+    objects = environment.get("objects", {})
     chair = objects.get("wooden_chair_poc", {})
     door = objects.get("entry_door_poc", {})
     visibility = objects.get("smoke_visibility_cue_poc", {})
-    review: dict[str, Any] = {}
+    review: dict[str, Any] = {
+        "room_cues": {
+            "room_scanned": bool(state.get("room_scanned")),
+            "door_checked": bool(state.get("door_checked")),
+            "status_communicated": bool(state.get("status_communicated")),
+            "environment_monitored": bool(state.get("environment_monitored")),
+            "occupant_visible": bool(state.get("occupant_visible")),
+            "occupant_located": bool(state.get("occupant_located")),
+            "exit_path_clear": bool(state.get("exit_path_clear")),
+            "smoke_density": environment.get("smoke_density"),
+            "visibility_level": environment.get("visibility_level"),
+            "room_temperature": environment.get("room_temperature"),
+            "air_quality_warning": environment.get("air_quality_warning"),
+            "note": environment.get("notes"),
+        }
+    }
     if chair:
         review["wooden_chair_poc"] = {
             "label": chair.get("label", "Wooden chair"),
@@ -187,6 +203,15 @@ def key_observations(
         observations.append(
             "The smoke/visibility cue was "
             + ("checked before the final state." if visibility.get("observed") else "still unchecked at the end.")
+        )
+    room_cues = environment.get("room_cues")
+    if room_cues:
+        observations.append(
+            "The room-level cues show "
+            f"scan={yes_no(bool(room_cues.get('room_scanned')))}, "
+            f"communication={yes_no(bool(room_cues.get('status_communicated')))}, "
+            f"monitoring={yes_no(bool(room_cues.get('environment_monitored')))}, "
+            f"occupant located={yes_no(bool(room_cues.get('occupant_located')))}."
         )
     return observations
 
@@ -283,10 +308,10 @@ def format_review_summary(
         )
 
     lines.extend(["", "Environment cues:", *environment_lines(summary.get("environment_review") or {})])
-    lines.extend(["", f"Warnings ({len(warnings)}):"])
-    lines.extend([f"  - {finding_text(finding)}" for finding in warnings] or ["  - none"])
-    lines.extend(["", f"Errors ({len(errors)}):"])
-    lines.extend([f"  - {finding_text(finding)}" for finding in errors] or ["  - none"])
+    lines.extend(["", f"Warning findings ({len(warnings)}):"])
+    lines.extend(grouped_finding_lines(warnings) or ["  - none"])
+    lines.extend(["", f"Error findings ({len(errors)}):"])
+    lines.extend(grouped_finding_lines(errors) or ["  - none"])
     lines.extend(["", "Key observations:"])
     lines.extend([f"  - {item}" for item in summary.get("key_observations", [])])
     lines.extend(["", "Reviewer takeaways:"])
@@ -295,10 +320,27 @@ def format_review_summary(
 
 
 def environment_lines(environment: dict[str, Any]) -> list[str]:
+    room_cues = environment.get("room_cues")
     chair = environment.get("wooden_chair_poc")
     door = environment.get("entry_door_poc")
     visibility = environment.get("smoke_visibility_cue_poc")
     lines: list[str] = []
+    if room_cues:
+        lines.extend(
+            [
+                "  - Room cues:",
+                f"    - room scanned: {yes_no(bool(room_cues.get('room_scanned')))}",
+                f"    - door checked: {yes_no(bool(room_cues.get('door_checked')))}",
+                f"    - status communicated: {yes_no(bool(room_cues.get('status_communicated')))}",
+                f"    - environment monitored: {yes_no(bool(room_cues.get('environment_monitored')))}",
+                f"    - exit path clear: {yes_no(bool(room_cues.get('exit_path_clear')))}",
+                f"    - occupant visible: {yes_no(bool(room_cues.get('occupant_visible')))}",
+                f"    - occupant located: {yes_no(bool(room_cues.get('occupant_located')))}",
+                f"    - smoke density marker: {room_cues.get('smoke_density')}",
+                f"    - visibility marker: {room_cues.get('visibility_level')}",
+                f"    - air quality marker: {room_cues.get('air_quality_warning')}",
+            ]
+        )
     if chair:
         lines.extend(
             [
@@ -335,7 +377,35 @@ def environment_lines(environment: dict[str, Any]) -> list[str]:
 def finding_text(finding: dict[str, Any]) -> str:
     code = finding.get("code", "finding")
     message = finding.get("message", "No message")
-    return f"{code}: {message}"
+    text = f"{code}: {message}"
+    if finding.get("instructor_note"):
+        text += f" Instructor note: {finding['instructor_note']}"
+    return text
+
+
+def grouped_finding_lines(findings: list[dict[str, Any]]) -> list[str]:
+    grouped: dict[tuple[str, str, str], int] = {}
+    order: list[tuple[str, str, str]] = []
+    for finding in findings:
+        key = (
+            str(finding.get("code", "finding")),
+            str(finding.get("message", "No message")),
+            str(finding.get("instructor_note") or ""),
+        )
+        if key not in grouped:
+            order.append(key)
+            grouped[key] = 0
+        grouped[key] += 1
+
+    lines: list[str] = []
+    for code, message, instructor_note in order:
+        count = grouped[(code, message, instructor_note)]
+        count_text = f" ({count}x)" if count > 1 else ""
+        text = f"{code}{count_text}: {message}"
+        if instructor_note:
+            text += f" Instructor note: {instructor_note}"
+        lines.append(f"  - {text}")
+    return lines
 
 
 def yes_no(value: bool) -> str:

@@ -18,9 +18,11 @@ The script:
 6. Replays each log to prove deterministic behavior.
 7. Prints a sectioned review summary for each session.
 8. Shows the wooden-chair environment preview with physics disabled and enabled.
-9. Shows whether the chair was moved, whether the entry door was opened, and whether the smoke/visibility cue was checked.
+9. Shows whether the room was scanned, the chair was moved, the entry door was checked/opened, communication was recorded, smoke/visibility was checked, the environment was monitored, and the occupant was located.
 
-The happy path moves the wooden chair, opens the entry door, and checks the smoke/visibility cue before entering the room. The warning/error path tries to enter while an environmental cue is still unresolved, so the backend shows a warning and keeps the state from advancing.
+The happy path records the room scan, checks the door, moves the wooden chair, opens the entry door, communicates status, checks smoke/visibility, monitors the environment, enters the room, locates the occupant, and then records the removal step.
+
+The warning/error path intentionally skips some cues. The backend then explains those skipped steps in the review instead of pretending the run was clean.
 
 The door's open/closed state and the smoke/visibility cue's checked/unchecked state matter in the scenario. Door type, lock state, collision shape, mass, hinge side, swing direction, force directions, and real smoke behavior are metadata only for now.
 
@@ -28,4 +30,4 @@ The physics preview is only metadata. It does not generate a mesh, load an Unrea
 
 Keep the disclaimer visible in any demo: this is illustrative POC behavior, not clinical or operational guidance.
 
-The review summary is the main proof point for Dr. Cameron: it should show that the system can explain what happened, not just that the demo ran.
+The review summary is the main proof point for Dr. Cameron: it should show that the system can explain what happened, what cues were noticed or missed, and why the backend flagged the run.

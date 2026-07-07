@@ -1,4 +1,4 @@
-"""Run the full local POC demo: sessions, logs, replay, review, and chair preview."""
+"""Run the full local POC demo: sessions, logs, replay, review, and environment preview."""
 
 import argparse
 import asyncio
@@ -29,12 +29,17 @@ DEFAULT_HTTP_URL = "http://127.0.0.1:8765"
 DEFAULT_LOG_DIRECTORY = Path("logs") / "sessions"
 HAPPY_ACTIONS = [
     "assess_scene",
+    "scan_room",
+    "check_door",
     "confirm_ppe",
     "request_backup",
+    "communicate_status",
     "move_obstacle",
     "open_door",
     "check_visibility",
+    "monitor_environment",
     "enter_room",
+    "locate_occupant",
     "remove_occupant",
 ]
 WARNING_ERROR_ACTIONS = [
@@ -44,8 +49,16 @@ WARNING_ERROR_ACTIONS = [
     "confirm_ppe",
     "request_backup",
     "move_obstacle",
+    "scan_room",
+    "move_obstacle",
     "open_door",
     "enter_room",
+    "communicate_status",
+    "check_visibility",
+    "enter_room",
+    "monitor_environment",
+    "enter_room",
+    "remove_occupant",
     "stop_scenario",
 ]
 PhysicsPreview = Literal["disabled", "enabled", "both"]

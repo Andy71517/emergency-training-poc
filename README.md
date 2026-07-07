@@ -43,7 +43,7 @@ python scripts/run_local_demo.py
 
 It starts the backend if needed, runs demo sessions, replays the logs, prints review summaries, and shows the wooden-chair environment preview with physics disabled and enabled.
 
-The toy smoke-room scenario now includes a wooden chair, an entry door, and a smoke/visibility cue near the path into the room. The happy path moves the chair with `move_obstacle`, opens the door with `open_door`, checks visibility with `check_visibility`, and then enters. If the trainee ignores one of these POC cues, the backend returns a warning and does not advance the room-entry step.
+The toy smoke-room scenario now tracks a few simple environment cues: room scan, door check, chair/path blockage, door open/closed state, communication, smoke/visibility, ongoing environment monitoring, exit path status, and occupant search. The happy path records those cues in order before removing the occupant. If the trainee skips a cue, the backend returns a POC warning or error and the review explains what happened in plain English.
 
 In another terminal, run the fake trainee demo:
 

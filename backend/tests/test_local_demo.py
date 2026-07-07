@@ -87,6 +87,18 @@ def test_review_report_formats_summary_and_replay_result() -> None:
         "final_state": {"phase": "stopped"},
         "end_condition_reached": True,
         "environment_review": {
+            "room_cues": {
+                "room_scanned": True,
+                "door_checked": False,
+                "status_communicated": True,
+                "environment_monitored": False,
+                "exit_path_clear": True,
+                "occupant_visible": False,
+                "occupant_located": False,
+                "smoke_density": "moderate_preview_observed",
+                "visibility_level": "checked_low_visibility",
+                "air_quality_warning": "present_preview",
+            },
             "wooden_chair_poc": {
                 "blocked_path": False,
                 "moved": True,
@@ -119,6 +131,8 @@ def test_review_report_formats_summary_and_replay_result() -> None:
     assert "Session: warning/error path" in report
     assert "Actions reviewed: 1" in report
     assert "Replay verified: yes" in report
+    assert "Room cues:" in report
+    assert "environment monitored: no" in report
     assert "Wooden chair:" in report
     assert "moved during scenario: yes" in report
     assert "Entry door:" in report

@@ -4,18 +4,60 @@
   "scenario_id": "smoke_inhalation_room_v0",
   "event_id": "event-001",
   "timestamp": "2026-06-22T09:00:00Z",
-  "sequence_number": 1,
+  "sequence_number": 2,
   "state": {
     "phase": "scene_assessed",
     "scene_assessed": true,
+    "room_scanned": true,
     "ppe_confirmed": false,
     "backup_requested": false,
+    "door_checked": false,
+    "status_communicated": false,
+    "environment_monitored": false,
     "path_blocked": true,
     "door_open": false,
+    "exit_path_clear": false,
     "visibility_checked": false,
+    "occupant_visible": false,
+    "occupant_located": false,
     "occupant_removed": false,
+    "reassessment_count": 0,
     "scenario_outcome": "in_progress",
     "environment": {
+      "smoke_density": "moderate_preview_observed",
+      "visibility_level": "poor_preview_observed",
+      "room_temperature": "warm_preview",
+      "air_quality_warning": "present_preview",
+      "exit_path_clear": false,
+      "occupant_visible": false,
+      "notes": "Deterministic POC cues only. These are not sensor readings or operational guidance.",
+      "cues": {
+        "room_scan": {
+          "label": "Initial room scan",
+          "observed": true,
+          "note": "POC cue for noticing the room before touching objects or entering."
+        },
+        "door_condition": {
+          "label": "Door condition",
+          "observed": false,
+          "note": "POC metadata only. This does not model locks, force, or real entry tactics."
+        },
+        "status_communication": {
+          "label": "Status communication",
+          "observed": false,
+          "note": "POC cue for recording whether the trainee communicated status."
+        },
+        "environment_monitor": {
+          "label": "Ongoing environment check",
+          "observed": false,
+          "note": "POC cue for checking changing conditions. No real smoke, heat, or sensor model."
+        },
+        "occupant_search": {
+          "label": "Occupant search",
+          "observed": false,
+          "note": "POC cue for locating the occupant before recording removal."
+        }
+      },
       "objects": {
         "wooden_chair_poc": {
           "object_type": "wooden_chair",
@@ -63,5 +105,14 @@
     }
   },
   "is_terminal": false,
-  "next_expected_actions": ["confirm_ppe", "request_backup", "move_obstacle", "open_door", "check_visibility"]
+  "next_expected_actions": [
+    "check_door",
+    "confirm_ppe",
+    "request_backup",
+    "communicate_status",
+    "move_obstacle",
+    "open_door",
+    "check_visibility",
+    "monitor_environment"
+  ]
 }

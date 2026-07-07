@@ -34,12 +34,20 @@ def test_review_summary_reports_actions_findings_and_end_state(tmp_path: Path) -
     assert summary["action_timeline"][0]["action_type"] == "confirm_ppe"
     assert summary["action_timeline"][0]["validation_status"] == "warning"
     assert summary["warnings"]
+    assert summary["warnings"][0]["instructor_note"]
     assert summary["end_condition_reached"] is True
     assert summary["scenario_outcome"] == "stopped"
     assert summary["final_phase"] == "stopped"
     assert summary["final_state"]["scenario_outcome"] == "stopped"
     assert summary["key_observations"]
     assert summary["reviewer_takeaways"]
+    room_cues = summary["environment_review"]["room_cues"]
+    assert room_cues["room_scanned"] is False
+    assert room_cues["status_communicated"] is False
+    assert room_cues["environment_monitored"] is False
+    assert room_cues["occupant_located"] is False
+    assert room_cues["exit_path_clear"] is False
+    assert room_cues["smoke_density"] == "moderate_preview"
     chair = summary["environment_review"]["wooden_chair_poc"]
     assert chair["blocked_path"] is True
     assert chair["moved"] is False
@@ -79,6 +87,8 @@ def test_review_summary_formats_human_readable_debrief(tmp_path: Path) -> None:
     assert "Action timeline:" in rendered
     assert "1. assess_scene -> ok" in rendered
     assert "Environment cues:" in rendered
+    assert "Room cues:" in rendered
+    assert "status communicated:" in rendered
     assert "Smoke/visibility cue:" in rendered
     assert "Key observations:" in rendered
     assert "Reviewer takeaways:" in rendered

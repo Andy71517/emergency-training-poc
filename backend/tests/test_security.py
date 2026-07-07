@@ -86,12 +86,17 @@ def test_ended_sessions_do_not_count_against_active_session_limit(tmp_path: Path
     manager.start_session("session-one")
     actions = [
         "assess_scene",
+        "scan_room",
+        "check_door",
         "confirm_ppe",
         "request_backup",
+        "communicate_status",
         "move_obstacle",
         "open_door",
         "check_visibility",
+        "monitor_environment",
         "enter_room",
+        "locate_occupant",
         "remove_occupant",
     ]
     for sequence_number, action in enumerate(actions, start=1):

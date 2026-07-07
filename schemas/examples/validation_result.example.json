@@ -4,10 +4,17 @@
   "scenario_id": "smoke_inhalation_room_v0",
   "event_id": "event-001",
   "timestamp": "2026-06-22T09:00:00Z",
-  "sequence_number": 1,
-  "status": "ok",
-  "warnings": [],
+  "sequence_number": 4,
+  "status": "warning",
+  "warnings": [
+    {
+      "code": "room_scan_not_recorded",
+      "message": "The room scan cue has not been recorded before acting on the environment.",
+      "rule_id": "room-scan-before-object-work",
+      "instructor_note": "This helps the review show whether the trainee noticed the room before touching objects or moving toward entry."
+    }
+  ],
   "errors": [],
-  "notes": ["No scenario-specific conformance rule was triggered."],
-  "applied_rule_ids": ["scene-assessment-first"]
+  "notes": [],
+  "applied_rule_ids": ["room-scan-before-object-work"]
 }

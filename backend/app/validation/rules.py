@@ -17,6 +17,7 @@ class RuleDefinition:
     when: dict[str, Any]
     code: str
     message: str
+    instructor_note: str | None
     blocks_transition: bool
 
 
@@ -37,6 +38,7 @@ def load_rules(
             when=dict(item["when"]),
             code=item["result"]["code"],
             message=item["result"]["message"],
+            instructor_note=item["result"].get("instructor_note"),
             blocks_transition=bool(item["result"].get("blocks_transition", False)),
         )
         for item in data.get("rules", [])
