@@ -1,204 +1,210 @@
 # Emergency Training Simulator POC
 
-Backend-first foundation for a future adaptive training simulator
+From full-system idea to a working backend-first proof
 
-5-minute update + 5-minute demo
-
----
-
-# The short version
-
-I am proving the foundation before building the spectacle.
-
-- trainee action in
-- backend-owned state change
-- rule check
-- client update
-- log, replay, review
+Project update for Dr. Melissa Cameron
 
 ---
 
-# Why this project exists
+# The starting point was much bigger than this repo
 
-Good training needs more than a scene.
+The original goal points toward a full adaptive training platform.
 
-- repeatable scenarios
-- visible consequences
-- environmental cues
-- instructor review
-- a clear record of what happened
+- Unreal-style immersive scenes
+- AI-driven scenario changes
+- sensing and trainee action interpretation
+- validation and instructor review
+- physical objects, assets, and deployment later
 
----
-
-# The trap I am avoiding
-
-The shiny parts can wait.
-
-- Unreal
-- generated 3D assets
-- sensors
-- physics
-- real AI calls
-
-First question: can the system keep the truth straight?
+This POC is the first safe slice of that bigger idea.
 
 ---
 
-# The core loop
+# The first useful question was smaller
+
+Before building the spectacle, I need the system to keep the truth straight.
+
+- What action happened?
+- What state changed?
+- What was warned or rejected?
+- What can an instructor review afterward?
+
+That is why I started backend-first.
+
+---
+
+# My solo-dev strategy is checkpoints, not chaos
+
+This is a huge ask for one person, so I am turning it into thin slices.
+
+- prove one loop at a time
+- keep every slice demoable
+- delay expensive tools until they have a job
+- keep the backend as the source of truth
+
+Scope control is how the big idea stays buildable.
+
+---
+
+# What Sprint 0 created
+
+The first pass built the project skeleton and boundaries.
+
+- docs, architecture notes, and ADRs
+- message schemas and examples
+- toy scenarios and validation rules
+- backend placeholders, scripts, logs
+- Unreal and asset pipeline placeholders
+
+This made the project organized before it became complex.
+
+---
+
+# The first working loop is now real
+
+The backend can run the core POC loop end to end.
 
 ```text
-trainee action
-  -> backend
-  -> scenario state
-  -> validation
-  -> client update
-  -> JSONL log
-  -> replay / review
+trainee action -> backend -> scenario state
+-> validation -> client update -> log -> review
 ```
 
-This is the spine of the project.
-
----
-
-# What works now
-
-The local POC can already run end-to-end.
+What exists today:
 
 - FastAPI WebSocket backend
-- deterministic YAML scenario engine
-- POC validation rules
-- JSONL session logs
-- replay and review summaries
-- one-command demo
+- deterministic YAML scenarios
+- JSONL logs, replay, and review summaries
 
 ---
 
-# Current demo scenario
+# The review summary became the strongest proof
 
-A tiny smoke-room software scenario.
-
-- wooden chair may block the path
-- entry door starts closed
-- trainee actions change backend state
-- warnings appear when cues are ignored
-
-Not field guidance. Just a POC scenario.
-
----
-
-# Why the chair and door matter
-
-The room should not be ignored.
-
-- obstacles can block progress
-- doors can change access
-- future objects can carry metadata
-- physics stays future work
-
-Right now: state and rule checking only.
-
----
-
-# The strongest proof point
-
-The demo does not just run.
+The demo does not just say "it ran."
 
 It explains what happened.
 
-- actions taken
+- action timeline
 - final state
 - warnings and errors
 - replay verification
-- environment cue status
+- plain-English reviewer notes
+
+That is the start of instructor-facing value.
 
 ---
 
-# Trust boundary
+# The scenarios are small, but no longer flat
 
-The client requests actions.
+The backend now tracks environmental cues.
 
-The backend decides truth.
+- smoke and visibility
+- wooden chair blocking a path
+- door open or closed
+- occupant visibility
+- hallway obstacle and exit-door state
 
-- state changes
+These are toy rules, not emergency guidance.
+
+---
+
+# A second scenario proved the engine can generalize
+
+The blocked-exit hallway scenario uses the same backend loop with different state.
+
+- different environment
+- different objects
+- different warnings
+- same deterministic engine
+
+This is a step toward a future scenario library.
+
+---
+
+# Unreal is starting as a display client
+
+Unreal should not become the simulator brain.
+
+Current path:
+
+```text
+display JSON -> generated debug text -> Unreal panel
+```
+
+Next path:
+
+```text
+text file -> JSON parsing -> live backend WebSocket
+```
+
+---
+
+# Current architecture keeps the truth in one place
+
+Backend owns:
+
+- scenario state
 - validation results
-- final outcome
-- session log
+- logs and replay
 - review summary
 
----
+Unreal displays state and later sends simple action requests.
 
-# Security baseline
-
-This is POC hardening, not production security.
-
-Current guardrails reject:
-
-- strange IDs
-- unsafe message shapes
-- oversized payloads
-- wrong sequence numbers
-- duplicate event IDs
+Assets, physics, AI, sensing, and deployment stay staged.
 
 ---
 
-# Future Unreal role
+# Timeline: realistic solo-dev checkpoints
 
-Unreal should display state, not own scenario logic.
+Now:
 
-- connect over WebSocket
-- send simple trainee actions
-- receive backend state
-- show text/debug state first
-- scenes and gameplay later
+- backend proof and review loop
+- Unreal debug display started
 
----
+Next:
 
-# Submission packet vs meeting deck
+- Unreal reads text, then JSON, then WebSocket state
 
-The repo now separates the deliverables.
+Later:
 
-- packet: submit/read
-- deck: talk through live
-- demo: prove the loop
-- docs: explain the system
-
-No more PDF confetti.
+- scene shell, reviewed assets, physics/AI/sensing experiments
 
 ---
 
-# Next useful steps
+# What I am not claiming yet
 
-Keep adding one careful layer at a time.
+This is still a proof of concept.
 
-1. tighten display contract
-2. improve review output
-3. enrich object metadata
-4. test tiny Unreal display
-5. review assets in Blender
-6. add physics later
+- no real AI calls
+- no clinical or protocol authority
+- no real physics
+- no generated assets
+- no full Unreal scene
+- no production deployment
+
+The boundary is deliberate.
 
 ---
 
-# Demo plan
+# Demo and feedback ask
 
-Run:
+Demo:
 
 ```powershell
 python scripts/run_local_demo.py
 ```
 
-Show:
+What I want feedback on:
 
-- happy path
-- warning/error path
-- replay verification
-- review summary
+- Is the review useful for instructors?
+- Are the environmental cues clear?
+- Is the solo-dev roadmap realistic?
+- What scenario should come next?
 
 ---
 
 # Closing
 
-The project is moving in the right order.
+The project is evolving in the right order.
 
 First prove the loop.
 

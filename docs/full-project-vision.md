@@ -137,6 +137,21 @@ manual/stubbed action
 
 That loop matters because the full system will eventually need the same foundation, even when AI, Unreal, sensing, projection, networking, and richer validation are added later.
 
+## Current build strategy
+
+Because the project is currently being advanced by one solo developer, the full vision is being treated as a north star rather than a single immediate build.
+
+The practical strategy is:
+
+1. prove the backend loop
+2. make the session explainable through replay and review
+3. make Unreal display backend-owned state
+4. add simple visuals only after the display path works
+5. review assets manually before trusting generated content
+6. explore physics, sensing, AI, validation, and deployment after the foundation is stable
+
+This keeps the project realistic without shrinking the long-term goal.
+
 ## Important boundary
 
 The full project vision includes future capabilities that are not implemented here yet.

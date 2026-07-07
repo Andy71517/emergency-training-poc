@@ -8,6 +8,24 @@ The full project vision is large. The current repo should grow toward it careful
 
 For a direct comparison between the original full-system goals, the current repo, the remaining gaps, and the safest next experiments, see [full-system-gap-map.md](full-system-gap-map.md).
 
+## Solo-developer framing
+
+This is currently a solo-developer project.
+
+That means the roadmap should not be read as "build the whole final simulator next."
+
+It should be read as:
+
+```text
+large full-system vision
+  -> small proof
+  -> working checkpoint
+  -> reviewed result
+  -> next thin slice
+```
+
+The goal is steady progress without letting Unreal, generated assets, AI, sensing, physics, or deployment swallow the project before the foundation is ready.
+
 ## Track 1: Current POC milestones
 
 These are the milestones for this repository right now.
@@ -25,6 +43,7 @@ These are the milestones for this repository right now.
 - entry door environment cue
 - future Unreal client contract
 - text-only Unreal display preview
+- JSON-to-debug-text bridge for the first Unreal panel
 - first security baseline
 - local demo abuse guardrails
 - lightweight GitHub Actions CI
@@ -39,7 +58,8 @@ These are the milestones for this repository right now.
 
 - keep improving the review/debrief output
 - add richer instructor/reviewer examples
-- strengthen the future Unreal text debug contract
+- make Unreal read the generated debug text file automatically
+- parse the display JSON directly after the text path works
 - add clearer message-contract versioning notes
 - keep scenario logic deterministic and backend-owned
 
@@ -48,7 +68,7 @@ These are the milestones for this repository right now.
 - add more environment objects with obvious state
 - add richer replay comparison reports
 - add configurable local scenarios
-- add thin Unreal client experiment only after the text contract is stable
+- add thin Unreal WebSocket experiment only after file/JSON display is stable
 
 ## Track 2: Full-system milestones
 
@@ -115,6 +135,67 @@ The safest build order is:
 12. AI adaptation experiments
 13. validation framework expansion
 14. deployment architecture
+
+## Rough timeline
+
+This is a planning timeline, not a promise.
+
+The timing depends on solo-developer bandwidth, Unreal setup friction, compute access, Dr. Cameron's feedback, and how small the next slices stay.
+
+### Current checkpoint
+
+Status: active now.
+
+- backend loop works locally
+- replay/review summaries work
+- two deterministic toy scenarios exist
+- environmental cues are represented in backend state
+- Unreal text display path has started
+
+### Next checkpoint
+
+Target: make Unreal read project data without manual copy/paste.
+
+- read generated debug text file from Unreal
+- keep scenario truth in backend
+- use this as the bridge before JSON parsing
+
+### Next after that
+
+Target: make Unreal display structured state.
+
+- parse display-state JSON in Unreal
+- render warnings, errors, and object rows
+- still avoid full gameplay logic
+
+### First stronger demo checkpoint
+
+Target: live backend-to-Unreal display.
+
+- backend WebSocket sends state
+- Unreal receives state
+- debug panel updates live
+- review summary still explains the session afterward
+
+### Later POC checkpoint
+
+Target: make the demo easier to understand visually.
+
+- simple Unreal scene shell
+- object placeholders
+- reviewed asset workflow through Blender
+- no generated assets trusted without review
+
+### Future research checkpoints
+
+Target: explore the larger original project vision.
+
+- generated assets
+- real physics experiments
+- sensing experiments
+- AI adaptation
+- validation framework expansion
+- deployment planning
 
 ## Rule of thumb
 

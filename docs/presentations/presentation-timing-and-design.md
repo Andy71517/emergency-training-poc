@@ -8,39 +8,40 @@ Use the files this way:
 - `project-overview-slides.md`: talk through live
 - `project-overview-speaker-notes.md`: presenter context
 - `project-overview-read-through-script.md`: practice script
+- `dr-cameron-demo-runbook.md`: screen-share checklist and live demo flow
 - `python scripts/run_local_demo.py`: proof on screen
 
 ## Target timing
 
 Aim for:
 
-- 5 minutes of slides
+- about 7 minutes of slides if the audience needs the full origin story
 - 5 minutes of demo
+- 5 minutes for questions and feedback
 
-That gives enough time to explain the idea without turning the meeting into a lecture.
+If time is tight, compress the slides to 5 minutes by moving quickly through the timeline and boundaries.
 
 ## Live slide flow
 
 Use the full deck, but move quickly.
 
 1. Title
-2. Short version
-3. Why this project exists
-4. Trap I am avoiding
-5. Core loop
-6. What works now
-7. Current demo scenario
-8. Chair and door
-9. Review as proof point
-10. Trust boundary
-11. Security baseline
-12. Future Unreal role
-13. Packet vs deck
-14. Next steps
-15. Demo plan
-16. Closing
+2. Original full-system vision
+3. First useful question
+4. Solo-dev checkpoint strategy
+5. Sprint 0 scaffold
+6. First working backend loop
+7. Review as proof point
+8. Environmental cues
+9. Second scenario
+10. Unreal as display client
+11. Current architecture
+12. Timeline
+13. Boundaries
+14. Demo and feedback
+15. Closing
 
-If time is tight, skip slides 11, 12, and 13 live. Keep them ready for questions.
+If time is tight, move quickly through slides 5, 9, and 12. Keep the detail in speaker notes.
 
 ## Demo flow
 
@@ -57,7 +58,13 @@ Show:
 3. warning/error session
 4. replay verification
 5. review summary
-6. chair and door cue status
+6. environmental cue status
+
+If Unreal is ready, also show the text debug panel after the backend demo.
+
+Frame Unreal carefully:
+
+> This is the first display-client step. The backend still owns scenario truth.
 
 Main demo sentence:
 
@@ -103,3 +110,31 @@ Keep the voice grounded:
 - "Here is the next careful step."
 
 That should land well with Dr. Cameron because it shows progress and judgment, not just ambition.
+
+## Solo developer framing
+
+Say this out loud early:
+
+> This is a large project for one person, so I am treating the full vision as the north star and the POC as a sequence of checkpoints.
+
+That framing helps the audience judge the work fairly. It also explains why the project delays Unreal scenes, generated assets, real physics, sensing, and AI calls until the foundation has a clear job for them.
+
+## Audience tone
+
+The first audience is Dr. Melissa Cameron, who is also the project supervisor for the on-campus job.
+
+The tone should be:
+
+- clear enough for a mixed audience
+- respectful and prepared
+- honest about limits
+- casual enough to sound like me
+- focused on judgment, not hype
+
+## Is the packet enough?
+
+The packet is enough as a reading bundle or leave-behind.
+
+It is not enough as the live presentation by itself.
+
+Use the packet when someone wants to read the project later. Use the deck and runbook when presenting on screen.

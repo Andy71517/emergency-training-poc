@@ -34,6 +34,8 @@ COLOR_BODY = (0.09, 0.11, 0.13)
 COLOR_MUTED = (0.42, 0.45, 0.48)
 COLOR_CODE_BG = (0.92, 0.96, 0.98)
 COLOR_PANEL = (1.0, 1.0, 1.0)
+COLOR_AMBER_SOFT = (1.00, 0.94, 0.82)
+COLOR_AZURE_SOFT = (0.89, 0.96, 1.00)
 
 
 def _clean_for_pdf(text: str) -> str:
@@ -147,8 +149,98 @@ def _text(
     ]
 
 
+def _phase_label(page_number: int, total_pages: int) -> str:
+    if page_number == 1:
+        return "PROJECT UPDATE"
+    if page_number <= 4:
+        return "WHY THIS SHAPE"
+    if page_number <= 9:
+        return "WHAT EXISTS NOW"
+    if page_number <= 12:
+        return "WHAT COMES NEXT"
+    return "DEMO + FEEDBACK"
+
+
+def _cover_stream(title: str, body: list[str], total_pages: int) -> bytes:
+    title = _clean_for_pdf(title)
+    lines = [_clean_for_pdf(line.strip()) for line in body if line.strip()]
+    subtitle = lines[0] if lines else "Backend-first proof of concept"
+    audience = lines[1] if len(lines) > 1 else "Project update for Dr. Melissa Cameron"
+
+    commands: list[str] = [
+        _rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, COLOR_BACKGROUND),
+        _rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, COLOR_HEADER),
+        _rect(0, 0, PAGE_WIDTH, 104, COLOR_AZURE),
+        _rect(0, PAGE_HEIGHT - 28, PAGE_WIDTH, 28, COLOR_ACCENT),
+        _rect(54, 116, 310, 9, COLOR_ACCENT),
+        _rect(PAGE_WIDTH - 218, 88, 140, 140, COLOR_AMBER_SOFT),
+        _rect(PAGE_WIDTH - 178, 128, 140, 140, COLOR_AZURE_SOFT),
+        _rect(54, PAGE_HEIGHT - 162, 124, 26, COLOR_ACCENT),
+        *_text(
+            x=69,
+            y=PAGE_HEIGHT - 153,
+            value="POC UPDATE",
+            font="F3",
+            size=10,
+            color=COLOR_HEADER,
+        ),
+        *_text(
+            x=54,
+            y=PAGE_HEIGHT - 238,
+            value=title,
+            font="F3",
+            size=38,
+            color=(1, 1, 1),
+        ),
+        *_text(
+            x=54,
+            y=PAGE_HEIGHT - 278,
+            value=subtitle[:82],
+            font="F1",
+            size=16,
+            color=(0.86, 0.93, 0.98),
+        ),
+        *_text(
+            x=54,
+            y=PAGE_HEIGHT - 326,
+            value=audience[:82],
+            font="F3",
+            size=14,
+            color=COLOR_AMBER_SOFT,
+        ),
+        *_text(
+            x=54,
+            y=PAGE_HEIGHT - 386,
+            value="Backend truth first. Unreal display next. Immersion later.",
+            font="F1",
+            size=13,
+            color=(0.86, 0.93, 0.98),
+        ),
+        *_text(
+            x=54,
+            y=34,
+            value="POC only - not clinical, operational, or production guidance",
+            font="F1",
+            size=8.8,
+            color=(0.78, 0.84, 0.88),
+        ),
+        *_text(
+            x=PAGE_WIDTH - 124,
+            y=34,
+            value=f"1/{total_pages}",
+            font="F1",
+            size=8.8,
+            color=(0.78, 0.84, 0.88),
+        ),
+    ]
+    return ("\n".join(commands) + "\n").encode("latin-1", "replace")
+
+
 def _content_stream(title: str, body: list[str], page_number: int, total_pages: int) -> bytes:
     title = _clean_for_pdf(title)
+    if page_number == 1:
+        return _cover_stream(title, body, total_pages)
+
     lines = [_clean_for_pdf(line) for line in _format_body(body)]
     visible_line_count = sum(1 for line in lines if line)
     dynamic_line_height = LINE_HEIGHT
@@ -156,17 +248,19 @@ def _content_stream(title: str, body: list[str], page_number: int, total_pages: 
         available_height = BODY_Y - CONTENT_BOTTOM_Y
         dynamic_line_height = min(28, max(LINE_HEIGHT, available_height / (visible_line_count + 1)))
     body_size = 14.2 if visible_line_count <= 10 else 12.8
+    phase_label = _phase_label(page_number, total_pages)
 
     commands: list[str] = [
         _rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, COLOR_BACKGROUND),
-        _rect(0, PAGE_HEIGHT - 112, PAGE_WIDTH, 112, COLOR_HEADER),
-        _rect(0, PAGE_HEIGHT - 112, PAGE_WIDTH, 6, COLOR_ACCENT),
-        _rect(0, 0, 14, PAGE_HEIGHT, (0.89, 0.96, 1.00)),
-        _rect(MARGIN_X, 72, PAGE_WIDTH - (MARGIN_X * 2), 410, COLOR_PANEL),
-        _rect(MARGIN_X, 72, 5, 410, COLOR_ACCENT),
+        _rect(0, PAGE_HEIGHT - 104, PAGE_WIDTH, 104, COLOR_HEADER),
+        _rect(0, PAGE_HEIGHT - 104, PAGE_WIDTH, 7, COLOR_ACCENT),
+        _rect(0, 0, 16, PAGE_HEIGHT, COLOR_AZURE_SOFT),
+        _rect(MARGIN_X, 70, PAGE_WIDTH - (MARGIN_X * 2), 414, COLOR_PANEL),
+        _rect(MARGIN_X, 70, 6, 414, COLOR_ACCENT),
+        _rect(PAGE_WIDTH - 174, PAGE_HEIGHT - 88, 112, 22, COLOR_AMBER_SOFT),
         *_text(
             x=MARGIN_X,
-            y=PAGE_HEIGHT - 48,
+            y=PAGE_HEIGHT - 46,
             value=title,
             font="F3",
             size=25,
@@ -174,20 +268,27 @@ def _content_stream(title: str, body: list[str], page_number: int, total_pages: 
         ),
         *_text(
             x=MARGIN_X,
-            y=PAGE_HEIGHT - 76,
-            value="Meeting deck / backend-first local proof",
+            y=PAGE_HEIGHT - 73,
+            value="Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron",
             font="F1",
             size=9.5,
             color=(0.78, 0.84, 0.88),
         ),
-        _rect(PAGE_WIDTH - 130, PAGE_HEIGHT - 95, 66, 18, COLOR_ACCENT),
         *_text(
-            x=PAGE_WIDTH - 118,
-            y=PAGE_HEIGHT - 89,
-            value="POC",
+            x=PAGE_WIDTH - 163,
+            y=PAGE_HEIGHT - 82,
+            value=phase_label,
             font="F3",
             size=8.8,
             color=COLOR_HEADER,
+        ),
+        *_text(
+            x=PAGE_WIDTH - 92,
+            y=PAGE_HEIGHT - 32,
+            value=f"{page_number:02d}",
+            font="F3",
+            size=20,
+            color=COLOR_AMBER_SOFT,
         ),
     ]
 

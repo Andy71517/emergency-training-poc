@@ -1,22 +1,26 @@
 # Emergency Training Simulator POC Report
 
-Prepared as a project progress report for Dr. Cameron.
+Prepared as a project progress report for Dr. Melissa Cameron.
 
 ## Table of contents
 
 1. Executive summary
-2. Full project north star
-3. Architecture at a glance
-4. Current POC scope
-5. Why backend-first
-6. Current implementation
-7. Review and replay as the proof point
-8. Validation boundary
-9. Security and trust boundary
-10. Relationship to future Unreal work
-11. Relationship to future assets and physics
-12. Two-track roadmap
-13. Recommended next steps
+2. How the project started
+3. Full project north star
+4. Why the first POC is smaller
+5. Architecture at a glance
+6. Current POC scope
+7. Current implementation
+8. Review and replay as the proof point
+9. Validation boundary
+10. Security and trust boundary
+11. Relationship to future Unreal work
+12. Relationship to future assets and physics
+13. Solo-developer checkpoint plan
+14. Rough timeline
+15. Two-track roadmap
+16. Recommended next steps
+17. Closing
 
 ## Executive summary
 
@@ -25,6 +29,36 @@ The long-term project vision is an AI-driven, real-time adaptive emergency-respo
 This repository is not the full platform yet. It is the first proof-of-concept foundation underneath that larger direction.
 
 The current POC proves a smaller but important loop: a manual or scripted trainee action reaches the backend, changes deterministic scenario state, gets checked by a validation layer, returns client-ready state, writes a JSONL log, and can be replayed and reviewed afterward.
+
+The project is being built by one solo developer right now. That matters. The full project vision is large enough to include multiple research and engineering tracks, so this repo deliberately turns the work into smaller checkpoints that can be built, tested, shown, and reviewed.
+
+## How the project started
+
+The starting point was a broad project overview for an AI-driven adaptive emergency-response training simulator.
+
+That original direction included:
+
+- AI-assisted and agentic scenario generation
+- real-time scenario adaptation
+- immersive training spaces
+- Unreal or similar real-time visualization
+- physical mannequins or props
+- sensing of trainee behavior
+- validation against structured references
+- post-scenario review
+- scalable deployment across sites
+
+That is the long-term direction. It is not what a first solo-developer POC should try to fully implement.
+
+The first practical decision was to separate the full vision from the first proof.
+
+The full vision asks:
+
+> What could the complete adaptive training platform eventually become?
+
+The first POC asks:
+
+> Can the software keep track of a scenario, validate toy actions, log the session, and explain what happened afterward?
 
 ## Full project north star
 
@@ -44,6 +78,24 @@ trainee speaks, moves, and performs procedures
 Future capabilities include AI and agentic scenario adaptation, multimodal sensing, projection mapping, mannequin integration, cloud services, distributed training sites, and validation against structured clinical or training references.
 
 Those are future full-system goals. They are not current repo capabilities.
+
+## Why the first POC is smaller
+
+The first POC is intentionally narrow because the full system depends on a reliable truth layer.
+
+Before adding realistic visuals, generated assets, AI calls, sensors, or physics, the project needs to answer simpler questions:
+
+- What action was attempted?
+- Was the action accepted, warned, or rejected?
+- What scenario state changed?
+- What environmental cues mattered?
+- What was logged?
+- Can the ordered session be replayed?
+- Can an instructor understand the session afterward?
+
+If those answers are unclear, later immersive work can look impressive while hiding a weak foundation.
+
+The current repo therefore focuses on the backend loop first. That is a scope-control choice, not a reduction of the long-term ambition.
 
 ## Architecture at a glance
 
@@ -86,23 +138,6 @@ manual/stubbed trainee action
 
 This scope is intentionally narrow. The goal is to make the core logic testable, repeatable, and explainable before adding AI, Unreal, sensing, projection, or real physics.
 
-## Why backend-first
-
-It would be tempting to start with Unreal, generated assets, AI calls, sensors, or projection mapping because those pieces look more impressive.
-
-The risk is that those layers can hide an unclear source of truth.
-
-The backend comes first because the full system will eventually need to answer basic questions reliably:
-
-- What action was attempted?
-- What state changed?
-- What was rejected or warned?
-- What did the scenario look like at the end?
-- Can the session be replayed?
-- Can an instructor understand what happened afterward?
-
-If those answers are not clear, visuals and AI will not fix the foundation.
-
 ## Current implementation
 
 The current implementation includes:
@@ -119,11 +154,14 @@ The current implementation includes:
 - one-command local demo
 - future Unreal client contract
 - text-only Unreal display preview
+- JSON-to-debug-text bridge for the first Unreal panel
 - environment object contract
 - basic security guardrails
 - lightweight GitHub Actions CI
 
-The demo scenario is a small smoke-room POC. It includes a wooden chair and an entry door as environment cues. The chair can block the path. The door can be open or closed. The happy path moves the chair, opens the door, enters the room, and removes the occupant. The warning/error path shows what happens when the trainee ignores sequence or environmental cues.
+The repo now has two small deterministic POC scenarios. The smoke-room scenario includes a wooden chair and an entry door as environment cues. The chair can block the path. The door can be open or closed. The happy path moves the chair, opens the door, enters the room, and removes the occupant. The warning/error path shows what happens when the trainee ignores sequence or environmental cues.
+
+The blocked-exit hallway scenario adds a second toy environment with a hallway obstacle and exit-door state. This helps prove the scenario engine is not hardcoded to one room.
 
 This scenario is a software fixture only. It is not emergency guidance.
 
@@ -201,7 +239,11 @@ Unreal is treated as a future client, not the source of truth.
 
 The future Unreal client should display backend-owned state and send trainee actions. It should not decide validation results, final outcomes, or review summaries.
 
-The current repo includes a text-only future Unreal contract and display preview. It does not build a full Unreal scene.
+The current repo includes a text-only future Unreal contract, display preview, checked-in sample display JSON, and a JSON-to-debug-text bridge. The bridge lets Unreal show a generated text panel before it parses JSON directly.
+
+The current Unreal checkpoint is intentionally small: the hardcoded debug panel can show the same text, and the next step is making Unreal read the generated text file automatically.
+
+The repo does not build a full Unreal scene.
 
 ## Relationship to future assets and physics
 
@@ -210,6 +252,83 @@ The current chair and door are scenario objects and metadata, not generated 3D a
 Future generated assets may come from tools like Hunyuan 3D or similar pipelines, but assets should be reviewed manually before use. Blender is likely useful later as the review and cleanup tool before Unreal import.
 
 Physics is also future work. The current repo can represent physics preview metadata, but it does not simulate gravity, collision, tipping, mass, or force.
+
+## Solo-developer checkpoint plan
+
+The project is being staged as a solo-developer effort.
+
+That means each slice should:
+
+- prove one clear idea
+- stay testable locally
+- avoid adding expensive tools before they have a job
+- preserve the backend as the source of truth
+- produce something Dr. Cameron can review
+- leave the next slice easier than the previous one
+
+The current checkpoint sequence is:
+
+1. repo scaffold and project boundaries
+2. deterministic backend loop
+3. replay and review proof
+4. richer deterministic environmental cues
+5. second scenario to prove reuse
+6. Unreal text display path
+7. Unreal file/JSON display
+8. live Unreal backend display
+9. simple scene shell
+10. reviewed asset workflow
+11. later physics, AI, sensing, validation, and deployment experiments
+
+This sequence keeps the project moving toward the full vision without pretending the first POC is the full simulator.
+
+## Rough timeline
+
+This timeline is a planning guide, not a promise.
+
+Actual pacing depends on solo-developer time, Unreal setup friction, compute access, research direction from Dr. Cameron, and whether the next milestones stay small.
+
+### Current checkpoint: backend proof and review loop
+
+Status: mostly working locally.
+
+The repo can already run deterministic backend scenarios, produce validation results, write JSONL logs, replay sessions, and generate review summaries.
+
+### Near term: Unreal display path
+
+Target: make the backend state visible without building a full scene.
+
+Planned steps:
+
+1. make Unreal read `hallway_debug_panel.sample.txt`
+2. make Unreal parse `hallway_display_state.sample.json`
+3. connect Unreal to the backend WebSocket
+4. keep all scenario authority in the backend
+
+### Mid term: simple visual shell and reviewed assets
+
+Target: make the demo easier to understand visually while staying controlled.
+
+Possible steps:
+
+- simple Unreal room or hallway shell
+- visible debug/status panel
+- basic object placeholders
+- Blender/manual asset review workflow
+- first reviewed chair/door/obstacle assets
+
+### Later research phases
+
+Target: explore the larger original vision only after the foundation is stable.
+
+Possible later phases:
+
+- generated assets such as Hunyuan 3D candidates
+- real physics experiments
+- trainee sensing experiments
+- AI-assisted adaptation
+- stronger validation framework
+- cloud and hub-and-spoke planning
 
 ## Two-track roadmap
 
@@ -243,8 +362,8 @@ The next useful work should stay close to the proof point:
 
 1. improve instructor/reviewer examples
 2. add a small evaluation rubric for Dr. Cameron
-3. strengthen the future Unreal text debug contract
-4. add another deterministic toy scenario
+3. make Unreal read the generated debug text file automatically
+4. parse the display JSON directly in Unreal after the text path works
 5. keep the backend as source of truth
 
 Unreal, generated assets, AI calls, sensing, and deployment should wait until the contracts and review loop are stable.

@@ -15,7 +15,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 6 0 obj
-<< /Length 6118 >>
+<< /Length 6515 >>
 stream
 1.000 1.000 1.000 rg
 0.0 0.0 792.0 612.0 re f
@@ -103,13 +103,31 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 428.0 Td
-(- First audience: Dr. Cameron, as a) Tj
+(- Original vision includes AI, Unreal,) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 417.9 Td
-(  project progress and direction update.) Tj
+(  sensing, validation, immersive) Tj
+ET
+BT
+/F1 8.2 Tf
+0.080 0.100 0.120 rg
+54.0 406.0 Td
+(- Solo-developer checkpoint toward a) Tj
+ET
+BT
+/F1 8.2 Tf
+0.080 0.100 0.120 rg
+54.0 395.9 Td
+(  much larger full-system vision.) Tj
+ET
+BT
+/F1 8.2 Tf
+0.080 0.100 0.120 rg
+54.0 384.0 Td
+(- Scope control is how the larger idea) Tj
 ET
 0.985 0.992 1.000 rg
 284.0 354.0 224.0 158.0 re f
@@ -175,7 +193,7 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 296.0 384.0 Td
-(- Future Unreal client contract can) Tj
+(- Future Unreal display path can show) Tj
 ET
 0.985 0.992 1.000 rg
 526.0 354.0 224.0 158.0 re f
@@ -229,13 +247,13 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 404.2 Td
-(- Includes wooden-chair physics preview) Tj
+(- Shows environmental cue status in) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 394.1 Td
-(  metadata only.) Tj
+(  plain English.) Tj
 ET
 0.985 0.992 1.000 rg
 42.0 138.0 224.0 158.0 re f
@@ -259,25 +277,37 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 244.1 Td
+(- Blocked-exit hallway software) Tj
+ET
+BT
+/F1 8.2 Tf
+0.080 0.100 0.120 rg
+54.0 234.0 Td
+(  scenario.) Tj
+ET
+BT
+/F1 8.2 Tf
+0.080 0.100 0.120 rg
+54.0 222.1 Td
 (- wooden_chair_poc may block the path.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-54.0 232.2 Td
+54.0 210.2 Td
 (- entry_door_poc starts closed.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-54.0 220.3 Td
-(- Environment cues matter, but this is) Tj
+54.0 198.3 Td
+(- Hallway obstacle and exit-door cues) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-54.0 210.2 Td
-(  not real physics or field guidance.) Tj
+54.0 188.2 Td
+(  are tracked.) Tj
 ET
 0.985 0.992 1.000 rg
 284.0 138.0 224.0 158.0 re f
@@ -343,55 +373,55 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 256.0 Td
-(- Keep the backend as the source of) Tj
+(- Make Unreal read the generated debug) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 245.9 Td
-(  truth.) Tj
+(  text file.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 234.0 Td
-(- Keep replay/review as the strongest) Tj
+(- Then make Unreal parse display JSON.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-538.0 223.9 Td
-(  proof point.) Tj
+538.0 222.1 Td
+(- Then connect Unreal to the backend) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 212.0 Td
-(- Improve the future client display) Tj
+(  WebSocket.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-538.0 201.9 Td
-(  contract.) Tj
+538.0 200.1 Td
+(- Keep the backend as the source of) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 190.0 Td
-(- Add richer object metadata carefully.) Tj
+(  truth.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 178.1 Td
-(- Use Blender/manual review before) Tj
+(- Keep replay/review as the strongest) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 168.0 Td
-(  trusting generated assets.) Tj
+(  proof point.) Tj
 ET
 BT
 /F3 9.2 Tf
@@ -419,9 +449,9 @@ xref
 0000000185 00000 n 
 0000000253 00000 n 
 0000000328 00000 n 
-0000006497 00000 n 
+0000006894 00000 n 
 trailer
 << /Size 8 /Root 1 0 R >>
 startxref
-6643
+7040
 %%EOF
