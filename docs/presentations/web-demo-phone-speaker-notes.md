@@ -110,6 +110,14 @@ If there is enough time, run both hallway paths with **Continue to next path**.
 
 > First, I want feedback on whether this review is clear and useful. Then I can finish polishing the demo and move into the smallest useful Unreal display step, while keeping the backend in control of the scenario.
 
+**What does instructor review mean here?**
+
+> The review gives the instructor a clear record for the discussion after a scenario. It shows the actions, important cues, rule findings, retries, and final state. It supports the instructor's review, but it does not grade the trainee or replace professional judgment.
+
+**What should be automated, and what should stay with the instructor?**
+
+> The system can handle consistent tasks such as recording actions, tracking scenario state, finding missing cues, and organizing the session summary. The instructor should decide what those results mean, add context, guide the discussion, and make any real training judgment. The software should provide evidence, not act as the authority.
+
 ## If the demo fails
 
 **Say calmly:**
@@ -129,3 +137,7 @@ Then:
 **Ask:**
 
 > What information would you want to notice first in a post-scenario review?
+
+**Then ask:**
+
+> In a later version, would it be useful for instructors to add their own notes or annotations to a saved review? If so, what format?
