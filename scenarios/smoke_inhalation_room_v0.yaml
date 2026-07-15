@@ -1,6 +1,6 @@
 scenario_id: smoke_inhalation_room_v0
 title: "POC: Smoke Inhalation Room"
-version: "0.1.0"
+version: "0.2.0"
 disclaimer: >-
   Toy POC scenario only. Not medical guidance, firefighter/EMT protocol, or operational authority.
 
@@ -128,9 +128,12 @@ transition_rules:
   - id: scan-room
     when:
       scene_assessed: true
+      path_blocked: false
+      door_open: true
       room_scanned: false
       action_type: scan_room
     set:
+      phase: room_observed
       room_scanned: true
       environment.cues.room_scan.observed: true
       environment.visibility_level: poor_preview_observed
@@ -142,6 +145,7 @@ transition_rules:
       door_checked: false
       action_type: check_door
     set:
+      phase: access_checked
       door_checked: true
       environment.cues.door_condition.observed: true
 
@@ -162,26 +166,14 @@ transition_rules:
       status_communicated: true
       environment.cues.status_communication.observed: true
 
-  - id: move-wooden-chair-obstacle-after-door-open
-    when:
-      scene_assessed: true
-      action_type: move_obstacle
-      environment.objects.wooden_chair_poc.blocks_path: true
-      environment.objects.entry_door_poc.open_state: open
-    set:
-      path_blocked: false
-      exit_path_clear: true
-      environment.exit_path_clear: true
-      environment.objects.wooden_chair_poc.blocks_path: false
-      environment.objects.wooden_chair_poc.moved: true
-      environment.objects.wooden_chair_poc.location: clear_of_entry_path
-
   - id: move-wooden-chair-obstacle-before-door-open
     when:
       scene_assessed: true
+      door_checked: true
       action_type: move_obstacle
       environment.objects.wooden_chair_poc.blocks_path: true
     set:
+      phase: access_cleared
       path_blocked: false
       exit_path_clear: false
       environment.exit_path_clear: false
@@ -192,31 +184,22 @@ transition_rules:
   - id: open-entry-door-after-chair-cleared
     when:
       scene_assessed: true
+      door_checked: true
       action_type: open_door
       environment.objects.entry_door_poc.open_state: closed
       environment.objects.wooden_chair_poc.blocks_path: false
     set:
+      phase: doorway_open
       door_open: true
       exit_path_clear: true
       environment.exit_path_clear: true
       environment.objects.entry_door_poc.blocks_path: false
       environment.objects.entry_door_poc.open_state: open
 
-  - id: open-entry-door-before-chair-cleared
-    when:
-      scene_assessed: true
-      action_type: open_door
-      environment.objects.entry_door_poc.open_state: closed
-    set:
-      door_open: true
-      exit_path_clear: false
-      environment.exit_path_clear: false
-      environment.objects.entry_door_poc.blocks_path: false
-      environment.objects.entry_door_poc.open_state: open
-
   - id: check-smoke-visibility-cue
     when:
       scene_assessed: true
+      room_scanned: true
       action_type: check_visibility
       environment.objects.smoke_visibility_cue_poc.observed: false
     set:
@@ -228,6 +211,7 @@ transition_rules:
   - id: monitor-environment
     when:
       scene_assessed: true
+      room_scanned: true
       environment_monitored: false
       action_type: monitor_environment
     set:
@@ -317,13 +301,13 @@ end_conditions:
 
 expected_happy_path:
   - assess_scene
-  - scan_room
   - check_door
   - confirm_ppe
   - request_backup
   - communicate_status
   - move_obstacle
   - open_door
+  - scan_room
   - check_visibility
   - monitor_environment
   - enter_room
@@ -342,25 +326,28 @@ possible_unsafe_or_warning_paths:
     reason: "The scene assessment step was skipped."
   - actions: [assess_scene, move_obstacle]
     expected_validation: warning
-    reason: "The room scan cue was skipped before touching an environment object."
-  - actions: [assess_scene, scan_room, open_door]
+    reason: "The door condition was not checked before attempting to clear access."
+  - actions: [assess_scene, check_door, open_door]
     expected_validation: warning
-    reason: "The door check cue was skipped before opening the door."
-  - actions: [assess_scene, confirm_ppe, request_backup, enter_room]
+    reason: "The obstacle still blocks access to the entry door."
+  - actions: [assess_scene, check_door, scan_room]
+    expected_validation: warning
+    reason: "The doorway is not yet open, so the room scan cannot be recorded."
+  - actions: [assess_scene, check_door, confirm_ppe, request_backup, enter_room]
     expected_validation: warning
     reason: "The wooden chair still blocks the entry path."
-  - actions: [assess_scene, scan_room, confirm_ppe, request_backup, communicate_status, move_obstacle, enter_room]
+  - actions: [assess_scene, check_door, confirm_ppe, request_backup, communicate_status, move_obstacle, enter_room]
     expected_validation: warning
     reason: "The entry door is still closed."
-  - actions: [assess_scene, scan_room, confirm_ppe, request_backup, communicate_status, move_obstacle, open_door, enter_room]
+  - actions: [assess_scene, check_door, confirm_ppe, request_backup, communicate_status, move_obstacle, open_door, scan_room, enter_room]
     expected_validation: warning
     reason: "The smoke/visibility cue has not been checked."
-  - actions: [assess_scene, scan_room, confirm_ppe, request_backup, move_obstacle, open_door, check_visibility, enter_room]
+  - actions: [assess_scene, check_door, confirm_ppe, request_backup, move_obstacle, open_door, scan_room, check_visibility, enter_room]
     expected_validation: warning
     reason: "The communication cue has not been recorded."
-  - actions: [assess_scene, scan_room, confirm_ppe, request_backup, communicate_status, move_obstacle, open_door, check_visibility, enter_room]
+  - actions: [assess_scene, check_door, confirm_ppe, request_backup, communicate_status, move_obstacle, open_door, scan_room, check_visibility, enter_room]
     expected_validation: warning
     reason: "The ongoing environment monitor cue has not been recorded."
-  - actions: [assess_scene, scan_room, confirm_ppe, request_backup, communicate_status, move_obstacle, open_door, check_visibility, monitor_environment, enter_room, remove_occupant]
+  - actions: [assess_scene, check_door, confirm_ppe, request_backup, communicate_status, move_obstacle, open_door, scan_room, check_visibility, monitor_environment, enter_room, remove_occupant]
     expected_validation: error
     reason: "The occupant has not been located before removal is recorded."

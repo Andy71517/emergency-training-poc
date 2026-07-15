@@ -53,6 +53,8 @@ These are the milestones for this repository right now.
 - second deterministic toy scenario
 - improved post-scenario review format
 - project presentation package and PDF
+- local React presentation console backed by FastAPI
+- explicit smoke-room access and observation progress stages
 
 ### Near-term
 

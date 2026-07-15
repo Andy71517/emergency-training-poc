@@ -59,7 +59,35 @@ python scripts/run_menu_demo.py --fast
 
 Both modes use the same deterministic backend behavior and JSONL logs. The menu can run happy and warning paths for both toy scenarios, replay or summarize saved logs, compare two reviews, show backend status, list scenarios, and accept a small custom action sequence.
 
-The repo now has two deterministic toy scenarios: a smoke-room scenario and a blocked-exit hallway scenario. They track simple environment cues like scans, doors, obstacles, communication, visibility, environment monitoring, exit path status, and occupant handling. If the trainee skips a cue, the backend returns a POC warning or error and the review explains what happened in plain English.
+## Local presentation webpage
+
+The one-page React demo turns the same four backend-owned paths and review summaries into a meeting-friendly visual console. It adds presentation pacing and an expandable action sequence without changing scenario behavior or validation rules.
+
+For the recommended meeting setup, run one local command:
+
+```powershell
+python scripts/run_web_demo.py
+```
+
+Then open `http://127.0.0.1:8765`. This builds the React page and serves it from FastAPI on one local port, reducing moving parts during a presentation.
+
+While actively editing the frontend, use the classic two-terminal development workflow. Start FastAPI on port `8765`:
+
+```powershell
+python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8765
+```
+
+Then start Vite on port `5173`:
+
+```powershell
+cd web
+npm install
+npm run dev
+```
+
+Open the local URL printed by Vite. This development mode keeps each service independently restartable and provides live frontend updates. Both workflows are entirely local and use the same FastAPI-owned state, WebSocket contract, and review endpoints.
+
+The repo now has two deterministic toy scenarios: a smoke-room scenario and a blocked-exit hallway scenario. They track simple environment cues like scans, doors, obstacles, communication, visibility, environment monitoring, exit path status, and occupant handling. The smoke-room path also frames explicit access and observation progress states, so actions remain blocked until the toy scene makes them available. If the trainee skips a cue or attempts an unavailable action, the backend returns a POC warning or error and the review explains what happened in plain English.
 
 In another terminal, run the fake trainee demo:
 

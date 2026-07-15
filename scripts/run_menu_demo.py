@@ -10,7 +10,6 @@ import json
 import sys
 import time
 from collections.abc import Callable
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 from urllib.error import URLError
@@ -23,6 +22,10 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from backend.app.adapters.manual_input_adapter import build_action_message  # noqa: E402
+from backend.app.demo_catalog import (  # noqa: E402
+    DEMO_DEFINITIONS,
+    DemoDefinition,
+)
 from backend.app.logging.review_summary import generate_review_summary  # noqa: E402
 from backend.app.scenario_engine.loader import load_scenario  # noqa: E402
 from scripts.replay_session import replay  # noqa: E402
@@ -46,97 +49,6 @@ STATUS_LABELS = {
     "warning": "Review suggested",
     "error": "Action not accepted",
 }
-
-
-@dataclass(frozen=True)
-class DemoDefinition:
-    """One deterministic action sequence that makes a useful demo point."""
-
-    label: str
-    scenario_id: str
-    actions: tuple[str, ...]
-
-
-SMOKE_HAPPY = DemoDefinition(
-    label="Smoke-room happy path",
-    scenario_id="smoke_inhalation_room_v0",
-    actions=(
-        "assess_scene",
-        "scan_room",
-        "check_door",
-        "confirm_ppe",
-        "request_backup",
-        "communicate_status",
-        "move_obstacle",
-        "open_door",
-        "check_visibility",
-        "monitor_environment",
-        "enter_room",
-        "locate_occupant",
-        "remove_occupant",
-    ),
-)
-SMOKE_WARNING = DemoDefinition(
-    label="Smoke-room warning/error path",
-    scenario_id="smoke_inhalation_room_v0",
-    actions=(
-        "confirm_ppe",
-        "enter_room",
-        "assess_scene",
-        "confirm_ppe",
-        "request_backup",
-        "move_obstacle",
-        "scan_room",
-        "move_obstacle",
-        "open_door",
-        "enter_room",
-        "communicate_status",
-        "check_visibility",
-        "enter_room",
-        "monitor_environment",
-        "enter_room",
-        "remove_occupant",
-        "stop_scenario",
-    ),
-)
-HALLWAY_HAPPY = DemoDefinition(
-    label="Blocked-exit hallway happy path",
-    scenario_id="blocked_exit_hallway_v0",
-    actions=(
-        "assess_scene",
-        "scan_hallway",
-        "confirm_ppe",
-        "request_backup",
-        "communicate_status",
-        "check_visibility",
-        "identify_secondary_exit",
-        "move_obstacle",
-        "check_exit_door",
-        "open_exit_door",
-        "monitor_environment",
-        "guide_occupant_to_exit",
-    ),
-)
-HALLWAY_WARNING = DemoDefinition(
-    label="Blocked-exit hallway warning path",
-    scenario_id="blocked_exit_hallway_v0",
-    actions=(
-        "assess_scene",
-        "scan_hallway",
-        "confirm_ppe",
-        "request_backup",
-        "communicate_status",
-        "check_visibility",
-        "identify_secondary_exit",
-        "move_obstacle",
-        "check_exit_door",
-        "open_exit_door",
-        "guide_occupant_to_exit",
-        "monitor_environment",
-        "guide_occupant_to_exit",
-    ),
-)
-DEMO_DEFINITIONS = (SMOKE_HAPPY, SMOKE_WARNING, HALLWAY_HAPPY, HALLWAY_WARNING)
 
 
 def available_scenarios() -> list[tuple[str, str, tuple[str, ...]]]:
@@ -647,7 +559,15 @@ async def interactive_menu(arguments: argparse.Namespace) -> int:
                         print("No actions entered; custom run canceled.")
                     else:
                         await run_definition_with_review(
-                            DemoDefinition("Custom action run", scenario_id, tuple(actions)),
+                            DemoDefinition(
+                                demo_id="custom-action-run",
+                                label="Custom action run",
+                                short_label="Custom action run",
+                                scenario_id=scenario_id,
+                                tone="custom",
+                                description="A locally entered deterministic action sequence.",
+                                actions=tuple(actions),
+                            ),
                             ws_url=ws_url,
                             session_prefix=arguments.session_prefix,
                             fast=arguments.fast,

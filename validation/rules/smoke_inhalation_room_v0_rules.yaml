@@ -1,6 +1,6 @@
 scenario_id: smoke_inhalation_room_v0
-scenario_version: "0.1.0"
-ruleset_version: "0.1.0"
+scenario_version: "0.2.0"
+ruleset_version: "0.2.0"
 disclaimer: "POC rule checks only. Not clinical validation, operational guidance, or protocol authority."
 
 rules:
@@ -43,11 +43,51 @@ rules:
     when:
       state.scene_assessed: true
       state.room_scanned: false
-      action_type_in: [move_obstacle, open_door, check_visibility, monitor_environment, enter_room]
+      state.path_blocked: false
+      state.door_open: true
+      action_type_in: [check_visibility, monitor_environment, enter_room]
     result:
       code: room_scan_not_recorded
       message: "The room scan cue has not been recorded before acting on the environment."
       instructor_note: "This helps the review show whether the trainee noticed the room before touching objects or moving toward entry."
+      blocks_transition: true
+
+  - id: door-check-before-obstacle-work
+    severity: warning
+    when:
+      action_type: move_obstacle
+      state.scene_assessed: true
+      state.door_checked: false
+    result:
+      code: door_check_not_recorded
+      message: "The entry condition has not been checked before clearing the obstacle."
+      instructor_note: "The toy progression keeps access inspection ahead of obstacle changes so the review follows a visible state sequence."
+      blocks_transition: true
+
+  - id: clear-path-before-opening-door
+    severity: warning
+    when:
+      action_type: open_door
+      state.scene_assessed: true
+      state.path_blocked: true
+    result:
+      code: access_path_still_blocked
+      message: "The obstacle still blocks access to the entry door."
+      instructor_note: "The backend keeps the door closed until the deterministic obstacle state is cleared."
+      blocks_transition: true
+
+  - id: doorway-before-room-scan
+    severity: warning
+    when:
+      action_type: scan_room
+      state.scene_assessed: true
+      any_state_equals:
+        path_blocked: true
+        door_open: false
+    result:
+      code: room_not_accessible_for_scan
+      message: "The room scan cannot be recorded until the entry path is clear and the doorway is open."
+      instructor_note: "This is a toy progress gate for a coherent demo story, not a real visibility or entry protocol."
       blocks_transition: true
 
   - id: check-door-before-opening
@@ -61,7 +101,7 @@ rules:
       code: door_check_not_recorded
       message: "The door was opened before the POC door check cue was recorded."
       instructor_note: "This is not a real entry tactic. It only shows that the backend can notice a skipped door-condition cue."
-      blocks_transition: false
+      blocks_transition: true
 
   - id: entry-prerequisites
     severity: error
@@ -81,7 +121,6 @@ rules:
     when:
       action_type: enter_room
       state.scene_assessed: true
-      state.room_scanned: true
       state.ppe_confirmed: true
       state.backup_requested: true
       state.status_communicated: false
@@ -96,7 +135,6 @@ rules:
     when:
       action_type: enter_room
       state.scene_assessed: true
-      state.room_scanned: true
       state.ppe_confirmed: true
       state.backup_requested: true
       state.status_communicated: true
@@ -112,7 +150,6 @@ rules:
     when:
       action_type: enter_room
       state.scene_assessed: true
-      state.room_scanned: true
       state.ppe_confirmed: true
       state.backup_requested: true
       state.status_communicated: true
