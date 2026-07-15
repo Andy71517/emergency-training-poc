@@ -2,7 +2,11 @@ import json
 from pathlib import Path
 
 from backend.app.logging.jsonl_logger import JsonlSessionLogger
-from backend.app.logging.review_summary import format_review_summary, generate_review_summary
+from backend.app.logging.review_summary import (
+    action_progress_stories,
+    format_review_summary,
+    generate_review_summary,
+)
 from backend.app.orchestrator.session_manager import SessionManager
 from backend.tests.conftest import action_message
 
@@ -93,3 +97,17 @@ def test_review_summary_formats_human_readable_debrief(tmp_path: Path) -> None:
     assert "Key observations:" in rendered
     assert "Reviewer takeaways:" in rendered
     assert "Replay verified: yes" in rendered
+
+
+def test_action_progress_stories_explain_a_successful_retry() -> None:
+    timeline = [
+        {"action_type": "open_door", "validation_status": "error"},
+        {"action_type": "move_obstacle", "validation_status": "ok"},
+        {"action_type": "open_door", "validation_status": "ok"},
+    ]
+
+    stories = action_progress_stories(timeline)
+
+    assert len(stories) == 1
+    assert "required scenario state changed" in stories[0]
+    assert "later attempt was then accepted" in stories[0]

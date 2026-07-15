@@ -218,6 +218,11 @@ def format_menu_review(
             repeat = f" ({count} times)" if count > 1 else ""
             lines.append(f"  - {action}: {status}{repeat}")
 
+    progress_stories = summary.get("progress_stories") or []
+    if progress_stories:
+        lines.extend(["", "What changed before the retry:"])
+        lines.extend(f"  - {story}" for story in progress_stories)
+
     lines.extend(["", "Important cues at the end:"])
     lines.extend(cue_summary_lines(summary.get("environment_review") or {}))
 
@@ -333,6 +338,32 @@ def print_review(
         )
     )
     return summary
+
+
+def replay_or_saved_review(
+    log_path: Path,
+    output: Callable[[str], None] = print,
+) -> dict[str, Any]:
+    """Replay compatible logs, while keeping older saved reviews readable."""
+
+    try:
+        replay_result = replay(log_path)
+    except ValueError as error:
+        if "Replay mismatch" not in str(error):
+            raise
+        summary = generate_review_summary(log_path)
+        output(
+            "This older log cannot be strictly replayed against the current scenario version. "
+            "Its saved review is still available below."
+        )
+        output(format_menu_review(summary))
+        return {"verified": False, "saved_review_available": True}
+
+    output(
+        f"Replay verified {replay_result['events_replayed']} events. "
+        "The saved actions still reproduce the recorded final state."
+    )
+    return replay_result
 
 
 def offer_action_details(
@@ -519,11 +550,7 @@ async def interactive_menu(arguments: argparse.Namespace) -> int:
             elif choice == "6":
                 log_path = choose_log(input)
                 if log_path is not None:
-                    result = replay(log_path)
-                    print(
-                        f"Replay verified {result['events_replayed']} events. "
-                        f"Final state: {result['final_state']}"
-                    )
+                    replay_or_saved_review(log_path)
             elif choice == "7":
                 log_path = choose_log(input)
                 if log_path is not None:

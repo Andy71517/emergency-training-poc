@@ -76,6 +76,7 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
         "environment_review": review,
         "actions_taken": actions,
         "action_timeline": action_timeline,
+        "progress_stories": action_progress_stories(action_timeline),
         "total_actions": len(actions),
         "validation_counts": validation_counts,
         "warnings": warnings,
@@ -89,6 +90,38 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
         ),
         "reviewer_takeaways": reviewer_takeaways(warnings=warnings, errors=errors),
     }
+
+
+def action_progress_stories(action_timeline: list[dict[str, Any]]) -> list[str]:
+    """Explain repeated attempts as plain-English state progress, not raw fields."""
+
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for item in action_timeline:
+        grouped.setdefault(str(item.get("action_type", "action")), []).append(item)
+
+    stories: list[str] = []
+    for action_type, attempts in grouped.items():
+        if len(attempts) < 2:
+            continue
+        earlier_blocked = sum(
+            item.get("validation_status") in {"warning", "error"} for item in attempts[:-1]
+        )
+        if not earlier_blocked:
+            continue
+        label = action_type.replace("_", " ").capitalize()
+        if attempts[-1].get("validation_status") == "ok":
+            stories.append(
+                f"{label} was tried {len(attempts)} times. "
+                f"{earlier_blocked} earlier attempt{' produced' if earlier_blocked == 1 else 's produced'} "
+                "a review finding before the required scenario state changed; "
+                "the later attempt was then accepted."
+            )
+        else:
+            stories.append(
+                f"{label} was tried {len(attempts)} times but remained unavailable because "
+                "the required scenario state was still incomplete."
+            )
+    return stories
 
 
 def environment_review(state: dict[str, Any]) -> dict[str, Any]:
@@ -334,6 +367,11 @@ def format_review_summary(
             f"-> phase={item.get('phase_after') or 'unknown'}"
             f"{finding_suffix}"
         )
+
+    progress_stories = summary.get("progress_stories") or []
+    if progress_stories:
+        lines.extend(["", "Progress and retry story:"])
+        lines.extend([f"  - {story}" for story in progress_stories])
 
     lines.extend(["", "Environment cues:", *environment_lines(summary.get("environment_review") or {})])
     lines.extend(["", f"Warning findings ({len(warnings)}):"])

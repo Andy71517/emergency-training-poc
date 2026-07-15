@@ -27,6 +27,8 @@ Before the meeting, open:
 
 - `docs/presentations/emergency-training-poc-overview.pdf`
 - a terminal at the repo root
+- the local Scenario Review Console at `http://127.0.0.1:8765`
+- `docs/presentations/web-demo-phone-speaker-notes.md` on your phone
 - `docs/presentations/project-overview-speaker-notes.md`
 - `docs/presentations/project-overview-read-through-script.md`
 - Unreal, only if the debug panel is ready enough to show
@@ -88,24 +90,26 @@ Show slides 14-15.
 
 ## Demo flow
 
-From the repo root, run:
+From the repo root, run the local web demo:
 
 ```powershell
-python scripts/run_local_demo.py
+python scripts/run_web_demo.py
 ```
+
+Then open `http://127.0.0.1:8765`. Keep `python scripts/run_menu_demo.py` available as a terminal fallback.
 
 Point out:
 
-1. backend starts or is detected
-2. happy path session runs
-3. warning/error path session runs
-4. replay verification appears
-5. review summary explains the session
-6. environmental cues show up in the explanation
+1. the green backend-online badge
+2. one expected path
+3. its plain-English review
+4. one review-focused path
+5. the blocked, resolved, and retried action story
+6. environmental cues and discussion points
 
 Use this line during the review output:
 
-> This is the part I care about most: the system can explain what happened, not just say the scenario ended.
+> This is the part I care about most: the system can explain what happened, why an action was held, and what changed before a retry—not just say the scenario ended.
 
 ## Optional Unreal display moment
 

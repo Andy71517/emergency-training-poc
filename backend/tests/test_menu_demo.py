@@ -1,8 +1,10 @@
+import scripts.run_menu_demo as menu_demo
 from scripts.run_menu_demo import (
     DEMO_DEFINITIONS,
     format_menu_review,
     friendly_label,
     parse_action_list,
+    replay_or_saved_review,
     render_session_comparison,
     signed_difference,
     wants_yes,
@@ -93,3 +95,26 @@ def test_session_comparison_is_plain_english_and_not_a_score() -> None:
     assert "warnings +1, errors +1" in rendered
     assert "not clinical validation" in rendered
     assert signed_difference(0) == "0"
+
+
+def test_old_replay_mismatch_falls_back_to_saved_review(monkeypatch, tmp_path) -> None:
+    log_path = tmp_path / "older-session.jsonl"
+    log_path.write_text("{}\n", encoding="utf-8")
+    summary = {
+        "scenario_id": "smoke_inhalation_room_v0",
+        "review_headline": "Saved review remains readable.",
+        "end_condition_reached": False,
+        "action_timeline": [],
+        "environment_review": {},
+        "warnings": [],
+        "errors": [],
+    }
+    output: list[str] = []
+    monkeypatch.setattr(menu_demo, "replay", lambda _path: (_ for _ in ()).throw(ValueError("Replay mismatch at sequence 1")))
+    monkeypatch.setattr(menu_demo, "generate_review_summary", lambda _path: summary)
+
+    result = replay_or_saved_review(log_path, output.append)
+
+    assert result == {"verified": False, "saved_review_available": True}
+    assert "older log cannot be strictly replayed" in output[0]
+    assert "DEMO REVIEW" in output[1]

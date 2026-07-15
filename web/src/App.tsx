@@ -48,6 +48,7 @@ type Review = {
   end_condition_reached: boolean;
   total_actions: number;
   action_timeline: TimelineItem[];
+  progress_stories: string[];
   warnings: Finding[];
   errors: Finding[];
   environment_review: {
@@ -130,6 +131,7 @@ function App() {
   const [showActions, setShowActions] = useState(false);
 
   const selected = paths.find((path) => path.demo_id === selectedId) ?? paths[0];
+  const selectedIndex = Math.max(0, paths.findIndex((path) => path.demo_id === selected?.demo_id));
 
   useEffect(() => {
     const load = async () => {
@@ -233,6 +235,13 @@ function App() {
     }
   };
 
+  const continueToNextPath = () => {
+    if (!paths.length) return;
+    const nextPath = paths[(selectedIndex + 1) % paths.length];
+    setSelectedId(nextPath.demo_id);
+    resetReview();
+  };
+
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-slate-100">
       <div className="ambient ambient-one" />
@@ -329,6 +338,8 @@ function App() {
             {stage === "review" && review && (
               <ReviewView
                 logName={logName}
+                nextLabel={selectedIndex === paths.length - 1 ? "Return to first path" : "Continue to next path"}
+                onNext={continueToNextPath}
                 onReset={resetReview}
                 review={review}
                 selected={selected}
@@ -444,6 +455,8 @@ function ReviewView({
   showActions,
   setShowActions,
   onReset,
+  onNext,
+  nextLabel,
 }: {
   review: Review;
   selected?: DemoPath;
@@ -451,6 +464,8 @@ function ReviewView({
   showActions: boolean;
   setShowActions: (value: boolean) => void;
   onReset: () => void;
+  onNext: () => void;
+  nextLabel: string;
 }) {
   const cues = review.environment_review.room_cues ?? {};
   const cueRows = [
@@ -531,6 +546,13 @@ function ReviewView({
         </div>
       </div>
 
+      {review.progress_stories?.length > 0 && (
+        <div className="progress-story mt-5">
+          <div className="review-card-title"><Waypoints size={17} /> Why an action was retried</div>
+          {review.progress_stories.map((story) => <p className="mt-3 leading-6 text-slate-300" key={story}>{story}</p>)}
+        </div>
+      )}
+
       <button className="action-disclosure" onClick={() => setShowActions(!showActions)} type="button">
         <span><Waypoints size={16} /> Full action sequence</span>
         <span className="text-xs text-slate-500">
@@ -553,9 +575,14 @@ function ReviewView({
 
       <div className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
         <p className="truncate text-xs text-slate-600">Saved locally · {logName}</p>
-        <button className="secondary-button" onClick={onReset} type="button">
-          <RotateCcw size={15} /> Choose another path
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button className="secondary-button" onClick={onReset} type="button">
+            <RotateCcw size={15} /> Choose a path
+          </button>
+          <button className="next-button" onClick={onNext} type="button">
+            {nextLabel} <ArrowRight size={15} />
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -570,9 +597,17 @@ function ErrorView({ error, onReset }: { error: string; onReset: () => void }) {
         </div>
         <h2 className="mt-6 font-display text-3xl font-semibold">The demo could not finish</h2>
         <p className="mt-3 leading-7 text-slate-400">{error}</p>
-        <button className="secondary-button mx-auto mt-7" onClick={onReset} type="button">
-          <RotateCcw size={15} /> Return to selection
-        </button>
+        <p className="mt-3 text-sm leading-6 text-slate-500">
+          If the backend was restarted, reload this local page to reconnect. No session result is claimed when a run does not finish.
+        </p>
+        <div className="mt-7 flex flex-wrap justify-center gap-2">
+          <button className="secondary-button" onClick={onReset} type="button">
+            <RotateCcw size={15} /> Return to selection
+          </button>
+          <button className="next-button" onClick={() => window.location.reload()} type="button">
+            Reload local connection
+          </button>
+        </div>
       </div>
     </div>
   );
