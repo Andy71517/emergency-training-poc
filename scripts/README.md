@@ -3,6 +3,7 @@
 These scripts are small local helpers for running and checking the POC.
 
 - `run_local_demo.py`: runs the full local demo, including backend startup, sessions, replay, review summaries, and the wooden-chair physics preview.
+- `run_menu_demo.py`: presentation-friendly menu for the two toy scenarios. It can run happy and warning paths, replay or summarize saved logs, compare two reviews, check backend status, list scenarios, and accept a small custom action sequence.
 - `run_backend.sh`: starts the local backend.
 - `run_fake_trainee.py`: runs a happy-path session and a warning/error session.
 - `run_unreal_contract_harness.py`: tests the future Unreal WebSocket contract without rendering or gameplay.
@@ -14,6 +15,22 @@ These scripts are small local helpers for running and checking the POC.
 - `build_doc_pdfs.py`: builds the small PDF submission packet under `docs/submission-packet/`.
 
 Start with `run_local_demo.py` when you want to show the whole loop. Use the other scripts when you want to inspect one piece at a time.
+
+For a guided Dr. Cameron-friendly backend walkthrough, run:
+
+```powershell
+python scripts/run_menu_demo.py
+```
+
+This is presentation mode. It uses a clearly announced 2.5-second pause, offers optional action details, and asks before starting each additional path when option 5 runs all four.
+
+For the no-delay developer/test mode, run:
+
+```powershell
+python scripts/run_menu_demo.py --fast
+```
+
+Fast mode shows action details automatically and runs option 5 without between-run prompts. Both modes start the local backend if needed and produce the same deterministic session logs. The helper's warnings, errors, comparisons, and reviews are not clinical validation, real emergency guidance, or protocol authority.
 
 For the first Unreal debug panel, the easiest path is:
 

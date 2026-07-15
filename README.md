@@ -43,6 +43,22 @@ python scripts/run_local_demo.py
 
 It starts the backend if needed, runs demo sessions, replays the logs, prints review summaries, and shows the wooden-chair environment preview with physics disabled and enabled.
 
+For a guided, presentation-friendly backend walkthrough with menu choices, run:
+
+```powershell
+python scripts/run_menu_demo.py
+```
+
+This default presentation mode announces a brief 2.5-second pause before each run, keeps the first review concise, and offers to show the full action sequence. When running all four paths, it asks before moving to the next one so the audience can catch up or exit early.
+
+For developer checks with no intentional delay or between-run prompts, run:
+
+```powershell
+python scripts/run_menu_demo.py --fast
+```
+
+Both modes use the same deterministic backend behavior and JSONL logs. The menu can run happy and warning paths for both toy scenarios, replay or summarize saved logs, compare two reviews, show backend status, list scenarios, and accept a small custom action sequence.
+
 The repo now has two deterministic toy scenarios: a smoke-room scenario and a blocked-exit hallway scenario. They track simple environment cues like scans, doors, obstacles, communication, visibility, environment monitoring, exit path status, and occupant handling. If the trainee skips a cue, the backend returns a POC warning or error and the review explains what happened in plain English.
 
 In another terminal, run the fake trainee demo:
@@ -57,15 +73,16 @@ To test the future Unreal client contract, without building an Unreal scene:
 python scripts/run_unreal_contract_harness.py
 ```
 
-Run tests and inspect a generated session log:
+Run tests, create a fresh session log, and inspect it:
 
 ```powershell
 python -m pytest -q
 python -m ruff check backend scripts
 python -m compileall -q backend scripts docs\presentations\build_pdf.py docs\reports\build_report_pdf.py
 python scripts\check_json_files.py
-python scripts/replay_session.py logs/sessions/demo-happy.jsonl
-python scripts/summarize_log.py logs/sessions/demo-happy.jsonl
+python scripts/run_menu_demo.py --fast
+python scripts/replay_session.py logs/sessions/YOUR_CURRENT_SESSION.jsonl
+python scripts/summarize_log.py logs/sessions/YOUR_CURRENT_SESSION.jsonl
 ```
 
 Clients start by sending `{"message_type":"start_session"}` to `/ws/sessions/{session_id}`. After that, they send ordered `trainee_action` messages. Generated session logs live under `logs/sessions/` and are ignored by Git.

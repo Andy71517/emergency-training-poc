@@ -1,0 +1,95 @@
+from scripts.run_menu_demo import (
+    DEMO_DEFINITIONS,
+    format_menu_review,
+    friendly_label,
+    parse_action_list,
+    render_session_comparison,
+    signed_difference,
+    wants_yes,
+)
+
+
+def test_menu_includes_four_requested_deterministic_demo_paths() -> None:
+    assert [definition.scenario_id for definition in DEMO_DEFINITIONS] == [
+        "smoke_inhalation_room_v0",
+        "smoke_inhalation_room_v0",
+        "blocked_exit_hallway_v0",
+        "blocked_exit_hallway_v0",
+    ]
+    assert all(definition.actions for definition in DEMO_DEFINITIONS)
+
+
+def test_custom_action_parser_ignores_empty_entries() -> None:
+    assert parse_action_list(" assess_scene, , stop_scenario ") == [
+        "assess_scene",
+        "stop_scenario",
+    ]
+
+
+def test_menu_review_uses_plain_english_instead_of_internal_names() -> None:
+    summary = {
+        "scenario_id": "smoke_inhalation_room_v0",
+        "review_headline": "The run reached the toy end condition.",
+        "end_condition_reached": True,
+        "action_timeline": [
+            {"action_type": "assess_scene", "validation_status": "ok"},
+            {"action_type": "enter_room", "validation_status": "warning"},
+        ],
+        "environment_review": {"room_cues": {"room_scanned": True}},
+        "warnings": [{"code": "internal_code", "message": "Check the visible cue first."}],
+        "errors": [],
+    }
+
+    concise = format_menu_review(summary, replay_result={"verified": True})
+    rendered = format_menu_review(
+        summary,
+        replay_result={"verified": True},
+        show_action_details=True,
+    )
+
+    assert "Full sequence hidden" in concise
+    assert "assess_scene" not in concise
+    assert "Assess scene, Enter room" in rendered
+    assert "Enter room: Review suggested" in rendered
+    assert "Check the visible cue first." in rendered
+    assert "assess_scene" not in rendered
+    assert "internal_code" not in rendered
+    assert friendly_label("blocked_exit_hallway_v0") == "Blocked exit hallway"
+
+
+def test_yes_no_prompt_defaults_support_presentable_run_all_flow() -> None:
+    assert wants_yes("", default=True)
+    assert not wants_yes("", default=False)
+    assert wants_yes("yes", default=False)
+    assert not wants_yes("n", default=True)
+
+
+def test_session_comparison_is_plain_english_and_not_a_score() -> None:
+    first = {
+        "scenario_id": "smoke_inhalation_room_v0",
+        "scenario_outcome": "completed",
+        "end_condition_reached": True,
+        "total_actions": 13,
+        "warnings": [],
+        "errors": [],
+    }
+    second = {
+        "scenario_id": "smoke_inhalation_room_v0",
+        "scenario_outcome": "stopped",
+        "end_condition_reached": True,
+        "total_actions": 17,
+        "warnings": [{"code": "warning"}],
+        "errors": [{"code": "error"}],
+    }
+
+    rendered = render_session_comparison(
+        first,
+        second,
+        first_label="happy.jsonl",
+        second_label="warning.jsonl",
+    )
+
+    assert "Session comparison" in rendered
+    assert "warnings +1, errors +1" in rendered
+    assert "not clinical validation" in rendered
+    assert signed_difference(0) == "0"

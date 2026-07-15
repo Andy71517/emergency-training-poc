@@ -114,6 +114,7 @@ def environment_review(state: dict[str, Any]) -> dict[str, Any]:
             "environment_monitored": bool(state.get("environment_monitored")),
             "occupant_visible": bool(state.get("occupant_visible") or state.get("occupant_guided")),
             "occupant_located": bool(state.get("occupant_located") or state.get("occupant_guided")),
+            "occupant_removed": bool(state.get("occupant_removed")),
             "occupant_guided": bool(state.get("occupant_guided")),
             "exit_path_clear": bool(state.get("exit_path_clear") or environment.get("exit_path_clear")),
             "primary_exit_blocked": state.get("primary_exit_blocked"),
