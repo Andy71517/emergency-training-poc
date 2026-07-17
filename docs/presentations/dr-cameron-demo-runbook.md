@@ -2,6 +2,8 @@
 
 This is the live screen-share guide.
 
+For the final timed meeting sequence, use `docs/presentations/final-demo-run-of-show.md`. Keep this longer runbook as background and fallback detail.
+
 Use this when the goal is to explain the project clearly in a meeting, not to walk through every file in the repo.
 
 ## Meeting goal

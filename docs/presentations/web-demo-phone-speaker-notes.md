@@ -2,6 +2,8 @@
 
 These are private notes for the local Scenario Review Console. Keep them on your phone during the meeting. The audience does not need to see them.
 
+For the exact timed sequence, use `docs/presentations/final-demo-run-of-show.md`. This file is the longer question-and-answer backup.
+
 ## Before the meeting
 
 - Run `python scripts/run_web_demo.py`.
