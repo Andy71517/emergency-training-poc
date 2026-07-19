@@ -61,7 +61,11 @@ Both modes use the same deterministic backend behavior and JSONL logs. The menu 
 
 ## Local presentation webpage
 
-The one-page React demo turns the same four backend-owned paths and review summaries into a meeting-friendly visual console. It adds presentation pacing and an expandable action sequence without changing scenario behavior or validation rules.
+The one-page React demo turns the four guided backend-owned paths and review summaries into a meeting-friendly visual console. It adds presentation pacing, a live action trail, plain-English state changes, and an expandable action-by-action review without changing scenario ownership or validation rules.
+
+The four guided paths remain scripted so the live presentation is predictable. The webpage also has a separate **seeded exploration** mode: the backend creates a varied sequence of simulated-trainee inputs and displays the seed needed to reproduce it. This is deterministic pseudo-random exploration, not AI generation or real trainee behavior.
+
+A **user-controlled smoke-room path** lets a person choose one action at a time. Every choice goes through the same backend session, deterministic rules, state updates, JSONL logging, and final instructor review as the guided paths. It demonstrates the shape of a future trainee interaction, but it is not protocol instruction, validated assessment, or trainee scoring.
 
 For the recommended meeting setup, run one local command:
 

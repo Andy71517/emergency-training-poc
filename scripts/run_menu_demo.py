@@ -229,6 +229,18 @@ def format_menu_review(
     findings = menu_finding_lines(summary)
     lines.extend(["", "Discussion points:"])
     lines.extend(findings or ["  - No warnings or errors were recorded by the toy rules."])
+    instructor_review = summary.get("instructor_review") or {}
+    if instructor_review:
+        lines.extend(
+            [
+                "",
+                str(instructor_review.get("title") or "Instructor review message"),
+                f"  {instructor_review.get('summary')}",
+            ]
+        )
+        lines.extend(f"  - {item}" for item in instructor_review.get("evidence") or [])
+        lines.append(f"  Discussion prompt: {instructor_review.get('discussion_prompt')}")
+        lines.append(f"  Boundary: {instructor_review.get('boundary')}")
     lines.extend(["", DISCLAIMER])
     return "\n".join(lines)
 

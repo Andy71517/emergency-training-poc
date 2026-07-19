@@ -2,7 +2,11 @@
 
 from fastapi import APIRouter, HTTPException
 
-from backend.app.demo_catalog import DEMO_DEFINITIONS
+from backend.app.demo_catalog import (
+    DEMO_DEFINITIONS,
+    SMOKE_USER_CONTROLLED,
+    generate_exploration_definition,
+)
 from backend.app.logging.review_summary import generate_review_summary
 from backend.app.orchestrator.session_manager import SessionManager
 from backend.app.security import ensure_safe_identifier
@@ -14,7 +18,10 @@ def create_demo_router(session_manager: SessionManager) -> APIRouter:
     @router.get("/paths")
     def demo_paths() -> dict[str, object]:
         return {
-            "paths": [definition.as_public_dict() for definition in DEMO_DEFINITIONS],
+            "paths": [
+                definition.as_public_dict()
+                for definition in (*DEMO_DEFINITIONS, SMOKE_USER_CONTROLLED)
+            ],
             "disclaimer": (
                 "Deterministic POC rule checks only—not clinical validation, operational "
                 "guidance, or protocol authority."
@@ -35,5 +42,19 @@ def create_demo_router(session_manager: SessionManager) -> APIRouter:
         except ValueError as error:
             raise HTTPException(status_code=409, detail=str(error)) from error
         return {"review": summary, "log_name": log_path.name}
+
+    @router.get("/exploration/{scenario_id}")
+    def exploration_path(scenario_id: str, seed: int | None = None) -> dict[str, object]:
+        try:
+            definition = generate_exploration_definition(scenario_id, seed=seed)
+        except ValueError as error:
+            raise HTTPException(status_code=400, detail=str(error)) from error
+        return {
+            "path": definition.as_public_dict(),
+            "note": (
+                "Backend-generated simulated-trainee inputs. The sequence is not AI-generated, "
+                "real trainee data, or operational guidance."
+            ),
+        }
 
     return router

@@ -7,8 +7,11 @@ import {
   ChevronDown,
   CircleStop,
   Clock3,
+  Dices,
+  FileText,
   Flame,
   ListChecks,
+  MousePointerClick,
   Play,
   RotateCcw,
   ShieldCheck,
@@ -16,16 +19,19 @@ import {
   Waypoints,
   XCircle,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type DemoPath = {
   demo_id: string;
   label: string;
   short_label: string;
   scenario_id: string;
-  tone: "expected" | "review";
+  tone: "expected" | "review" | "explore" | "interactive";
   description: string;
   actions: string[];
+  mode?: "scripted" | "seeded_exploration" | "user_controlled";
+  seed?: number | null;
+  available_actions?: string[];
 };
 
 type Finding = {
@@ -37,8 +43,13 @@ type Finding = {
 type TimelineItem = {
   sequence_number: number;
   action_type: string;
+  action_description?: string;
+  result_summary?: string;
   validation_status: "ok" | "warning" | "error" | string;
+  phase_before?: string | null;
   phase_after?: string | null;
+  state_changes?: string[];
+  finding_messages?: string[];
 };
 
 type Review = {
@@ -49,6 +60,13 @@ type Review = {
   total_actions: number;
   action_timeline: TimelineItem[];
   progress_stories: string[];
+  instructor_review: {
+    title: string;
+    summary: string;
+    evidence: string[];
+    discussion_prompt: string;
+    boundary: string;
+  };
   warnings: Finding[];
   errors: Finding[];
   environment_review: {
@@ -60,6 +78,8 @@ type UpdateMessage = {
   message_type: string;
   validation_result?: {
     status: string;
+    warnings?: Finding[];
+    errors?: Finding[];
   };
   scenario_state?: {
     is_terminal: boolean;
@@ -70,7 +90,14 @@ type UpdateMessage = {
   message?: string;
 };
 
-type RunStage = "idle" | "pacing" | "running" | "review" | "error";
+type RunStage = "idle" | "pacing" | "running" | "interactive" | "review" | "error";
+
+type LiveEvent = {
+  action: string;
+  status: string;
+  phase: string;
+  message?: string;
+};
 
 const PRESENTATION_DELAY_MS = 2500;
 const ACTION_PACING_MS = 140;
@@ -129,9 +156,19 @@ function App() {
   const [logName, setLogName] = useState("");
   const [error, setError] = useState("");
   const [showActions, setShowActions] = useState(false);
+  const [explorationPath, setExplorationPath] = useState<DemoPath | null>(null);
+  const [generatingExploration, setGeneratingExploration] = useState(false);
+  const [liveEvents, setLiveEvents] = useState<LiveEvent[]>([]);
+  const [showInstructorFinale, setShowInstructorFinale] = useState(false);
+  const [interactiveSessionId, setInteractiveSessionId] = useState("");
+  const [interactiveFeedback, setInteractiveFeedback] = useState<LiveEvent | null>(null);
+  const [interactiveBusy, setInteractiveBusy] = useState(false);
+  const interactiveSocket = useRef<WebSocket | null>(null);
+  const interactiveSequence = useRef(0);
 
-  const selected = paths.find((path) => path.demo_id === selectedId) ?? paths[0];
-  const selectedIndex = Math.max(0, paths.findIndex((path) => path.demo_id === selected?.demo_id));
+  const displayPaths = explorationPath ? [...paths, explorationPath] : paths;
+  const selected = displayPaths.find((path) => path.demo_id === selectedId) ?? displayPaths[0];
+  const selectedIndex = Math.max(0, displayPaths.findIndex((path) => path.demo_id === selected?.demo_id));
 
   useEffect(() => {
     const load = async () => {
@@ -157,29 +194,53 @@ function App() {
   }, []);
 
   const resetReview = () => {
+    interactiveSocket.current?.close();
+    interactiveSocket.current = null;
+    interactiveSequence.current = 0;
     setReview(null);
     setLogName("");
     setProgress(0);
     setCurrentAction("");
     setCurrentPhase("awaiting_assessment");
     setShowActions(false);
+    setLiveEvents([]);
+    setShowInstructorFinale(false);
+    setInteractiveSessionId("");
+    setInteractiveFeedback(null);
+    setInteractiveBusy(false);
     setError("");
     setStage("idle");
   };
 
+  const loadReview = async (sessionId: string) => {
+    const response = await fetch(`/api/demo/reviews/${sessionId}`);
+    if (!response.ok) throw new Error("The review could not be loaded from the backend.");
+    const payload = (await response.json()) as { review: Review; log_name: string };
+    setReview(payload.review);
+    setLogName(payload.log_name);
+    setCurrentAction("");
+    setShowInstructorFinale(true);
+    setStage("review");
+  };
+
   const runDemo = async () => {
     if (!selected || stage === "running" || stage === "pacing") return;
+    if (selected.mode === "user_controlled") {
+      await startInteractiveRun();
+      return;
+    }
     setReview(null);
     setError("");
     setProgress(0);
     setCurrentPhase("awaiting_assessment");
     setShowActions(false);
+    setLiveEvents([]);
     setStage("pacing");
 
     try {
       await sleep(PRESENTATION_DELAY_MS);
       setStage("running");
-      const sessionId = `web-${selected.demo_id}-${Date.now().toString(36)}`.slice(0, 64);
+      const sessionId = `web-${selected.demo_id}-${crypto.randomUUID()}`.slice(0, 64);
       const socket = await openSocket(sessionId);
       socket.send(JSON.stringify({ message_type: "start_session", scenario_id: selected.scenario_id }));
       const started = await receiveJson(socket);
@@ -204,7 +265,7 @@ function App() {
               scenario_id: selected.scenario_id,
               event_id: eventId,
               timestamp: new Date().toISOString(),
-              actor_id: "web-demo-trainee",
+              actor_id: selected.mode === "seeded_exploration" ? "simulated-trainee-inputs" : "web-demo-trainee",
               action_type: action,
               payload: {},
               sequence_number: index + 1,
@@ -213,7 +274,13 @@ function App() {
         );
         const update = await receiveJson(socket);
         if (update.message_type === "error") throw new Error(update.message ?? "An action failed.");
-        setCurrentPhase(update.scenario_state?.state?.phase ?? currentPhase);
+        const nextPhase = update.scenario_state?.state?.phase ?? currentPhase;
+        const status = update.validation_result?.status ?? "unknown";
+        setCurrentPhase(nextPhase);
+        setLiveEvents((events) => [
+          ...events,
+          { action: friendlyLabel(action), status, phase: friendlyLabel(nextPhase) },
+        ]);
         setProgress(((index + 1) / selected.actions.length) * 100);
         if (update.scenario_state?.is_terminal) {
           await receiveJson(socket);
@@ -222,32 +289,133 @@ function App() {
         await sleep(ACTION_PACING_MS);
       }
 
-      const response = await fetch(`/api/demo/reviews/${sessionId}`);
-      if (!response.ok) throw new Error("The review could not be loaded from the backend.");
-      const payload = (await response.json()) as { review: Review; log_name: string };
-      setReview(payload.review);
-      setLogName(payload.log_name);
-      setCurrentAction("");
-      setStage("review");
+      await loadReview(sessionId);
     } catch (caught) {
       setStage("error");
       setError(caught instanceof Error ? caught.message : "The demo could not finish.");
     }
   };
 
+  const startInteractiveRun = async () => {
+    if (!selected) return;
+    setReview(null);
+    setError("");
+    setLiveEvents([]);
+    setInteractiveFeedback(null);
+    setCurrentPhase("awaiting_assessment");
+    setStage("pacing");
+    try {
+      await sleep(PRESENTATION_DELAY_MS);
+      const sessionId = `web-user-controlled-${crypto.randomUUID()}`.slice(0, 64);
+      const socket = await openSocket(sessionId);
+      socket.send(JSON.stringify({ message_type: "start_session", scenario_id: selected.scenario_id }));
+      const started = await receiveJson(socket);
+      if (started.message_type === "error") throw new Error(started.message ?? "Session could not start.");
+      interactiveSocket.current = socket;
+      interactiveSequence.current = 0;
+      setInteractiveSessionId(sessionId);
+      setStage("interactive");
+    } catch (caught) {
+      setStage("error");
+      setError(caught instanceof Error ? caught.message : "The user-controlled run could not start.");
+    }
+  };
+
+  const submitInteractiveAction = async (action: string) => {
+    const socket = interactiveSocket.current;
+    if (!socket || !selected || !interactiveSessionId || interactiveBusy) return;
+    setInteractiveBusy(true);
+    interactiveSequence.current += 1;
+    const sequenceNumber = interactiveSequence.current;
+    const eventId = `event-${crypto.randomUUID()}`;
+    setCurrentAction(friendlyLabel(action));
+    try {
+      socket.send(
+        JSON.stringify({
+          schema_version: "0.1.0",
+          message_type: "trainee_action",
+          session_id: interactiveSessionId,
+          scenario_id: selected.scenario_id,
+          message_id: `message-${crypto.randomUUID()}`,
+          timestamp: new Date().toISOString(),
+          sequence_number: sequenceNumber,
+          correlation_event_id: eventId,
+          trainee_action: {
+            schema_version: "0.1.0",
+            session_id: interactiveSessionId,
+            scenario_id: selected.scenario_id,
+            event_id: eventId,
+            timestamp: new Date().toISOString(),
+            actor_id: "user-controlled-poc",
+            action_type: action,
+            payload: {},
+            sequence_number: sequenceNumber,
+          },
+        }),
+      );
+      const update = await receiveJson(socket);
+      if (update.message_type === "error") throw new Error(update.message ?? "The action could not be processed.");
+      const nextPhase = update.scenario_state?.state?.phase ?? currentPhase;
+      const status = update.validation_result?.status ?? "unknown";
+      const findings = [
+        ...(update.validation_result?.errors ?? []),
+        ...(update.validation_result?.warnings ?? []),
+      ];
+      const feedback = {
+        action: friendlyLabel(action),
+        status,
+        phase: friendlyLabel(nextPhase),
+        message: findings[0]?.message,
+      };
+      setCurrentPhase(nextPhase);
+      setInteractiveFeedback(feedback);
+      setLiveEvents((events) => [...events, feedback]);
+      if (update.scenario_state?.is_terminal) {
+        await receiveJson(socket);
+        interactiveSocket.current = null;
+        await loadReview(interactiveSessionId);
+      }
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "The action could not be processed.");
+      setStage("error");
+    } finally {
+      setInteractiveBusy(false);
+    }
+  };
+
+  const generateExploration = async () => {
+    const scenarioId = selected?.scenario_id ?? "smoke_inhalation_room_v0";
+    setGeneratingExploration(true);
+    setError("");
+    try {
+      const response = await fetch(`/api/demo/exploration/${scenarioId}`);
+      if (!response.ok) throw new Error("The backend could not generate an exploration run.");
+      const payload = (await response.json()) as { path: DemoPath };
+      setExplorationPath(payload.path);
+      setSelectedId(payload.path.demo_id);
+      resetReview();
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Exploration generation failed.");
+      setStage("error");
+    } finally {
+      setGeneratingExploration(false);
+    }
+  };
+
   const continueToNextPath = () => {
     if (!paths.length) return;
-    const nextPath = paths[(selectedIndex + 1) % paths.length];
+    const nextPath = displayPaths[(selectedIndex + 1) % displayPaths.length];
     setSelectedId(nextPath.demo_id);
     resetReview();
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-ink text-slate-100">
+    <main className="app-shell min-h-screen overflow-hidden bg-ink text-slate-100">
+      <div className="technical-grid" />
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
-      <div className="relative mx-auto flex min-h-screen max-w-[1540px] flex-col px-5 py-5 sm:px-8 lg:px-10">
-        <header className="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="app-frame relative mx-auto flex min-h-screen max-w-[1540px] flex-col px-5 py-5 sm:px-8 lg:px-10">
+        <header className="app-header flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
             <div className="grid size-11 place-items-center rounded-2xl border border-amber-300/30 bg-amber-300/10 text-amber-300 shadow-glow-amber">
               <Flame size={22} strokeWidth={1.8} />
@@ -270,19 +438,19 @@ function App() {
           </div>
         </header>
 
-        <section className="grid flex-1 gap-6 py-6 lg:grid-cols-[0.88fr_1.55fr]">
-          <aside className="panel flex flex-col p-5 sm:p-6">
+        <section className="workspace-grid grid flex-1 gap-6 py-6 lg:grid-cols-[0.82fr_1.62fr]">
+          <aside className="panel scenario-sidebar flex flex-col p-5 sm:p-6">
             <div className="mb-5">
               <p className="eyebrow text-azure-300">Choose a demonstration</p>
-              <h2 className="mt-2 font-display text-2xl font-semibold">Four paths. Two review stories.</h2>
+              <h2 className="mt-2 font-display text-2xl font-semibold">Clear paths. Rich review stories.</h2>
               <p className="mt-2 max-w-md text-sm leading-6 text-slate-400">
-                Expected paths show a clean backend-owned state transition. Review paths deliberately
-                create discussion points.
+                Guided paths stay repeatable for presentation. A separate seeded exploration mode
+                creates varied simulated-trainee inputs that can still be reproduced.
               </p>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-              {paths.map((path, index) => (
+              {displayPaths.map((path, index) => (
                 <button
                   key={path.demo_id}
                   className={`scenario-card ${selected?.demo_id === path.demo_id ? "scenario-selected" : ""}`}
@@ -299,8 +467,8 @@ function App() {
                     </span>
                     <span className="mt-1 block text-xs leading-5 text-slate-400">{path.description}</span>
                   </span>
-                  <span className={`tone-mark ${path.tone === "review" ? "tone-review" : "tone-expected"}`}>
-                    {path.tone === "review" ? <AlertTriangle size={16} /> : <Check size={16} />}
+                  <span className={`tone-mark tone-${path.tone}`}>
+                    {path.tone === "review" ? <AlertTriangle size={16} /> : path.tone === "explore" ? <Dices size={16} /> : path.tone === "interactive" ? <MousePointerClick size={16} /> : <Check size={16} />}
                   </span>
                 </button>
               ))}
@@ -308,13 +476,22 @@ function App() {
 
             <div className="mt-auto pt-5">
               <button
+                className="explore-button mb-3"
+                disabled={!backendOnline || generatingExploration || stage === "running" || stage === "pacing" || stage === "interactive"}
+                onClick={() => void generateExploration()}
+                type="button"
+              >
+                <Dices size={17} />
+                <span><strong>{generatingExploration ? "Generating…" : "Generate seeded exploration"}</strong><small>Developer tool · uses selected scenario</small></span>
+              </button>
+              <button
                 className="run-button"
-                disabled={!selected || !backendOnline || stage === "running" || stage === "pacing"}
+                disabled={!selected || !backendOnline || stage === "running" || stage === "pacing" || stage === "interactive"}
                 onClick={() => void runDemo()}
                 type="button"
               >
                 {stage === "pacing" ? <Clock3 size={18} /> : <Play size={18} fill="currentColor" />}
-                {stage === "pacing" ? "Preparing presentation…" : "Run selected path"}
+                {stage === "pacing" ? "Preparing presentation…" : selected?.mode === "user_controlled" ? "Start choosing actions" : "Run selected path"}
                 <ArrowRight className="ml-auto" size={18} />
               </button>
               <p className="mt-3 flex items-start gap-2 text-xs leading-5 text-slate-500">
@@ -324,7 +501,7 @@ function App() {
             </div>
           </aside>
 
-          <section className="panel relative min-h-[620px] overflow-hidden">
+          <section className="panel workspace-panel relative min-h-[620px] overflow-hidden">
             {stage === "idle" && <IdleView selected={selected} />}
             {stage === "pacing" && <PacingView selected={selected} />}
             {stage === "running" && (
@@ -333,12 +510,32 @@ function App() {
                 progress={progress}
                 currentAction={currentAction}
                 currentPhase={currentPhase}
+                liveEvents={liveEvents}
               />
             )}
-            {stage === "review" && review && (
+            {stage === "interactive" && (
+              <InteractiveView
+                actions={(selected?.available_actions ?? []).filter((action) => action !== "stop_scenario")}
+                busy={interactiveBusy}
+                currentPhase={currentPhase}
+                feedback={interactiveFeedback}
+                history={liveEvents}
+                onAction={(action) => void submitInteractiveAction(action)}
+                onFinish={() => void submitInteractiveAction("stop_scenario")}
+                selected={selected}
+              />
+            )}
+            {stage === "review" && review && showInstructorFinale && (
+              <InstructorFinale
+                onOpenReview={() => setShowInstructorFinale(false)}
+                review={review}
+                selected={selected}
+              />
+            )}
+            {stage === "review" && review && !showInstructorFinale && (
               <ReviewView
                 logName={logName}
-                nextLabel={selectedIndex === paths.length - 1 ? "Return to first path" : "Continue to next path"}
+                nextLabel={selectedIndex === displayPaths.length - 1 ? "Return to first path" : "Continue to next path"}
                 onNext={continueToNextPath}
                 onReset={resetReview}
                 review={review}
@@ -351,7 +548,7 @@ function App() {
           </section>
         </section>
 
-        <footer className="flex flex-col gap-2 border-t border-white/10 pt-4 text-xs leading-5 text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <footer className="app-footer flex flex-col gap-2 border-t border-white/10 pt-4 text-xs leading-5 text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>{disclaimer || "Deterministic POC rule checks only—not operational guidance."}</p>
           <p className="shrink-0">No real AI adaptation, smoke physics, sensing, or trainee scoring.</p>
         </footer>
@@ -365,8 +562,8 @@ function IdleView({ selected }: { selected?: DemoPath }) {
     <div className="flex h-full min-h-[620px] flex-col justify-between p-7 sm:p-10">
       <div className="flex items-center justify-between">
         <span className="section-chip"><Sparkles size={14} /> Presenter view</span>
-        <span className={`path-chip ${selected?.tone === "review" ? "path-review" : "path-expected"}`}>
-          {selected?.tone === "review" ? "Review-focused" : "Expected path"}
+        <span className={`path-chip path-${selected?.tone ?? "expected"}`}>
+          {selected?.tone === "review" ? "Review-focused" : selected?.tone === "explore" ? "Seeded exploration" : selected?.tone === "interactive" ? "User controlled" : "Expected path"}
         </span>
       </div>
       <div className="max-w-2xl py-14">
@@ -379,9 +576,9 @@ function IdleView({ selected }: { selected?: DemoPath }) {
         </p>
       </div>
       <div className="grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-3">
-        <MiniFact icon={<Waypoints size={17} />} label="Scripted actions" value={`${selected?.actions.length ?? 0}`} />
+        <MiniFact icon={<Waypoints size={17} />} label={selected?.mode === "seeded_exploration" ? "Generated actions" : selected?.mode === "user_controlled" ? "Available actions" : "Scripted actions"} value={`${selected?.mode === "user_controlled" ? selected.available_actions?.length ?? 0 : selected?.actions.length ?? 0}`} />
         <MiniFact icon={<Activity size={17} />} label="State owner" value="FastAPI backend" />
-        <MiniFact icon={<ListChecks size={17} />} label="Review style" value="Plain English" />
+        <MiniFact icon={selected?.seed ? <Dices size={17} /> : <ListChecks size={17} />} label={selected?.seed ? "Reproducible seed" : "Review style"} value={selected?.seed ? String(selected.seed) : "Plain English"} />
       </div>
     </div>
   );
@@ -409,11 +606,13 @@ function RunningView({
   progress,
   currentAction,
   currentPhase,
+  liveEvents,
 }: {
   selected?: DemoPath;
   progress: number;
   currentAction: string;
   currentPhase: string;
+  liveEvents: LiveEvent[];
 }) {
   return (
     <div className="flex h-full min-h-[620px] flex-col justify-center p-8 sm:p-12">
@@ -440,9 +639,117 @@ function RunningView({
           <Waypoints size={14} /> Backend progress state: {friendlyLabel(currentPhase)}
         </div>
       </div>
+      <div className="live-trail mt-5">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Latest backend results</p>
+          <span className="text-xs text-slate-600">Showing the latest four</span>
+        </div>
+        <div className="mt-3 space-y-2">
+          {liveEvents.slice(-4).reverse().map((event, index) => (
+            <div className="live-event" key={`${event.action}-${liveEvents.length - index}`}>
+              <ActionStatus status={event.status} />
+              <span className="min-w-0 flex-1 truncate text-sm text-slate-200">{event.action}</span>
+              <span className="hidden text-xs text-slate-500 sm:inline">{event.phase}</span>
+            </div>
+          ))}
+          {!liveEvents.length && <p className="text-sm text-slate-500">Waiting for the first recorded action…</p>}
+        </div>
+      </div>
       <p className="mt-6 flex items-center gap-2 text-sm text-slate-500">
         <Activity className="animate-pulse text-azure-300" size={16} />
         Applying deterministic scenario transitions and saving ordered JSONL events.
+      </p>
+    </div>
+  );
+}
+
+function InteractiveView({
+  selected,
+  actions,
+  currentPhase,
+  feedback,
+  history,
+  busy,
+  onAction,
+  onFinish,
+}: {
+  selected?: DemoPath;
+  actions: string[];
+  currentPhase: string;
+  feedback: LiveEvent | null;
+  history: LiveEvent[];
+  busy: boolean;
+  onAction: (action: string) => void;
+  onFinish: () => void;
+}) {
+  return (
+    <div className="interactive-stage h-full min-h-[620px] overflow-y-auto p-6 sm:p-8 lg:p-10">
+      <div className="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className="eyebrow text-violet-300">User-controlled POC run</p>
+          <h2 className="mt-2 font-display text-3xl font-semibold">{selected?.short_label}</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
+            Choose one action at a time. The backend checks the action against its current scenario state and responds immediately.
+          </p>
+        </div>
+        <div className="phase-badge"><Waypoints size={14} /> Current progress: {friendlyLabel(currentPhase)}</div>
+      </div>
+
+      <div className="mt-6 grid gap-5 xl:grid-cols-[1.15fr_.85fr]">
+        <section className="review-card">
+          <div className="review-card-title"><MousePointerClick size={17} /> Choose the next action</div>
+          <div className="action-choice-grid mt-4">
+            {actions.map((action) => (
+              <button disabled={busy} key={action} onClick={() => onAction(action)} type="button">
+                <span>{friendlyLabel(action)}</span><ArrowRight size={14} />
+              </button>
+            ))}
+          </div>
+          <button className="finish-run-button mt-4" disabled={busy} onClick={onFinish} type="button">
+            <CircleStop size={16} /> Finish run and create review
+          </button>
+        </section>
+
+        <div className="space-y-5">
+          <section className={`response-card response-${feedback?.status ?? "waiting"}`}>
+            <div className="review-card-title"><Activity size={17} /> Backend response</div>
+            {feedback ? (
+              <div className="mt-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <strong className="text-lg text-slate-100">{feedback.action}</strong>
+                  <ActionStatus status={feedback.status} />
+                </div>
+                <p className="mt-3 text-sm leading-6 text-slate-300">
+                  {feedback.message ?? (feedback.status === "ok" ? "The action was accepted by the current POC state." : "The backend recorded a review finding for this action.")}
+                </p>
+                <p className="mt-3 text-xs text-slate-500">Progress after action: {feedback.phase}</p>
+              </div>
+            ) : (
+              <p className="mt-4 text-sm leading-6 text-slate-500">Choose an action to see what the backend records and whether the scenario moves forward.</p>
+            )}
+          </section>
+
+          <section className="review-card">
+            <div className="flex items-center justify-between">
+              <div className="review-card-title"><ListChecks size={17} /> Recorded so far</div>
+              <span className="text-xs text-slate-600">{history.length} actions</span>
+            </div>
+            <div className="mt-3 space-y-2">
+              {history.slice(-5).reverse().map((event, index) => (
+                <div className="live-event" key={`${event.action}-${history.length - index}`}>
+                  <ActionStatus status={event.status} />
+                  <span className="min-w-0 flex-1 truncate text-sm">{event.action}</span>
+                </div>
+              ))}
+              {!history.length && <p className="text-sm text-slate-500">No actions recorded yet.</p>}
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <p className="mt-5 flex items-start gap-2 text-xs leading-5 text-slate-500">
+        <ShieldCheck className="mt-0.5 shrink-0" size={14} />
+        This interaction demonstrates backend state and deterministic POC findings. It does not provide protocol guidance or a trainee score.
       </p>
     </div>
   );
@@ -497,6 +804,7 @@ function ReviewView({
             {selected?.short_label}
           </h2>
           <p className="mt-3 max-w-2xl leading-6 text-slate-400">{review.review_headline}</p>
+          {selected?.seed && <div className="seed-badge mt-4"><Dices size={14} /> Reproducible exploration seed: {selected.seed}</div>}
         </div>
         <div className={`result-seal ${review.errors.length ? "result-review" : "result-complete"}`}>
           {review.errors.length ? <AlertTriangle size={18} /> : <CheckCircle2 size={18} />}
@@ -508,6 +816,17 @@ function ReviewView({
         <Metric label="Actions recorded" value={review.total_actions} tone="azure" />
         <Metric label="Review suggestions" value={review.warnings.length} tone="amber" />
         <Metric label="Blocked actions" value={review.errors.length} tone="red" />
+      </div>
+
+      <div className="story-banner mt-5">
+        <div className="story-icon"><FileText size={20} /></div>
+        <div>
+          <p className="eyebrow text-azure-300">Session story</p>
+          <p className="mt-1 text-sm leading-6 text-slate-300">
+            The run finished in <strong>{friendlyLabel(review.scenario_outcome ?? "unknown")}</strong> state after {review.total_actions} recorded actions.
+            {review.errors.length ? ` ${review.errors.length} action${review.errors.length === 1 ? " was" : "s were"} blocked by the current POC state.` : " No actions were blocked by the POC rules."}
+          </p>
+        </div>
       </div>
 
       <div className="mt-6 grid gap-5 xl:grid-cols-[0.92fr_1.08fr]">
@@ -561,17 +880,54 @@ function ReviewView({
         <ChevronDown className={`transition-transform ${showActions ? "rotate-180" : ""}`} size={17} />
       </button>
       {showActions && (
-        <ol className="action-list">
+        <ol className="action-list action-detail-list">
           {review.action_timeline.map((item) => (
             <li key={`${item.sequence_number}-${item.action_type}`}>
               <span className="action-number">{String(item.sequence_number).padStart(2, "0")}</span>
-              <span className="flex-1">{friendlyLabel(item.action_type)}</span>
-              {item.phase_after && <span className="hidden text-[.67rem] text-slate-600 lg:inline">{friendlyLabel(item.phase_after)}</span>}
-              <ActionStatus status={item.validation_status} />
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <strong className="text-sm text-slate-100">{friendlyLabel(item.action_type)}</strong>
+                  <ActionStatus status={item.validation_status} />
+                </div>
+                <p className="mt-1 text-xs leading-5 text-slate-400">{item.action_description}</p>
+                <p className="mt-1 text-xs font-medium leading-5 text-slate-300">{item.result_summary}</p>
+                {(item.state_changes?.length ?? 0) > 0 && (
+                  <div className="state-change-list mt-2">
+                    {item.state_changes?.map((change) => <span key={change}>{change}</span>)}
+                  </div>
+                )}
+                {(item.finding_messages?.length ?? 0) > 0 && (
+                  <p className="mt-2 text-xs leading-5 text-amber-200/80">Review note: {item.finding_messages?.join(" ")}</p>
+                )}
+              </div>
+              {item.phase_after && <span className="phase-mini">{friendlyLabel(item.phase_after)}</span>}
             </li>
           ))}
         </ol>
       )}
+
+      <section className="instructor-message mt-6" aria-labelledby="instructor-review-title">
+        <div className="instructor-message-header">
+          <div className="instructor-mark"><ShieldCheck size={22} /></div>
+          <div>
+            <p className="eyebrow text-amber-300">Final discussion aid</p>
+            <h3 className="mt-1 font-display text-xl font-semibold" id="instructor-review-title">
+              {review.instructor_review.title}
+            </h3>
+          </div>
+        </div>
+        <p className="mt-4 leading-6 text-slate-200">{review.instructor_review.summary}</p>
+        <ul className="instructor-evidence mt-4">
+          {review.instructor_review.evidence.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+        <div className="discussion-prompt mt-4">
+          <span>Suggested discussion prompt</span>
+          <p>{review.instructor_review.discussion_prompt}</p>
+        </div>
+        <p className="mt-4 border-t border-white/10 pt-3 text-xs leading-5 text-slate-500">
+          {review.instructor_review.boundary}
+        </p>
+      </section>
 
       <div className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
         <p className="truncate text-xs text-slate-600">Saved locally · {logName}</p>
@@ -584,6 +940,58 @@ function ReviewView({
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+function InstructorFinale({
+  review,
+  selected,
+  onOpenReview,
+}: {
+  review: Review;
+  selected?: DemoPath;
+  onOpenReview: () => void;
+}) {
+  return (
+    <div className="finale-stage min-h-[620px] p-6 sm:p-10">
+      <div className="finale-heading">
+        <span className="section-chip"><CheckCircle2 size={14} /> Session review ready</span>
+        <p>{selected?.short_label}</p>
+      </div>
+      <button
+        aria-label="Open the full post-scenario review"
+        className="instructor-message instructor-finale-card"
+        onClick={onOpenReview}
+        type="button"
+      >
+        <div className="instructor-message-header">
+          <div className="instructor-mark"><ShieldCheck size={24} /></div>
+          <div className="text-left">
+            <p className="eyebrow text-amber-300">Final discussion aid</p>
+            <h2 className="mt-1 font-display text-2xl font-semibold sm:text-3xl">
+              {review.instructor_review.title}
+            </h2>
+          </div>
+        </div>
+        <p className="mt-5 text-left text-lg leading-7 text-slate-100">
+          {review.instructor_review.summary}
+        </p>
+        <ul className="instructor-evidence mt-5 text-left">
+          {review.instructor_review.evidence.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+        <div className="discussion-prompt mt-5 text-left">
+          <span>Suggested discussion prompt</span>
+          <p>{review.instructor_review.discussion_prompt}</p>
+        </div>
+        <p className="mt-5 border-t border-white/10 pt-4 text-left text-xs leading-5 text-slate-500">
+          {review.instructor_review.boundary}
+        </p>
+        <span className="finale-open-hint">
+          Open full session review <ArrowRight size={16} />
+        </span>
+      </button>
+      <p className="finale-footnote">One click opens cues, findings, action details, and path controls.</p>
     </div>
   );
 }

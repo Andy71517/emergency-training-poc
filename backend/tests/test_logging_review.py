@@ -37,6 +37,10 @@ def test_review_summary_reports_actions_findings_and_end_state(tmp_path: Path) -
     assert summary["validation_counts"]["warning"] >= 1
     assert summary["action_timeline"][0]["action_type"] == "confirm_ppe"
     assert summary["action_timeline"][0]["validation_status"] == "warning"
+    assert summary["action_timeline"][0]["action_description"]
+    assert summary["action_timeline"][0]["result_summary"]
+    assert summary["action_timeline"][0]["phase_before"] == "awaiting_assessment"
+    assert summary["action_timeline"][1]["state_changes"]
     assert summary["warnings"]
     assert summary["warnings"][0]["instructor_note"]
     assert summary["end_condition_reached"] is True
@@ -45,6 +49,10 @@ def test_review_summary_reports_actions_findings_and_end_state(tmp_path: Path) -
     assert summary["final_state"]["scenario_outcome"] == "stopped"
     assert summary["key_observations"]
     assert summary["reviewer_takeaways"]
+    assert summary["instructor_review"]["title"] == "Instructor review message"
+    assert summary["instructor_review"]["evidence"]
+    assert "not a grade" in summary["instructor_review"]["boundary"]
+    assert "remained unresolved" in summary["instructor_review"]["discussion_prompt"]
     room_cues = summary["environment_review"]["room_cues"]
     assert room_cues["room_scanned"] is False
     assert room_cues["status_communicated"] is False

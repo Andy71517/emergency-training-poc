@@ -19,6 +19,7 @@ The hallway scenario is optional. It is there to prove that the review format wo
 - Open `http://127.0.0.1:8765`.
 - Confirm that **Backend online** is green.
 - Select **Smoke room · expected**, but do not start it yet.
+- Keep **Seeded exploration** out of the main route; use it only if someone asks about varied inputs.
 - Keep `docs/presentations/web-demo-phone-speaker-notes.md` open on your phone.
 - Keep a second terminal ready for `python scripts/run_menu_demo.py` if needed.
 - Close unrelated windows and silence notifications.
@@ -40,7 +41,7 @@ The hallway scenario is optional. It is there to prove that the review format wo
 | 4:15–5:20 | On the review, point to **Why an action was retried**, then the discussion points. | “The repeated action is intentional. The first attempt happened too early. Another action changed the scenario state, and the later attempt was accepted. The system explains that relationship directly instead of making the audience decode raw fields.” |
 | 5:20–5:40 | Keep the review visible. | “This shows software state progression. It does not claim to define the correct real-world emergency procedure.” |
 | 5:40–6:20 | Point back to the overall review. | “For an instructor, this creates a clear record for the discussion after a scenario: actions, cues, findings, retries, and final state. It supports professional judgment; it does not replace it.” |
-| 6:20–7:00 | Stop clicking. Face the audience if possible. | “The software can consistently record and organize evidence. The instructor should decide what it means and guide the discussion. What information would you want to notice first in a post-scenario review?” |
+| 6:20–7:00 | Point to the final **Instructor review message**, then stop clicking. | “The software can consistently record and organize evidence. This final message gives the instructor a discussion starting point, but the instructor still decides what the evidence means. What information would you want to notice first in a post-scenario review?” |
 
 ## Follow-up question
 
@@ -59,6 +60,20 @@ Say:
 > The hallway scenario uses the same review structure. That helps show that the system is not limited to one hardcoded smoke-room example.
 
 Run one hallway path only if Dr. Cameron asks to see the second scenario.
+
+If someone asks whether the review paths are random, say:
+
+> The four guided paths are scripted so the presentation is repeatable. The separate seeded exploration mode generates a varied simulated-trainee action order in the backend. Its seed lets me reproduce and review the exact same run later.
+
+This exploration is pseudo-random, not AI-generated, and it does not represent real trainee behavior.
+
+If she asks what the trainee-facing interaction could look like, open **Smoke room · choose actions** and select two or three actions manually.
+
+Say:
+
+> This is the user-controlled POC path. The person chooses an action, but the backend still owns the scenario state and responds to each choice. It demonstrates the interaction loop; it is not a validated training assessment or protocol guide.
+
+Finish the run to show that user-controlled actions produce the same instructor finale and detailed review.
 
 ## Four-minute version
 

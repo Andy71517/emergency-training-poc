@@ -1,7 +1,11 @@
-"""Shared deterministic demo paths for local presentation clients."""
+"""Shared scripted paths and reproducible exploration runs for local clients."""
 
+import random
+import secrets
 from dataclasses import asdict, dataclass
 from typing import Any
+
+from backend.app.scenario_engine.loader import load_scenario
 
 
 @dataclass(frozen=True)
@@ -15,6 +19,9 @@ class DemoDefinition:
     tone: str
     description: str
     actions: tuple[str, ...]
+    mode: str = "scripted"
+    seed: int | None = None
+    available_actions: tuple[str, ...] = ()
 
     def as_public_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -118,4 +125,53 @@ HALLWAY_WARNING = DemoDefinition(
     ),
 )
 
+SMOKE_USER_CONTROLLED = DemoDefinition(
+    demo_id="smoke-room-user-controlled",
+    label="Smoke-room user-controlled path",
+    short_label="Smoke room · choose actions",
+    scenario_id="smoke_inhalation_room_v0",
+    tone="interactive",
+    description=(
+        "Choose one action at a time and see how the backend-owned scenario responds. "
+        "This is a POC interaction, not protocol guidance or trainee scoring."
+    ),
+    actions=(),
+    mode="user_controlled",
+    available_actions=load_scenario("smoke_inhalation_room_v0").allowed_actions,
+)
+
 DEMO_DEFINITIONS = (SMOKE_HAPPY, SMOKE_WARNING, HALLWAY_HAPPY, HALLWAY_WARNING)
+
+
+def generate_exploration_definition(
+    scenario_id: str,
+    *,
+    seed: int | None = None,
+) -> DemoDefinition:
+    """Create a varied but reproducible simulated-trainee action sequence."""
+
+    definition = load_scenario(scenario_id)
+    selected_seed = seed if seed is not None else secrets.randbelow(1_000_000_000)
+    generator = random.Random(selected_seed)
+    available_actions = [
+        action for action in definition.allowed_actions if action != "stop_scenario"
+    ]
+    shuffled_actions = available_actions.copy()
+    generator.shuffle(shuffled_actions)
+    retry_count = min(6, len(available_actions))
+    retries = [generator.choice(available_actions) for _ in range(retry_count)]
+    actions = tuple([*shuffled_actions, *retries, "stop_scenario"])
+    return DemoDefinition(
+        demo_id=f"seeded-exploration-{scenario_id}",
+        label=f"Seeded exploration: {definition.title}",
+        short_label="Seeded exploration run",
+        scenario_id=scenario_id,
+        tone="explore",
+        description=(
+            "A backend-generated simulated-trainee sequence. It may create incomplete or "
+            "repeated actions, and the seed makes the exact run reproducible."
+        ),
+        actions=actions,
+        mode="seeded_exploration",
+        seed=selected_seed,
+    )

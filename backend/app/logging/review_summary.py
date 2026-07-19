@@ -5,6 +5,56 @@ from pathlib import Path
 from typing import Any
 
 
+ACTION_DESCRIPTIONS = {
+    "assess_scene": "Recorded an initial scene assessment.",
+    "scan_room": "Checked the room and recorded the visible environmental cues.",
+    "scan_hallway": "Checked the hallway and recorded the visible route cues.",
+    "confirm_ppe": "Recorded the POC protective-equipment confirmation.",
+    "request_backup": "Recorded a request for additional support.",
+    "communicate_status": "Recorded a status update for the scenario timeline.",
+    "check_door": "Checked the room-entry door condition.",
+    "check_exit_door": "Checked the hallway exit-door condition.",
+    "move_obstacle": "Attempted to clear the obstacle from the path.",
+    "open_door": "Attempted to open the room-entry door.",
+    "open_exit_door": "Attempted to open the hallway exit door.",
+    "check_visibility": "Recorded a check of the visibility cue.",
+    "identify_secondary_exit": "Recorded a possible secondary exit route.",
+    "monitor_environment": "Recorded an ongoing environmental check.",
+    "enter_room": "Attempted to move the scenario into the room-entry stage.",
+    "locate_occupant": "Attempted to record the occupant as located.",
+    "remove_occupant": "Attempted to record the occupant as removed from the room.",
+    "guide_occupant_to_exit": "Attempted to record the occupant as guided to the exit.",
+    "reassess_scene": "Recorded another assessment of the current scene state.",
+    "retreat": "Recorded a retreat from the current scenario position.",
+    "stop_scenario": "Stopped the toy scenario and preserved its current state for review.",
+}
+
+STATE_CHANGE_LABELS = {
+    "scene_assessed": "Scene assessment recorded",
+    "room_scanned": "Room cues recorded",
+    "hallway_scanned": "Hallway cues recorded",
+    "ppe_confirmed": "PPE confirmation recorded",
+    "backup_requested": "Backup request recorded",
+    "door_checked": "Entry door checked",
+    "exit_door_checked": "Exit door checked",
+    "status_communicated": "Status communication recorded",
+    "environment_monitored": "Environmental monitoring recorded",
+    "path_blocked": "Room-entry path blockage changed",
+    "primary_exit_blocked": "Primary-exit blockage changed",
+    "door_open": "Entry door state changed",
+    "exit_door_open": "Exit door state changed",
+    "exit_path_clear": "Exit path state changed",
+    "visibility_checked": "Visibility cue checked",
+    "secondary_exit_identified": "Secondary exit identified",
+    "exit_route_selected": "Exit route selected",
+    "occupant_visible": "Occupant visibility changed",
+    "occupant_located": "Occupant recorded as located",
+    "occupant_removed": "Occupant recorded as removed",
+    "occupant_guided": "Occupant recorded as guided to the exit",
+    "scenario_outcome": "Scenario outcome changed",
+}
+
+
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
     entries: list[dict[str, Any]] = []
     with Path(path).open(encoding="utf-8") as stream:
@@ -44,13 +94,25 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
             timeline_item = {
                 "sequence_number": entry.get("sequence_number"),
                 "action_type": event["action_type"],
+                "action_description": ACTION_DESCRIPTIONS.get(
+                    event["action_type"],
+                    "Recorded this action in the session timeline.",
+                ),
                 "validation_status": status,
                 "warning_codes": [item.get("code") for item in validation.get("warnings", [])],
                 "error_codes": [item.get("code") for item in validation.get("errors", [])],
+                "finding_messages": [
+                    item.get("message")
+                    for item in validation.get("errors", []) + validation.get("warnings", [])
+                    if item.get("message")
+                ],
+                "phase_before": (previous_action_state or {}).get("phase"),
                 "phase_after": (state_snapshot or {}).get("phase"),
                 "outcome_after": (state_snapshot or {}).get("scenario_outcome"),
                 "state_changed": previous_action_state is None or previous_action_state != state_snapshot,
+                "state_changes": summarize_state_changes(previous_action_state, state_snapshot),
             }
+            timeline_item["result_summary"] = action_result_summary(timeline_item)
             action_timeline.append(timeline_item)
             if isinstance(state_snapshot, dict):
                 previous_action_state = state_snapshot
@@ -58,6 +120,8 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
         errors.extend(validation.get("errors", []))
         if state_snapshot is not None:
             final_state = state_snapshot
+            if not event.get("action_type") and isinstance(state_snapshot, dict):
+                previous_action_state = state_snapshot
         end_reached = end_reached or entry.get("event_type") == "scenario_ended"
 
     review = environment_review(final_state)
@@ -65,6 +129,15 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
         validation_counts=validation_counts,
         end_reached=end_reached,
         final_phase=final_state.get("phase"),
+    )
+    progress_stories = action_progress_stories(action_timeline)
+    instructor_review = build_instructor_review(
+        action_count=len(actions),
+        validation_counts=validation_counts,
+        end_reached=end_reached,
+        final_state=final_state,
+        environment=review,
+        progress_stories=progress_stories,
     )
     return {
         "session_id": entries[0].get("session_id"),
@@ -76,7 +149,8 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
         "environment_review": review,
         "actions_taken": actions,
         "action_timeline": action_timeline,
-        "progress_stories": action_progress_stories(action_timeline),
+        "progress_stories": progress_stories,
+        "instructor_review": instructor_review,
         "total_actions": len(actions),
         "validation_counts": validation_counts,
         "warnings": warnings,
@@ -90,6 +164,141 @@ def generate_review_summary(path: Path) -> dict[str, Any]:
         ),
         "reviewer_takeaways": reviewer_takeaways(warnings=warnings, errors=errors),
     }
+
+
+def build_instructor_review(
+    *,
+    action_count: int,
+    validation_counts: dict[str, int],
+    end_reached: bool,
+    final_state: dict[str, Any],
+    environment: dict[str, Any],
+    progress_stories: list[str],
+) -> dict[str, Any]:
+    """Create a final discussion aid from recorded POC evidence."""
+
+    room_cues = environment.get("room_cues") or {}
+    completed_cues = [
+        label
+        for field, label in (
+            ("room_scanned", "area check"),
+            ("door_checked", "door check"),
+            ("status_communicated", "status communication"),
+            ("environment_monitored", "environment monitoring"),
+            ("exit_path_clear", "clear exit path"),
+        )
+        if room_cues.get(field)
+    ]
+    missing_cues = [
+        label
+        for field, label in (
+            ("room_scanned", "area check"),
+            ("door_checked", "door check"),
+            ("status_communicated", "status communication"),
+            ("environment_monitored", "environment monitoring"),
+            ("exit_path_clear", "clear exit path"),
+        )
+        if not room_cues.get(field)
+    ]
+    finding_count = validation_counts.get("warning", 0) + validation_counts.get("error", 0)
+    if finding_count:
+        opening = (
+            f"This session recorded {action_count} actions and {finding_count} POC review "
+            f"finding{'s' if finding_count != 1 else ''}."
+        )
+    else:
+        opening = f"This session recorded {action_count} actions with no POC review findings."
+
+    evidence = [
+        f"The scenario end condition was {'reached' if end_reached else 'not reached'}.",
+        f"The final recorded outcome was {friendly_state(final_state.get('scenario_outcome'))}.",
+        "Completed cues: " + (", ".join(completed_cues) if completed_cues else "none recorded") + ".",
+        "Still missing: " + (", ".join(missing_cues) if missing_cues else "none") + ".",
+    ]
+    if progress_stories:
+        evidence.append(
+            f"The review identified {len(progress_stories)} blocked-or-flagged action "
+            f"retr{'y' if len(progress_stories) == 1 else 'ies'} that can be discussed."
+        )
+
+    if progress_stories:
+        discussion_prompt = (
+            "Ask the trainee to explain what they noticed, what changed before the retry, "
+            "and what they would want to review with an instructor."
+        )
+    elif missing_cues:
+        discussion_prompt = (
+            "Ask the trainee what they noticed, which recorded cues remained unresolved, "
+            "and what they would want to review with an instructor."
+        )
+    else:
+        discussion_prompt = (
+            "Ask the trainee what they noticed, how the recorded sequence moved the scenario "
+            "forward, and what they would want to review with an instructor."
+        )
+
+    return {
+        "title": "Instructor review message",
+        "summary": opening,
+        "evidence": evidence,
+        "discussion_prompt": discussion_prompt,
+        "boundary": (
+            "This is a deterministic POC discussion aid, not a grade, validated rubric, "
+            "or operational judgment."
+        ),
+    }
+
+
+def summarize_state_changes(
+    before: dict[str, Any] | None,
+    after: dict[str, Any] | None,
+) -> list[str]:
+    """Describe meaningful top-level scenario changes without exposing field names."""
+
+    if not isinstance(before, dict) or not isinstance(after, dict):
+        return []
+    changes: list[str] = []
+    before_phase = before.get("phase")
+    after_phase = after.get("phase")
+    if before_phase != after_phase:
+        changes.append(
+            f"Progress moved from {friendly_state(before_phase)} to {friendly_state(after_phase)}."
+        )
+    for field, label in STATE_CHANGE_LABELS.items():
+        if field == "scenario_outcome" or before.get(field) == after.get(field):
+            continue
+        new_value = after.get(field)
+        if isinstance(new_value, bool):
+            changes.append(f"{label}: {'yes' if new_value else 'no'}.")
+        elif new_value is not None:
+            changes.append(f"{label}: {friendly_state(new_value)}.")
+    if before.get("scenario_outcome") != after.get("scenario_outcome"):
+        changes.append(
+            f"Scenario outcome: {friendly_state(after.get('scenario_outcome'))}."
+        )
+    return changes
+
+
+def action_result_summary(item: dict[str, Any]) -> str:
+    """Give each recorded action a short, audience-friendly outcome."""
+
+    status = item.get("validation_status")
+    changes = item.get("state_changes") or []
+    if status == "error":
+        return "The action was not accepted; scenario state stayed at the required earlier step."
+    if status == "warning":
+        if changes:
+            return "The action was recorded, but the POC rules added a review point."
+        return "The action produced a review point without advancing the scenario."
+    if changes:
+        return "The action was accepted and updated the scenario state."
+    return "The action was accepted; no visible progress marker changed."
+
+
+def friendly_state(value: Any) -> str:
+    if value is None:
+        return "unknown"
+    return str(value).replace("_", " ")
 
 
 def action_progress_stories(action_timeline: list[dict[str, Any]]) -> list[str]:

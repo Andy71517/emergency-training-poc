@@ -18,9 +18,11 @@ def test_demo_paths_are_backend_owned_and_presentation_safe(tmp_path: Path) -> N
 
     assert response.status_code == 200
     payload = response.json()
-    assert len(payload["paths"]) == 4
+    assert len(payload["paths"]) == 5
     assert payload["paths"][0]["demo_id"] == "smoke-room-happy"
     assert payload["paths"][0]["actions"][0] == "assess_scene"
+    assert payload["paths"][4]["mode"] == "user_controlled"
+    assert "assess_scene" in payload["paths"][4]["available_actions"]
     assert "not clinical validation" in payload["disclaimer"]
 
 
@@ -46,6 +48,20 @@ def test_demo_review_rejects_unsafe_or_missing_session_ids(tmp_path: Path) -> No
 
     assert client.get("/api/demo/reviews/bad.session").status_code == 400
     assert client.get("/api/demo/reviews/not-found").status_code == 404
+
+
+def test_seeded_exploration_is_varied_but_reproducible(tmp_path: Path) -> None:
+    client = TestClient(create_app(tmp_path))
+
+    first = client.get("/api/demo/exploration/smoke_inhalation_room_v0?seed=71517")
+    second = client.get("/api/demo/exploration/smoke_inhalation_room_v0?seed=71517")
+
+    assert first.status_code == 200
+    assert first.json()["path"] == second.json()["path"]
+    assert first.json()["path"]["mode"] == "seeded_exploration"
+    assert first.json()["path"]["seed"] == 71517
+    assert first.json()["path"]["actions"][-1] == "stop_scenario"
+    assert "not AI-generated" in first.json()["note"]
 
 
 def test_websocket_accepts_action_and_returns_state_update(tmp_path: Path) -> None:
