@@ -83,8 +83,8 @@ The approved platform direction is CS Launch for the web application, VT ARC for
 
 ### First workflow proof
 
-- define generated-scenario and generation-job contracts
-- add a mocked instructor authoring and approval flow to the existing React interface
+- define generated-scenario and generation-job contracts — first in-memory version complete
+- add a mocked instructor authoring and approval flow to the existing React interface — first version complete
 - keep all model output clearly labeled as a draft
 - preserve the deterministic scenarios as regression and presentation baselines
 

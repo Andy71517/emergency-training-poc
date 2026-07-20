@@ -20,6 +20,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { ScenarioStudio } from "./ScenarioStudio";
 
 type DemoPath = {
   demo_id: string;
@@ -144,6 +145,7 @@ const openSocket = (sessionId: string) =>
   });
 
 function App() {
+  const [appView, setAppView] = useState<"sessions" | "studio">("sessions");
   const [paths, setPaths] = useState<DemoPath[]>([]);
   const [selectedId, setSelectedId] = useState("");
   const [disclaimer, setDisclaimer] = useState("");
@@ -409,6 +411,10 @@ function App() {
     resetReview();
   };
 
+  if (appView === "studio") {
+    return <ScenarioStudio onBack={() => setAppView("sessions")} />;
+  }
+
   return (
     <main className="app-shell min-h-screen overflow-hidden bg-ink text-slate-100">
       <div className="technical-grid" />
@@ -428,6 +434,9 @@ function App() {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <button className="secondary-button" onClick={() => setAppView("studio")} type="button">
+              <Sparkles size={16} /> Scenario studio
+            </button>
             <span className={`status-pill ${backendOnline ? "status-online" : "status-offline"}`}>
               <span className="status-dot" />
               Backend {backendOnline ? "online" : "offline"}

@@ -65,6 +65,8 @@ Both modes use the same deterministic backend behavior and JSONL logs. The menu 
 
 The one-page React demo turns the four guided backend-owned paths and review summaries into a meeting-friendly visual console. It adds presentation pacing, a live action trail, plain-English state changes, and an expandable action-by-action review without changing scenario ownership or validation rules.
 
+The webpage now also includes the first mocked **Scenario and Asset Studio** workflow. An instructor can request a local fixture suggestion, edit every scenario-content field, save a new revision, reject the suggestion, or explicitly approve the exact revision they reviewed. The mock is deliberately labeled: it makes no AI, API, CS Launch, or ARC call. It tests the authority and review experience before real model integration.
+
 The four guided paths remain scripted so the live presentation is predictable. The webpage also has a separate **seeded exploration** mode: the backend creates a varied sequence of simulated-trainee inputs and displays the seed needed to reproduce it. This is deterministic pseudo-random exploration, not AI generation or real trainee behavior.
 
 A **user-controlled smoke-room path** lets a person choose one action at a time. Every choice goes through the same backend session, deterministic rules, state updates, JSONL logging, and final instructor review as the guided paths. It demonstrates the shape of a future trainee interaction, but it is not protocol instruction, validated assessment, or trainee scoring.

@@ -42,8 +42,8 @@ This remains a deterministic proof of concept. Its results are not clinical vali
 
 ## Funding-proof direction
 
-The current console will remain the deterministic session and review baseline. The next planned frontend slice is a mocked instructor workflow for requesting an AI-generated scenario draft, watching a generation job move through visible stages, and approving or rejecting the result.
+The current console remains the deterministic session and review baseline. A mocked instructor workflow now lets a user request a scenario suggestion, see visible local job stages, edit all scenario content, and approve or reject a specific revision.
 
-This will initially use fake local job progress and fixture data. No real model call will be hidden behind the interface. After the workflow is reviewed, CS Launch can host the long-running application while VT ARC handles approved generation jobs. Unreal remains the eventual trainee runtime and physics environment.
+This uses fake local job progress and fixture data. No real model call is hidden behind the interface. The AI role is suggestion only; the instructor owns the title, goals, environment, duration, cues, actions, transitions, end conditions, assets, constraints, notes, and approval decision. After the workflow is reviewed, CS Launch can host the long-running application while VT ARC handles approved generation jobs. Unreal remains the eventual trainee runtime and physics environment.
 
 See `docs/architecture/funding-proof-platform.md` for the full platform split and safety boundaries.
