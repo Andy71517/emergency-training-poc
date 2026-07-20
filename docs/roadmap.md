@@ -72,7 +72,40 @@ These are the milestones for this repository right now.
 - add configurable local scenarios
 - add thin Unreal WebSocket experiment only after file/JSON display is stable
 
-## Track 2: Full-system milestones
+## Track 2: Funding-proof research
+
+Dr. Cameron's review changed the immediate research priority. Additional funding will need evidence for two parts of the larger vision:
+
+- AI-generated interactive scenario drafts
+- AI-generated assets that can be prepared for Unreal physics
+
+The approved platform direction is CS Launch for the web application, VT ARC for heavy AI generation, and a local or training-room workstation for Unreal. See [funding-proof-platform.md](architecture/funding-proof-platform.md).
+
+### First workflow proof
+
+- define generated-scenario and generation-job contracts
+- add a mocked instructor authoring and approval flow to the existing React interface
+- keep all model output clearly labeled as a draft
+- preserve the deterministic scenarios as regression and presentation baselines
+
+### First ARC proof
+
+- confirm PI-project access and the supported job-submission path
+- compare a small set of scenario-generation and image-to-3D candidates
+- generate one smoke-room draft and one leather-chair asset candidate
+- process and review the chair in Blender
+- import an approved result into Unreal and configure basic collision and physics
+- measure queue, generation, cleanup, and import time
+
+### Later research
+
+- improve scenario variety and consistency checks
+- build reviewed asset manifests and versioning
+- automate the CS Launch-to-ARC handoff only through an approved method
+- test faster room-preparation generation
+- investigate active-session generation only after earlier latency is measured
+
+## Track 3: Full-system milestones
 
 These belong to the larger project vision.
 
@@ -131,12 +164,14 @@ The safest build order is:
 6. future client display contract
 7. richer deterministic scenarios
 8. Unreal text/debug client
-9. generated/reviewed asset pipeline
-10. real physics experiments
-11. sensing experiments
-12. AI adaptation experiments
-13. validation framework expansion
-14. deployment architecture
+9. mocked scenario-generation and approval workflow
+10. measured ARC scenario-generation experiment
+11. generated/reviewed leather-chair asset pipeline
+12. Unreal collision and physics experiment
+13. sensing experiments
+14. AI adaptation experiments
+15. validation framework expansion
+16. deployment architecture
 
 ## Rough timeline
 
@@ -156,13 +191,14 @@ Status: active now.
 
 ### Next checkpoint
 
-Target: make Unreal read project data without manual copy/paste.
+Target: prove the scenario-authoring workflow before connecting a real model.
 
-- read generated debug text file from Unreal
-- keep scenario truth in backend
-- use this as the bridge before JSON parsing
+- define a generated-scenario draft contract
+- represent queued and completed generation jobs
+- add a mocked prompt-to-review flow to the local web interface
+- get feedback on approval, rejection, and editing needs
 
-### Next after that
+### Parallel runtime checkpoint
 
 Target: make Unreal display structured state.
 
@@ -179,14 +215,15 @@ Target: live backend-to-Unreal display.
 - debug panel updates live
 - review summary still explains the session afterward
 
-### Later POC checkpoint
+### Funding-proof asset checkpoint
 
-Target: make the demo easier to understand visually.
+Target: measure one reviewed AI-to-Unreal asset path.
 
-- simple Unreal scene shell
-- object placeholders
-- reviewed asset workflow through Blender
-- no generated assets trusted without review
+- generate candidate leather-chair assets on ARC
+- review and process a selected candidate through Blender
+- import the approved asset into a simple Unreal scene
+- test collision and basic physics
+- record timing, hardware use, failures, and manual effort
 
 ### Future research checkpoints
 
@@ -201,7 +238,7 @@ Target: explore the larger original project vision.
 
 ## Rule of thumb
 
-If a feature changes scenario truth, validation, or review, build it in the backend first.
+If a feature changes approved scenario truth, validation, or review, build its contract and authority boundary in the backend first.
 
 If a feature only displays state or captures input, it can live in a future client layer.
 

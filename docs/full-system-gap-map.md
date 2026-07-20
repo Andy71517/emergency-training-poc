@@ -21,7 +21,7 @@ This is useful for Dr. Cameron because it shows the project is moving toward the
 
 | Full project goal | Current repo status | Main gap | Safest next experiment |
 | --- | --- | --- | --- |
-| AI-generated scenarios | Not implemented. The repo uses deterministic YAML scenarios. | No real model calls, no generated scenarios, no agentic planning. | Keep deterministic baselines, then test AI-generated scenario drafts offline before any live integration. |
+| AI-generated scenarios | Not implemented. The repo uses deterministic YAML scenarios. This is now a funding-proof priority. | No generation contract, model pipeline, ARC job, consistency checks, or instructor approval flow. | Build a mocked prompt-to-draft approval flow, then run a measured offline ARC experiment. |
 | Real-time scenario adaptation | Partly simulated through deterministic state transitions across checked-in scenarios. | No AI-driven adaptation, uncertainty, or dynamic branching beyond checked-in rules. | Compare the smoke-room and blocked-exit hallway scenarios, then add controlled branching only when review stays clear. |
 | Trainee action interpretation | Manual or scripted actions only. | No voice, camera, pose, object detection, or procedural inference. | Define a future sensing adapter contract before using real sensors. |
 | Multimodal sensing | Not implemented. | No audio/video capture, wearable input, sensor confidence, privacy plan, or data policy. | Write a sensing boundary doc and start with fake/stubbed sensor messages only. |
@@ -36,8 +36,8 @@ This is useful for Dr. Cameron because it shows the project is moving toward the
 | Hub-and-spoke deployment | Documented only as future architecture. | No cloud, regional hub, spoke sites, caching, failover, or distributed sync. | Stay local until auth, logging, state contracts, and deployment needs are clearer. |
 | Centralized instructor support | A local single-session presentation/review console now exists. | No authentication, roles, multi-session controls, live supervision, or multi-site support. | Keep the console local and test its review flow before considering broader instructor controls. |
 | Accessibility and tiered deployment | Mentioned in docs only. | No low-cost deployment profiles or hardware tiers. | Draft high-fidelity, medium, and low-cost configuration profiles later. |
-| Generated assets | Placeholder pipeline plus Blender/manual review workflow. | No Hunyuan 3D outputs, reviewed meshes, licensing review on a real asset, or Unreal import. | Generate or source one tiny candidate only after the checklist is accepted. |
-| Real physics | Metadata preview only. | No gravity, collision, mass, tipping, force, or physics engine behavior. | Define object metadata needs, then test one reviewed object in Unreal later. |
+| Generated assets | Placeholder pipeline plus Blender/manual review workflow. This is now a funding-proof priority. | No measured ARC generation run, reviewed mesh, provenance decision, or Unreal import. | Generate one leather-chair candidate set, review it, and record the full path into Unreal. |
+| Real physics | Metadata preview only. Unreal Chaos is the intended runtime. | No imported generated body, collision, mass, friction, tipping, or force test. | Configure basic collision and physics for one approved chair; do not claim the generator itself simulates physics. |
 | Production security | Small local POC guardrails only. | No auth, TLS, user roles, real rate limiting, cloud hardening, or data governance. | Keep local security boundaries documented; add production security only when deployment becomes real. |
 
 ## What is already proven
@@ -64,14 +64,14 @@ If sensors detect trainee behavior later, those detections still need to become 
 
 If validation becomes more serious later, the system still needs a clear log and review path.
 
-## What is intentionally postponed
+## What remains outside the stable POC
 
 These parts are important, but they are not safe to add first:
 
-- real AI calls
+- real AI calls, until the separate funding-proof contracts and review boundary are ready
 - clinical or protocol validation
-- generated 3D assets
-- real physics
+- generated 3D assets, except for a controlled and reviewed funding experiment
+- real physics, except for one bounded Unreal experiment with an approved asset
 - full Unreal gameplay
 - projection mapping
 - multimodal sensing
@@ -91,9 +91,11 @@ The next steps should stay small:
 
 1. Add this gap map. Done.
 2. Add a second deterministic scenario. Done.
-3. Build a text-only Unreal debug display.
+3. Build a text-only Unreal debug display. Done as a manual display path.
 4. Add the Blender/manual asset review checklist. Done.
-5. Only then begin tiny experiments with generated assets or richer Unreal display.
+5. Mock the scenario-generation and instructor-approval workflow.
+6. Run a measured ARC scenario and leather-chair generation experiment.
+7. Import only a reviewed asset into Unreal for a bounded physics test.
 
 This order keeps the project understandable.
 

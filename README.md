@@ -24,6 +24,8 @@ Right now this uses one tiny scenario, a FastAPI WebSocket, deterministic Python
 
 For the full north-star project vision, see [docs/full-project-vision.md](docs/full-project-vision.md). For the split between current POC work and future full-system work, see [docs/roadmap.md](docs/roadmap.md). For a direct comparison between the original full-system goals and the current repo, see [docs/full-system-gap-map.md](docs/full-system-gap-map.md).
 
+Dr. Cameron's latest funding feedback makes AI-generated scenario drafts and AI-generated, physics-ready asset research the next proof priorities. The deterministic demo remains the trusted baseline. The approved platform direction uses CS Launch for the future web application, VT ARC for heavy generation jobs, and a local or training-room workstation for Unreal and physics. See [docs/architecture/funding-proof-platform.md](docs/architecture/funding-proof-platform.md).
+
 ## Setup and run
 
 Use Python 3.11 or newer.
@@ -144,6 +146,8 @@ python docs/reports/build_report_pdf.py
 ```
 
 ## What this repo is not doing
+
+These statements describe the working code today. The new funding-proof track will explore a few of them as isolated, measured experiments; they are not implemented merely because they now appear on the roadmap.
 
 - Real LLM or external API calls
 - Clinical validation or EMT/firefighter protocol authority

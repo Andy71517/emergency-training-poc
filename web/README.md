@@ -39,3 +39,11 @@ Vite serves the webpage on port `5173` and locally proxies `/api`, `/health`, an
 Use `npm run build` for a production build and `npm run lint` for frontend linting.
 
 This remains a deterministic proof of concept. Its results are not clinical validation, operational guidance, protocol authority, or real trainee scoring.
+
+## Funding-proof direction
+
+The current console will remain the deterministic session and review baseline. The next planned frontend slice is a mocked instructor workflow for requesting an AI-generated scenario draft, watching a generation job move through visible stages, and approving or rejecting the result.
+
+This will initially use fake local job progress and fixture data. No real model call will be hidden behind the interface. After the workflow is reviewed, CS Launch can host the long-running application while VT ARC handles approved generation jobs. Unreal remains the eventual trainee runtime and physics environment.
+
+See `docs/architecture/funding-proof-platform.md` for the full platform split and safety boundaries.
