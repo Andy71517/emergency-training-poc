@@ -84,6 +84,8 @@ The eventual interface can have these focused areas:
 
 The trainee's immersive experience belongs primarily in Unreal. The current user-controlled web path remains useful as a developer test harness, accessible fallback, and remote demonstration of backend behavior.
 
+The approved visual-proof direction is hybrid: build a browser-based 3D physics preview first, then reproduce the bounded proof in Unreal Engine 5.8. Both clients should use the same backend-owned semantic contract. See [visual-physics-proof.md](visual-physics-proof.md).
+
 ## First implementation slice
 
 Before connecting a real model, build one mocked end-to-end authoring flow:

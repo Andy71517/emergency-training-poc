@@ -27,6 +27,8 @@ Use these when helpful:
 
 These fields are metadata only right now. They do not create real gravity, collision, mass, or force behavior.
 
+The visual physics phase will add a separate versioned configuration and observation contract rather than overloading these coarse scenario fields. That contract will cover transforms, dimensions, physical materials, interaction commands, movement, contact, settling, and engine metadata. See [visual-physics-proof.md](visual-physics-proof.md).
+
 ## Current object-specific fields
 
 Wooden chair:

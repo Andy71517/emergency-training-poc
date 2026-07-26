@@ -55,15 +55,16 @@ These are the milestones for this repository right now.
 - project presentation package and PDF
 - local React presentation console backed by FastAPI
 - explicit smoke-room access and observation progress stages
+- mocked instructor-controlled scenario authoring and revision approval
+- focused review-summary modules
+- extracted and wired React view modules, shared types, and WebSocket helpers
 
 ### Near-term
 
-- keep improving the review/debrief output
-- add richer instructor/reviewer examples
-- make Unreal read the generated debug text file automatically
-- parse the display JSON directly after the text path works
-- add clearer message-contract versioning notes
-- keep scenario logic deterministic and backend-owned
+- define the shared visual-physics command and observation contract
+- build a primitive browser-based chair movement/contact proof
+- keep scenario logic and acceptance meaning backend-owned
+- establish a minimal Unreal Engine 5.8 project after the web proof works
 
 ### Later POC
 
@@ -87,6 +88,15 @@ The approved platform direction is CS Launch for the web application, VT ARC for
 - add a mocked instructor authoring and approval flow to the existing React interface — first version complete
 - keep all model output clearly labeled as a draft
 - preserve the deterministic scenarios as regression and presentation baselines
+
+### Visual proof
+
+- use a hybrid path: browser 3D preview first, Unreal Engine 5.8 second
+- hold gravity and chair mass constant for the first bounded test
+- require measurable movement and a reported physical contact
+- send physics observations back for backend logging and review
+- use primitive geometry before waiting for an AI-generated asset
+- keep the web preview as a developer and presentation tool after Unreal exists
 
 ### First ARC proof
 
@@ -191,12 +201,13 @@ Status: active now.
 
 ### Next checkpoint
 
-Target: prove the scenario-authoring workflow before connecting a real model.
+Target: prove backend-authorized movement and physical contact in a browser-based 3D preview.
 
-- define a generated-scenario draft contract
-- represent queued and completed generation jobs
-- add a mocked prompt-to-review flow to the local web interface
-- get feedback on approval, rejection, and editing needs
+- define versioned physics configuration, command, and observation contracts
+- create a primitive chair, floor, and wall with real colliders
+- hold gravity and mass constant
+- apply one backend-authorized interaction
+- report movement, contact, final transform, and settling evidence
 
 ### Parallel runtime checkpoint
 
