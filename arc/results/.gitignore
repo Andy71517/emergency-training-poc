@@ -1,0 +1,6 @@
+*.out
+*.err
+*.json
+*
+!.gitignore
+!README.md
