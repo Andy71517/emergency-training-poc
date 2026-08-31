@@ -15,7 +15,11 @@ fi
 source "$(dirname "$0")/load_arc_config.sh"
 
 if [[ "$1" == "cpu" ]]; then
-  sbatch --account="$ARC_ACCOUNT" --partition="$ARC_CPU_PARTITION" arc/jobs/verify_cpu.sbatch
+  cpu_qos_arguments=()
+  if [[ -n "${ARC_CPU_QOS:-}" ]]; then
+    cpu_qos_arguments=("--qos=$ARC_CPU_QOS")
+  fi
+  sbatch --account="$ARC_ACCOUNT" --partition="$ARC_CPU_PARTITION" "${cpu_qos_arguments[@]}" arc/jobs/verify_cpu.sbatch
 else
-  sbatch --account="$ARC_ACCOUNT" --partition="$ARC_GPU_PARTITION" arc/jobs/verify_a100.sbatch
+  sbatch --account="$ARC_ACCOUNT" --partition="$ARC_GPU_PARTITION" --qos="$ARC_GPU_QOS" arc/jobs/verify_a100.sbatch
 fi

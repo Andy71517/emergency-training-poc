@@ -8,13 +8,14 @@ future generation pipeline works. They only answer:
 
 1. Can the account reach TinkerCliffs?
 2. Can it read and write inside the assigned project storage?
-3. Can Slurm run a tiny CPU job under the assigned account?
+3. Can Slurm run a tiny CPU job when the assigned account has CPU access?
 4. Can Slurm allocate one A100 and report its basic hardware details?
+5. Can Apptainer access that allocated GPU and store its cache in project storage?
 
 ## Before the first job
 
 Copy `arc/.env.example` to `arc/.env`, then fill in only the account,
-project-storage, workspace, and partition details that ARC confirmed for this
+project-storage, workspace, partition, and QoS details that ARC confirmed for this
 project. `arc/.env` is ignored by Git and is the one local source for these
 values. Do not put credentials or tokens in it.
 
@@ -52,7 +53,11 @@ If this fails, keep the exact error and ask Dr. Cameron or ARC support to check
 project membership and permissions. Do not work around it with broad
 permissions.
 
-## Run the tiny CPU check
+## Optional CPU check
+
+Only run this when `sacctmgr` shows that the configured account can use a CPU
+QoS for the configured CPU partition. Some project accounts are authorized only
+for a GPU QoS on TinkerCliffs.
 
 Submit from the repository root so the output path resolves correctly:
 
@@ -93,6 +98,19 @@ seff JOB_ID
 The check passes when `nvidia-smi` reports an NVIDIA A100 and the assigned Slurm
 GPU variable is present. Queue time is not failure; it may simply be waiting
 for a GPU.
+
+## Run the short Apptainer check
+
+After the A100 check succeeds, submit the project-local Apptainer smoke check:
+
+```bash
+bash arc/scripts/submit_apptainer_check.sh
+squeue --me
+```
+
+It requests one A100 for at most five minutes, loads ARC's Apptainer module,
+uses `--nv`, and pulls the small public Alpine image only if the project-local
+smoke image is absent. It does not download a model or generate an asset.
 
 ## What to record
 

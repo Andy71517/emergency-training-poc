@@ -2,7 +2,7 @@
 
 ## Status
 
-**Draft for approval.** This plan describes the first real generation and simulation pipeline. It does not claim that ARC generation, Blender refinement, or Unreal physics are implemented in this repository today.
+**Active.** This plan describes the first real generation and simulation pipeline. ARC allocation, project storage, A100 access, and an Apptainer GPU smoke test are verified. It does not claim that TRELLIS.2 generation, Blender refinement, or Unreal physics are implemented in this repository today.
 
 ## Goal
 
@@ -87,7 +87,7 @@ No downstream step may accept an artifact that lacks its upstream approval and p
 3. Decide where Blender runs: local workstation for interactive review first; ARC batch processing only for reproducible non-interactive checks.
 4. Confirm that the first Unreal test runs on the local/training-room Windows workstation.
 
-**Exit criteria:** a recorded approved toolchain, storage locations, one named owner for approvals, and no private workaround around institutional access.
+**Exit criteria:** met for the first environment gate: approved `research-mel` project storage, TinkerCliffs A100 access, and an Apptainer GPU smoke test. The TRELLIS.2 image and model weights remain pending.
 
 ### Phase 1: Contracts and artifact layout
 

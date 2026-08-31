@@ -21,6 +21,7 @@ required_variables=(
   ARC_PROJECT_WORKSPACE
   ARC_CPU_PARTITION
   ARC_GPU_PARTITION
+  ARC_GPU_QOS
 )
 
 for variable_name in "${required_variables[@]}"; do
