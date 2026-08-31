@@ -2,6 +2,9 @@
 
 set -u
 
+# shellcheck source=load_arc_config.sh
+source "$(dirname "$0")/load_arc_config.sh"
+
 echo "VT ARC environment snapshot"
 echo "User: $(whoami)"
 echo "Host: $(hostname)"
@@ -17,4 +20,6 @@ echo "Visible partitions:"
 sinfo --format="%P %a %l %D %G" || true
 echo
 echo "Project root:"
-ls -ld /projects/research-mel || true
+ls -ld "$ARC_PROJECT_STORAGE_ROOT" || true
+echo "Project workspace:"
+ls -ld "$ARC_PROJECT_WORKSPACE" || true

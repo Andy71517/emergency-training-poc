@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BlenderAssetReview",
+  "type": "object",
+  "required": ["contract_version", "asset_id", "reviewed_source_sha256", "reviewer", "reviewed_at", "checklist_version", "decision", "scale_checked", "topology_checked", "materials_checked", "collision_checked"],
+  "properties": {
+    "contract_version": {"const": "0.1.0"},
+    "asset_id": {"type": "string"},
+    "reviewed_source_sha256": {"type": "string"},
+    "reviewer": {"type": "string"},
+    "reviewed_at": {"type": "string", "format": "date-time"},
+    "checklist_version": {"type": "string"},
+    "decision": {"enum": ["candidate", "needs_changes", "reviewed_visual_only", "reviewed_collision_candidate", "rejected"]},
+    "scale_checked": {"type": "boolean"},
+    "topology_checked": {"type": "boolean"},
+    "materials_checked": {"type": "boolean"},
+    "collision_checked": {"type": "boolean"},
+    "cleanup_notes": {"type": "string"},
+    "export_file": {"type": ["object", "null"]}
+  },
+  "additionalProperties": false
+}

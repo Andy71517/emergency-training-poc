@@ -1,0 +1,47 @@
+{
+  "contract_version": "0.1.0",
+  "manifest": {
+    "contract_version": "0.1.0",
+    "asset_id": "leather-chair-candidate-001",
+    "display_name": "Leather chair candidate",
+    "intended_role": "Bounded Unreal movement and contact proof object.",
+    "provenance": {
+      "source_job_id": "arc-asset-job-001",
+      "model_label": "planned-asset-model",
+      "model_version": "pending-selection",
+      "seed": "42",
+      "prompt_digest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "environment_digest": "pending-approved-container"
+    },
+    "candidate_files": [
+      {
+        "relative_path": "candidate/chair.glb",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "media_type": "model/gltf-binary"
+      }
+    ],
+    "dimensions_m": [0.8, 0.9, 0.85],
+    "created_at": "2026-08-31T00:00:00Z"
+  },
+  "blender_review": {
+    "contract_version": "0.1.0",
+    "asset_id": "leather-chair-candidate-001",
+    "reviewed_source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "reviewer": "example-reviewer",
+    "reviewed_at": "2026-08-31T00:00:00Z",
+    "checklist_version": "0.1.0",
+    "decision": "reviewed_collision_candidate",
+    "scale_checked": true,
+    "topology_checked": true,
+    "materials_checked": true,
+    "collision_checked": true,
+    "cleanup_notes": "Sanitized example only; no real asset was reviewed.",
+    "export_file": {
+      "relative_path": "export/chair.fbx",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "media_type": "model/fbx"
+    }
+  },
+  "approved_by": "example-reviewer",
+  "approved_at": "2026-08-31T00:00:00Z"
+}

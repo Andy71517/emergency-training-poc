@@ -47,6 +47,10 @@ assets/generated/*
 !assets/generated/README.md
 !assets/generated/.gitkeep
 
+# Real generation and physics-pipeline artifacts (retain only the guide)
+artifacts/*
+!artifacts/README.md
+
 # Editors
 .idea/
 .vscode/

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PublishedScenarioPackage",
+  "type": "object",
+  "required": ["contract_version", "scenario_id", "source_job_id", "source_job_status", "draft_revision", "draft_status", "package_sha256"],
+  "properties": {
+    "contract_version": {"const": "0.1.0"},
+    "scenario_id": {"type": "string"},
+    "source_job_id": {"type": "string"},
+    "source_job_status": {"enum": ["requested", "queued", "running", "checking", "failed", "review_ready"]},
+    "draft_revision": {"type": "integer", "minimum": 1},
+    "draft_status": {"enum": ["suggested", "instructor_edited", "approved", "rejected"]},
+    "approved_by": {"type": ["string", "null"]},
+    "approved_at": {"type": ["string", "null"], "format": "date-time"},
+    "package_sha256": {"type": "string"}
+  },
+  "additionalProperties": false
+}

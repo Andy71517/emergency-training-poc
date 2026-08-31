@@ -1,7 +1,5 @@
 #!/bin/bash
 #SBATCH --job-name=emergency-poc-a100-check
-#SBATCH --account=research-mel
-#SBATCH --partition=a100_normal_q
 #SBATCH --time=00:05:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1

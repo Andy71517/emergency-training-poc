@@ -1,7 +1,5 @@
 #!/bin/bash
 #SBATCH --job-name=emergency-poc-cpu-check
-#SBATCH --account=research-mel
-#SBATCH --partition=normal_q
 #SBATCH --time=00:02:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1

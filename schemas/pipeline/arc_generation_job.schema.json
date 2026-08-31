@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArcGenerationJob",
+  "type": "object",
+  "required": ["contract_version", "job_id", "request_id", "status", "requested_by", "requested_at", "project_storage_path", "environment_digest", "model_label", "model_version", "seed"],
+  "properties": {
+    "contract_version": {"const": "0.1.0"},
+    "job_id": {"type": "string"},
+    "request_id": {"type": "string"},
+    "status": {"enum": ["requested", "queued", "running", "checking", "failed", "review_ready"]},
+    "requested_by": {"type": "string"},
+    "requested_at": {"type": "string", "format": "date-time"},
+    "slurm_job_id": {"type": ["string", "null"]},
+    "project_storage_path": {"type": "string"},
+    "environment_digest": {"type": "string"},
+    "model_label": {"type": "string"},
+    "model_version": {"type": "string"},
+    "seed": {"type": "string"},
+    "queued_at": {"type": ["string", "null"], "format": "date-time"},
+    "started_at": {"type": ["string", "null"], "format": "date-time"},
+    "completed_at": {"type": ["string", "null"], "format": "date-time"},
+    "error_summary": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

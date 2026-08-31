@@ -2,6 +2,8 @@
 
 This is intentionally tiny. It catches broken schema/example JSON in CI without
 turning the repo into a full schema validation system yet.
+
+Pipeline contract fixtures live under schemas and are checked here as well.
 """
 
 from __future__ import annotations
@@ -32,4 +34,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AssetArtifactManifest",
+  "type": "object",
+  "required": ["contract_version", "asset_id", "display_name", "intended_role", "provenance", "candidate_files", "dimensions_m", "created_at"],
+  "properties": {
+    "contract_version": {"const": "0.1.0"},
+    "asset_id": {"type": "string"},
+    "display_name": {"type": "string"},
+    "intended_role": {"type": "string"},
+    "provenance": {"type": "object"},
+    "candidate_files": {"type": "array", "minItems": 1},
+    "dimensions_m": {"type": "array", "minItems": 3, "maxItems": 3},
+    "created_at": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": false
+}

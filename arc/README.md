@@ -1,17 +1,22 @@
 # VT ARC first checkout
 
-This folder is a small, low-cost way to confirm that Andy can use Dr. Cameron's
-`research-mel` allocation before this project needs real compute.
+This folder is a small, low-cost way to confirm that the assigned project
+account can use ARC before this project needs real compute.
 
 These checks do **not** train a model, download model weights, or prove that the
 future generation pipeline works. They only answer:
 
 1. Can the account reach TinkerCliffs?
-2. Can it read and write inside `/projects/research-mel`?
-3. Can Slurm run a tiny CPU job under `research-mel`?
+2. Can it read and write inside the assigned project storage?
+3. Can Slurm run a tiny CPU job under the assigned account?
 4. Can Slurm allocate one A100 and report its basic hardware details?
 
 ## Before the first job
+
+Copy `arc/.env.example` to `arc/.env`, then fill in only the account,
+project-storage, workspace, and partition details that ARC confirmed for this
+project. `arc/.env` is ignored by Git and is the one local source for these
+values. Do not put credentials or tokens in it.
 
 Open a TinkerCliffs shell through ARC Open OnDemand, or connect with the SSH
 method in the current ARC documentation. Then run:
@@ -23,7 +28,7 @@ quota
 sacctmgr show assoc user="$USER" format=Cluster,Account,User,Partition,QOS%50
 ```
 
-Look for `research-mel` in the association output. Save the command output
+Look for the configured `ARC_ACCOUNT` in the association output. Save the command output
 without copying credentials, private keys, or access tokens into this repo.
 
 From the repository root on ARC, collect a fuller text snapshot:
@@ -37,9 +42,10 @@ bash arc/scripts/collect_environment.sh
 Use a personal subfolder so the project root stays organized:
 
 ```bash
-mkdir -p "/projects/research-mel/$USER/emergency-training-poc"
-touch "/projects/research-mel/$USER/emergency-training-poc/access-test.txt"
-ls -la "/projects/research-mel/$USER/emergency-training-poc"
+source arc/scripts/load_arc_config.sh
+mkdir -p "$ARC_PROJECT_WORKSPACE"
+touch "$ARC_PROJECT_WORKSPACE/access-test.txt"
+ls -la "$ARC_PROJECT_WORKSPACE"
 ```
 
 If this fails, keep the exact error and ask Dr. Cameron or ARC support to check
@@ -51,7 +57,7 @@ permissions.
 Submit from the repository root so the output path resolves correctly:
 
 ```bash
-sbatch arc/jobs/verify_cpu.sbatch
+bash arc/scripts/submit_checkout.sh cpu
 squeue --me
 ```
 
@@ -72,7 +78,7 @@ error in the `.err` file.
 Only do this after the CPU check passes:
 
 ```bash
-sbatch arc/jobs/verify_a100.sbatch
+bash arc/scripts/submit_checkout.sh gpu
 squeue --me
 ```
 

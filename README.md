@@ -26,6 +26,8 @@ For the full north-star project vision, see [docs/full-project-vision.md](docs/f
 
 Dr. Cameron's latest funding feedback makes AI-generated scenario drafts and AI-generated, physics-ready asset research the next proof priorities. The deterministic demo remains the trusted baseline. The approved platform direction uses CS Launch for the future web application, VT ARC for heavy generation jobs, and a local or training-room workstation for Unreal and physics. See [docs/architecture/funding-proof-platform.md](docs/architecture/funding-proof-platform.md).
 
+The proposed first real ARC-to-Blender-to-Unreal pipeline is approval-gated and deliberately narrow: one scenario draft, one chair asset, and one repeatable Unreal physics proof. See [docs/arc-blender-unreal-pipeline-plan.md](docs/arc-blender-unreal-pipeline-plan.md).
+
 ## Setup and run
 
 Use Python 3.11 or newer.
