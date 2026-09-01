@@ -66,6 +66,8 @@ apptainer exec --nv --bind "$ARC_PROJECT_WORKSPACE:/workspace" "$container_image
     conda create -y -p /workspace/trellis2/environment python=3.10 pip
   fi
   conda activate /workspace/trellis2/environment
+  # The upstream setup uses Git for pinned sources; the CUDA image does not guarantee it.
+  conda install -y git
   python -m pip install --upgrade pip
   python -m pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
   python -m pip install imageio imageio-ffmpeg tqdm easydict opencv-python-headless ninja trimesh transformers gradio==6.0.1 tensorboard pandas lpips zstandard kornia timm pillow-simd
