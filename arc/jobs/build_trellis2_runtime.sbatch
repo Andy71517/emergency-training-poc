@@ -59,8 +59,10 @@ apptainer exec --nv --bind "$ARC_PROJECT_WORKSPACE:/workspace" "$container_image
   set -euo pipefail
   export HOME=/workspace/trellis2/home
   export PIP_CACHE_DIR=/workspace/cache/pip
+  # Keep pip build files and its wheel cache on the same filesystem.
+  export TMPDIR=/workspace/cache/pip/tmp
   export CUDA_HOME=/usr/local/cuda
-  mkdir -p "$HOME" "$PIP_CACHE_DIR"
+  mkdir -p "$HOME" "$PIP_CACHE_DIR" "$TMPDIR"
   source /opt/conda/etc/profile.d/conda.sh
   if [[ ! -x /workspace/trellis2/environment/bin/python ]]; then
     conda create -y -p /workspace/trellis2/environment python=3.10 pip
