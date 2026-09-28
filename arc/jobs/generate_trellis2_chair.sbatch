@@ -34,6 +34,7 @@ apptainer exec --nv --bind "$ARC_PROJECT_WORKSPACE:/workspace" --bind "$PWD:/pro
   export HOME=/workspace/trellis2/home
   export HF_HOME=/workspace/cache/huggingface
   export OPENCV_IO_ENABLE_OPENEXR=1
+  export PYTHONPATH=/workspace/trellis2/source${PYTHONPATH:+:$PYTHONPATH}
   source /opt/conda/etc/profile.d/conda.sh
   conda activate /workspace/trellis2/environment
   cd /workspace/trellis2/source
