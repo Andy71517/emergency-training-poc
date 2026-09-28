@@ -4,12 +4,11 @@ These models deliberately represent records and approval gates only. They do
 not submit an ARC job, invoke a model, run Blender, or control Unreal.
 """
 
+import re
 from datetime import datetime
 from enum import StrEnum
-import re
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
-
 
 PIPELINE_CONTRACT_VERSION = "0.1.0"
 SHA256_PATTERN = re.compile(r"^[a-f0-9]{64}$")

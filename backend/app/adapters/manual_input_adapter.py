@@ -1,6 +1,6 @@
 """Build contract-shaped messages for manual or scripted POC input."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from uuid import uuid4
 
@@ -17,7 +17,7 @@ def build_action_message(
     actor_id: str = "stub-trainee",
     payload: dict[str, Any] | None = None,
 ) -> TraineeActionMessage:
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     event_id = f"event-{uuid4()}"
     event = TraineeActionEvent(
         session_id=session_id,

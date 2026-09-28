@@ -38,6 +38,17 @@ Vite serves the webpage on port `5173` and locally proxies `/api`, `/health`, an
 
 Use `npm run build` for a production build and `npm run lint` for frontend linting.
 
+## Visual physics lab
+
+Open **Visual physics lab** in the top bar. With FastAPI running, press **Run physics
+proof** to request a backend authorization. The primitive chair receives one
+40 N·s impulse in Rapier, then the browser sends its measured movement, contact,
+floor clearance, final transform, and timing to FastAPI. The backend writes a
+JSONL evidence record under `logs/physics/` and returns the bounded verdict.
+**Reset scene** makes a fresh rigid body for another run; **Show collision
+shapes** is a developer view. No generated mesh or Unreal engine is involved
+in this first visual development proof.
+
 This remains a deterministic proof of concept. Its results are not clinical validation, operational guidance, protocol authority, or real trainee scoring.
 
 ## Funding-proof direction

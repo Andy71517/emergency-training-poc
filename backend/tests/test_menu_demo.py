@@ -4,8 +4,8 @@ from scripts.run_menu_demo import (
     format_menu_review,
     friendly_label,
     parse_action_list,
-    replay_or_saved_review,
     render_session_comparison,
+    replay_or_saved_review,
     signed_difference,
     wants_yes,
 )

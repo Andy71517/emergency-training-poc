@@ -10,7 +10,6 @@ import math
 import re
 from typing import Any
 
-
 SCHEMA_VERSION = "0.1.0"
 SAFE_IDENTIFIER_PATTERN = r"^[A-Za-z0-9_-]{1,64}$"
 SCENARIO_IDENTIFIER_PATTERN = r"^[a-z0-9_]{1,80}$"
@@ -97,7 +96,7 @@ def _check_payload_value(
             raise ValueError(f"{field_path} has too many keys")
         for key, nested_value in value.items():
             if not isinstance(key, str):
-                raise ValueError(f"{field_path} contains a non-string key")
+                raise ValueError(f"{field_path} contains a non-string key")  # noqa: TRY004
             if len(key) > 64:
                 raise ValueError(f"{field_path}.{key[:16]}... has a key that is too long")
             _check_payload_value(

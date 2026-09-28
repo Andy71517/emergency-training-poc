@@ -28,7 +28,6 @@ from backend.app.logging.review_timeline import (
     summarize_state_changes,
 )
 
-
 ACTION_DESCRIPTIONS = {
     "assess_scene": "Recorded an initial scene assessment.",
     "scan_room": "Checked the room and recorded the visible environmental cues.",

@@ -1,6 +1,6 @@
 """Shared test message helpers."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from backend.app.models.events import TraineeActionEvent
 from backend.app.models.messages import TraineeActionMessage
@@ -13,7 +13,7 @@ def action_message(
     scenario_id: str = "smoke_inhalation_room_v0",
 ) -> TraineeActionMessage:
     event_id = f"{session_id}-event-{sequence_number}"
-    timestamp = datetime(2026, 1, 1, 0, 0, sequence_number, tzinfo=timezone.utc)
+    timestamp = datetime(2026, 1, 1, 0, 0, sequence_number, tzinfo=UTC)
     event = TraineeActionEvent(
         session_id=session_id,
         scenario_id=scenario_id,
