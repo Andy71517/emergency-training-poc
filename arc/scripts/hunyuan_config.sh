@@ -1,0 +1,7 @@
+#!/bin/bash
+# Source after load_arc_config.sh. Defaults keep this lane separate from TRELLIS.
+ARC_HUNYUAN_SOURCE_REVISION=82920d643c0dc2f7bfd7255f45f62d386edfe60c
+ARC_HUNYUAN_MODEL_REVISION=07d6dc9694e0ea942683bf6e3e374887d9f5b054
+ARC_HUNYUAN_CONTAINER="$ARC_PROJECT_WORKSPACE/containers/trellis2-pytorch-2.6.0-cu124.sif"
+ARC_HUNYUAN_ROOT="$ARC_PROJECT_WORKSPACE/hunyuan21"
+ARC_HUNYUAN_INPUT="${ARC_HUNYUAN_INPUT:-$ARC_PROJECT_WORKSPACE/trellis2/inputs/wooden-chair.png}"
