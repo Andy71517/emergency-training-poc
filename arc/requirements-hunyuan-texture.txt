@@ -1,7 +1,7 @@
 -r requirements-hunyuan-shape.txt
 # Inference/UV/rasterizer additions; no web demo or training stack.
 setuptools==75.8.2
-ninja==1.11.1.1
+ninja==1.11.1.4
 pybind11==2.13.4
 realesrgan==0.3.0
 basicsr==1.4.2
