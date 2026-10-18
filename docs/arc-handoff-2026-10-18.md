@@ -42,3 +42,12 @@ Retry build `8053061` completed in 1m43s, exit `0:0`, with `Hunyuan texture impo
 - Test on uploaded file in official bpy 5.1.2: five live Boolean gap cuts, copied material with neutral remnants tinted brown, source hidden/preserved. Evaluated 72,664 triangles, zero nonmanifold edges, floor min Z=0; source geometry/UV/albedo unchanged. Front/rear Cycles renders inspected. Visual repair still needs Andy's local review; no collision, Unreal export or physical test completed yet.
 
 Resume at `docs/blender-chair-repair-runbook.md`: run repair script in Scripting workspace, review result, save a separate preview, then continue approved Blender batch with material review, foot contact, simple convex collisions and Unreal export. TRELLIS remains paused pending DINOv3 access.
+
+
+## Automated collision completion — later October 18
+
+Andy ran the backrest repair successfully and returned front/side screenshots. He saved chair-repaired-preview.blend, then chair-collision.blend. Manual seat and four leg UBX pieces were entered and reviewed; backrest collider was not started. Andy requested replacing the per-object screenshot workflow with one tested script and one whole-result review.
+
+Uploaded chair-collision.blend inspected in official bpy 5.1.2. Added scripts/blender/complete_hunyuan_chair_collisions.py and docs/blender-chair-collision-runbook.md on the existing Batch 5 branch. It preserves and hides SM_Chair and the manual UBX pieces; creates evaluated SM_Chair_Demo and 19 closed convex UCX colliders, with separate slats/open gaps and flat proxy feet at Z=0. Original geometry, transforms, UVs and packed texture pixels unchanged. Fifteen gap-ray samples and one under-chair sample clear; front/rear QA renders inspected. Saved/reopened output verified; repeat execution rejected. Chaos cooking, material setup in Unreal, mass/friction and stability remain untested.
+
+Delivered separate completed copy chair-collision-complete.blend (script already run) and the reusable script. User can open the prepared file OR run script on original input, not both. Resume with one visual review of whole collision set, then automated selective Unreal export. No need to resume manual backrest-box instructions. New collection POC_Complete_Collision_Preview is the export candidate; original UBX/cutters must be excluded. The report is a Text datablock named POC_collision_report.json.
