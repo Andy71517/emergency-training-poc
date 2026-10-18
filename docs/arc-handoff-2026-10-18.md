@@ -24,3 +24,7 @@ Local validation includes cleanup on the actual uploaded chair (four faces remov
 5. TRELLIS remains available on its existing branch/runtime. The last reported DINOv3 request is still pending; do not resubmit TRELLIS until access and private authentication are verified.
 
 The latest prior handoffs are `docs/arc-handoff-2026-09-28.md` and `docs/arc-handoff-2026-10-04.md`. Draft PRs #1 (browser visual physics), #2 (TRELLIS), and #3 (Hunyuan geometry) remain separate; no merge was performed in this session.
+
+## Texture build follow-up
+
+Texture build job `8052986` failed after 9m30s. Python dependency installation, the custom CUDA rasterizer build/install, and the silent C++ helper step completed; `pip check` rejected `ninja 1.11.1.1` as unsupported on the platform before the final import/CUDA check ran. Updated the texture-only Ninja pin to `1.11.1.4`, whose wheel uses valid modern platform-tag metadata. Fetch this branch and rerun the texture build, reusing the existing environment and caches. Texture runtime and paint inference remain unverified until that retry succeeds.
