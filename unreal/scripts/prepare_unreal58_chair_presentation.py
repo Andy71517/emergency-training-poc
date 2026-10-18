@@ -80,9 +80,9 @@ def main():
         report['level_asset'] = level_path
         scene = {a.get_actor_label(): a for a in actors.get_all_level_actors()}
         # A level-local layout. Shared meshes, materials, and the original map are untouched.
-        cases = [('Display chair', (-210, 0, 0), u.Rotator(0, 180, 0)),
-                 ('Upright drop', (0, 0, 100), u.Rotator(0, 180, 0)),
-                 ('Tilted drop', (210, 0, 120), u.Rotator(0, 180, 30))]
+        cases = [('Display chair', (-210, 0, 0), u.Rotator(pitch=0, yaw=180, roll=0)),
+                 ('Upright drop', (0, 0, 100), u.Rotator(pitch=0, yaw=180, roll=0)),
+                 ('Tilted drop', (210, 0, 120), u.Rotator(pitch=0, yaw=180, roll=30))]
         for label, position, rotation in cases:
             actor = scene[label]
             component = actor.get_component_by_class(u.StaticMeshComponent)
@@ -104,7 +104,7 @@ def main():
             component.set_text(text)
             component.set_world_size(size)
             component.set_horizontal_alignment(u.HorizTextAligment.EHTA_CENTER)
-            component.set_text_render_color(u.Color(*color, 255))
+            component.set_text_render_color(u.Color(r=color[0], g=color[1], b=color[2], a=255))
             component.set_collision_enabled(u.CollisionEnabled.NO_COLLISION)
             component.set_editor_property('cast_shadow', False)
         caption('GENERATED ASSET / PHYSICS DEMO', (0, 30, 295), 18, (235, 241, 255))

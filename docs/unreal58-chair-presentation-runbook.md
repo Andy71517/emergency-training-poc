@@ -38,3 +38,7 @@ Return the first red Python error, or the newest `chair-presentation-*.json` und
 Python compilation/lint and bundled-helper hash/missing/tampered-file checks run outside Unreal. The original scene has now been run and observed on Andy's PC. The new presentation layout, label rendering, and capture must still be reviewed there; no Unreal runtime is available in the authoring environment.
 
 Official references: [Epic TextRenderComponent](https://dev.epicgames.com/documentation/en-us/unreal-engine/python-api/class/TextRenderComponent), [Epic LevelEditorSubsystem](https://dev.epicgames.com/documentation/en-us/unreal-engine/python-api/class/LevelEditorSubsystem), [Microsoft Game Bar recording](https://support.microsoft.com/en-us/accessibility/windows/use-a-screen-reader-to-record-your-screen-with-xbox-game-bar).
+
+## Rotation correction
+
+The first presentation run exposed positional Rotator argument ordering: the intended yaw180 was applied to a different axis, inverting the chairs. The corrected presentation script supplies pitch/yaw/roll by name. Open the ORIGINAL map under ChairDemo_<id> (not ChairPresentation_<id>), then run the corrected presentation script to create a fresh copy. Do not record the inverted version. The earlier original setup also used positional arguments for its tilted case, so the observed baseline establishes falling/settling, not a verified 30-degree tilted-drop condition. The corrected presentation explicitly sets that roll.
