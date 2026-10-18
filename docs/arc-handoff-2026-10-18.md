@@ -28,3 +28,7 @@ The latest prior handoffs are `docs/arc-handoff-2026-09-28.md` and `docs/arc-han
 ## Texture build follow-up
 
 Texture build job `8052986` failed after 9m30s. Python dependency installation, the custom CUDA rasterizer build/install, and the silent C++ helper step completed; `pip check` rejected `ninja 1.11.1.1` as unsupported on the platform before the final import/CUDA check ran. Updated the texture-only Ninja pin to `1.11.1.4`, whose wheel uses valid modern platform-tag metadata. Fetch this branch and rerun the texture build, reusing the existing environment and caches. Texture runtime and paint inference remain unverified until that retry succeeds.
+
+## Texture import follow-up
+
+Retry build `8053061` completed in 1m43s, exit `0:0`, with `Hunyuan texture imports and CUDA: OK`. Paint job `8053186` then failed in 2m29s after successful cleanup (four faces removed, watertight working copy), weight downloads, and main pipeline component loading. The error was `ModuleNotFoundError: pytorch_lightning`, reached through `hunyuanpaintpbr.__init__` importing its `HunyuanPaint` class. Added upstream-pinned `pytorch-lightning==1.9.5` and `torchmetrics==1.6.0`, and extended the build smoke check to import `Dino_v2` through that same package. Dependency resolution and Bash syntax pass locally; actual ARC import verification is pending the build retry. Pull the texture branch, rerun its build, then paint original shape run `8052814` after verification. Downloaded model weights remain cached.

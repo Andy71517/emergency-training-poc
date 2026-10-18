@@ -44,7 +44,7 @@ apptainer exec --nv --bind "$ARC_PROJECT_WORKSPACE:/workspace" --bind "$PWD:/pro
   cd hy3dpaint/DifferentiableRenderer
   bash compile_mesh_painter.sh
   python -m pip check
-  python -c "from hunyuan_texture_compat import install_torchvision_compat; install_torchvision_compat(); import torch, custom_rasterizer; from textureGenPipeline import Hunyuan3DPaintPipeline; from realesrgan import RealESRGANer; from DifferentiableRenderer.mesh_inpaint_processor import meshVerticeInpaint; assert torch.cuda.is_available(); print(torch.cuda.get_device_name(0)); print(\"Hunyuan texture imports and CUDA: OK\")"
+  python -c "from hunyuan_texture_compat import install_torchvision_compat; install_torchvision_compat(); import torch, custom_rasterizer; from textureGenPipeline import Hunyuan3DPaintPipeline; from hunyuanpaintpbr.unet.modules import Dino_v2; from realesrgan import RealESRGANer; from DifferentiableRenderer.mesh_inpaint_processor import meshVerticeInpaint; assert torch.cuda.is_available(); print(torch.cuda.get_device_name(0)); print(\"Hunyuan texture imports and CUDA: OK\")"
   python -m pip freeze > /workspace/hunyuan21/metadata/texture-requirements.freeze.txt
 '
 mkdir -p "$ARC_HUNYUAN_ROOT/texture-weights"
