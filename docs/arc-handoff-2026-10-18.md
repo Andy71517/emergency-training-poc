@@ -60,3 +60,14 @@ Andy inspected the complete 19-piece collision preview and said it looks good. P
 Verified Blender 5.1.2 FBX export/reimport roundtrip: 20 meshes, 19 hulls, 72,664 render triangles, two used slots with matching assignments, active UVs and bounds preserved within 1e-5 m. Roughness and metallic PNGs match packed G/B channels exactly when reloaded as data. Source object set, geometry/transforms/hide flags/UVs/packed pixels unchanged; existing-folder guard passes. Compilation/Ruff and ZIP integrity pass. FBX version 7400. No Unreal import/cooking/Chaos run yet.
 
 Resume: Andy downloads/extracts the ZIP; obtain installed Unreal version (or installation status) before exact import steps/Editor Python setup. Verify ~100 cm height, Z-up/floor pivot, 19 simple hulls and explicit material mapping inside Unreal, then build and record the drop/tip demo. No need to rerun Blender export if using the prepared package.
+
+
+## Unreal version confirmed: 5.8 — setup script prepared
+
+Andy confirmed Unreal Engine 5.8. New stacked branch codex/unreal58-chair-demo contains unreal/scripts/setup_unreal58_chair_demo.py and docs/unreal58-chair-demo-runbook.md. Delivered chair-unreal58-demo-setup.zip with the previously verified FBX/maps plus script and START-HERE instructions, all in one folder.
+
+Script intended behavior: verify package hashes and clean saved current map; create a unique content folder and separate lit map; temporarily select legacy FBX import and restore the feature flag; require 19 convex hulls and approximately 100 cm height/floor pivot; wire two chair materials explicitly; create a floor, camera, display chair, upright drop and tilted drop. Dynamic settings (5 kg, .55 friction, .05 restitution) are demo assumptions. Script does not start simulation; user inspects then Alt+S, Esc to stop. Reports success/failure in project Saved/EmergencyPOC.
+
+Validation completed here: API references checked against Epic docs, Python compile/lint, valid-package preflight, missing/altered texture rejection, and ZIP integrity. IMPORTANT: no Unreal runtime is present here. No UE imports, API property calls, shader compilation, collision cooking, map creation or Chaos simulation have been executed. First run on Andy's PC is the integration check. Do not overstate validation.
+
+Resume: create/open a separate Blank Blueprint project in 5.8; enable Python Editor Script Plugin and restart; save current map; File > Execute Python Script selects bundled setup_unreal58_chair_demo.py. Inspect whole scene once; return screenshot/observed drop behavior or first error/report. Do not resume manual collider entry. The Blender/export PR remains stacked and unmerged.
