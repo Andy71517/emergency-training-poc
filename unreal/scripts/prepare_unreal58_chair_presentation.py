@@ -10,7 +10,7 @@ import uuid
 from datetime import UTC, datetime
 from pathlib import Path
 
-HELPER_SHA256 = "7127b3e42929af8b49eaff766279b10e12d925ac96fa9ba475728db0a92e7394"
+HELPER_SHA256 = "ded7652b5e0454944877b0c69eff295e5fb8226a4a21f2ace3c2d6350a35803b"
 EXPECTED_LABELS = ('Display chair', 'Upright drop', 'Tilted drop', 'Demo floor', 'Demo camera')
 
 

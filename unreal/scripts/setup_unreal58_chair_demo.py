@@ -74,7 +74,7 @@ def new_material(u, tools, path, name, color=None, roughness=.5):
     editing = u.MaterialEditingLibrary
     if color is not None:
         expression = editing.create_material_expression(material, u.MaterialExpressionConstant3Vector, -400, 0)
-        expression.set_editor_property('constant', u.LinearColor(*color[:3], 1))
+        expression.set_editor_property('constant', u.LinearColor(r=color[0], g=color[1], b=color[2], a=1))
         if not editing.connect_material_property(expression, '', u.MaterialProperty.MP_BASE_COLOR):
             raise RuntimeError('Base color connection failed: ' + name)
     scalar = editing.create_material_expression(material, u.MaterialExpressionConstant, -400, 180)
@@ -96,7 +96,7 @@ def wire_texture(u, material, texture, prop, output, y, is_data=False):
 
 def spawn(u, actor_system, cls, label, location, rotation=None):
     actor = actor_system.spawn_actor_from_class(cls, u.Vector(*location),
-                                                rotation or u.Rotator(0, 0, 0))
+                                                rotation or u.Rotator(pitch=0, yaw=0, roll=0))
     if actor is None:
         raise RuntimeError('Could not spawn ' + label)
     actor.set_actor_label(label)
@@ -117,9 +117,9 @@ def build_scene(u, actor_system, level_system, root, mesh, floor_material, physi
     fc.set_collision_profile_name('BlockAll')
     fc.set_phys_material_override(physics_material)
     chairs = []
-    cases = [('Display chair', (-180, 0, 0), u.Rotator(0, 0, 0), False),
-             ('Upright drop', (0, 0, 65), u.Rotator(0, 0, 0), True),
-             ('Tilted drop', (180, 0, 85), u.Rotator(0, 0, 30), True)]
+    cases = [('Display chair', (-180, 0, 0), u.Rotator(pitch=0, yaw=0, roll=0), False),
+             ('Upright drop', (0, 0, 65), u.Rotator(pitch=0, yaw=0, roll=0), True),
+             ('Tilted drop', (180, 0, 85), u.Rotator(pitch=0, yaw=0, roll=30), True)]
     for label, location, rotation, simulate in cases:
         actor = spawn(u, actor_system, u.StaticMeshActor, label, location, rotation)
         component = actor.get_component_by_class(u.StaticMeshComponent)

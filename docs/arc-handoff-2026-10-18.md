@@ -1,5 +1,15 @@
 # ARC visual POC handoff — 2026-10-18
 
+## October 19 PR resolution follow-up
+
+The original Unreal setup now uses named rotation axes for an actual 30-degree
+roll in its tilted case. Python and ARC shell sources use LF line endings across
+platforms so the presentation helper's byte hash survives Windows checkouts; its
+pinned hash was updated with the setup fix. Offline regression checks cover the
+spawned tilt, static reference and valid/changed helper handling. These checks do
+not execute Unreal or establish new Chaos runtime evidence. Existing accepted
+maps do not need rebuilding.
+
 ## Verified today
 
 - Andy switched to Hunyuan branch `codex/arc-hunyuan-chair` at `89c95a9` and confirmed the shape config/checkpoint were accessible without a token.
