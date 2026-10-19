@@ -16,7 +16,6 @@ from backend.app.pipeline.models import (
     ScenarioPublicationStatus,
 )
 
-
 SHA = "a" * 64
 NOW = datetime(2026, 8, 31, tzinfo=UTC)
 
