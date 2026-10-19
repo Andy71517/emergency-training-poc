@@ -24,9 +24,7 @@ def create_app(log_directory: Path | None = None) -> FastAPI:
     app = FastAPI(title="Emergency Training POC", version="0.1.0")
     manager = SessionManager(log_directory) if log_directory is not None else SessionManager()
     authoring_service = ScenarioAuthoringService()
-    physics_service = PhysicsProofService(
-        log_directory / "physics" if log_directory is not None else None
-    )
+    physics_service = PhysicsProofService()
     app.state.session_manager = manager
     app.state.authoring_service = authoring_service
     app.state.physics_service = physics_service
