@@ -62,7 +62,7 @@ def test_network_failure_is_actionable_and_worker_failure_persists(tmp_path,monk
         raise urllib.error.URLError('sensitive transport details')
     service.planner=disconnected
     job=wait(service,service.submit('Three classroom layouts',3,42)['id'])
-    assert 'VPN' in job['error'] and 'sensitive' not in job['error']
+    assert 'no API-key rejection' in job['error'] and 'sensitive' not in job['error']
     service.planner=lambda *a,**k:(plan(),{'provider':'offline_test'})
     job=wait(service,service.submit('Three classroom layouts',3,42)['id'])
     executable=tmp_path/'fake-blender.exe';executable.touch()

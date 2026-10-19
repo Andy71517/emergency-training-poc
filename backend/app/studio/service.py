@@ -10,6 +10,7 @@ from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 
+from arc.scripts.check_arc_network import describe_connection_error
 from arc.scripts.check_scenario_planner_access import safe_error_detail
 from arc.scripts.generate_scenario_batch import ask_model, write_package
 
@@ -107,8 +108,8 @@ class SceneBatchService:
             scenes = [json.loads(p.read_text()) for p in sorted(output.glob('room_*.json'))]
             job.update(status='review_ready',scenes=scenes,completed_at=datetime.now(UTC).isoformat(),error=None)
             job['stages']['planning']='complete'
-        except (urllib.error.URLError, TimeoutError):
-            job.update(status='failed', error='ARC connection failed or timed out. Check the VT VPN and internet connection, then use Test ARC connection. No automatic retry was made.')
+        except (urllib.error.URLError, TimeoutError) as exc:
+            job.update(status='failed', error=describe_connection_error(exc))
             job['stages']['planning']='failed'
         except ValueError as exc:
             detail = safe_error_detail(json.dumps({'message':str(exc)}).encode(), token)

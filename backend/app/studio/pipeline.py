@@ -9,6 +9,7 @@ import uuid
 import zipfile
 from pathlib import Path
 
+from arc.scripts.check_arc_network import describe_connection_error
 from arc.scripts.check_scenario_planner_access import safe_error_detail
 from backend.app.studio.service import REPO, local_settings, settings
 
@@ -29,8 +30,8 @@ def connection_check():
             raise ValueError('ARC responded without model text. Try again later.')
     except urllib.error.HTTPError as exc:
         raise ValueError(f'ARC HTTP {exc.code}: '+safe_error_detail(exc.read(16384),token)) from None
-    except (urllib.error.URLError, TimeoutError):
-        raise ValueError('Cannot reach ARC. Check the VT VPN, internet access and service availability.') from None
+    except (urllib.error.URLError, TimeoutError) as exc:
+        raise ValueError(describe_connection_error(exc)) from None
     except (KeyError, IndexError, TypeError, json.JSONDecodeError):
         raise ValueError('ARC returned an unexpected response format.') from None
     return {'ok':True,'message':'Authenticated model response received.','model':model}
