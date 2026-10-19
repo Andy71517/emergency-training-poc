@@ -1,3 +1,5 @@
+> Historical checkpoint. For the current working state and next actions, start with [arc-handoff-2026-10-19.md](arc-handoff-2026-10-19.md). Later sections below preserve the earlier troubleshooting history.
+
 # ARC visual POC handoff — 2026-10-18
 
 ## October 19 PR resolution follow-up
@@ -135,3 +137,16 @@ Added unreal/scripts/assemble_unreal58_rooms.py plus docs/unreal58-room-batch-ru
 No engine runtime here. Compile/lint, valid package preflight, tampered-room rejection, conversion and ZIP integrity pass. Actual map creation/collision/camera/API behavior await Andy's first run; do not claim engine rooms verified yet. First action: open existing EmergencyChairPOC chair demo, stop simulation/save, execute bundled assemble_unreal58_rooms.py; inspect last room003map and others; Alt+S should show settling only because chairs begin onfloor. Return overall screenshot/behavior or firstred error/report Saved/EmergencyPOC/room-setup-*.json.
 
 After successful room verification, implement frontend integration batch using existing authoring/backend rather than disconnected new UI: real prompt request, persistent jobs/status, plan/previews first, Blender/Unreal workers later. Do not claim workers/live-browser Unreal streaming already exist. User wants minimal/futuristic polished appearance.
+
+
+## Unreal rooms observed; frontend prompt workspace implemented
+
+Andy confirmed all rooms visible in Unreal and chairs remain still on floor during check. Expected for ground-level starts. No instrumented full collision/evacuation benchmark performed. He asked next for minimal/futuristic polished frontend; approved personal API key in backend configuration for local single-user POC and continuing implementation.
+
+New branch codex/arc-scenario-workspace stacked on Unreal branch. Added SpatialWorkbench React/CSS as default app view (working brand FIELDWORK), prompt/count/seed composer, private config indicator, persistent recent jobs, status pipeline, clickable SVG layout gallery, original request/assumptions, JSON downloads and legacy-tools navigation. PhysicsLab lazy loaded: initial workspaceJS~252kB instead of~3.4MB. Existing mock authoring/runtime unchanged.
+
+New /api/studio endpoints use SceneBatchService SQLite under logs/studio; bounded queue4jobs/one real hosted ARC request at a time, threaded generation, persisted jobs/artifacts, interrupted status on restart. Private key read from backend/.env or environment; browser receives configured bool/model only. Prompt containing configured key rejected; sanitized errors, allowlisted artifact routes, foreign-origin mutation check. No Blender/Unreal workers connected; UI says so. Generator ask_model now accepts server-provided token without interactive prompt and supports package/direct CLI imports. Personal key not known to assistant.
+
+Validation:87 backend tests pass in isolated source snapshot, generator4tests pass, lint/build pass. Working scratch full suite's older no-generated-assets assertion fails because ignored wooden-chair-reference.png exists; isolated snapshot excludes that generated asset, no user file deleted. New tests cover persistence, credential redaction/rejection, artifacts, origin/request bounds and failures. Browser HTTP flow tested in Chromium with explicitly offline planner fixture (no real key), desktop1440/mobile390 screenshots inspected and sidebar overflow fixed. New frontend-to-live-ARC call still needs Andy's Windows runtime.
+
+Resume with docs/arc-workspace-runbook.md: fresh Windows checkout branch codex/arc-scenario-workspace; createvenv pipinstall-e.; npm--prefixweb ci/build; copybackend/.env.example tobackend/.env in freshclone and privatelyeditkey; start uvicorn backend.app.main:app --host127.0.0.1 --port8765 fromroot; openlocalhost. No new ARC job. Keep singlebackendprocess/no reload. First live UI prompt should change dimensions/chaircount to test adaptation beyond copiedexample. Return wholeworkspace screenshot or error. Later attach actual Blender/Unreal workers and freshasset registry resolver, not simulated buttons.

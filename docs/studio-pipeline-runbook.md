@@ -1,0 +1,89 @@
+> Current checkpoint: [arc-handoff-2026-10-19.md](arc-handoff-2026-10-19.md). For the first couch and named furniture variants, see [furniture-variants-runbook.md](furniture-variants-runbook.md).
+
+# FIELDWORK pipeline handoff — 2026-10-18
+
+Resume here for the frontend/local worker batch on `codex/arc-scenario-workspace`, draft PR #7. Earlier ARC evidence remains in `arc-handoff-2026-10-18.md` and `arc-handoff-2026-09-28.md`.
+
+## Windows update
+
+Stop uvicorn with Ctrl+C. From the repository root:
+
+```powershell
+git pull --ff-only
+.\.venv\Scripts\python.exe -m pip install -e .
+npm --prefix web ci
+npm --prefix web run build
+notepad backend\.env
+```
+
+Keep the existing key and model. Add these paths, using your actual installation and prepared chair locations:
+
+```dotenv
+BLENDER_EXECUTABLE=C:/Program Files/Blender Foundation/Blender 5.1/blender.exe
+CHAIR_BLEND=C:/your-assets/chair-collision-complete.blend
+```
+
+Use the completed chair with `SM_Chair_Demo` and 19 `UCX_SM_Chair_Demo_*` pieces, not the original GLB. Copy as path can help; enclosing quotes are accepted. Do not overwrite your existing `.env` with the template. Values are read again per request, so path changes do not require a restart.
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8765
+```
+
+Open http://127.0.0.1:8765. In Connections, **Test ARC connection** makes a small authenticated model request. A configured key alone is not connectivity evidence. Use VT VPN if required. The screenshot received on October 18 showed a failed planning attempt with a generic error; its exact cause is unknown. Transport/timeouts, HTTP responses, plan errors and unexpected response formats now have separate messages. Old jobs retain old messages; test and explicitly retry to get current diagnostics.
+
+## Connect Unreal once per editor session
+
+1. Backend and Unreal must use the same computer and checkout. The bridge polls `logs/studio/engine`; no public listener or new plugin is installed.
+2. Open Unreal 5.8 and your saved original/presentation chair demo with its **Display chair** actor. Existing Python/editor scripting support must be enabled.
+3. Save work and stop any active simulation.
+4. **Tools → Execute Python Script → unreal/scripts/studio_bridge.py** in this checkout.
+5. Keep Unreal open. Connections should show **Editor connected** within a few seconds. Use one editor instance per checkout.
+
+The first assembly validates/binds the chair's 19 hulls, 100 cm height, floor pivot and two material slots. Later batches reuse the mesh binding until Unreal restarts. Reloading the bridge while it has a task is refused. Backend restarts mark interrupted work and cancel unclaimed commands; they do not establish completion of claimed editor work.
+
+## Controls and actual work
+
+| Control | Work and output |
+| --- | --- |
+| Generate batch | Real ARC plan request, bounded validation, seeded room specifications and SVGs; no substitute fixture on failure |
+| Edit brief / Retry | Revise the composer or explicitly create another model request; old job remains |
+| Rebuild with seed | New job from saved validated plan; no LLM request |
+| Whole batch | Download room JSON/SVG, manifest and portable Blender scripts; chair binary excluded |
+| Build in Blender | Background Blender 5.1 assembles prepared chairs into a new rooms.blend, renders overview PNG and saves report; source asset untouched |
+| Assemble in Unreal | Open editor bridge builds one new map per scene and returns matching assembly evidence |
+| Run Chaos batch | Load each generated map, simulate ten seconds, read chair positions from its game world, stop simulation and return observations |
+| Unreal handoff ZIP | Alternative: extract and execute assemble_unreal58_rooms.py manually in the original chair demo |
+| Import assembly report | Check job ID, room hashes and map entries from Saved/EmergencyPOC/room-setup-*.json; not proof of simulation |
+
+Inspect Blender previews/files and Unreal maps. The room count supports 1–30. Blender uses CPU rendering and the existing serial local worker, with a 30-minute timeout; large batches take longer. A separate scene per room plus an overview is saved. Scene data is reused across both applications.
+
+Chaos reports show editor-reported initial/final positions and endpoint displacement. They do not measure collision contacts or verify evacuation behavior/calibrated physics. Floor-level chairs may legitimately remain still; no extra impulse is applied. Chair height, mass and material parameters are demo assumptions. The browser displays Blender renders and engine reports; Unreal video is not streamed.
+
+The bridge only accepts fixed assemble/simulate/record actions. Model text is never executed. Keys stay backend-only and are stripped from Blender child environments; raw process/network output is not persisted by these workers. Env and worker files remain local under ignored logs/config paths.
+
+API references: [LevelEditorSubsystem](https://dev.epicgames.com/documentation/en-us/unreal-engine/python-api/class/LevelEditorSubsystem), [UnrealEditorSubsystem](https://dev.epicgames.com/documentation/en-us/unreal-engine/python-api/class/UnrealEditorSubsystem). Uses documented editor_play_simulate, editor_request_end_play and get_game_world calls.
+
+## Validation and practical limits
+
+- Backend regression suite: 108 passing tests at the latest furniture-library checkpoint.
+- Production frontend build and ESLint; targeted Python lint and compile checks.
+- Browser flow with explicit offline fixture planner: generation, focus alignment, stage navigation, Connections, Unreal ZIP download, saved-plan replay, desktop/mobile layout and no page errors.
+- Actual Blender 5.1.2 Python runtime ran assembly and rendering with the accepted three-room plan and completed chair; new blend/report/preview produced and preview inspected. Andy subsequently confirmed the actual Windows room worker succeeds; the new generic furniture-review invocation still needs its first Windows run.
+- Tests cover replay without another model call, ZIP/report hash binding, rejected foreign origins, sanitized failures, editor command/result flow and restricted artifacts. A fake editor exercises bridge simulation-start/game-world-sampling/stop. This does not claim real Unreal execution.
+- Andy confirmed live ARC frontend generation, Windows Blender room assembly and actual Unreal 5.8 bridge/Chaos batches. First live recording and first couch variant run remain pending; this build environment has no private ARC credentials or Unreal installation.
+
+## Next actions
+
+The baseline live pipeline is confirmed. Resume from [the current handoff](arc-handoff-2026-10-19.md): submit the first couch request using [the furniture runbook](furniture-variants-runbook.md), import and inspect its output, then prepare appropriate collision pieces and mixed-asset room integration. Separately verify the first actual recorded Unreal clips with [the playback runbook](visual-playback-runbook.md). TRELLIS remains paused pending DINOv3 access.
+
+## Windows ARC certificate fix
+
+The no-key network diagnostic confirmed DNS and TCP connectivity on Andy's PC, followed by Python certificate verification failure. The ARC clients now use a verified truststore SSLContext on Windows (native CryptoAPI certificate-chain validation); Linux retains Python's default verified context. No certificate checks are disabled. Update the editable installation with `.\.venv\Scripts\python.exe -m pip install -e .`, rerun `arc/scripts/check_arc_network.py`, then restart the backend. HTTP 401/403 from the no-key probe confirms an HTTP response with valid TLS; it does not test the private key. If native Windows validation also fails, investigate the server's certificate chain or the machine's trust configuration rather than bypassing verification.
+
+## Confirmed live pipeline and next visual batch
+
+Andy confirmed live ARC plans, Blender assembly, Unreal assembly and the full ten-second-per-room Chaos batch with downloadable observations on October 18. For the new recorded movement demo and updated worker setup, continue from [visual-playback-runbook.md](visual-playback-runbook.md). This new capture path still needs its first live Unreal verification.
+
+## History and duplication
+
+For the new recoverable Trash, exact-input request reuse and implemented variant library and remaining mixed-asset expansion, see [batch-history-and-assets.md](batch-history-and-assets.md). Trash keeps files on disk and does not remove maps already created in Unreal.

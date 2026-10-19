@@ -9,6 +9,11 @@ import sys
 import urllib.error
 import urllib.request
 
+try:
+    from .arc_http import arc_ssl_context
+except ImportError:
+    from arc_http import arc_ssl_context
+
 
 def safe_error_detail(raw, token):
     """Extract only an error description; never dump headers or a raw response."""
@@ -42,7 +47,7 @@ def main():
         data=json.dumps(payload).encode(), headers={'Authorization': 'Bearer ' + token.strip(),
                                                    'Content-Type': 'application/json'}, method='POST')
     try:
-        with urllib.request.urlopen(request, timeout=120) as response:
+        with urllib.request.urlopen(request, timeout=120, context=arc_ssl_context()) as response:
             result = json.loads(response.read(1_000_000))
     except urllib.error.HTTPError as exc:
         messages = {401: 'Key rejected. Check the key privately in your ARC account.',
@@ -69,3 +74,4 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         sys.exit('\nCancelled; no key saved.')
+

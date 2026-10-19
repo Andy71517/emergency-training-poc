@@ -1,0 +1,5 @@
+Built-in image-generation tool reference prepared for this POC, 2026-10-19.
+The web reference is encoded as WebP for delivery; the frontend converts it to PNG for the ARC request.
+This is an image-to-3D input, not generated geometry or a physics-validated asset.
+
+Use case: product-mockup. Asset type: single reference image for image-to-3D furniture generation. Create one realistic unbranded compact two-seat sofa, charcoal gray woven fabric, simple rectangular padded back, two distinct seat cushions, straight upholstered arms, four short dark wooden square legs. It must be an ordinary coherent physically plausible sofa, no pillows or blankets or decorations. Full object visible, centered with margins, front three-quarter view at approximately seat height, front and right side visible, all visible legs unobstructed, no cropping. Neutral soft studio lighting, plain solid white background, no room, no floor horizon, no text, no watermark. Clear geometry and subtle fabric texture. Width approximately 1.8 metres, depth 0.85 metres, height 0.85 metres; do not display dimensions.

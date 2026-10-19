@@ -10,6 +10,8 @@ from pathlib import Path
 def assemble(package_dir, chair_blend, output_blend):
     import bpy
     from mathutils import Vector
+    if bpy.app.version[:2] != (5, 1):
+        raise RuntimeError('This worker requires Blender 5.1.x.')
     folder, source, output = (Path(p).resolve() for p in (package_dir, chair_blend, output_blend))
     if output.exists():
         raise RuntimeError('Choose a new output filename; overwrite is refused.')
@@ -163,18 +165,24 @@ def assemble(package_dir, chair_blend, output_blend):
              'chair_count': chair_count, 'collider_count': chair_count*19,
              'doorway_opening_m': [gap,dh], 'front_wall_hidden_for_review': True})
     overview = bpy.data.scenes.new('POC_00_Overview')
+    columns = min(5, math.ceil(math.sqrt(len(collections))))
+    spacing_x = max(s['room']['width_m'] for s in specs) + 3
+    spacing_y = max(s['room']['depth_m'] for s in specs) + 4
     for i, collection in enumerate(collections):
         obj = bpy.data.objects.new('Overview '+collection.name, None)
         obj.instance_type, obj.instance_collection = 'COLLECTION', collection
-        obj.location = (i*11,0,0)
+        obj.location = ((i % columns)*spacing_x,(i // columns)*spacing_y,0)
         overview.collection.objects.link(obj)
-    camera(overview, (11,-20,31), (11,4,0), 36)
+    rows = math.ceil(len(collections)/columns)
+    centre = ((columns-1)*spacing_x/2, (rows-1)*spacing_y/2+4, 0)
+    scale = max(columns*spacing_x, rows*spacing_y*1.8) + 5
+    camera(overview, (centre[0]+5,centre[1]-25,35), centre, scale)
     for i in range(1, len(collections)):
         light = bpy.data.lights.new('Overview area '+str(i), 'AREA')
         light.energy, light.shape, light.size = 2200, 'DISK', 8
         obj = bpy.data.objects.new(light.name, light)
         overview.collection.objects.link(obj)
-        obj.location = (i*11,4,10)
+        obj.location = ((i % columns)*spacing_x,(i // columns)*spacing_y+4,10)
     bpy.context.window.scene = overview
     bpy.context.view_layer.update()
     for scene, spec in zip([bpy.data.scenes['POC_'+s['scene_id']] for s in specs],specs):
@@ -203,3 +211,4 @@ def assemble(package_dir, chair_blend, output_blend):
     output.parent.mkdir(parents=True,exist_ok=True)
     bpy.ops.wm.save_as_mainfile(filepath=str(output))
     return report
+
