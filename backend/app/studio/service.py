@@ -1,8 +1,10 @@
 """Local persistent jobs; credentials never enter job records or browser responses."""
+import hashlib
 import json
 import os
 import sqlite3
 import threading
+import unicodedata
 import urllib.error
 import uuid
 from concurrent.futures import ThreadPoolExecutor
@@ -75,26 +77,78 @@ class SceneBatchService:
             raise KeyError(job_id)
         return json.loads(row[0])
 
-    def list(self):
+    def records(self):
         with self.connect() as db:
-            rows = db.execute('SELECT data FROM jobs ORDER BY rowid DESC LIMIT 100').fetchall()
+            rows = db.execute('SELECT data FROM jobs ORDER BY rowid DESC').fetchall()
         return [json.loads(row[0]) for row in rows]
 
-    def submit(self, prompt, count, seed):
+    def list(self):
+        return [j for j in self.records() if not j.get('trashed_at')][:100]
+
+    def trash_list(self):
+        return [j for j in self.records() if j.get('trashed_at')][:100]
+
+    @staticmethod
+    def request_key(prompt,count,seed,model):
+        prompt=unicodedata.normalize('NFC',prompt.replace('\r\n','\n').strip())
+        value={'prompt':prompt,'count':count,'seed':seed,'model':model,'contract':'studio-plan-v1'}
+        return hashlib.sha256(json.dumps(value,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+
+    def find_match(self,prompt,count,seed,model=None):
+        model=model or settings()[1]
+        key=self.request_key(prompt,count,seed,model)
+        candidates=[j for j in self.records() if not j.get('trashed_at')
+            and j['status'] in ('queued','planning','building','review_ready')
+            and (j['status']!='review_ready' or (self.directory/j['id']/'manifest.json').is_file())
+            and self.request_key(j['prompt'],j['count'],j['seed'],j['model'])==key]
+        return next((j for j in candidates if j['status']!='review_ready'),candidates[0] if candidates else None)
+
+    @staticmethod
+    def working(job):
+        return job['status'] in ('queued','planning','building') or any(
+            state.get('status') in ('queued','running') for state in job.get('pipeline',{}).values())
+
+    def trash(self,job_id):
+        with self.lock:
+            job=self.get(job_id)
+            if self.working(job):
+                raise ValueError('This batch is still working. Wait for it to finish before deleting it.')
+            job['trashed_at']=datetime.now(UTC).isoformat()
+            self.save(job)
+        return job
+
+    def restore(self,job_id):
+        with self.lock:
+            job=self.get(job_id)
+            job.pop('trashed_at',None)
+            self.save(job)
+        return job
+
+    def submit(self, prompt, count, seed, force_new=False):
         token, model = settings()
-        if not token:
-            raise ValueError('Configure ARC_LLM_API_KEY in backend/.env, then try again.')
-        if token in prompt:
+        if len(prompt.strip())<10:
+            raise ValueError('Describe the scenario in at least ten non-blank characters.')
+        if token and token in prompt:
             raise ValueError('The prompt contains a credential. Remove it; nothing was saved.')
         with self.lock:
+            if not force_new:
+                existing=self.find_match(prompt,count,seed,model)
+                if existing:
+                    # Reopen even an older match in the bounded Recent batches list.
+                    if existing['status']=='review_ready':
+                        self.save(existing)
+                    return dict(existing,reused=True)
+            if not token:
+                raise ValueError('Configure ARC_LLM_API_KEY in backend/.env, then try again.')
             if sum(j['status'] in ('queued','planning','building') for j in self.list()) >= 4:
                 raise ValueError('Four jobs are already active. Wait for a job to finish.')
             job = {'id':uuid.uuid4().hex, 'prompt':prompt,'count':count,'seed':seed,
                    'model':model,'status':'queued','created_at':datetime.now(UTC).isoformat(),
-                   'error':None,'plan':None,'scenes':[],'stages':{'planning':'queued','blender':'not_connected','unreal':'not_connected'}}
+                   'error':None,'plan':None,'scenes':[],'stages':{'planning':'queued','blender':'not_connected','unreal':'not_connected'},
+                   'request_key':self.request_key(prompt,count,seed,model)}
             self.save(job)
             self.pool.submit(self.run, job['id'], token)
-        return job
+        return dict(job,reused=False)
 
     def run(self, job_id, token):
         job = self.get(job_id)
@@ -132,8 +186,11 @@ class SceneBatchService:
         from arc.scripts.generate_scenario_batch import validate_plan
         plan = validate_plan(old['plan'])
         job = dict(old, id=uuid.uuid4().hex, seed=seed, status='building', error=None,
-                   scenes=[], stages={'planning':'building','blender':'not_started','unreal':'not_started'},
+                   scenes=[], pipeline={}, stages={'planning':'building','blender':'not_started','unreal':'not_started'},
                    created_at=datetime.now(UTC).isoformat(), replay_of=job_id)
+        job.pop('trashed_at',None)
+        job.pop('completed_at',None)
+        job['request_key']=self.request_key(job['prompt'],job['count'],seed,job['model'])
         with self.lock:
             if sum(j['status'] in ('queued','planning','building') for j in self.list()) >= 4:
                 raise ValueError('Four jobs are active. Wait for a job to finish.')

@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowDownToLine, ArrowRight, Box, Check, ChevronRight, Command, Layers3, Loader2, Plus, Radio, RefreshCw, Settings2, Sparkles, Terminal, Upload, X } from 'lucide-react';
+import { ArrowDownToLine, ArrowRight, Box, Check, ChevronRight, Command, Layers3, Loader2, Plus, Radio, RefreshCw, Settings2, Sparkles, Terminal, Trash2, Undo2, Upload, X } from 'lucide-react';
 import './spatial-workbench.css';
 import { RunPlayback, type VideoStage } from './RunPlayback';
 
 type Scene = { scene_id:string; objects:unknown[]; room:{width_m:number;depth_m:number}; designated_aisle:{condition:string} };
 type Stage = {status:string;message:string;run?:string;maps?:string[];room_count?:number;maximum_endpoint_displacement_m?:number};
-type Job = {id:string;prompt:string;count:number;seed:number;model:string;status:string;created_at:string;error:string|null;plan:{title:string;assumptions:string[]}|null;scenes:Scene[];pipeline?:{blender?:Stage;unreal?:Stage;simulation?:Stage;video?:VideoStage};replay_of?:string};
+type Job = {id:string;prompt:string;count:number;seed:number;model:string;status:string;created_at:string;error:string|null;plan:{title:string;assumptions:string[]}|null;scenes:Scene[];pipeline?:{blender?:Stage;unreal?:Stage;simulation?:Stage;video?:VideoStage};replay_of?:string;reused?:boolean;trashed_at?:string};
 type Config = {configured:boolean;model:string;blender_ready:boolean;blender_executable_set:boolean;chair_bound:boolean;asset_label:string;requirements:string[];video_available:boolean;engine:{connected:boolean;busy:boolean;project?:string;version?:string;capabilities?:string[];activity?:{job_id:string;action:string;room:number;total:number}|null}};
 const initialPrompt='Create classroom-style room layouts using the reviewed wooden chair asset. Include a visible exit and a designated aisle. Keep most layouts clear and obstruct the aisle in the final layout.';
 const labels:Record<string,string>={queued:'Queued',planning:'Interpreting prompt',building:'Building layouts',review_ready:'Ready for review',failed:'Needs attention',interrupted:'Interrupted',complete:'Complete',running:'Running',not_started:'Ready to start',assembly_reported:'Assembly reported',playback_reported:'Playback reported'};
@@ -22,6 +22,10 @@ async function request<T>(url:string,body?:unknown):Promise<T>{
 export function SpatialWorkbench({onLegacy}:{onLegacy:()=>void}){
   const [config,setConfig]=useState<Config|null>(null);
   const [jobs,setJobs]=useState<Job[]>([]);
+  const [trash,setTrash]=useState<Job[]>([]);
+  const [showTrash,setShowTrash]=useState(false);
+  const [match,setMatch]=useState<Job|null>(null);
+  const [forceNew,setForceNew]=useState(false);
   const [selected,setSelected]=useState<string|null>(null);
   const [prompt,setPrompt]=useState(initialPrompt);
   const [count,setCount]=useState(3);
@@ -37,8 +41,8 @@ export function SpatialWorkbench({onLegacy}:{onLegacy:()=>void}){
   const dialogRef=useRef<HTMLDivElement>(null);
   const job=jobs.find(j=>j.id===selected);
   const refresh=useCallback(async()=>{
-    const [c,j]=await Promise.all([request<Config>('/api/studio/config'),request<Job[]>('/api/studio/jobs')]);
-    setConfig(c);setJobs(j);
+    const [c,j,t]=await Promise.all([request<Config>('/api/studio/config'),request<Job[]>('/api/studio/jobs'),request<Job[]>('/api/studio/trash')]);
+    setConfig(c);setJobs(j);setTrash(t);
   },[]);
   useEffect(()=>{
     let alive=true;
@@ -46,10 +50,10 @@ export function SpatialWorkbench({onLegacy}:{onLegacy:()=>void}){
     tick();const timer=setInterval(tick,4000);return()=>{alive=false;clearInterval(timer);};
   },[refresh]);
   useEffect(()=>{
-    if(!expanded&&!connections)return;
+    if(!expanded&&!connections&&!showTrash)return;
     const previous=document.activeElement as HTMLElement|null;
     const handler=(event:KeyboardEvent)=>{
-      if(event.key==='Escape'){setExpanded(null);setConnections(false);}
+      if(event.key==='Escape'){setExpanded(null);setConnections(false);setShowTrash(false);}
       if(event.key==='Tab'){
         const nodes=dialogRef.current?.querySelectorAll<HTMLElement>('button,a[href],input');
         if(!nodes?.length)return;
@@ -59,17 +63,32 @@ export function SpatialWorkbench({onLegacy}:{onLegacy:()=>void}){
       }
     };
     window.addEventListener('keydown',handler);return()=>{window.removeEventListener('keydown',handler);previous?.focus();};
-  },[expanded,connections]);
+  },[expanded,connections,showTrash]);
   async function act(name:string,operation:()=>Promise<void>){
     setBusy(name);setError('');setNotice('');
     try{await operation();await refresh();}catch(e){setError(e instanceof Error?e.message:'Request failed.');}finally{setBusy('');}
   }
   const choose=(j:Job)=>{setSelected(j.id);setExpanded(null);setStage('plan');setNotice('');};
   const edit=(j?:Job)=>{setSelected(null);setExpanded(null);setStage('plan');if(j){setPrompt(j.prompt);setCount(j.count);setSeed(j.seed);}requestAnimationFrame(()=>input.current?.focus());};
-  const generate=()=>act('generate',async()=>{const j=await request<Job>('/api/studio/jobs',{prompt,count,seed});choose(j);});
+  const generate=()=>act('generate',async()=>{const j=await request<Job>('/api/studio/jobs',{prompt,count,seed,force_new:forceNew});choose(j);setForceNew(false);if(j.reused)setNotice(active(j)?'That request is already running. Opened the existing batch; no second ARC request was made.':'Opened your saved batch. No new ARC request was made.');});
   const check=()=>act('connection',async()=>{const result=await request<{message:string}>('/api/studio/connection-check',{});setNotice(result.message);});
   const ready=jobs.filter(j=>j.status==='review_ready').length;
   const valid=prompt.trim().length>=10&&Number.isInteger(count)&&count>=1&&count<=30&&Number.isInteger(seed)&&seed>=0&&seed<=2147483647;
+  useEffect(()=>{
+    let current=true;
+    const timer=setTimeout(()=>{
+      if(!valid){setMatch(null);return;}
+      void request<Job|null>('/api/studio/jobs/match',{prompt,count,seed}).then(result=>{if(current)setMatch(result);}).catch(()=>{if(current)setMatch(null);});
+    },450);
+    return()=>{current=false;clearTimeout(timer);};
+  },[prompt,count,seed,valid,config?.model,jobs.length,trash.length]);
+  const working=(item:Job)=>active(item)||Object.values(item.pipeline||{}).some(s=>['queued','running'].includes(s.status));
+  const remove=(item:Job)=>void act('trash',async()=>{
+    await request(`/api/studio/jobs/${item.id}/trash`,{});
+    if(selected===item.id)setSelected(null);
+    setExpanded(null);setNotice('Batch moved to Trash. Its files are kept and can be restored.');
+    setMatch(null);
+  });
   const blender=job?.pipeline?.blender;
   const unreal=job?.pipeline?.unreal;
   const simulation=job?.pipeline?.simulation;
@@ -92,8 +111,8 @@ export function SpatialWorkbench({onLegacy}:{onLegacy:()=>void}){
       <button className="sw-nav sw-nav-active" onClick={()=>edit()} title="Create scenario"><Command size={17}/> Create scenario <ChevronRight size={14}/></button>
       <button className="sw-new" onClick={()=>{edit();setPrompt('');}}><Plus size={15}/> New prompt</button>
       <div className="sw-section-label">RECENT BATCHES <span>{jobs.length.toString().padStart(2,'0')}</span></div>
-      <div className="sw-history">{jobs.length===0?<p>Your first batch starts here.<br/>Describe a space to begin.</p>:jobs.map(j=><button key={j.id} className={`sw-job ${selected===j.id?'selected':''}`} onClick={()=>choose(j)} title={j.plan?.title||j.prompt}><span className={`sw-job-dot ${j.status}`}/><span>{j.plan?.title||j.prompt.slice(0,30)}<small>{j.count} layouts · {labels[j.status]||j.status}</small></span></button>)}</div>
-      <div className="sw-sidebar-bottom"><button onClick={()=>setConnections(true)}><Settings2 size={15}/> Connections <ChevronRight size={14}/></button><button onClick={onLegacy}><Terminal size={15}/> Legacy POC tools <ArrowRight size={14}/></button><div className="sw-user"><span>A</span><div>Andy’s workspace<small>Local · single user</small></div></div></div>
+      <div className="sw-history">{jobs.length===0?<p>Your first batch starts here.<br/>Describe a space to begin.</p>:jobs.map(j=><div key={j.id} className="sw-job-row"><button className={`sw-job ${selected===j.id?'selected':''}`} onClick={()=>choose(j)} title={j.plan?.title||j.prompt}><span className={`sw-job-dot ${j.status}`}/><span>{j.plan?.title||j.prompt.slice(0,30)}<small>{j.count} layouts · {labels[j.status]||j.status}</small><small className="sw-history-time">{new Date(j.created_at).toLocaleDateString()} · {j.id.slice(0,6)}</small></span></button><button className="sw-trash-icon" aria-label={`Delete batch ${j.plan?.title||j.prompt.slice(0,30)}`} title={working(j)?'Wait for this batch to finish':'Move batch to recoverable Trash'} disabled={!!busy||working(j)} onClick={()=>remove(j)}><Trash2 size={14}/></button></div>)}</div>
+      <div className="sw-sidebar-bottom"><button onClick={()=>setShowTrash(true)}><Trash2 size={15}/> Trash ({trash.length}) <ChevronRight size={14}/></button><button onClick={()=>setConnections(true)}><Settings2 size={15}/> Connections <ChevronRight size={14}/></button><button onClick={onLegacy}><Terminal size={15}/> Legacy POC tools <ArrowRight size={14}/></button><div className="sw-user"><span>A</span><div>Andy’s workspace<small>Local · single user</small></div></div></div>
     </aside>
     <div className="sw-body">
       <header className="sw-topbar"><span>Workspace <ChevronRight size={13}/><strong>Scenario generation</strong></span><button className="sw-connection" onClick={()=>setConnections(true)}><i className={config?.configured?'online':''}/>{config?.configured?'ARC key configured':config?'Connect ARC':'Connecting'}<Settings2 size={13}/></button></header>
@@ -103,9 +122,10 @@ export function SpatialWorkbench({onLegacy}:{onLegacy:()=>void}){
         <section className="sw-composer" aria-label="Scenario brief">
           <div className="sw-composer-head"><span><Sparkles size={16}/> SCENARIO BRIEF</span><span>{config?.model||'ARC hosted model'}</span></div>
           <label className="sw-sr" htmlFor="scenario-prompt">Describe the scenario</label>
-          <textarea ref={input} id="scenario-prompt" value={prompt} onChange={e=>setPrompt(e.target.value)} maxLength={8000} placeholder="An eight-metre classroom. Twelve wooden chairs. One clear way out…"/>
-          <div className="sw-composer-footer"><div className="sw-controls"><label>Layouts<input aria-label="Number of layouts" type="number" min={1} max={30} value={count} onChange={e=>setCount(Number(e.target.value))}/></label><span className="sw-control-divider"/><label>Seed<input className="sw-seed" aria-label="Reproducibility seed" type="number" min={0} max={2147483647} value={seed} onChange={e=>setSeed(Number(e.target.value))}/></label><span className="sw-char-count">{prompt.length}/8000</span></div><button className="sw-generate" disabled={!!busy||!config?.configured||!valid} onClick={()=>void generate()}>{busy==='generate'?<Loader2 size={16} className="sw-spin"/>:<Sparkles size={16}/>}Generate batch<ArrowRight size={17}/></button></div>
+          <textarea ref={input} id="scenario-prompt" value={prompt} onChange={e=>{setPrompt(e.target.value);setForceNew(false);}} maxLength={8000} placeholder="An eight-metre classroom. Twelve wooden chairs. One clear way out…"/>
+          <div className="sw-composer-footer"><div className="sw-controls"><label>Layouts<input aria-label="Number of layouts" type="number" min={1} max={30} value={count} onChange={e=>{setCount(Number(e.target.value));setForceNew(false);}}/></label><span className="sw-control-divider"/><label>Seed<input className="sw-seed" aria-label="Reproducibility seed" type="number" min={0} max={2147483647} value={seed} onChange={e=>{setSeed(Number(e.target.value));setForceNew(false);}}/></label><span className="sw-char-count">{prompt.length}/8000</span></div><button className="sw-generate" disabled={!!busy||(!config?.configured&&(!match||forceNew))||!valid} onClick={()=>void generate()}>{busy==='generate'?<Loader2 size={16} className="sw-spin"/>:<Sparkles size={16}/>}{match&&!forceNew?'Open existing batch':forceNew?'Generate fresh batch':'Generate batch'}<ArrowRight size={17}/></button></div>
         </section>
+        {match&&<div className="sw-reuse"><div><Check size={15}/><span>{active(jobs.find(item=>item.id===match.id)||match)?'This request is already running.':'A matching batch is already saved.'} The default action opens it without another ARC request.</span></div><label><input type="checkbox" checked={forceNew} onChange={e=>setForceNew(e.target.checked)}/>Ask ARC for a fresh plan instead</label></div>}
         <div className="sw-scope"><span><Check size={13}/> Reviewed wooden chair</span><span><Check size={13}/> Rectangular rooms + one exit</span><span><Check size={13}/> Seeded layouts</span><button onClick={()=>setConnections(true)}>Asset & worker setup <ChevronRight size={12}/></button></div>
         {!config?.configured&&config&&<div className="sw-notice">Add your ARC key to backend/.env, then use Connections to test access. Never put the key in a prompt.</div>}
         {error&&<div role="alert" className="sw-error"><span>{error}</span><button aria-label="Dismiss error" onClick={()=>setError('')}><X size={16}/></button></div>}
@@ -113,6 +133,7 @@ export function SpatialWorkbench({onLegacy}:{onLegacy:()=>void}){
         <section className="sw-results">
           <div className="sw-results-title"><div><span className="sw-section-label">OUTPUT / REVIEW</span><h2>{job?.plan?.title||'Your next environment'}</h2></div><span aria-live="polite">{job?progress:`${ready} batches ready`}</span></div>
           {job?<>
+            <div className="sw-actions sw-batch-tools"><button disabled={!!busy||working(job)} onClick={()=>remove(job)}><Trash2 size={13}/>Delete this batch</button><button onClick={()=>setShowTrash(true)}>Open Trash ({trash.length})</button></div>
             <div className="sw-pipeline" role="tablist" aria-label="Pipeline stages">{([
               ['plan','01','Plan & layouts',labels[job.status]],['blender','02','Blender assembly',blender?labels[blender.status]||blender.status:config?.blender_ready?'Ready to start':'Setup needed'],['unreal','03','Unreal / Chaos',encoding?'Preparing playback':video?.clips?.length?'Ready to watch':simulation?labels[simulation.status]||simulation.status:unreal?labels[unreal.status]||unreal.status:config?.engine.connected?'Editor connected':'Connect editor']
             ] as const).map(([key,n,title,status])=><button role="tab" aria-selected={stage===key} key={key} onClick={()=>setStage(key)} className={stage===key?'sw-stage-active':''}><span>{n}</span><strong>{title}</strong><small>{status}</small></button>)}</div>
@@ -134,10 +155,10 @@ export function SpatialWorkbench({onLegacy}:{onLegacy:()=>void}){
 
           </>:<div className="sw-empty"><div className="sw-empty-grid"><Box size={38} strokeWidth={1}/></div><h3>A possibility, not a preset.</h3><p>Generate a batch, inspect the layouts, build in Blender,<br/>then hand the same specifications to Unreal.</p><button className="sw-text-button" onClick={()=>input.current?.focus()}>Write your brief <ArrowRight size={13}/></button></div>}
         </section>
-        <footer className="sw-footer"><span>FIELDWORK / EMERGENCY TRAINING POC</span><button onClick={()=>setConnections(true)}>PIPELINE CONNECTIONS <ChevronRight size={11}/></button></footer>
+        <footer className="sw-footer"><span>FIELDWORK / EMERGENCY TRAINING POC</span><button className="sw-mobile-trash" onClick={()=>setShowTrash(true)}>Trash ({trash.length})</button><button onClick={()=>setConnections(true)}>PIPELINE CONNECTIONS <ChevronRight size={11}/></button></footer>
       </main>
     </div>
-    {(expanded||connections)&&<div className="sw-modal" onClick={()=>{setExpanded(null);setConnections(false);}}><div ref={dialogRef} role="dialog" aria-modal="true" aria-label={connections?'Pipeline connections':expanded?.scene_id} onClick={e=>e.stopPropagation()}><button autoFocus className="sw-modal-close" aria-label="Close dialog" onClick={()=>{setExpanded(null);setConnections(false);}}><X/></button>{connections?<>
+    {(expanded||connections||showTrash)&&<div className="sw-modal" onClick={()=>{setExpanded(null);setConnections(false);setShowTrash(false);}}><div ref={dialogRef} role="dialog" aria-modal="true" aria-label={showTrash?'Deleted batches':connections?'Pipeline connections':expanded?.scene_id} onClick={e=>e.stopPropagation()}><button autoFocus className="sw-modal-close" aria-label="Close dialog" onClick={()=>{setExpanded(null);setConnections(false);setShowTrash(false);}}><X/></button>{showTrash?<><p className="sw-eyebrow">RECOVERABLE TRASH</p><h2>Deleted batches</h2><p>These batches are hidden from Recent batches. Their saved files remain on this computer. Restoring brings back the batch and its outputs. Unreal maps already created in your project are kept separately.</p>{trash.length===0?<p>Trash is empty.</p>:trash.map(item=><div className="sw-trash-row" key={item.id}><div><strong>{item.plan?.title||item.prompt.slice(0,60)}</strong><small>{item.count} layouts · deleted {new Date(item.trashed_at||'').toLocaleString()}</small></div><button disabled={!!busy} onClick={()=>void act('restore',async()=>{const restored=await request<Job>(`/api/studio/jobs/${item.id}/restore`,{});setShowTrash(false);choose(restored);setNotice('Batch restored with its saved outputs.');})}><Undo2 size={14}/>Restore</button></div>)}</>:connections?<>
       <p className="sw-eyebrow">PIPELINE CONNECTIONS</p><h2>One setup. Repeatable batches.</h2><div className="sw-connection-row"><strong>VT ARC planner</strong><span>{config?.configured?'Key configured · not yet a connectivity check':'Key needed'}</span></div><p>Set ARC_LLM_API_KEY and ARC_LLM_MODEL in backend/.env. The key stays on this computer’s backend. Testing makes a small model request.</p><button className="sw-generate" disabled={!!busy||!config?.configured} onClick={()=>void check()}>{busy==='connection'?<Loader2 size={15} className="sw-spin"/>:<Radio size={15}/>}Test ARC connection</button>{notice&&<p role="status" className="sw-notice">{notice}</p>}{error&&<p role="alert" className="sw-error">{error}</p>}
       <div className="sw-connection-row"><strong>Blender 5.1 worker</strong><span>{config?.blender_ready?'Paths ready':'Setup needed'}</span></div><p>Add these two lines to the same backend/.env file, using your real paths. Restarting is not required for path changes.</p><pre>{'BLENDER_EXECUTABLE=C:/Program Files/Blender Foundation/Blender 5.1/blender.exe\nCHAIR_BLEND=C:/your-assets/chair-collision-complete.blend'}</pre><p>Executable: {config?.blender_executable_set?'found':'not found'} · Prepared chair: {config?.chair_bound?'found':'not found'}</p><button className="sw-text-button" onClick={()=>void act('refresh',async()=>{await refresh();setNotice('Configuration refreshed.');})}><RefreshCw size={14}/>Refresh paths</button>
       <div className="sw-connection-row"><strong>Unreal Engine 5.8</strong><span>{config?.engine.connected?'Editor connected':'Bridge not loaded'}</span></div><p>Open your saved original chair demo in Unreal 5.8. Choose Tools → Execute Python Script, then select this checkout’s unreal/scripts/studio_bridge.py. Keep the editor open. The bridge only handles fixed assembly and playback actions from this local checkout.</p><pre>unreal/scripts/studio_bridge.py</pre><p>After an update, execute that same script again while no run is active. Recording support: {canRecord?'worker ready':'reload worker'}. Video encoder: {config?.video_available?'installed':'install needed'}.</p><pre>{'.\\.venv\\Scripts\\python.exe -m pip install -e .'}</pre><p>Save your current level and stop simulation before sending work. First assembly binds the reviewed Display chair asset; later batches reuse that binding during this editor session.</p><div className="sw-connection-row"><strong>Reviewed asset</strong><span>Hunyuan / ARC</span></div><p>{config?.asset_label}. The prepared chair includes 19 collision pieces. Generating additional asset types on ARC and repairing them are not automated by this worker.</p>

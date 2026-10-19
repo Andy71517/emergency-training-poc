@@ -86,3 +86,7 @@ The no-key network diagnostic confirmed DNS and TCP connectivity on Andy's PC, f
 ## Confirmed live pipeline and next visual batch
 
 Andy confirmed live ARC plans, Blender assembly, Unreal assembly and the full ten-second-per-room Chaos batch with downloadable observations on October 18. For the new recorded movement demo and updated worker setup, continue from [visual-playback-runbook.md](visual-playback-runbook.md). This new capture path still needs its first live Unreal verification.
+
+## History and duplication
+
+For the new recoverable Trash, exact-input request reuse and proposed couch/asset-library expansion, see [batch-history-and-assets.md](batch-history-and-assets.md). Trash keeps files on disk and does not remove maps already created in Unreal.

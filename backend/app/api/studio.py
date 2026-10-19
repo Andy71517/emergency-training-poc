@@ -15,6 +15,7 @@ class GenerationRequest(BaseModel):
     prompt: str = Field(min_length=10,max_length=8000)
     count: int = Field(ge=1,le=30,strict=True)
     seed: int = Field(ge=0,le=2147483647,strict=True)
+    force_new: bool = Field(default=False,strict=True)
 
 
 class ReplayRequest(BaseModel):
@@ -51,11 +52,20 @@ def create_studio_router(service: SceneBatchService):
         pipeline.sync_engine()
         return service.list()
 
+    @router.get('/trash')
+    def trash_list():
+        return service.trash_list()
+
+    @router.post('/jobs/match')
+    def match(body: GenerationRequest,request: Request):
+        local(request)
+        return service.find_match(body.prompt,body.count,body.seed)
+
     @router.post('/jobs',status_code=202)
     def generate(body: GenerationRequest, request: Request):
         local(request)
         try:
-            return service.submit(body.prompt,body.count,body.seed)
+            return service.submit(body.prompt,body.count,body.seed,body.force_new)
         except ValueError as exc:
             raise HTTPException(400,str(exc)) from None
 
@@ -64,7 +74,26 @@ def create_studio_router(service: SceneBatchService):
         if not re.fullmatch(r'[a-f0-9]{32}',job_id):
             raise HTTPException(404,'Job not found')
         try:
-            return service.get(job_id)
+            record=service.get(job_id)
+            if record.get('trashed_at'):
+                raise HTTPException(404,'Batch is in Trash. Restore it first.')
+            return record
+        except KeyError:
+            raise HTTPException(404,'Job not found') from None
+
+    @router.post('/jobs/{job_id}/trash')
+    def trash(job_id: str,request: Request):
+        local(request)
+        job(job_id)
+        return action(service.trash,job_id)
+
+    @router.post('/jobs/{job_id}/restore')
+    def restore(job_id: str,request: Request):
+        local(request)
+        if not re.fullmatch(r'[a-f0-9]{32}',job_id):
+            raise HTTPException(404,'Job not found')
+        try:
+            return service.restore(job_id)
         except KeyError:
             raise HTTPException(404,'Job not found') from None
 
