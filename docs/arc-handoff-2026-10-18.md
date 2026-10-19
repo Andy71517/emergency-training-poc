@@ -1,5 +1,15 @@
 # ARC visual POC handoff — 2026-10-18
 
+## October 19 PR resolution follow-up
+
+The original Unreal setup now uses named rotation axes for an actual 30-degree
+roll in its tilted case. Python and ARC shell sources use LF line endings across
+platforms so the presentation helper's byte hash survives Windows checkouts; its
+pinned hash was updated with the setup fix. Offline regression checks cover the
+spawned tilt, static reference and valid/changed helper handling. These checks do
+not execute Unreal or establish new Chaos runtime evidence. Existing accepted
+maps do not need rebuilding.
+
 ## Verified today
 
 - Andy switched to Hunyuan branch `codex/arc-hunyuan-chair` at `89c95a9` and confirmed the shape config/checkpoint were accessible without a token.
@@ -60,3 +70,68 @@ Andy inspected the complete 19-piece collision preview and said it looks good. P
 Verified Blender 5.1.2 FBX export/reimport roundtrip: 20 meshes, 19 hulls, 72,664 render triangles, two used slots with matching assignments, active UVs and bounds preserved within 1e-5 m. Roughness and metallic PNGs match packed G/B channels exactly when reloaded as data. Source object set, geometry/transforms/hide flags/UVs/packed pixels unchanged; existing-folder guard passes. Compilation/Ruff and ZIP integrity pass. FBX version 7400. No Unreal import/cooking/Chaos run yet.
 
 Resume: Andy downloads/extracts the ZIP; obtain installed Unreal version (or installation status) before exact import steps/Editor Python setup. Verify ~100 cm height, Z-up/floor pivot, 19 simple hulls and explicit material mapping inside Unreal, then build and record the drop/tip demo. No need to rerun Blender export if using the prepared package.
+
+
+## Unreal version confirmed: 5.8 — setup script prepared
+
+Andy confirmed Unreal Engine 5.8. New stacked branch codex/unreal58-chair-demo contains unreal/scripts/setup_unreal58_chair_demo.py and docs/unreal58-chair-demo-runbook.md. Delivered chair-unreal58-demo-setup.zip with the previously verified FBX/maps plus script and START-HERE instructions, all in one folder.
+
+Script intended behavior: verify package hashes and clean saved current map; create a unique content folder and separate lit map; temporarily select legacy FBX import and restore the feature flag; require 19 convex hulls and approximately 100 cm height/floor pivot; wire two chair materials explicitly; create a floor, camera, display chair, upright drop and tilted drop. Dynamic settings (5 kg, .55 friction, .05 restitution) are demo assumptions. Script does not start simulation; user inspects then Alt+S, Esc to stop. Reports success/failure in project Saved/EmergencyPOC.
+
+Validation completed here: API references checked against Epic docs, Python compile/lint, valid-package preflight, missing/altered texture rejection, and ZIP integrity. IMPORTANT: no Unreal runtime is present here. No UE imports, API property calls, shader compilation, collision cooking, map creation or Chaos simulation have been executed. First run on Andy's PC is the integration check. Do not overstate validation.
+
+Resume: create/open a separate Blank Blueprint project in 5.8; enable Python Editor Script Plugin and restart; save current map; File > Execute Python Script selects bundled setup_unreal58_chair_demo.py. Inspect whole scene once; return screenshot/observed drop behavior or first error/report. Do not resume manual collider entry. The Blender/export PR remains stacked and unmerged.
+
+
+## Unreal runtime observed; presentation batch approved
+
+On October 18, Andy ran the original setup successfully in Unreal Engine 5.8. Returned screenshots show the textured three-chair level, lights/floor/camera, then the chairs resting during simulation. Andy explicitly reported: “the chairs fall and settle on the floor, within a second or two.” This is user-observed basic gravity/contact/settling success. It is not an instrumented physics benchmark or evidence of calibrated mass/friction. No emergency room/scenario has been constructed yet.
+
+Andy approved a presentation batch. Added unreal/scripts/prepare_unreal58_chair_presentation.py and docs/unreal58-chair-presentation-runbook.md. Delivered chair-unreal58-presentation.zip with this script and its hash-checked original setup helper; no models/maps/textures need downloading again. Run with the saved original L_ChairVisualDemo open and simulation stopped. The script validates original actor labels/shared mesh/19 hulls/material references, then creates a unique separate presentation map using existing assets. Shared source assets and baseline map are not modified. Adds front-facing framing, fixed reference/upright/tilted labels, title/pipeline text and provisional-physics note. Initial pivot heights become 0/100/120 cm, tilted roll30 degrees, all yaw180 degrees. Original assumed physical values remain. No automatic simulation or video capture; normal project time settings. Alt+S/Esc provide repeatable start/reset; record a three-second initial hold plus eight seconds of simulation using screen capture.
+
+Validation here: Python compilation/Ruff py311, helper loading without Unreal side effects, correct-helper acceptance and missing/tampered-helper rejection, ZIP integrity. The original scene has actual user runtime evidence; the NEW presentation script has not run in Unreal here and awaits Andy's whole-scene review. Report path Saved/EmergencyPOC/chair-presentation-*.json. Partial new map may remain after failure; original remains available. Resume with one execution/review, then a short recorded clip for Dr. Cameron. After preserving that evidence, propose a separate batch for a small room and emergency scenario. TRELLIS remains paused pending DINOv3 access. Existing stacked PRs remain unmerged.
+
+
+## Presentation rotation correction
+
+First presentation screenshot shows inverted chairs. Positional Rotator argument ordering caused unintended pitch180 instead of yaw180. Replaced presentation rotations with explicit pitch/yaw/roll keywords and text colors with named RGBA channels. First original setup's nominal tilted case used yaw30, so earlier observed drop success does not establish a 30-degree tilted condition. Corrected presentation explicitly sets roll30. User must reopen original ChairDemo map, then execute revised presentation script to make a fresh map; press G to hide text/light billboards. Revised presentation runtime awaits review.
+
+
+## Chair presentation accepted; prompt-to-scene next
+
+Direct component repair v3 succeeded on Andy's PC. He confirmed properly oriented chairs and tilted chair falling, rocking, then settling upright. Returned 11.5145-second Unreal video reviewed via sampled frames: initial raised state, drops, settled chairs and stationary reference. Preserve current project as working baseline. Do not resume inverted presentation rebuilds; use v3 repair if necessary. New corrected scene generation must set component transforms and verify readback.
+
+Andy clarified the intended scope: natural-language authored scenes produced through ARC, assembled/reviewed in Blender, then simulated in Unreal; not merely manual Unreal room construction. He approved investigating and preparing that batch. See docs/prompt-to-scene-batch-plan.md for exact scope, contracts, reuse strategy and boundaries. Official ARC documentation confirms hosted chat-completions endpoint and user-created personal keys; user authentication unverified. Added small stdlib arc/scripts/check_scenario_planner_access.py, hidden prompt, no key persistence/response dumps. First next step: Andy privately creates/reuses key at llm.arc.vt.edu and runs access checker on ARC. No new GPU installation/sbatch required for this small API check. Never ask him to paste credentials in chat.
+
+Only proposal and access checker prepared at this checkpoint: spatial schema, real prompt planner, seeded variants, Blender assembler, Unreal room assembler and fresh-asset resolver are not yet implemented. Existing authoring API remains a mock; preserve deterministic runtime authority. No room-level scenarios have run. Reuse reviewed chair for first three variants; expand to fresh assets after shared-contract assembly works. No further approval is needed to continue the already approved scoped implementation; obtain actual endpoint status before claiming live planning works.
+
+
+## ARC model access confirmed; first real prompt-to-plan generator prepared
+
+Andy ran the access checker successfully: endpoint reachable, authenticated gpt-oss-120b response received. Earlier HTTP400 cause remains unknown; sanitized diagnostics were added, and the next request succeeded. Do not attribute a specific cause.
+
+Added arc/scripts/generate_scenario_batch.py, arc/tests/test_scenario_batch.py and docs/arc-scenario-batch-runbook.md. CLI calls the hosted model with a bounded room-plan contract, validates its actual final JSON, expands saved plan into seeded layouts, validates containment/non-overlap/designated-aisle conditions and writes JSON/SVG/HTML review package plus hashes. Default request: three classroom-like chair layouts, two clear aisles and one obstructed. Count1-30 supported; only reviewed chair asset supported. Private key hidden/not persisted; API diagnostics sanitized. Replay mode requires saved plan and calls no model. No fixture fallback for failed live calls.
+
+Offline tests pass: invalid plans, duplicate/nonfinite JSON rejection, 540 layout combinations, over-capacity rejection, repeatable spatial scene replay, package hashes/no-overwrite. Compilation/lint pass. Preview markup generated from explicitly offline fixture; no model-generated layouts have yet been returned. No live request can be made here without Andy's private runtime key. First next command on ARC after git pull: python3 arc/scripts/generate_scenario_batch.py. No sbatch/model build required. Return plan.json, manifest.json and preview screenshot.
+
+Output stage spatial_drafts_ready, human review required. Registry currently records chair identity/dimensions/provenance only: binary binding and hashes remain future work. Blender/Unreal room consumers are not implemented by this checkpoint; proceed after inspecting actual model interpretation. Aisle overlap is not full pathfinding, impassable exit proof or evacuation simulation. No new assets generated. Existing backend/mock authoring unchanged. See runbook for exact commands/replay/count/custom prompt and limitations.
+
+
+## First ARC spatial plans returned; Blender rooms assembled
+
+ARC generator run succeeded in /home/anirudhalledula/emergency-training-poc/arc/results/scenario-batches/20261019_003044_818369. Andy returned plan.json and manifest.json. Plan:8x8x3m,1.2m doorway,1.6m aisle,12 chairs,clear/clear/obstructed. Canonical plan digest and plan file digest match. Rebuilt room JSON at seeds20261018/19/20; all three SHA256 hashes exactly match ARC manifest. Thus no new LLM/ARC run is required to assemble these exact rooms. The model returned the example's values; real prompt adaptation has not yet been demonstrated. request.json/raw model response not supplied.
+
+Added scripts/blender/assemble_scenario_rooms.py and docs/blender-scenario-room-runbook.md. Ran actual Blender5.1.2 assembly from previously reviewed chair-collision-complete.blend. New separate file has three individual metre-coordinate scenes plus a side-by-side overview using collection instances. Physical room meshes include 1.2x2.1m doorway openings; front walls hidden for cutaway review; no ceilings. Green aisle/red obstruction guides are annotations.36 chair instances,684 hidden convex collider instances; packed chair materials; 12 chairs per room. Individual source JSON embedded. No Blender rigid-body setup or Unreal room assembly performed.
+
+Verified saved/reopened file, exact chair positions and upright orientations, packed images, 27 doorway sample rays clear with adjacent-wall/lintel positive controls, original source SHA unchanged. Overview rendered and visually reviewed. Delivered three-classroom-layouts-blender.zip with prepared blend, overviewPNG, report, verification, source plan/manifest/replayed specs and reusable assembler. Andy need only extract/open prepared blend; no script execution/manual furniture placement. Await one whole-result visual review, then continue approved Unreal room assembly. Use existing Unreal imported reviewed chair mesh/materials. Restore hidden front wall when constructing full room collision. Do not claim aisle overlap proves an exit impassable or a validated evacuation scenario.
+
+
+## Blender room review accepted; Unreal setup prepared; frontend next
+
+Andy said Blender rooms look good. Asked for a frontend to enter natural-language prompts, trigger generation/repair/simulation and show outputs. Requested clean, stylish, minimal/futuristic design. Explicitly directed completing the prior room batch first, then frontend. Preserve that order and do not ask for renewed approval for room assembly.
+
+Added unreal/scripts/assemble_unreal58_rooms.py plus docs/unreal58-room-batch-runbook.md; delivered three-rooms-unreal58-setup.zip with Python, binding metadata and the3exact reviewed spatial specs. User runs from saved chair demo/presentation containing Display chair. Script reuses reviewed imported mesh/materials after19hull/100cm/2slot checks. Creates unique output materials and3separate maps, keeps complete perimeter collision including invisible cutaway front wall, actual rear doorway and lintel, noncolliding guide overlays/captions. Explicit component world transforms/readback and metre-to-cm conversion. Chairs start at reviewed floor positions; all12permap enabled as5kg demo rigid bodies, friction.55 restitution.05. This is an explicit static_review override recorded in report; no drop displacement or automatic simulation.
+
+No engine runtime here. Compile/lint, valid package preflight, tampered-room rejection, conversion and ZIP integrity pass. Actual map creation/collision/camera/API behavior await Andy's first run; do not claim engine rooms verified yet. First action: open existing EmergencyChairPOC chair demo, stop simulation/save, execute bundled assemble_unreal58_rooms.py; inspect last room003map and others; Alt+S should show settling only because chairs begin onfloor. Return overall screenshot/behavior or firstred error/report Saved/EmergencyPOC/room-setup-*.json.
+
+After successful room verification, implement frontend integration batch using existing authoring/backend rather than disconnected new UI: real prompt request, persistent jobs/status, plan/previews first, Blender/Unreal workers later. Do not claim workers/live-browser Unreal streaming already exist. User wants minimal/futuristic polished appearance.
