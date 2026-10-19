@@ -14,7 +14,6 @@ import websockets
 
 from backend.app.adapters.manual_input_adapter import build_action_message
 
-
 DEFAULT_ACTIONS = [
     "assess_scene",
     "confirm_ppe",

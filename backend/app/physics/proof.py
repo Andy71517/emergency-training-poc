@@ -1,8 +1,10 @@
 """Backend authorization and deterministic evaluation for the physics proof."""
 
 from datetime import UTC, datetime
+from pathlib import Path
 from uuid import uuid4
 
+from backend.app.logging.jsonl_logger import JsonlSessionLogger
 from backend.app.physics.models import (
     AcceptanceThresholds,
     BoxCollider,
@@ -64,7 +66,7 @@ def build_configuration() -> PhysicsProofConfiguration:
             _box("floor", (0.0, -0.05, 0.0), (3.0, 0.05, 3.0), is_static=True),
             _box("contact_barrier", (1.1, 0.6, 0.0), (0.08, 0.6, 1.0), is_static=True),
         ],
-        impulse_ns=Vector3(x=14.0, y=0.0, z=0.0),
+        impulse_ns=Vector3(x=40.0, y=0.0, z=0.0),
         impulse_application_point_m=Vector3(x=0.0, y=0.70, z=0.0),
         acceptance=AcceptanceThresholds(
             minimum_horizontal_movement_m=0.35,
@@ -81,9 +83,10 @@ def build_configuration() -> PhysicsProofConfiguration:
 class PhysicsProofService:
     """Keeps commands local and lets the backend judge client observations."""
 
-    def __init__(self) -> None:
+    def __init__(self, log_directory: Path | None = None) -> None:
         self.configuration = build_configuration()
         self._commands: dict[str, PhysicsInteractionCommand] = {}
+        self._logger = JsonlSessionLogger(log_directory or Path("logs/physics"))
 
     def authorize(self, request: PhysicsAuthorizationRequest) -> PhysicsInteractionCommand:
         if request.scenario_id != self.configuration.scenario_id:
@@ -151,7 +154,7 @@ class PhysicsProofService:
             if accepted
             else "Physics proof needs review: one or more required checks did not pass."
         )
-        return PhysicsAcceptanceResult(
+        result = PhysicsAcceptanceResult(
             command_id=command.command_id,
             accepted=accepted,
             movement_detected=movement,
@@ -162,3 +165,14 @@ class PhysicsProofService:
             summary=summary,
             checks=checks,
         )
+        self._logger.append(
+            command.session_id,
+            {
+                "record_type": "physics_proof",
+                "configuration": self.configuration.model_dump(mode="json"),
+                "command": command.model_dump(mode="json"),
+                "observation": observation.model_dump(mode="json"),
+                "result": result.model_dump(mode="json"),
+            },
+        )
+        return result

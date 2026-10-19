@@ -1,11 +1,12 @@
-from pathlib import Path
 import json
+from pathlib import Path
+
+from jsonschema import Draft202012Validator
 
 from backend.app.orchestrator.session_manager import SessionManager
 from backend.app.scenario_engine.engine import ScenarioEngine
 from backend.app.scenario_engine.loader import load_scenario
 from backend.tests.conftest import action_message
-from jsonschema import Draft202012Validator
 
 
 def test_scenario_yaml_loads_and_initial_state_is_correct() -> None:
