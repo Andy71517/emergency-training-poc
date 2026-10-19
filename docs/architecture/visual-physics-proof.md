@@ -60,12 +60,19 @@ ready
 - linear damping: `0.35`
 - angular damping: `0.50`
 - fixed simulation time step: `1/60` second
-- interaction: one `14` newton-second horizontal impulse
+- interaction: one `40` newton-second horizontal impulse
 - impulse point: approximately `0.70` meters above the chair's floor contact
 - contact barrier: static, named `contact_barrier`, positioned in the impulse direction
 - maximum observation window: `10` seconds
 
 These are POC configuration values chosen to make the interaction visible and repeatable. They are not validated measurements of a particular real chair.
+
+The original 14 newton-second proposal did not reach the barrier with the 12 kg
+compound chair, floor friction, and elevated impulse point in Rapier. A three-run
+headless Rapier checkout with 40 newton-seconds measured about 1.46 m maximum
+horizontal displacement, barrier contact, and settling in about 1.7 seconds.
+The browser and Unreal runs must still be measured independently. This is a
+development test input, not a real-world force prescription.
 
 ### Required observations
 

@@ -6,9 +6,9 @@ from fastapi.testclient import TestClient
 
 from backend.app.main import create_app
 from backend.app.physics.models import (
+    PhysicsAuthorizationRequest,
     PhysicsContactObservation,
     PhysicsEngineIdentity,
-    PhysicsAuthorizationRequest,
     PhysicsObservation,
     PhysicsTransform,
     Quaternion,
@@ -76,7 +76,7 @@ def test_configuration_has_shared_constants_and_colliders() -> None:
     assert configuration.gravity_mps2.y == -9.81
     assert configuration.object_mass_kg == 12.0
     assert configuration.fixed_timestep_seconds == 1.0 / 60.0
-    assert configuration.impulse_ns.x == 14.0
+    assert configuration.impulse_ns.x == 40.0
     assert {item.collider_id for item in configuration.static_colliders} == {
         "floor",
         "contact_barrier",
@@ -128,6 +128,9 @@ def test_physics_api_authorizes_and_evaluates_a_known_command(tmp_path) -> None:
 
     assert response.status_code == 200
     assert response.json()["accepted"] is True
+    evidence_path = tmp_path / "physics" / "physics-test-session.jsonl"
+    assert evidence_path.exists()
+    assert '"record_type":"physics_proof"' in evidence_path.read_text(encoding="utf-8")
 
 
 def test_physics_api_rejects_unknown_command(tmp_path) -> None:

@@ -15,7 +15,7 @@ from scripts.run_local_demo import (
 class FakeHealthResponse:
     status = 200
 
-    def __enter__(self) -> "FakeHealthResponse":
+    def __enter__(self) -> "FakeHealthResponse":  # noqa: PYI034
         return self
 
     def __exit__(self, *_: object) -> None:
