@@ -3,6 +3,7 @@ import json
 import os
 import sqlite3
 import threading
+import urllib.error
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
@@ -15,18 +16,25 @@ from arc.scripts.generate_scenario_batch import ask_model, write_package
 REPO = Path(__file__).resolve().parents[3]
 
 
-def settings():
+def local_settings():
     values = {}
     path = REPO/'backend'/'.env'
     if path.is_file():
-        for line in path.read_text().splitlines():
+        for line in path.read_text(encoding='utf-8-sig').splitlines():
             if '=' not in line or line.lstrip().startswith('#'):
                 continue
             key, value = line.split('=', 1)
-            if key.strip() in ('ARC_LLM_API_KEY', 'ARC_LLM_MODEL'):
+            if key.strip() in ('ARC_LLM_API_KEY', 'ARC_LLM_MODEL', 'BLENDER_EXECUTABLE', 'CHAIR_BLEND'):
                 values[key.strip()] = value.strip().strip('\"\'')
-    return (os.environ.get('ARC_LLM_API_KEY', values.get('ARC_LLM_API_KEY', '')),
-            os.environ.get('ARC_LLM_MODEL', values.get('ARC_LLM_MODEL', 'gpt-oss-120b')))
+    return {key: os.environ.get(key, values.get(key, default)) for key, default in (
+        ('ARC_LLM_API_KEY', ''), ('ARC_LLM_MODEL', 'gpt-oss-120b'),
+        ('BLENDER_EXECUTABLE', ''), ('CHAIR_BLEND', ''))}
+
+
+def settings():
+    values = local_settings()
+    return values['ARC_LLM_API_KEY'], values['ARC_LLM_MODEL']
+
 
 
 class SceneBatchService:
@@ -97,14 +105,49 @@ class SceneBatchService:
             self.save(job)
             output = write_package(self.directory/job_id, plan, source, job['seed'],job['prompt'])
             scenes = [json.loads(p.read_text()) for p in sorted(output.glob('room_*.json'))]
-            job.update(status='review_ready',scenes=scenes,completed_at=datetime.now(UTC).isoformat())
+            job.update(status='review_ready',scenes=scenes,completed_at=datetime.now(UTC).isoformat(),error=None)
             job['stages']['planning']='complete'
+        except (urllib.error.URLError, TimeoutError):
+            job.update(status='failed', error='ARC connection failed or timed out. Check the VT VPN and internet connection, then use Test ARC connection. No automatic retry was made.')
+            job['stages']['planning']='failed'
         except ValueError as exc:
             detail = safe_error_detail(json.dumps({'message':str(exc)}).encode(), token)
             job.update(status='failed', error=detail)
             job['stages']['planning']='failed'
+        except (KeyError, IndexError, TypeError):
+            job.update(status='failed', error='ARC returned an unexpected response format. Test the connection, then retry the request.')
+            job['stages']['planning']='failed'
         except Exception:  # noqa: BLE001 - worker boundary must persist a failure without leaking secrets
             # Never expose exception bodies, network payloads or credentials via API/logs.
-            job.update(status='failed',error='Generation or validation failed. Check service access, supported request and room capacity; revise and submit again.')
+            job.update(status='failed',error='Generation failed unexpectedly. Check the ARC connection and retry; no substitute plan was generated.')
+            job['stages']['planning']='failed'
+        self.save(job)
+
+
+    def replay(self, job_id, seed):
+        old = self.get(job_id)
+        if old.get('plan') is None:
+            raise ValueError('This job has no saved validated plan. Edit the brief and generate again.')
+        from arc.scripts.generate_scenario_batch import validate_plan
+        plan = validate_plan(old['plan'])
+        job = dict(old, id=uuid.uuid4().hex, seed=seed, status='building', error=None,
+                   scenes=[], stages={'planning':'building','blender':'not_started','unreal':'not_started'},
+                   created_at=datetime.now(UTC).isoformat(), replay_of=job_id)
+        with self.lock:
+            if sum(j['status'] in ('queued','planning','building') for j in self.list()) >= 4:
+                raise ValueError('Four jobs are active. Wait for a job to finish.')
+            self.save(job)
+            self.pool.submit(self.run_replay, job, plan)
+        return job
+
+    def run_replay(self, job, plan):
+        try:
+            out = write_package(self.directory/job['id'], plan,
+                {'provider':'saved_plan_replay','source_job':job['replay_of']}, job['seed'], job['prompt'])
+            scenes = [json.loads(p.read_text(encoding='utf-8')) for p in sorted(out.glob('room_*.json'))]
+            job.update(status='review_ready',scenes=scenes)
+            job['stages']['planning']='complete'
+        except Exception:  # noqa: BLE001 - persist replay worker failures
+            job.update(status='failed',error='The saved plan cannot fit this layout. Edit the brief and generate again.')
             job['stages']['planning']='failed'
         self.save(job)

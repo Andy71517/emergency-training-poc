@@ -1,4 +1,4 @@
-"""Run in Unreal 5.8 with a saved chair demo open. Creates three new room maps.
+"""Run in Unreal 5.8 with a saved chair demo open. Creates a new map per room specification.
 Consumes hash-bound Blender-reviewed scene JSON. No model calls, imports, or simulation start.
 """
 import hashlib
@@ -24,8 +24,8 @@ def read_specs(folder):
         if any(o['rotation_degrees'] != {'pitch':0,'yaw':0,'roll':0} or o['scale'] != [1,1,1] for o in spec['objects']):
             raise RuntimeError('This reviewed batch expects upright, unit-scale chairs.')
         specs.append(spec)
-    if len(specs) != 3:
-        raise RuntimeError('Expected three reviewed rooms.')
+    if not 1 <= len(specs) <= 30:
+        raise RuntimeError('Expected 1-30 reviewed rooms.')
     return binding, specs
 
 
@@ -35,17 +35,17 @@ def cm(position):
     return tuple(float(v)*100 for v in position)
 
 
-def main():
+def main(package_dir=None, source_mesh_path=None):
     import unreal as u
     stamp = datetime.now(UTC).strftime('%Y%m%d_%H%M%S')+'_'+uuid.uuid4().hex[:6]
     reports = Path(u.Paths.convert_relative_path_to_full(u.Paths.project_saved_dir()))/'EmergencyPOC'
     reports.mkdir(parents=True,exist_ok=True)
     report = {'stage':'preflight','maps':[], 'simulation_observed':False,
-              'physics_calibrated':False,'source':'Blender-reviewed ARC spatial batch'}
+              'physics_calibrated':False,'source':'ARC spatial batch; visual review required'}
     try:
         if not u.SystemLibrary.get_engine_version().startswith('5.8.'):
             raise RuntimeError('This script targets Unreal 5.8.x.')
-        binding, specs = read_specs(Path(__file__).resolve().parent)
+        binding, specs = read_specs(Path(package_dir) if package_dir else Path(__file__).resolve().parent)
         levels = u.get_editor_subsystem(u.LevelEditorSubsystem)
         actors = u.get_editor_subsystem(u.EditorActorSubsystem)
         assets = u.get_editor_subsystem(u.EditorAssetSubsystem)
@@ -53,10 +53,15 @@ def main():
             raise RuntimeError('Press Esc to stop simulation first.')
         if u.EditorLoadingAndSavingUtils.get_dirty_map_packages():
             raise RuntimeError('Save current level (Ctrl+S), then rerun.')
-        source_actors = [a for a in actors.get_all_level_actors() if a.get_actor_label()=='Display chair']
-        if len(source_actors) != 1:
-            raise RuntimeError('Open the original or presentation chair demo, with its Display chair actor.')
-        mesh = source_actors[0].get_component_by_class(u.StaticMeshComponent).get_editor_property('static_mesh')
+        if source_mesh_path:
+            mesh = u.load_asset(source_mesh_path)
+            if mesh is None:
+                raise RuntimeError('Previously bound chair mesh is unavailable.')
+        else:
+            source_actors = [a for a in actors.get_all_level_actors() if a.get_actor_label()=='Display chair']
+            if len(source_actors) != 1:
+                raise RuntimeError('Open the original or presentation chair demo, with its Display chair actor.')
+            mesh = source_actors[0].get_component_by_class(u.StaticMeshComponent).get_editor_property('static_mesh')
         hulls = u.get_editor_subsystem(u.StaticMeshEditorSubsystem).get_convex_collision_count(mesh)
         box = mesh.get_bounding_box()
         if hulls != 19 or abs(box.max.z-box.min.z-100) > 1 or abs(box.min.z) > .5:
@@ -193,7 +198,7 @@ def main():
         except (RuntimeError,AttributeError):
             u.log_warning('Maps saved. Select Room review camera and Pilot manually.')
         u.log('ROOM SETUP COMPLETE: '+root+'/Maps')
-        u.log('Inspect all three maps. Alt+S enables Chaos; chairs begin on floor, so no large drop is expected.')
+        u.log('Inspect all generated maps. Alt+S enables Chaos; chairs begin on floor, so no large drop is expected.')
     except Exception as exc:
         report.update({'failed_at':report['stage'],'stage':'failed','error':str(exc),'traceback':traceback.format_exc()})
         u.log_error('ROOM SETUP FAILED: '+str(exc))
@@ -202,7 +207,9 @@ def main():
         path=reports/('room-setup-'+stamp+'.json')
         path.write_text(json.dumps(report,indent=2),encoding='utf-8')
         u.log('Room setup report: '+str(path))
+    return report
 
 
 if __name__ == '__main__':
     main()
+
