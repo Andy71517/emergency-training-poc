@@ -2,6 +2,7 @@
 import base64
 import io
 import json
+import shutil
 import struct
 import subprocess
 import sys
@@ -11,13 +12,13 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import pytest
+from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from backend.app.api.assets import create_asset_router
-from backend.app.studio.assets import AssetLibrary, RESULT_NAMES, check_glb
-from backend.app.studio.service import REPO, SceneBatchService
 from arc.scripts.asset_request import make_request, sha
-from fastapi import FastAPI
+from backend.app.api.assets import create_asset_router
+from backend.app.studio.assets import RESULT_NAMES, AssetLibrary, check_glb
+from backend.app.studio.service import REPO, SceneBatchService
 
 
 def png():
@@ -153,7 +154,7 @@ def test_asset_routes_local_origin_upload_validation_and_download(library):
 
 def test_arc_sbatch_syntax_and_pinned_runtime_paths():
     for relative in ('arc/scripts/submit_hunyuan_variant.sh','arc/jobs/generate_hunyuan_variant.sbatch'):
-        subprocess.run(['bash','-n',str(REPO/relative)],check=True)
+        subprocess.run([shutil.which('bash') or 'bash', '-n', (REPO/relative).as_posix()], check=True)
     text=(REPO/'arc/jobs/generate_hunyuan_variant.sbatch').read_text()
     # The unchanged shape exporter finds LICENSE via the first PYTHONPATH entry.
     assert 'PYTHONPATH=/workspace/hunyuan21/source/hy3dshape:/project/arc/scripts' in text
@@ -200,3 +201,38 @@ def test_blender_review_worker_keeps_credentials_out_and_persists_gate(library,t
     assert library.get(asset['id'])['blender']['status']=='complete'
     assert library.get(asset['id'])['room_compatible'] is False
     assert library.blender_file(asset['id'],'report.json').is_file()
+
+
+@pytest.mark.parametrize('failure', ['timeout', 'invalid_report', 'missing_output', 'missing_source'])
+def test_blender_review_failure_is_persisted_and_retryable(library, tmp_path, monkeypatch, failure):
+    asset = library.create(body())
+    library.import_result(asset['id'], result_for(asset))
+    executable = tmp_path / 'blender'
+    executable.write_text('fixture')
+    monkeypatch.setenv('BLENDER_EXECUTABLE', str(executable))
+
+    def worker(command, **kwargs):
+        if failure == 'timeout':
+            raise subprocess.TimeoutExpired(command, 1800)
+        output = Path(command[command.index('--output') + 1])
+        output.mkdir()
+        if failure == 'invalid_report':
+            (output / 'furniture-review.blend').write_bytes(b'fixture only')
+            (output / 'report.json').write_text('[]')
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr('backend.app.studio.assets.subprocess.run', worker)
+    if failure == 'missing_source':
+        library.file(asset['id'], 'asset.glb').unlink()
+    # Execute queued work inline so the persisted failure is immediately observable.
+    monkeypatch.setattr(library.service.pool, 'submit', lambda fn, *args: fn(*args))
+    library.prepare(asset['id'])
+    first = library.get(asset['id'])
+    assert first['blender']['status'] == 'failed'
+    assert first['room_compatible'] is False
+    with pytest.raises(ValueError, match='not ready'):
+        library.blender_file(asset['id'], 'furniture-review.blend')
+    library.prepare(asset['id'])
+    again = library.get(asset['id'])
+    assert again['blender']['status'] == 'failed'
+    assert again['blender']['run'] != first['blender']['run']

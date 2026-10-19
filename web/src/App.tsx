@@ -14,7 +14,6 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 const PhysicsLab = lazy(() => import("./PhysicsLab").then(module => ({ default: module.PhysicsLab })));
 import { SpatialWorkbench } from "./SpatialWorkbench";
 import { ScenarioStudio } from "./ScenarioStudio";
-
 import { ErrorView } from "./components/ErrorView";
 import { IdleView } from "./components/IdleView";
 import { InstructorFinale } from "./components/InstructorFinale";

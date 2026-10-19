@@ -4,10 +4,10 @@ import binascii
 import io
 import json
 import os
-import subprocess
 import re
 import shutil
 import struct
+import subprocess
 import threading
 import uuid
 import zipfile
@@ -213,25 +213,25 @@ class AssetLibrary:
             record = self.get(asset_id)
             record['blender'].update(status='running', message='Blender is making a separate review copy.')
             self.save(record)
-        folder = self.directory/asset_id
-        output = folder/'blender'/run
-        output.parent.mkdir(exist_ok=True)
-        command = [executable, '--background', '--factory-startup', '--python-exit-code', '1',
-            '--python', str(REPO/'scripts/blender/prepare_furniture_variant.py'), '--',
-            '--source', str(self.file(asset_id, 'asset.glb')), '--request', str(folder/'request.json'),
-            '--output', str(output)]
-        env = {k:v for k,v in os.environ.items() if k not in ('ARC_LLM_API_KEY','OPENAI_API_KEY','HF_TOKEN')}
         try:
+            folder = self.directory/asset_id
+            output = folder/'blender'/run
+            output.parent.mkdir(exist_ok=True)
+            command = [executable, '--background', '--factory-startup', '--python-exit-code', '1',
+                '--python', str(REPO/'scripts/blender/prepare_furniture_variant.py'), '--',
+                '--source', str(self.file(asset_id, 'asset.glb')), '--request', str(folder/'request.json'),
+                '--output', str(output)]
+            env = {k:v for k,v in os.environ.items() if k not in ('ARC_LLM_API_KEY','OPENAI_API_KEY','HF_TOKEN')}
             result = subprocess.run(command, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                 timeout=1800, check=False)
             if result.returncode != 0 or not (output/'furniture-review.blend').is_file():
                 raise ValueError('Blender worker failed.')
             report = json.loads((output/'report.json').read_text(encoding='utf-8'))
-            if report['asset_id'] != asset_id or report.get('room_compatible') is not False:
+            if not isinstance(report, dict) or report.get('asset_id') != asset_id or report.get('room_compatible') is not False:
                 raise ValueError('Unexpected Blender report.')
             state = {'status': 'complete', 'run': run, 'report': report,
                 'message': 'Review copy ready. Inspect scale, orientation and materials; collision pieces are still needed.'}
-        except Exception:
+        except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError):
             state = {'status': 'failed', 'run': run,
                 'message': 'Blender could not prepare this model. Check the executable and imported GLB, then retry.'}
         with self.lock:

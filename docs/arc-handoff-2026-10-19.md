@@ -1,5 +1,26 @@
 # Current project handoff — October 18 evening / October 19 UTC, 2026
 
+## October 19 resumed direction — supersedes the manual next action below
+
+Andy resumed and requested resolution of all seven open PRs before moving ahead.
+The completed stack is being consolidated into `main`, preserving its history.
+Use `main` as the baseline once PR #7 is merged; older branch instructions below
+are historical. Resolution checks include the full backend/ARC suites, frontend
+build/lint, Python/Bash/JSON checks and dependency audit. New CI covers frontend
+checks and ARC tests as well as backend checks.
+
+The local app saved couch request
+`64e106d0434281a2a919e2d7e7706dd8a17d18f48b5f9be767a185fa7a55ce52`
+(1.8 x 0.85 x 0.85 m, seed 42); its ZIP was validated. No GPU submission occurred.
+Andy prefers testing natural-language asset creation and frontend ARC submission
+before the manual couch run. See `docs/asset-automation-plan.md` for the bounded
+next batch and its unresolved image-provider/SSH setup prerequisites. The plan is
+documented; neither automated image generation nor SSH transport is implemented.
+
+PR resolution also fixes the original Unreal setup's tilted axis, stable LF
+script bytes/helper hash, and retryable Blender asset-worker failure handling.
+Offline tests do not constitute a new engine or GPU runtime observation.
+
 **Resume here.** This replaces older handoffs as the current starting point while preserving them as history. Andy asked to stop with the work saved, checked and documented. No further work or model calls should start automatically while paused.
 
 ## Goal and working style

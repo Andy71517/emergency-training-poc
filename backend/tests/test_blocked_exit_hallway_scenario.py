@@ -6,7 +6,6 @@ from backend.app.scenario_engine.engine import ScenarioEngine
 from backend.app.scenario_engine.loader import load_scenario
 from backend.tests.conftest import action_message
 
-
 SCENARIO_ID = "blocked_exit_hallway_v0"
 HAPPY_PATH = [
     "assess_scene",

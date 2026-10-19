@@ -6,7 +6,6 @@ from pathlib import Path
 
 from backend.app.logging.review_summary import format_review_summary, generate_review_summary
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("log", type=Path)

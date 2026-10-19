@@ -9,7 +9,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.unreal_display_preview import display_state_from_log, render_debug_panel  # noqa: E402
+from scripts.unreal_display_preview import display_state_from_log, render_debug_panel
 
 
 def main() -> int:

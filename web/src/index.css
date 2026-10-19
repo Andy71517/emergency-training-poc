@@ -170,6 +170,24 @@ button:disabled { cursor: not-allowed; }
 .studio-status-instructor_edited { color: #8edcff; border-color: rgb(98 199 255 / .24); background: rgb(98 199 255 / .07); }
 .studio-status-approved { color: #8ee3c9; border-color: rgb(112 215 189 / .24); background: rgb(112 215 189 / .07); }
 .studio-status-rejected { color: #ffaaaa; border-color: rgb(255 144 144 / .2); background: rgb(255 144 144 / .055); }
+.physics-shell { position: relative; background: radial-gradient(circle at 65% 15%, rgb(32 109 151 / .18), transparent 42%), #06111c; }
+.physics-frame { min-height: 100vh; }
+.physics-layout { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(300px, .75fr); gap: 1.25rem; padding-top: 1.5rem; }
+.physics-viewport { min-height: 620px; overflow: hidden; }
+.physics-viewport canvas { display: block; }
+.physics-viewport-label { position: absolute; left: 1.25rem; bottom: 1.25rem; border: 1px solid rgb(98 199 255 / .18); border-radius: .5rem; padding: .4rem .65rem; color: #93cde9; background: rgb(3 16 27 / .8); font: 700 .65rem var(--font-mono); letter-spacing: .08em; pointer-events: none; }
+.physics-loading { display: grid; min-height: 620px; place-items: center; color: #91a4b7; }
+.physics-controls { align-self: start; padding: 1.5rem; }
+.physics-constants { display: grid; gap: .65rem; margin-top: 1.4rem; }
+.physics-constants span, .physics-evidence div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgb(255 255 255 / .07); padding-bottom: .55rem; color: #91a4b7; font-size: .78rem; }
+.physics-constants strong, .physics-evidence strong { color: #e3edf5; text-align: right; }
+.physics-status { display: flex; align-items: center; gap: .7rem; margin-top: 1.5rem; color: #8ee3c9; font-size: .88rem; font-weight: 700; }
+.physics-debug { display: flex; align-items: center; gap: .6rem; margin-top: 1.2rem; color: #9eafbd; font-size: .75rem; cursor: pointer; }
+.physics-debug input { accent-color: #62c7ff; }
+.physics-evidence { display: grid; gap: .8rem; margin-top: 1.5rem; border: 1px solid rgb(98 199 255 / .16); border-radius: 1rem; padding: 1rem; background: rgb(98 199 255 / .045); }
+.physics-pass { color: #8ee3c9; font-size: .8rem; font-weight: 700; }
+.physics-review { color: #f6bd5a; font-size: .8rem; font-weight: 700; }
+@media (max-width: 900px) { .physics-layout { grid-template-columns: 1fr; } .physics-viewport { min-height: 450px; } .physics-controls { margin-bottom: 2rem; } }
 .studio-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; margin-top: 1.25rem; }
 .studio-field textarea { min-height: 6rem; resize: vertical; }
 .studio-field-wide { grid-column: 1 / -1; }

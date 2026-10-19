@@ -2,7 +2,6 @@
 
 from typing import Any
 
-
 STATE_CHANGE_LABELS = {
     "scene_assessed": "Scene assessment recorded",
     "room_scanned": "Room cues recorded",
