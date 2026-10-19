@@ -59,8 +59,10 @@ apptainer exec --nv --bind "$ARC_PROJECT_WORKSPACE:/workspace" "$container_image
   set -euo pipefail
   export HOME=/workspace/trellis2/home
   export PIP_CACHE_DIR=/workspace/cache/pip
+  # Keep pip build files and its wheel cache on the same filesystem.
+  export TMPDIR=/workspace/cache/pip/tmp
   export CUDA_HOME=/usr/local/cuda
-  mkdir -p "$HOME" "$PIP_CACHE_DIR"
+  mkdir -p "$HOME" "$PIP_CACHE_DIR" "$TMPDIR"
   source /opt/conda/etc/profile.d/conda.sh
   if [[ ! -x /workspace/trellis2/environment/bin/python ]]; then
     conda create -y -p /workspace/trellis2/environment python=3.10 pip
@@ -70,7 +72,7 @@ apptainer exec --nv --bind "$ARC_PROJECT_WORKSPACE:/workspace" "$container_image
   conda install -y git
   python -m pip install --upgrade pip
   python -m pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
-  python -m pip install imageio imageio-ffmpeg tqdm easydict opencv-python-headless ninja trimesh transformers gradio==6.0.1 tensorboard pandas lpips zstandard kornia timm pillow-simd
+  python -m pip install imageio imageio-ffmpeg tqdm easydict opencv-python-headless ninja trimesh transformers gradio==6.0.1 tensorboard pandas lpips zstandard kornia timm pillow-simd psutil==6.1.1 packaging==24.2
   python -m pip install git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8
   python -m pip install flash-attn==2.7.3 --no-build-isolation
   rm -rf /tmp/trellis2-extensions
