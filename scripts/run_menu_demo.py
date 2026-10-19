@@ -21,15 +21,15 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from backend.app.adapters.manual_input_adapter import build_action_message  # noqa: E402
-from backend.app.demo_catalog import (  # noqa: E402
+from backend.app.adapters.manual_input_adapter import build_action_message
+from backend.app.demo_catalog import (
     DEMO_DEFINITIONS,
     DemoDefinition,
 )
-from backend.app.logging.review_summary import generate_review_summary  # noqa: E402
-from backend.app.scenario_engine.loader import load_scenario  # noqa: E402
-from scripts.replay_session import replay  # noqa: E402
-from scripts.run_local_demo import (  # noqa: E402
+from backend.app.logging.review_summary import generate_review_summary
+from backend.app.scenario_engine.loader import load_scenario
+from scripts.replay_session import replay
+from scripts.run_local_demo import (
     DEFAULT_HTTP_URL,
     DEFAULT_LOG_DIRECTORY,
     is_backend_healthy,

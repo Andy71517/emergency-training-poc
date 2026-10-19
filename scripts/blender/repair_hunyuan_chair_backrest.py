@@ -2,8 +2,8 @@
 Run in the Scripting workspace on Andy's scaled chair-cleanup.blend.
 Creates a separate preview and hidden source; does not save or overwrite files.
 """
-import bpy
 import bmesh
+import bpy
 import numpy as np
 
 TAG = 'POC_Backrest_Repair'

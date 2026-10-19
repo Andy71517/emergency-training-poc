@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ScenarioStudio } from "./ScenarioStudio";
+import { PhysicsLab } from "./PhysicsLab";
 import { ErrorView } from "./components/ErrorView";
 import { IdleView } from "./components/IdleView";
 import { InstructorFinale } from "./components/InstructorFinale";
@@ -30,7 +31,7 @@ import {
 import type { DemoPath, LiveEvent, Review, RunStage } from "./types";
 
 function App() {
-  const [appView, setAppView] = useState<"sessions" | "studio">("sessions");
+  const [appView, setAppView] = useState<"sessions" | "studio" | "physics">("sessions");
   const [paths, setPaths] = useState<DemoPath[]>([]);
   const [selectedId, setSelectedId] = useState("");
   const [disclaimer, setDisclaimer] = useState("");
@@ -300,6 +301,10 @@ function App() {
     return <ScenarioStudio onBack={() => setAppView("sessions")} />;
   }
 
+  if (appView === "physics") {
+    return <PhysicsLab onBack={() => setAppView("sessions")} />;
+  }
+
   return (
     <main className="app-shell min-h-screen overflow-hidden bg-ink text-slate-100">
       <div className="technical-grid" />
@@ -319,6 +324,9 @@ function App() {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <button className="secondary-button" onClick={() => setAppView("physics")} type="button">
+              <Play size={16} /> Visual physics lab
+            </button>
             <button className="secondary-button" onClick={() => setAppView("studio")} type="button">
               <Sparkles size={16} /> Scenario studio
             </button>
