@@ -3,11 +3,13 @@
 ## October 19 resumed direction — supersedes the manual next action below
 
 Andy resumed and requested resolution of all seven open PRs before moving ahead.
-The completed stack is being consolidated into `main`, preserving its history.
-Use `main` as the baseline once PR #7 is merged; older branch instructions below
-are historical. Resolution checks include the full backend/ARC suites, frontend
-build/lint, Python/Bash/JSON checks and dependency audit. New CI covers frontend
-checks and ARC tests as well as backend checks.
+All seven PRs (#1–#7) were merged into `main`, preserving their history; none
+remains open. The final stack merge is `0a0535b`. Use `main` as the baseline;
+older branch instructions below are historical. Each PR passed its GitHub checks
+before merging. Final local validation: 118 backend/ARC tests, frontend build/lint,
+repository Ruff, Python compilation, Bash syntax and JSON checks pass; npm audit
+reports zero vulnerabilities. New CI covers frontend checks and ARC tests as well
+as backend checks. No new GPU or Unreal runtime was executed during resolution.
 
 The local app saved couch request
 `64e106d0434281a2a919e2d7e7706dd8a17d18f48b5f9be767a185fa7a55ce52`
