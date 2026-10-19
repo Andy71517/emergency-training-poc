@@ -14,8 +14,10 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 try:
+    from .arc_http import arc_ssl_context
     from .check_scenario_planner_access import safe_error_detail
 except ImportError:  # Direct CLI execution from arc/scripts.
+    from arc_http import arc_ssl_context
     from check_scenario_planner_access import safe_error_detail
 
 ASSET = 'hunyuan_wooden_chair_8053348'
@@ -185,7 +187,7 @@ def ask_model(prompt, count, model, token=None):
                 data=json.dumps(payload).encode(), headers={'Content-Type': 'application/json',
                 'Authorization': 'Bearer '+token.strip()}, method='POST')
     try:
-        with urllib.request.urlopen(request, timeout=180) as response:
+        with urllib.request.urlopen(request, timeout=180, context=arc_ssl_context()) as response:
             data = json.loads(response.read(2_000_000))
     except urllib.error.HTTPError as exc:
         raise ValueError(f'HTTP {exc.code}: '+safe_error_detail(exc.read(16_384), token)) from None
@@ -274,3 +276,4 @@ if __name__ == '__main__':
         main()
     except (ValueError, KeyError, IndexError, OSError, urllib.error.URLError) as exc:
         raise SystemExit('Batch failed: '+str(exc)) from None
+

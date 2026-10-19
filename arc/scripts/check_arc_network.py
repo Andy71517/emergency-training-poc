@@ -4,6 +4,11 @@ import ssl
 import urllib.error
 import urllib.request
 
+try:
+    from .arc_http import arc_ssl_context
+except ImportError:
+    from arc_http import arc_ssl_context
+
 HOST='llm-api.arc.vt.edu'
 
 
@@ -44,7 +49,7 @@ def main():
         print('Continuing HTTPS test; a configured proxy may use a different route.')
     request=urllib.request.Request('https://'+HOST+'/api/v1/models',headers={'User-Agent':'FIELDWORK-network-check'})
     try:
-        with urllib.request.urlopen(request,timeout=20) as response:
+        with urllib.request.urlopen(request,timeout=20,context=arc_ssl_context()) as response:
             print('Python HTTPS: HTTP',response.status)
     except urllib.error.HTTPError as exc:
         print('Python HTTPS: HTTP',exc.code)
@@ -53,6 +58,8 @@ def main():
             print('Authentication was deliberately omitted; this response does not test your key.')
     except (urllib.error.URLError,OSError) as exc:
         print('Python HTTPS:',describe_connection_error(exc))
+    except ValueError as exc:
+        print('Python HTTPS setup:',str(exc))
     print('Finished. Share this output; it contains no API key.')
 
 

@@ -9,6 +9,7 @@ import uuid
 import zipfile
 from pathlib import Path
 
+from arc.scripts.arc_http import arc_ssl_context
 from arc.scripts.check_arc_network import describe_connection_error
 from arc.scripts.check_scenario_planner_access import safe_error_detail
 from backend.app.studio.service import REPO, local_settings, settings
@@ -23,7 +24,7 @@ def connection_check():
             'messages':[{'role':'user','content':'Reply with ARC access OK.'}]}).encode(),
         headers={'Authorization':'Bearer '+token.strip(),'Content-Type':'application/json'})
     try:
-        with urllib.request.urlopen(request,timeout=45) as response:
+        with urllib.request.urlopen(request,timeout=45,context=arc_ssl_context()) as response:
             data=json.loads(response.read(1_000_000))
         message=data['choices'][0]['message']
         if not (message.get('content') or message.get('reasoning_content')):

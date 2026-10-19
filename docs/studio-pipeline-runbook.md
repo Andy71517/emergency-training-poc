@@ -8,6 +8,7 @@ Stop uvicorn with Ctrl+C. From the repository root:
 
 ```powershell
 git pull --ff-only
+.\.venv\Scripts\python.exe -m pip install -e .
 npm --prefix web ci
 npm --prefix web run build
 notepad backend\.env
@@ -77,3 +78,7 @@ API references: [LevelEditorSubsystem](https://dev.epicgames.com/documentation/e
 4. Run Chaos batch; watch Unreal cycle maps, then inspect/download its observations in the frontend.
 5. Add camera/video evidence and quantitative physics checks after the Windows bridge works.
 6. Add ARC job submission for new asset requests and reviewed asset registration. New Hunyuan/TRELLIS generation and general mesh repair are not part of this local reuse worker. TRELLIS/DINOv3 remains paused pending access. Agents, smoke and arbitrary asset types remain later work.
+
+## Windows ARC certificate fix
+
+The no-key network diagnostic confirmed DNS and TCP connectivity on Andy's PC, followed by Python certificate verification failure. The ARC clients now use a verified truststore SSLContext on Windows (native CryptoAPI certificate-chain validation); Linux retains Python's default verified context. No certificate checks are disabled. Update the editable installation with `.\.venv\Scripts\python.exe -m pip install -e .`, rerun `arc/scripts/check_arc_network.py`, then restart the backend. HTTP 401/403 from the no-key probe confirms an HTTP response with valid TLS; it does not test the private key. If native Windows validation also fails, investigate the server's certificate chain or the machine's trust configuration rather than bypassing verification.
