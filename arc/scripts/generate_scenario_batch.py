@@ -10,10 +10,13 @@ import random
 import tempfile
 import urllib.error
 import urllib.request
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
-from check_scenario_planner_access import safe_error_detail
+try:
+    from .check_scenario_planner_access import safe_error_detail
+except ImportError:  # Direct CLI execution from arc/scripts.
+    from check_scenario_planner_access import safe_error_detail
 
 ASSET = 'hunyuan_wooden_chair_8053348'
 # Reviewed demo dimensions, not measurements of a real-world chair.
@@ -160,7 +163,7 @@ def svg(scene):
     return ''.join(parts)
 
 
-def ask_model(prompt, count, model):
+def ask_model(prompt, count, model, token=None):
     shape = {'title': 'Classroom chair layout', 'room_width_m': 8, 'room_depth_m': 8,
              'room_height_m': 3, 'door_width_m': 1.2, 'aisle_width_m': 1.6,
              'chairs_per_room': 12, 'variant_conditions': ['clear']*(count-1)+['obstructed'],
@@ -173,7 +176,7 @@ def ask_model(prompt, count, model):
               'Only classroom-like empty rectangular rooms, one centred positive-Y doorway and registered wooden chairs '
               'are supported. Put unsupported features (desks, agents, smoke, new assets, etc.) in unsupported_requests; '
               'do not substitute chairs for other assets. Record assumptions. No claim of emergency-training validity.')
-    token = os.environ.get('ARC_LLM_API_KEY') or getpass.getpass('ARC LLM API key (hidden; not saved): ')
+    token = token or os.environ.get('ARC_LLM_API_KEY') or getpass.getpass('ARC LLM API key (hidden; not saved): ')
     if not token.strip():
         raise ValueError('No API key entered.')
     payload = {'model': model, 'messages': [{'role': 'system', 'content': system},
@@ -211,7 +214,7 @@ def write_package(out, plan, source, seed, prompt):
             (stage/name).write_text(json.dumps(value, indent=2, allow_nan=False)+'\n', encoding='utf-8')
         save('plan.json', plan)
         save('request.json', {'prompt': prompt, 'base_seed': seed, 'source': source,
-                             'generated_at': datetime.now(timezone.utc).isoformat()})
+                             'generated_at': datetime.now(UTC).isoformat()})
         save('asset-registry.json', {'assets': [{'asset_id': ASSET, 'dimensions_m': DIMENSIONS,
               'shape_job': '8052814', 'texture_job': '8053348', 'scale_is_assumed': True,
               'binary_assets_included': False, 'binding_status': 'requires_prepared_blender_asset_binding'}]})
@@ -243,7 +246,7 @@ def main():
     args = parser.parse_args()
     if not 1 <= args.count <= 30:
         parser.error('--count must be 1-30')
-    stamp = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S_%f')
+    stamp = datetime.now(UTC).strftime('%Y%m%d_%H%M%S_%f')
     base = Path(os.environ.get('ARC_PROJECT_WORKSPACE', Path(__file__).resolve().parents[1]/'results'))
     output = args.output or base/'scenario-batches'/stamp
     if output.exists():

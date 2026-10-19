@@ -10,8 +10,11 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+const PhysicsLab = lazy(() => import("./PhysicsLab").then(module => ({ default: module.PhysicsLab })));
+import { SpatialWorkbench } from "./SpatialWorkbench";
 import { ScenarioStudio } from "./ScenarioStudio";
+
 import { ErrorView } from "./components/ErrorView";
 import { IdleView } from "./components/IdleView";
 import { InstructorFinale } from "./components/InstructorFinale";
@@ -30,7 +33,7 @@ import {
 import type { DemoPath, LiveEvent, Review, RunStage } from "./types";
 
 function App() {
-  const [appView, setAppView] = useState<"sessions" | "studio">("sessions");
+  const [appView, setAppView] = useState<"sessions" | "studio" | "physics" | "workbench">("workbench");
   const [paths, setPaths] = useState<DemoPath[]>([]);
   const [selectedId, setSelectedId] = useState("");
   const [disclaimer, setDisclaimer] = useState("");
@@ -296,8 +299,16 @@ function App() {
     resetReview();
   };
 
+  if (appView === "workbench") {
+    return <SpatialWorkbench onLegacy={() => setAppView("sessions")} />;
+  }
+
   if (appView === "studio") {
     return <ScenarioStudio onBack={() => setAppView("sessions")} />;
+  }
+
+  if (appView === "physics") {
+    return <Suspense fallback={<p>Loading physics lab…</p>}><PhysicsLab onBack={() => setAppView("sessions")} /></Suspense>;
   }
 
   return (
@@ -319,6 +330,12 @@ function App() {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <button className="secondary-button" onClick={() => setAppView("workbench")} type="button">
+              <Sparkles size={16} /> ARC workspace
+            </button>
+            <button className="secondary-button" onClick={() => setAppView("physics")} type="button">
+              <Play size={16} /> Visual physics lab
+            </button>
             <button className="secondary-button" onClick={() => setAppView("studio")} type="button">
               <Sparkles size={16} /> Scenario studio
             </button>
