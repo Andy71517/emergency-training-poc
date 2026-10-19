@@ -10,7 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.unreal_display_preview import render_debug_panel  # noqa: E402
+from scripts.unreal_display_preview import render_debug_panel
 
 DEFAULT_DISPLAY_STATE = (
     REPO_ROOT / "unreal" / "EmergencyTrainingClient" / "Data" / "hallway_display_state.sample.json"
