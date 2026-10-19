@@ -81,6 +81,39 @@ def create_studio_router(service: SceneBatchService):
             raise HTTPException(404,'No playback report available')
         return FileResponse(service.directory/job_id/'chaos-report.json',filename='chaos-report.json')
 
+    @router.post('/jobs/{job_id}/video-retry',status_code=202)
+    def video_retry(job_id: str,request: Request):
+        local(request)
+        job(job_id)
+        return action(pipeline.retry_video,job_id)
+
+    @router.get('/jobs/{job_id}/video-report')
+    def video_report(job_id: str):
+        record=job(job_id)
+        stage=record.get('pipeline',{}).get('video',{})
+        run=stage.get('run','')
+        if not re.fullmatch(r'[a-f0-9]{32}',run):
+            raise HTTPException(404,'Recording evidence not available')
+        path=service.directory/job_id/'captures'/run/'observations.json'
+        if not path.is_file():
+            raise HTTPException(404,'Recording evidence missing')
+        return FileResponse(path,filename='recorded-run-observations.json')
+
+    @router.get('/jobs/{job_id}/recordings/{scene_id}/{name}')
+    def recording(job_id: str,scene_id: str,name: str):
+        record=job(job_id)
+        stage=record.get('pipeline',{}).get('video',{})
+        if stage.get('status') not in ('complete','partial') or name not in ('clip.mp4','poster.png','capture.json'):
+            raise HTTPException(404,'Recording not available')
+        run=stage.get('run','')
+        if not re.fullmatch(r'[a-f0-9]{32}',run) or scene_id not in {c['scene_id'] for c in stage.get('clips',[])}:
+            raise HTTPException(404,'Recording not found')
+        path=service.directory/job_id/'captures'/run/scene_id/name
+        if not path.is_file():
+            raise HTTPException(404,'Recording file missing')
+        return FileResponse(path,media_type='video/mp4' if name=='clip.mp4' else None,
+            headers={'X-Content-Type-Options':'nosniff'})
+
     @router.post('/jobs/{job_id}/replay',status_code=202)
     def replay(job_id: str, body: ReplayRequest, request: Request):
         local(request)

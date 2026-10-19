@@ -13,6 +13,7 @@ from arc.scripts.arc_http import arc_ssl_context
 from arc.scripts.check_arc_network import describe_connection_error
 from arc.scripts.check_scenario_planner_access import safe_error_detail
 from backend.app.studio.service import REPO, local_settings, settings
+from backend.app.studio.video import encode_scene, encoder_available, encoder_path
 
 
 def connection_check():
@@ -65,7 +66,7 @@ class Pipeline:
                 'chair_bound':bool(chair and chair.is_file()),
                 'asset_id':'hunyuan_wooden_chair_8053348',
                 'asset_label':'Reviewed wooden chair · 1 m assumed height',
-                'unreal_mode':'local_editor_bridge','engine':engine,
+                'unreal_mode':'local_editor_bridge','engine':engine,'video_available':encoder_available(),
                 'requirements':['BLENDER_EXECUTABLE: full path to Blender 5.1 executable',
                     'CHAIR_BLEND: full path to chair-collision-complete.blend'],
                 'new_asset_generation':'ARC GPU jobs remain separate from this local worker.'}
@@ -74,9 +75,11 @@ class Pipeline:
         try:
             data=json.loads((self.service.directory/'engine/heartbeat.json').read_text(encoding='utf-8'))
             return {'connected':time.time()-data['time']<15,'busy':bool(data['busy']),
-                    'version':data.get('engine_version',''),'project':data.get('project','')}
+                    'version':data.get('engine_version',''),'project':data.get('project',''),
+                    'activity':data.get('activity'),
+                    'capabilities':data.get('capabilities',['assemble','simulate'])}
         except (OSError,ValueError,KeyError,TypeError):
-            return {'connected':False,'busy':False}
+            return {'connected':False,'busy':False,'capabilities':[]}
 
     def binding(self, job):
         folder=self.service.directory/job['id']
@@ -87,22 +90,26 @@ class Pipeline:
                 'physics_calibrated':False,'binary_assets_included':False}
 
     def enqueue_engine(self,job_id,action):
-        if action not in ('assemble','simulate'):
+        if action not in ('assemble','simulate','record'):
             raise ValueError('Unsupported editor action.')
         engine=self.engine_status()
         if engine['busy']:
             raise ValueError('The Unreal bridge is busy. Wait for its current action to finish.')
         if not engine['connected']:
             raise ValueError('Load unreal/scripts/studio_bridge.py once in your Unreal 5.8 editor. See Connections.')
+        if action=='record':
+            if 'record' not in engine['capabilities']:
+                raise ValueError('Reload unreal/scripts/studio_bridge.py in Unreal to enable recording. Stop any active run first.')
+            encoder_path()
         with self.service.lock:
             job=self.ready(job_id)
             if any(s.get('status') in ('queued','running') for j in self.service.list()
-                   for name,s in j.get('pipeline',{}).items() if name in ('unreal','simulation')):
-                raise ValueError('An Unreal action is already active. Wait for it to finish.')
+                   for name,s in j.get('pipeline',{}).items() if name in ('unreal','simulation','video')):
+                raise ValueError('A pipeline action is already running. Wait for it to finish.')
             maps=job.get('pipeline',{}).get('unreal',{}).get('maps',[])
-            if action=='simulate' and not maps:
+            if action in ('simulate','record') and not maps:
                 raise ValueError('Assemble this batch in Unreal before requesting Chaos playback.')
-            if action=='simulate' and any(not p.startswith('/Game/EmergencyPOC/Rooms_') for p in maps):
+            if action in ('simulate','record') and any(not p.startswith('/Game/EmergencyPOC/Rooms_') for p in maps):
                 raise ValueError('Automatic playback is restricted to generated FIELDWORK maps.')
             folder=self.service.directory/job_id
             (folder/'room-package.json').write_text(json.dumps(self.binding(job),indent=2),encoding='utf-8')
@@ -114,7 +121,7 @@ class Pipeline:
             temp.write_text(json.dumps(command),encoding='utf-8')
             temp.replace(path)
             name='unreal' if action=='assemble' else 'simulation'
-            job.setdefault('pipeline',{})[name]={'status':'queued','command_id':command['id'],
+            job.setdefault('pipeline',{})[name]={'status':'queued','command_id':command['id'],'mode':action,
                 'message':'Waiting for the Unreal editor bridge. Keep the editor open.'}
             self.service.save(job)
         return job
@@ -152,16 +159,74 @@ class Pipeline:
                     if {o.get('map') for o in observations}!=allowed_maps:
                         raise ValueError('Simulation report does not match assembled maps.')
                     (self.service.directory/job['id']/'chaos-report.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
-                    self.update(job['id'],'simulation',{'status':'playback_reported',
+                    self.update(job['id'],'simulation',{'status':'playback_reported','mode':result['action'],
                         'message':'Editor reported timed Chaos playback for every map. Contacts and calibration are not validated.',
                         'room_count':len(observations),'evidence':'local_editor_bridge',
                         'maximum_endpoint_displacement_m':max(o['maximum_endpoint_displacement_m'] for o in observations),
                         'physics_calibrated':False,'contacts_measured':False})
+                    if result['action']=='record':
+                        run=state['command_id']
+                        if result.get('run')!=run:
+                            raise ValueError('Recording run does not match the editor command.')
+                        capture_root=self.service.directory/job['id']/'captures'/run
+                        capture_root.mkdir(parents=True,exist_ok=True)
+                        (capture_root/'observations.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
+                        self.update(job['id'],'video',{'status':'queued','run':run,
+                            'message':'Preparing captured Unreal frames for browser playback.'})
+                        self.service.pool.submit(self.encode_videos,job['id'],run,observations)
             except (OSError,ValueError,KeyError,TypeError):
                 # Keep malformed output for inspection, but release the failed action.
                 if matched:
                     self.update(*matched,{'status':'failed','message':'Editor report was incomplete or did not match the batch. Review the editor log, then rerun.'})
                 continue
+
+    def encode_videos(self,job_id,run,observations):
+        self.update(job_id,'video',{'status':'running','run':run,'message':'Encoding Unreal recordings. Original frames are kept.'})
+        clips=[]
+        errors=[]
+        try:
+            scenes=self.ready(job_id)['scenes']
+            for scene,observation in zip(scenes,observations):
+                scene_id=scene['scene_id']
+                folder=self.service.directory/job_id/'captures'/run/scene_id
+                try:
+                    metadata=encode_scene(folder)
+                    clips.append({'scene_id':scene_id,'condition':scene['designated_aisle']['condition'],
+                        'map':observation['map'],**metadata,'controlled_input':observation.get('controlled_input'),
+                        'maximum_displacement_m':observation.get('target_maximum_displacement_m'),
+                        'motion_check_passed':observation.get('motion_check_passed'),
+                        'settled_at_end':observation.get('target_settled_at_end')})
+                except ValueError as exc:
+                    errors.append(scene_id+': '+str(exc))
+                except OSError:
+                    errors.append(scene_id+': Captured frames or metadata are missing or unreadable. Physics observations were kept.')
+                except subprocess.TimeoutExpired:
+                    errors.append(scene_id+': Video encoding exceeded three minutes. Captured frames were kept.')
+            self.update(job_id,'video',{'status':'complete' if len(clips)==len(scenes) else 'partial' if clips else 'failed',
+                'run':run,'clips':clips,'errors':errors,
+                'message':f'{len(clips)} of {len(scenes)} Unreal clips ready to watch.'})
+        except Exception:  # noqa: BLE001 - persist encoding boundary failures
+            self.update(job_id,'video',{'status':'failed','run':run,
+                'message':'Could not prepare playback. Physics observations and captured frames were kept.'})
+
+    def retry_video(self,job_id):
+        encoder_path()
+        with self.service.lock:
+            job=self.ready(job_id)
+            stage=job.get('pipeline',{}).get('video',{})
+            run=stage.get('run','')
+            if stage.get('status') not in ('failed','partial','interrupted') or len(run)!=32 or any(c not in 'abcdef0123456789' for c in run):
+                raise ValueError('No failed recording is available to encode again.')
+            try:
+                report=json.loads((self.service.directory/job_id/'captures'/run/'observations.json').read_text(encoding='utf-8'))
+            except (OSError,ValueError):
+                raise ValueError('Saved recording evidence is missing. Record a new movement demo.') from None
+            if report.get('run')!=run:
+                raise ValueError('Recording evidence no longer matches this run. Record a new demo.')
+            job['pipeline']['video']={'status':'queued','run':run,'message':'Retrying video encoding from saved frames.'}
+            self.service.save(job)
+            self.service.pool.submit(self.encode_videos,job_id,run,report['observations'])
+        return job
 
     def ready(self, job_id):
         job=self.service.get(job_id)

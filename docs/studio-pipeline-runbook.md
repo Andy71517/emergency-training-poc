@@ -82,3 +82,7 @@ API references: [LevelEditorSubsystem](https://dev.epicgames.com/documentation/e
 ## Windows ARC certificate fix
 
 The no-key network diagnostic confirmed DNS and TCP connectivity on Andy's PC, followed by Python certificate verification failure. The ARC clients now use a verified truststore SSLContext on Windows (native CryptoAPI certificate-chain validation); Linux retains Python's default verified context. No certificate checks are disabled. Update the editable installation with `.\.venv\Scripts\python.exe -m pip install -e .`, rerun `arc/scripts/check_arc_network.py`, then restart the backend. HTTP 401/403 from the no-key probe confirms an HTTP response with valid TLS; it does not test the private key. If native Windows validation also fails, investigate the server's certificate chain or the machine's trust configuration rather than bypassing verification.
+
+## Confirmed live pipeline and next visual batch
+
+Andy confirmed live ARC plans, Blender assembly, Unreal assembly and the full ten-second-per-room Chaos batch with downloadable observations on October 18. For the new recorded movement demo and updated worker setup, continue from [visual-playback-runbook.md](visual-playback-runbook.md). This new capture path still needs its first live Unreal verification.
