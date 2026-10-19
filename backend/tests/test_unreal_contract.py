@@ -8,7 +8,6 @@ from backend.app.models.messages import (
 )
 from scripts.run_unreal_contract_harness import ClientPhase, UnrealClientStateMachine
 
-
 CONTRACT_EXAMPLES = Path("unreal/contract/examples")
 
 

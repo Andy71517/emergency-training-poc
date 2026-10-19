@@ -160,7 +160,7 @@ def generate_exploration_definition(
     generator.shuffle(shuffled_actions)
     retry_count = min(6, len(available_actions))
     retries = [generator.choice(available_actions) for _ in range(retry_count)]
-    actions = tuple([*shuffled_actions, *retries, "stop_scenario"])
+    actions = (*shuffled_actions, *retries, "stop_scenario")
     return DemoDefinition(
         demo_id=f"seeded-exploration-{scenario_id}",
         label=f"Seeded exploration: {definition.title}",

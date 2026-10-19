@@ -7,11 +7,10 @@ that is useful for Dr. Cameron, reviewers, clients, or future teammates.
 from __future__ import annotations
 
 import argparse
-from dataclasses import dataclass
-from pathlib import Path
 import re
 import textwrap
-
+from dataclasses import dataclass
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKET_DIR = ROOT / "docs" / "submission-packet"
