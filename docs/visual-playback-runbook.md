@@ -1,3 +1,5 @@
+> Current project checkpoint: [arc-handoff-2026-10-19.md](arc-handoff-2026-10-19.md). The base Chaos batch is confirmed; the first real recording is still a user-side verification.
+
 # Visual playback batch — 2026-10-18
 
 ## What now works, and what is new
@@ -55,4 +57,4 @@ Encoder reference: https://github.com/imageio/imageio-ffmpeg
 - Browser fixture test loads, plays, pauses and downloads MP4 and checks desktop/mobile layout and JavaScript errors. Fixtures are marked as fixtures, not Unreal evidence.
 - Actual Unreal 5.8 screenshot capture during simulation is the next user-side test. The confirmed previous live Chaos workflow is evidence for the base bridge, not proof of the new capture API behavior.
 
-Next: verify the first real clips on Andy's PC, then improve camera framing/capture smoothness from actual output. General ARC asset generation/repair and live Unreal streaming remain separate work.
+Next: verify the first real clips on Andy's PC, then improve camera framing/capture smoothness from actual output. Portable ARC variant requests, result import and Blender staging are now covered in [furniture-variants-runbook.md](furniture-variants-runbook.md). The first couch run, asset-specific repair/collisions and live Unreal streaming are not established by recording tests.

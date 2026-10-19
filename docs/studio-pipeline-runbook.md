@@ -1,3 +1,5 @@
+> Current checkpoint: [arc-handoff-2026-10-19.md](arc-handoff-2026-10-19.md). For the first couch and named furniture variants, see [furniture-variants-runbook.md](furniture-variants-runbook.md).
+
 # FIELDWORK pipeline handoff — 2026-10-18
 
 Resume here for the frontend/local worker batch on `codex/arc-scenario-workspace`, draft PR #7. Earlier ARC evidence remains in `arc-handoff-2026-10-18.md` and `arc-handoff-2026-09-28.md`.
@@ -57,27 +59,22 @@ Inspect Blender previews/files and Unreal maps. The room count supports 1–30. 
 
 Chaos reports show editor-reported initial/final positions and endpoint displacement. They do not measure collision contacts or verify evacuation behavior/calibrated physics. Floor-level chairs may legitimately remain still; no extra impulse is applied. Chair height, mass and material parameters are demo assumptions. The browser displays Blender renders and engine reports; Unreal video is not streamed.
 
-The bridge only accepts fixed assemble/simulate actions. Model text is never executed. Keys stay backend-only and are stripped from Blender child environments; raw process/network output is not persisted by these workers. Env and worker files remain local under ignored logs/config paths.
+The bridge only accepts fixed assemble/simulate/record actions. Model text is never executed. Keys stay backend-only and are stripped from Blender child environments; raw process/network output is not persisted by these workers. Env and worker files remain local under ignored logs/config paths.
 
 API references: [LevelEditorSubsystem](https://dev.epicgames.com/documentation/en-us/unreal-engine/python-api/class/LevelEditorSubsystem), [UnrealEditorSubsystem](https://dev.epicgames.com/documentation/en-us/unreal-engine/python-api/class/UnrealEditorSubsystem). Uses documented editor_play_simulate, editor_request_end_play and get_game_world calls.
 
 ## Validation and practical limits
 
-- Backend regression suite: 91 passing tests on a snapshot of tracked GitHub sources plus this batch.
+- Backend regression suite: 108 passing tests at the latest furniture-library checkpoint.
 - Production frontend build and ESLint; targeted Python lint and compile checks.
 - Browser flow with explicit offline fixture planner: generation, focus alignment, stage navigation, Connections, Unreal ZIP download, saved-plan replay, desktop/mobile layout and no page errors.
-- Actual Blender 5.1.2 Python runtime ran assembly and rendering with the accepted three-room plan and completed chair; new blend/report/preview produced and preview inspected. The Windows executable invocation still needs the first user-side run.
+- Actual Blender 5.1.2 Python runtime ran assembly and rendering with the accepted three-room plan and completed chair; new blend/report/preview produced and preview inspected. Andy subsequently confirmed the actual Windows room worker succeeds; the new generic furniture-review invocation still needs its first Windows run.
 - Tests cover replay without another model call, ZIP/report hash binding, rejected foreign origins, sanitized failures, editor command/result flow and restricted artifacts. A fake editor exercises bridge simulation-start/game-world-sampling/stop. This does not claim real Unreal execution.
-- Live ARC frontend generation and actual Unreal 5.8 bridge execution remain user-side checks; no credentials or Unreal installation are available in the build environment.
+- Andy confirmed live ARC frontend generation, Windows Blender room assembly and actual Unreal 5.8 bridge/Chaos batches. First live recording and first couch variant run remain pending; this build environment has no private ARC credentials or Unreal installation.
 
 ## Next actions
 
-1. Update, add Blender paths, restart backend and test ARC. Share only sanitized errors if it fails.
-2. Generate three layouts, build in Blender and inspect the returned render/file.
-3. Load the bridge in the chair demo, Assemble in Unreal and inspect new maps.
-4. Run Chaos batch; watch Unreal cycle maps, then inspect/download its observations in the frontend.
-5. Add camera/video evidence and quantitative physics checks after the Windows bridge works.
-6. Add ARC job submission for new asset requests and reviewed asset registration. New Hunyuan/TRELLIS generation and general mesh repair are not part of this local reuse worker. TRELLIS/DINOv3 remains paused pending access. Agents, smoke and arbitrary asset types remain later work.
+The baseline live pipeline is confirmed. Resume from [the current handoff](arc-handoff-2026-10-19.md): submit the first couch request using [the furniture runbook](furniture-variants-runbook.md), import and inspect its output, then prepare appropriate collision pieces and mixed-asset room integration. Separately verify the first actual recorded Unreal clips with [the playback runbook](visual-playback-runbook.md). TRELLIS remains paused pending DINOv3 access.
 
 ## Windows ARC certificate fix
 
@@ -89,4 +86,4 @@ Andy confirmed live ARC plans, Blender assembly, Unreal assembly and the full te
 
 ## History and duplication
 
-For the new recoverable Trash, exact-input request reuse and proposed couch/asset-library expansion, see [batch-history-and-assets.md](batch-history-and-assets.md). Trash keeps files on disk and does not remove maps already created in Unreal.
+For the new recoverable Trash, exact-input request reuse and implemented variant library and remaining mixed-asset expansion, see [batch-history-and-assets.md](batch-history-and-assets.md). Trash keeps files on disk and does not remove maps already created in Unreal.

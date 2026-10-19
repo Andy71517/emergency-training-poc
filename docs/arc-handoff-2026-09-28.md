@@ -1,3 +1,5 @@
+> Historical checkpoint. For the current working state and next actions, start with [arc-handoff-2026-10-19.md](arc-handoff-2026-10-19.md). Later sections below preserve the earlier troubleshooting history.
+
 # ARC visual POC handoff — 2026-09-28
 
 Use this file to resume the ARC image-to-3D POC. It records what actually ran, what remains blocked, and the next decision. No model-generated chair mesh exists yet.

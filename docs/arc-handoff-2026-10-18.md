@@ -1,3 +1,5 @@
+> Historical checkpoint. For the current working state and next actions, start with [arc-handoff-2026-10-19.md](arc-handoff-2026-10-19.md). Later sections below preserve the earlier troubleshooting history.
+
 # ARC visual POC handoff — 2026-10-18
 
 ## Verified today

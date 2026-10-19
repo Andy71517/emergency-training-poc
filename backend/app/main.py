@@ -5,6 +5,7 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
+from backend.app.api.assets import create_asset_router
 from backend.app.api.authoring import create_authoring_router
 from backend.app.api.demo import create_demo_router
 from backend.app.api.health import router as health_router
@@ -32,6 +33,7 @@ def create_app(log_directory: Path | None = None) -> FastAPI:
     studio = SceneBatchService(studio_directory)
     app.state.studio_service = studio
     app.include_router(create_studio_router(studio))
+    app.include_router(create_asset_router(studio))
     app.include_router(health_router)
     app.include_router(create_authoring_router(authoring_service))
     app.include_router(create_physics_router(physics_service))
@@ -43,3 +45,4 @@ def create_app(log_directory: Path | None = None) -> FastAPI:
 
 
 app = create_app()
+
