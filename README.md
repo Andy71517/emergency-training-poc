@@ -1,5 +1,10 @@
 # Emergency Training Simulator POC
 
+Current visual asset workflow: [description → ARC → Blender MCP → Unreal package](docs/asset-automation-runbook.md).
+See the [October 26 handoff](docs/arc-handoff-2026-10-26.md) for verified work and the
+remaining one-time SSH setup/live-generation checkpoint. The deterministic demo
+described below remains a separate baseline.
+
 This repo is a small proof of concept for a much larger emergency-response training simulator vision.
 
 The long-term project goal is an AI-driven, adaptive emergency-response training platform with immersive environments, trainee sensing, validation, and scalable deployment.

@@ -188,14 +188,19 @@ def test_blender_review_worker_keeps_credentials_out_and_persists_gate(library,t
     executable=tmp_path/'blender';executable.write_text('fixture')
     monkeypatch.setenv('BLENDER_EXECUTABLE',str(executable))
     monkeypatch.setenv('ARC_LLM_API_KEY','SECRET-NOT-FOR-BLENDER')
-    def worker(command,**kwargs):
-        assert 'ARC_LLM_API_KEY' not in kwargs['env']
-        assert all('SECRET-NOT-FOR-BLENDER' not in x for x in command)
-        output=Path(command[command.index('--output')+1]);output.mkdir()
-        (output/'furniture-review.blend').write_bytes(b'fixture only')
-        (output/'report.json').write_text(json.dumps({'asset_id':asset['id'],'room_compatible':False}))
-        return subprocess.CompletedProcess(command,0)
-    monkeypatch.setattr('backend.app.studio.assets.subprocess.run',worker)
+    from backend.app.studio.blender_client import server_parameters
+    parameters = server_parameters(library.directory, executable)
+    assert 'ARC_LLM_API_KEY' not in parameters.env
+    assert 'SECRET-NOT-FOR-BLENDER' not in str(parameters)
+    def worker(root, exe, asset_id, revision, run):
+        output = root/asset_id/'blender'/run
+        output.mkdir(parents=True)
+        report = {'asset_id': asset_id, 'room_compatible': False, 'collision_mesh_created': True}
+        (output/'furniture-unreal.blend').write_bytes(b'fixture only')
+        (output/'unreal-package.zip').write_bytes(b'fixture only')
+        (output/'report.json').write_text(json.dumps(report))
+        return report
+    monkeypatch.setattr('backend.app.studio.assets.prepare_via_mcp',worker)
     library.prepare(asset['id'])
     library.service.pool.shutdown(wait=True)
     assert library.get(asset['id'])['blender']['status']=='complete'
@@ -211,17 +216,16 @@ def test_blender_review_failure_is_persisted_and_retryable(library, tmp_path, mo
     executable.write_text('fixture')
     monkeypatch.setenv('BLENDER_EXECUTABLE', str(executable))
 
-    def worker(command, **kwargs):
+    def worker(root, exe, asset_id, revision, run):
         if failure == 'timeout':
-            raise subprocess.TimeoutExpired(command, 1800)
-        output = Path(command[command.index('--output') + 1])
-        output.mkdir()
+            raise subprocess.TimeoutExpired('Blender MCP fixture', 1800)
+        output = root/asset_id/'blender'/run
+        output.mkdir(parents=True)
         if failure == 'invalid_report':
-            (output / 'furniture-review.blend').write_bytes(b'fixture only')
-            (output / 'report.json').write_text('[]')
-        return subprocess.CompletedProcess(command, 0)
+            return []
+        return {'asset_id': asset_id, 'room_compatible': False, 'collision_mesh_created': True}
 
-    monkeypatch.setattr('backend.app.studio.assets.subprocess.run', worker)
+    monkeypatch.setattr('backend.app.studio.assets.prepare_via_mcp', worker)
     if failure == 'missing_source':
         library.file(asset['id'], 'asset.glb').unlink()
     # Execute queued work inline so the persisted failure is immediately observable.
@@ -236,3 +240,20 @@ def test_blender_review_failure_is_persisted_and_retryable(library, tmp_path, mo
     again = library.get(asset['id'])
     assert again['blender']['status'] == 'failed'
     assert again['blender']['run'] != first['blender']['run']
+
+
+def test_late_blender_result_cannot_replace_a_newer_preparation(library, tmp_path, monkeypatch):
+    asset = library.create(body())
+    library.import_result(asset['id'], result_for(asset))
+    old_run = 'a'*32
+    record = library.get(asset['id'])
+    record['blender'] = {'run': old_run, 'status': 'queued'}
+    library.save(record)
+    def old_worker(*args):
+        current = library.get(asset['id'])
+        current['blender'] = {'run': 'b'*32, 'status': 'queued'}
+        library.save(current)
+        raise ValueError('Older preparation failed after a newer one was queued.')
+    monkeypatch.setattr('backend.app.studio.assets.prepare_via_mcp', old_worker)
+    library.run_prepare(asset['id'], old_run, str(tmp_path/'fixture-executable'))
+    assert library.get(asset['id'])['blender'] == {'run': 'b'*32, 'status': 'queued'}

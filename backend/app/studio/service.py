@@ -27,11 +27,13 @@ def local_settings():
             if '=' not in line or line.lstrip().startswith('#'):
                 continue
             key, value = line.split('=', 1)
-            if key.strip() in ('ARC_LLM_API_KEY', 'ARC_LLM_MODEL', 'BLENDER_EXECUTABLE', 'CHAIR_BLEND'):
+            if key.strip() in ('ARC_LLM_API_KEY', 'ARC_LLM_MODEL', 'BLENDER_EXECUTABLE', 'CHAIR_BLEND',
+                               'ARC_SSH_TARGET', 'ARC_REMOTE_REPO'):
                 values[key.strip()] = value.strip().strip('\"\'')
     return {key: os.environ.get(key, values.get(key, default)) for key, default in (
         ('ARC_LLM_API_KEY', ''), ('ARC_LLM_MODEL', 'gpt-oss-120b'),
-        ('BLENDER_EXECUTABLE', ''), ('CHAIR_BLEND', ''))}
+        ('BLENDER_EXECUTABLE', ''), ('CHAIR_BLEND', ''),
+        ('ARC_SSH_TARGET', ''), ('ARC_REMOTE_REPO', ''))}
 
 
 def settings():

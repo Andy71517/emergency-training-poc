@@ -14,6 +14,10 @@ dependencies = [
   "uvicorn[standard]>=0.30,<1.0",
   "truststore>=0.10,<1.0; sys_platform == 'win32'",
   "imageio-ffmpeg>=0.6,<0.7",
+  "mcp==1.30.0",
+  "coacd==1.0.14",
+  "numpy>=1.26,<3",
+  "scipy>=1.12,<2",
 ]
 
 [project.optional-dependencies]

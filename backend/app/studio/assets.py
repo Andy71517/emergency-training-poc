@@ -3,7 +3,6 @@ import base64
 import binascii
 import io
 import json
-import os
 import re
 import shutil
 import struct
@@ -15,7 +14,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from arc.scripts.asset_request import make_request, sha, validate_png, validate_request
-from backend.app.studio.service import REPO, local_settings
+from backend.app.studio.blender_client import prepare_via_mcp
+from backend.app.studio.service import local_settings
 
 BUILTIN = 'hunyuan_wooden_chair_8053348'
 RESULT_NAMES = {'asset.glb', 'preview.png', 'shape-manifest.json', 'paint-manifest.json',
@@ -203,7 +203,7 @@ class AssetLibrary:
             if not executable or not Path(executable).is_file():
                 raise ValueError('Set BLENDER_EXECUTABLE in backend/.env first; use Connections to check the path.')
             run = uuid.uuid4().hex
-            record['blender'] = {'status': 'queued', 'run': run, 'message': 'Waiting for the local Blender worker.'}
+            record['blender'] = {'status': 'queued', 'run': run, 'message': 'Waiting for Blender MCP cleanup, collisions and export.'}
             self.save(record)
             self.service.pool.submit(self.run_prepare, asset_id, run, executable)
         return record
@@ -211,38 +211,35 @@ class AssetLibrary:
     def run_prepare(self, asset_id, run, executable):
         with self.lock:
             record = self.get(asset_id)
-            record['blender'].update(status='running', message='Blender is making a separate review copy.')
+            if record.get('blender', {}).get('run') != run or record['blender'].get('status') != 'queued':
+                return
+            record['blender'].update(status='running', message='Blender MCP is cleaning a copy, decomposing collisions and exporting.')
             self.save(record)
         try:
-            folder = self.directory/asset_id
-            output = folder/'blender'/run
-            output.parent.mkdir(exist_ok=True)
-            command = [executable, '--background', '--factory-startup', '--python-exit-code', '1',
-                '--python', str(REPO/'scripts/blender/prepare_furniture_variant.py'), '--',
-                '--source', str(self.file(asset_id, 'asset.glb')), '--request', str(folder/'request.json'),
-                '--output', str(output)]
-            env = {k:v for k,v in os.environ.items() if k not in ('ARC_LLM_API_KEY','OPENAI_API_KEY','HF_TOKEN')}
-            result = subprocess.run(command, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                timeout=1800, check=False)
-            if result.returncode != 0 or not (output/'furniture-review.blend').is_file():
-                raise ValueError('Blender worker failed.')
-            report = json.loads((output/'report.json').read_text(encoding='utf-8'))
-            if not isinstance(report, dict) or report.get('asset_id') != asset_id or report.get('room_compatible') is not False:
+            self.file(asset_id, 'asset.glb')
+            report = prepare_via_mcp(self.directory, executable, asset_id, record['result_revision'], run)
+            output = self.directory/asset_id/'blender'/run
+            if not isinstance(report, dict) or report.get('asset_id') != asset_id or report.get('room_compatible') is not False or report.get('collision_mesh_created') is not True:
                 raise ValueError('Unexpected Blender report.')
+            if not all((output/name).is_file() for name in ('furniture-unreal.blend', 'unreal-package.zip', 'report.json')):
+                raise ValueError('Missing Blender MCP outputs.')
             state = {'status': 'complete', 'run': run, 'report': report,
-                'message': 'Review copy ready. Inspect scale, orientation and materials; collision pieces are still needed.'}
-        except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError):
+                'message': 'Cleaned Blender copy and convex collision/export package ready. Review fit, materials and size before Unreal import.'}
+        except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError, ExceptionGroup):
             state = {'status': 'failed', 'run': run,
-                'message': 'Blender could not prepare this model. Check the executable and imported GLB, then retry.'}
+                'message': 'Blender MCP could not complete preparation. Model preserved; inspect its local worker log and retry.'}
         with self.lock:
             record = self.get(asset_id)
+            if record.get('blender', {}).get('run') != run or record['blender'].get('status') != 'running':
+                return
             record['blender'] = state
             self.save(record)
 
     def blender_file(self, asset_id, name):
         record = self.get(asset_id)
         state = record.get('blender', {})
-        if state.get('status') != 'complete' or name not in ('furniture-review.blend', 'report.json'):
+        if state.get('status') != 'complete' or name not in ('furniture-review.blend', 'furniture-unreal.blend',
+                'unreal-package.zip', 'report.json', 'preview.png', 'material-plan.json', 'export-manifest.json'):
             raise ValueError('Blender review output is not ready.')
         if not re.fullmatch('[a-f0-9]{32}', state.get('run', '')):
             raise ValueError('Blender review output is not ready.')

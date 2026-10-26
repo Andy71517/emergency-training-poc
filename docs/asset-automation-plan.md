@@ -1,5 +1,11 @@
 # Natural-language assets and frontend ARC jobs
 
+**October 26 update:** this bounded asset lane is implemented, including a real
+Blender MCP preparation worker. Read `docs/asset-automation-runbook.md` for setup
+and `docs/arc-handoff-2026-10-26.md` for exact validation/live-run status. The design
+discussion below is retained as history; the image provider is now pinned SDXL
+on ARC. SSH setup and first actual GPU/Unreal integration runs remain pending.
+
 ## Requested outcome, October 19, 2026
 
 Andy wants to test the first couch through the intended automated workflow:

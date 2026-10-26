@@ -1,12 +1,15 @@
 """Local asset library routes; GPU execution remains an explicit ARC handoff."""
 import io
+from pathlib import Path
 from urllib.parse import urlparse
 
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel, ConfigDict, Field
 
+from backend.app.studio.asset_automation import AssetAutomation
 from backend.app.studio.assets import AssetLibrary
+from backend.app.studio.service import local_settings
 
 
 class VariantRequest(BaseModel):
@@ -22,6 +25,9 @@ class VariantRequest(BaseModel):
 def create_asset_router(service):
     router = APIRouter(prefix='/api/studio/assets', tags=['Furniture library'])
     library = AssetLibrary(service)
+    automation = AssetAutomation(library)
+    service.asset_automation = automation
+    router.add_event_handler('shutdown', automation.close)
 
     def local(request):
         origin = request.headers.get('origin')
@@ -45,6 +51,39 @@ def create_asset_router(service):
     @router.get('')
     def variants():
         return library.list()
+
+    @router.get('/automation/config')
+    def automation_config():
+        values = local_settings()
+        return {'ssh_configured': bool(values['ARC_SSH_TARGET'] and values['ARC_REMOTE_REPO']),
+                'blender_configured': bool(values['BLENDER_EXECUTABLE'] and Path(values['BLENDER_EXECUTABLE']).is_file()),
+                'image_provider': 'SDXL 1.0 on ARC', 'blender_transport': 'MCP stdio',
+                'setup_document': 'docs/asset-automation-runbook.md'}
+
+    @router.post('/automation/check')
+    def automation_check(request: Request):
+        local(request)
+        return action(automation.transport.check)
+
+    @router.get('/automation/jobs')
+    def automation_jobs():
+        return automation.list()
+
+    @router.post('/automation/jobs', status_code=202)
+    async def automate(request: Request):
+        local(request)
+        raw = await limited_body(request, 20000)
+        import json
+        try:
+            body = json.loads(raw)
+        except ValueError:
+            raise HTTPException(400, 'Expected a furniture description.') from None
+        return action(automation.submit, body)
+
+    @router.post('/automation/jobs/{job_id}/resume', status_code=202)
+    def resume_asset(job_id: str, request: Request):
+        local(request)
+        return action(automation.resume, job_id)
 
     @router.post('', status_code=201)
     async def create(request: Request):

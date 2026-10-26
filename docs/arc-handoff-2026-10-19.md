@@ -1,5 +1,9 @@
 # Current project handoff — October 18 evening / October 19 UTC, 2026
 
+**Newer checkpoint:** `docs/arc-handoff-2026-10-26.md` records the implemented
+asset-automation and Blender MCP batch, actual native checks and remaining SSH
+setup/live-run boundary. The October 19 plan-only statements below are history.
+
 ## October 19 resumed direction — supersedes the manual next action below
 
 Andy resumed and requested resolution of all seven open PRs before moving ahead.
