@@ -1,6 +1,6 @@
 # Instructor/reviewer flow
 
-This describes the future instructor or reviewer experience.
+The current session review presents actions, findings and replay evidence. The spatial studio also exposes saved plans, jobs, assets, worker reports and recordings. Domain-reviewed instruction, annotations and approved training publication remain future work. [Current status](../current-status.md).
 
 For the first POC, the reviewer is the most important user.
 

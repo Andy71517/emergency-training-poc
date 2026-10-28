@@ -1,41 +1,19 @@
-# Project presentation package
+# Presentation package
 
-This folder contains the meeting/presentation package for the emergency training simulator POC.
+Refreshed October 28, 2026 to cover the room studio, generated chair, new asset
+automation/Blender MCP and outstanding live checks. Use [current status](../current-status.md)
+when preparing a demo; a document refresh is not a new GPU or engine observation.
 
-Use it when you need to explain the project to Dr. Melissa Cameron, a class, campus job reviewer, advisor, lab group, or early stakeholder.
+- [Eight-slide source](project-overview-slides.md) and [PDF deck](emergency-training-poc-overview.pdf)
+- [Speaker notes](project-overview-speaker-notes.md) and [practice script](project-overview-read-through-script.md)
+- [Run-of-show](final-demo-run-of-show.md), [Dr. Cameron guide](dr-cameron-demo-runbook.md), [phone notes](web-demo-phone-speaker-notes.md)
+- [One-page handout source](project-overview-one-page-handout.md)
+- [Timing/design](presentation-timing-and-design.md)
 
-This is the talk-through deck. For the denser submit-ready report, see `docs/reports/`.
+Rebuild the deck from the repo root with `python docs/presentations/build_pdf.py`.
+Use `python scripts/build_doc_pdfs.py` for the packet handout. Inspect rendered
+pages after rebuilding. The [report](../reports/README.md) is a separate export.
 
-## Files
-
-- `project-overview-slides.md`: editable slide deck source
-- `project-overview-speaker-notes.md`: slide-by-slide notes
-- `project-overview-read-through-script.md`: a spoken script in a natural, chill tone
-- `dr-cameron-demo-runbook.md`: live screen-share checklist and demo flow
-- `project-overview-one-page-handout.md`: short handout version
-- `presentation-timing-and-design.md`: suggested 5-minute talk, 5-minute demo flow, and slide design direction
-- `emergency-training-poc-overview.pdf`: generated PDF version of the slide deck
-- `build_pdf.py`: small no-dependency PDF builder for this deck
-
-## Rebuild the PDF
-
-From the repo root:
-
-```powershell
-python docs/presentations/build_pdf.py
-```
-
-This PDF is a deck export. It is meant for meetings and talk-throughs, not as the full submit-ready report.
-
-## Live meeting recommendation
-
-For a Dr. Cameron meeting, use:
-
-1. `emergency-training-poc-overview.pdf` for the talk
-2. `dr-cameron-demo-runbook.md` beside the terminal
-3. `python scripts/run_local_demo.py` for the backend proof
-4. Unreal only if the debug panel is calm enough to show
-
-The packet is still useful as a leave-behind, but the live meeting should focus on the deck, demo, and review summary.
-
-The deck now tells the story from the original full-system idea to the current backend-first POC and the next solo-developer milestones in a shorter meeting-friendly format.
+Show saved inspected room/asset evidence and label the synthetic native fixture.
+Do not claim a running couch, completed generic engine import, live recording or
+production training system. The deterministic session review is the fallback.

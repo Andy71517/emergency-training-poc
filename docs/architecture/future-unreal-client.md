@@ -1,33 +1,28 @@
-# Future Unreal Client
+# Unreal editor integration and future trainee client
 
-**Status:** future presentation client. The current repo only defines the contract.
+The filename preserves the original architecture link. Unreal editor automation
+now exists; the full trainee client remains future work.
 
-Unreal may eventually render scenario state, collect trainee interactions, and show feedback. For now, it should be treated as a future client, not the brain of the system.
+## Implemented editor lane
 
-The contract lives in `unreal/contract/`. You can exercise it with `scripts/run_unreal_contract_harness.py`.
+Unreal 5.8 scripts prepare the reviewed chair, assemble chair room maps, collect
+Chaos batch observations and support saved movement recordings. A local file-based
+bridge executes fixed backend-created work in the user's open editor. The user
+confirmed chair/room/Chaos runs. First live recording and the generic new-furniture
+import/collision cooking remain separate acceptance checks.
 
-That harness behaves like a future thin Unreal shell:
+See [studio guide](../studio-pipeline-runbook.md),
+[Unreal folder](../../unreal/README.md) and [current status](../current-status.md).
+The binary project is external; Git contains scripts and contracts.
 
-1. Open the WebSocket.
-2. Send `start_session`.
-3. Send one ordered action at a time.
-4. Receive state updates from the backend.
-5. Stop when `scenario_ended` arrives.
+## Trainee session client
 
-No full Unreal scene, rendering layer, gameplay framework, networking topology, projection mapping, sensing integration, or generated content is required now.
+The contract in `unreal/contract/` describes an ordered WebSocket client that opens
+a session, sends actions and displays backend state/findings. The text/JSON starter
+in `unreal/EmergencyTrainingClient/` and `scripts/run_unreal_contract_harness.py`
+exercise that boundary. The editor job bridge does not implement it.
 
-The next Unreal step is a text-only debug display. It should show backend state such as phase, validation status, chair moved/not moved, door open/closed, smoke/visibility cue checked/unchecked, and path blocked/not blocked.
-
-Use `scripts/preview_unreal_display.py` to preview that display from a JSONL log before Unreal exists. Use `--json` to print the simplified debug-display payload described by `unreal/contract/debug-display-state.schema.json`.
-
-## Boundary rule
-
-Unreal may cache and display backend state. It must not invent or change scenario progress locally.
-
-The backend owns:
-
-- scenario transitions
-- validation results
-- end conditions
-- session logs
-- post-scenario review inputs
+The backend owns transitions, validation, end conditions, logs and review. Unreal
+may render state and report observations; it must not invent scenario progress or
+clinical/operational judgments. Full trainee gameplay, sensing and immersive
+training semantics remain future integration work.

@@ -3,7 +3,7 @@
 << /Type /Catalog /Pages 2 0 R >>
 endobj
 2 0 obj
-<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R 13 0 R 15 0 R] /Count 5 >>
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R] /Count 3 >>
 endobj
 3 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
@@ -85,7 +85,7 @@ BT
 /F1 8.5 Tf
 0.390 0.430 0.470 rg
 516.0 28.0 Td
-(1/5) Tj
+(1/3) Tj
 ET
 endstream
 endobj
@@ -93,7 +93,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
 endobj
 8 0 obj
-<< /Length 4720 >>
+<< /Length 5305 >>
 stream
 1.000 1.000 1.000 rg
 0.0 0.0 612.0 792.0 re f
@@ -119,7 +119,7 @@ BT
 /F1 8.5 Tf
 0.390 0.430 0.470 rg
 516.0 28.0 Td
-(2/5) Tj
+(2/3) Tj
 ET
 0.780 0.840 0.880 rg
 54.0 48.0 504.0 1.0 re f
@@ -133,257 +133,229 @@ BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
 54.0 681.0 Td
-(This roadmap separates the current POC path from the full-system path.) Tj
+(Reviewed October 28, 2026. Current status supplies the evidence behind this roadmap. Full-) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 661.8 Td
-(That separation matters.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 642.6 Td
-(The full project vision is large. The current repo should grow toward it carefully, one) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 629.4 Td
-(trusted layer at a time.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 610.2 Td
-(For a direct comparison between the original full-system goals, the current repo, the) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 597.0 Td
-(remaining gaps, and the safest next experiments, see full-system-gap-map.md.) Tj
+54.0 667.8 Td
+(system gap map compares the implemented POC with the long-term vision.) Tj
 ET
 BT
 /F3 14.5 Tf
 0.020 0.290 0.520 rg
-54.0 567.8 Td
-(Solo-developer framing) Tj
+54.0 638.6 Td
+(Implemented foundation) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 548.8 Td
-(This is currently a solo-developer project.) Tj
+54.0 619.6 Td
+(- Deterministic sessions, two toy scenarios, ordered WebSocket contracts, explicit) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 529.6 Td
-(That means the roadmap should not be read as "build the whole final simulator next.") Tj
+54.0 607.1 Td
+(validation, JSONL replay/review and local guardrails.) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 510.4 Td
-(It should be read as:) Tj
-ET
-0.920 0.960 0.980 rg
-48.0 488.2 516.0 11.0 re f
-BT
-/F2 8.8 Tf
-0.020 0.170 0.310 rg
-54.0 491.2 Td
-(large full-system vision) Tj
-ET
-0.920 0.960 0.980 rg
-48.0 476.7 516.0 11.0 re f
-BT
-/F2 8.8 Tf
-0.020 0.170 0.310 rg
-54.0 479.7 Td
-(-> small proof) Tj
-ET
-0.920 0.960 0.980 rg
-48.0 465.2 516.0 11.0 re f
-BT
-/F2 8.8 Tf
-0.020 0.170 0.310 rg
-54.0 468.2 Td
-(-> working checkpoint) Tj
-ET
-0.920 0.960 0.980 rg
-48.0 453.7 516.0 11.0 re f
-BT
-/F2 8.8 Tf
-0.020 0.170 0.310 rg
-54.0 456.7 Td
-(-> reviewed result) Tj
-ET
-0.920 0.960 0.980 rg
-48.0 442.2 516.0 11.0 re f
-BT
-/F2 8.8 Tf
-0.020 0.170 0.310 rg
-54.0 445.2 Td
-(-> next thin slice) Tj
+54.0 587.9 Td
+(- React studio, hosted ARC room planner, validated seeded layouts, persistent) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 433.7 Td
-(The goal is steady progress without letting Unreal, generated assets, AI, sensing, physics,) Tj
+54.0 575.4 Td
+(jobs/history, exact-input reuse and recoverable Trash.) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 420.5 Td
-(or deployment swallow the project before the foundation is ready.) Tj
+54.0 556.2 Td
+(- Generated textured chair, reviewed Blender repair and 19-piece collision baseline;) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 543.7 Td
+(user-confirmed Blender room assembly and Unreal 5.8 chair/room/Chaos demos.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 524.5 Td
+(- Separate browser Rapier primitive proof and legacy fixture authoring/revision approval.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 512.0 Td
+(- Furniture variant library, optional reference/request/result ZIP route, actual GLB) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 499.5 Td
+(  viewer.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 487.0 Td
+(- Description-based asset automation, SSH/Slurm dispatch/recovery and validated) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 474.5 Td
+(  retrieval.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 462.0 Td
+(- Blender MCP preparation, CPU convex decomposition, editable .blend, preview,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 449.5 Td
+(FBX/material package and a generic Unreal import helper.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 430.3 Td
+(- Recording controls, saved-frame encoding/retry, artifact downloads and CI.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 417.8 Td
+(The last three automation/recording areas have partial runtime evidence; see the next checks) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 404.6 Td
+(below. A completed implementation list is not a claim of live acceptance.) Tj
 ET
 BT
 /F3 14.5 Tf
 0.020 0.290 0.520 rg
-54.0 391.3 Td
-(Track 1: Current POC milestones) Tj
+54.0 375.4 Td
+(Next acceptance checkpoints) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 372.3 Td
-(These are the milestones for this repository right now.) Tj
+54.0 356.4 Td
+(1. One-time SSH/agent/host trust and ARC checkout update. Evidence: the app worker) Tj
 ET
 BT
-/F3 12.0 Tf
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 343.9 Td
+(check succeeds without passwords or weakened host verification.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 324.7 Td
+(2. First automated charcoal couch. Evidence: actual Slurm ID, successful) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 312.2 Td
+(image/shape/paint stages, validated lineage and inspected real model.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 293.0 Td
+(3. Blender preparation of that actual couch. Evidence: inspected shape/materials,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 280.5 Td
+(reported dimensions, preserved source, collision fit and saved editable result.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 261.3 Td
+(4. Generic Unreal furniture import. Evidence: actual engine import, material wiring,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 248.8 Td
+(size/hull/cooking checks and bounded contact inspection.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 229.6 Td
+(5. First live movement recording. Evidence: actual engine frames/MP4, matching) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 217.1 Td
+(observations and useful framing.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 197.9 Td
+(6. Mixed-furniture rooms. Evidence: planner, reviewed asset resolver, footprints and) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 185.4 Td
+(Blender/Unreal bindings agree on IDs/dimensions without silent substitutions.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 166.2 Td
+(Reuse existing runtimes and accepted chair demos. Do not rebuild model environments or rerun) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 153.0 Td
+(generation merely to refresh documentation. Resume uncertain submissions using their saved) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 139.8 Td
+(dispatch rather than creating another GPU job.) Tj
+ET
+BT
+/F3 14.5 Tf
 0.020 0.290 0.520 rg
-54.0 345.1 Td
-(Completed) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 329.1 Td
-(- Sprint 0 repo scaffolding) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 316.6 Td
-(- deterministic backend scenario loop) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 304.1 Td
-(- FastAPI WebSocket session endpoint) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 291.6 Td
-(- JSON message contracts) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 279.1 Td
-(- local JSONL session logs) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 266.6 Td
-(- replay and review scripts) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 254.1 Td
-(- one-command local demo) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 241.6 Td
-(- wooden chair environment cue) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 229.1 Td
-(- entry door environment cue) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 216.6 Td
-(- future Unreal client contract) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 204.1 Td
-(- text-only Unreal display preview) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 191.6 Td
-(- JSON-to-debug-text bridge for the first Unreal panel) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 179.1 Td
-(- first security baseline) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 166.6 Td
-(- local demo abuse guardrails) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 154.1 Td
-(- lightweight GitHub Actions CI) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 141.6 Td
-(- UX docs for Dr. Cameron as first audience) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 129.1 Td
-(- Dr. Cameron review rubric and scope-control rubric) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 116.6 Td
-(- full-system gap map) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 104.1 Td
-(- second deterministic toy scenario) Tj
+54.0 110.6 Td
+(Complete-environment direction) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
 54.0 91.6 Td
-(- improved post-scenario review format) Tj
+(The intended user flow is a room/scenario description that resolves reviewed assets,) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 79.1 Td
-(- project presentation package and PDF) Tj
+54.0 78.4 Td
+(generates missing designs explicitly, places furniture using actual footprints, saves an) Tj
 ET
 endstream
 endobj
@@ -391,7 +363,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
 endobj
 10 0 obj
-<< /Length 4456 >>
+<< /Length 3117 >>
 stream
 1.000 1.000 1.000 rg
 0.0 0.0 612.0 792.0 re f
@@ -417,749 +389,157 @@ BT
 /F1 8.5 Tf
 0.390 0.430 0.470 rg
 516.0 28.0 Td
-(3/5) Tj
+(3/3) Tj
 ET
 0.780 0.840 0.880 rg
 54.0 48.0 504.0 1.0 re f
 BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 710.0 Td
-(Near-term) Tj
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 718.0 Td
+(editable Blender environment and assembles the same scene in Unreal.) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 694.0 Td
-(- keep improving the review/debrief output) Tj
+54.0 698.8 Td
+(Individual asset automation is now implemented. The current room lane still uses the) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 681.5 Td
-(- add richer instructor/reviewer examples) Tj
+54.0 685.6 Td
+(reviewed chair. The missing bridge is coordinated mixed-asset planning and binding, followed) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 669.0 Td
-(- make Unreal read the generated debug text file automatically) Tj
+54.0 672.4 Td
+(by end-to-end visual/engine acceptance. Scenario semantics, navigation, smoke/fire behavior) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 656.5 Td
-(- parse the display JSON directly after the text path works) Tj
+54.0 659.2 Td
+(and trainee interactions need their own contracts and experiments; a generated room is not) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 644.0 Td
-(- add clearer message-contract versioning notes) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 631.5 Td
-(- keep scenario logic deterministic and backend-owned) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 611.0 Td
-(Later POC) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 595.0 Td
-(- add more environment objects with obvious state) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 582.5 Td
-(- add richer replay comparison reports) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 570.0 Td
-(- add configurable local scenarios) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 557.5 Td
-(- add thin Unreal WebSocket experiment only after file/JSON display is stable) Tj
+54.0 646.0 Td
+(automatically a training simulation.) Tj
 ET
 BT
 /F3 14.5 Tf
 0.020 0.290 0.520 rg
-54.0 535.0 Td
-(Track 2: Full-system milestones) Tj
+54.0 616.8 Td
+(Later research and deployment) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 516.0 Td
-(These belong to the larger project vision.) Tj
+54.0 597.8 Td
+(- Measure queue/inference/cleanup/import time and review effort across designs.) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 496.8 Td
-(They should not be treated as current repo features yet.) Tj
+54.0 585.3 Td
+(- Improve model quality, provenance review, collision fit and asset reuse/versioning.) Tj
 ET
 BT
-/F3 12.0 Tf
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 572.8 Td
+(- Connect instructor-reviewed scenario content to runtime behavior with explicit) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 560.3 Td
+(  authority.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 547.8 Td
+(- Expand physics measurements and independent validation before claiming realism.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 535.3 Td
+(- Define sensing, confidence/privacy, mannequin and projection interfaces.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 522.8 Td
+(- Validate real-time adaptation and domain-reviewed training content separately.) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 510.3 Td
+(- Plan CS Launch hosting, institution-approved ARC service access, authentication,) Tj
+ET
+BT
+/F1 10.2 Tf
+0.080 0.100 0.120 rg
+54.0 497.8 Td
+(roles, retention and multi-site operation before moving beyond loopback.) Tj
+ET
+BT
+/F3 14.5 Tf
 0.020 0.290 0.520 rg
-54.0 469.6 Td
-(Future AI layer) Tj
+54.0 468.6 Td
+(Build strategy) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 453.6 Td
-(- AI-assisted scenario generation) Tj
+54.0 449.6 Td
+(One solo-developer checkpoint should produce a concrete, reviewable result and preserve) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 441.1 Td
-(- agentic scenario adaptation) Tj
+54.0 436.4 Td
+(earlier working demos. Prefer measured evidence to completion percentages or calendar) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 428.6 Td
-(- model-based trainee action interpretation) Tj
+54.0 423.2 Td
+(promises. The backend owns accepted state, validation and review; generation proposes) Tj
 ET
 BT
 /F1 10.2 Tf
 0.080 0.100 0.120 rg
-54.0 416.1 Td
-(- AI-supported review summaries) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 403.6 Td
-(- validation of AI-generated outputs) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 383.1 Td
-(Future validation layer) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 367.1 Td
-(- structured medical/protocol references) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 354.6 Td
-(- department-provided validated materials) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 342.1 Td
-(- rule-based and model-based validation) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 329.6 Td
-(- update process for changing guidelines) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 317.1 Td
-(- review workflow for validation data) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 296.6 Td
-(Future immersive environment layer) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 280.6 Td
-(- Unreal scene development) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 268.1 Td
-(- projection mapping experiments) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 255.6 Td
-(- mannequin localization) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 243.1 Td
-(- projected patient/environment changes) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 230.6 Td
-(- synchronized audio/visual feedback) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 210.1 Td
-(Future sensing layer) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 194.1 Td
-(- voice input) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 181.6 Td
-(- pose and gesture recognition) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 169.1 Td
-(- motion tracking) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 156.6 Td
-(- procedural action detection) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 144.1 Td
-(- sensor confidence and uncertainty handling) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 123.6 Td
-(Future deployment layer) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 107.6 Td
-(- cloud services) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 95.1 Td
-(- hub-and-spoke architecture) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 82.6 Td
-(- Virginia Tech hub role) Tj
+54.0 410.0 Td
+(artifacts and engines report observations.) Tj
 ET
 endstream
 endobj
 11 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
 endobj
-12 0 obj
-<< /Length 4303 >>
-stream
-1.000 1.000 1.000 rg
-0.0 0.0 612.0 792.0 re f
-0.020 0.170 0.310 rg
-0.0 742.0 612.0 50.0 re f
-0.960 0.580 0.120 rg
-0.0 742.0 612.0 5.0 re f
-0.890 0.960 1.000 rg
-0.0 0.0 10.0 792.0 re f
-BT
-/F3 8.7 Tf
-1.000 0.940 0.820 rg
-54.0 762.0 Td
-(PROJECT ROADMAP) Tj
-ET
-BT
-/F3 9.4 Tf
-1.000 1.000 1.000 rg
-166.0 762.0 Td
-(Roadmap) Tj
-ET
-BT
-/F1 8.5 Tf
-0.390 0.430 0.470 rg
-516.0 28.0 Td
-(4/5) Tj
-ET
-0.780 0.840 0.880 rg
-54.0 48.0 504.0 1.0 re f
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 718.0 Td
-(- spoke-site deployment model) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 705.5 Td
-(- resilience and caching) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 693.0 Td
-(- multi-site instructor support) Tj
-ET
-BT
-/F3 14.5 Tf
-0.020 0.290 0.520 rg
-54.0 670.5 Td
-(Recommended build order) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 651.5 Td
-(The safest build order is:) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 632.3 Td
-(1. trusted backend loop) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 619.8 Td
-(2. replay and review) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 607.3 Td
-(3. message contracts) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 594.8 Td
-(4. security and trust boundaries) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 582.3 Td
-(5. UX and instructor review flow) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 569.8 Td
-(6. future client display contract) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 557.3 Td
-(7. richer deterministic scenarios) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 544.8 Td
-(8. Unreal text/debug client) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 532.3 Td
-(9. generated/reviewed asset pipeline) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 519.8 Td
-(10. real physics experiments) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 507.3 Td
-(11. sensing experiments) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 494.8 Td
-(12. AI adaptation experiments) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 482.3 Td
-(13. validation framework expansion) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 469.8 Td
-(14. deployment architecture) Tj
-ET
-BT
-/F3 14.5 Tf
-0.020 0.290 0.520 rg
-54.0 447.3 Td
-(Rough timeline) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 428.3 Td
-(This is a planning timeline, not a promise.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 409.1 Td
-(The timing depends on solo-developer bandwidth, Unreal setup friction, compute access, Dr.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 395.9 Td
-(Cameron's feedback, and how small the next slices stay.) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 368.7 Td
-(Current checkpoint) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 352.7 Td
-(Status: active now.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 333.5 Td
-(- backend loop works locally) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 321.0 Td
-(- replay/review summaries work) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 308.5 Td
-(- two deterministic toy scenarios exist) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 296.0 Td
-(- environmental cues are represented in backend state) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 283.5 Td
-(- Unreal text display path has started) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 263.0 Td
-(Next checkpoint) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 247.0 Td
-(Target: make Unreal read project data without manual copy/paste.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 227.8 Td
-(- read generated debug text file from Unreal) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 215.3 Td
-(- keep scenario truth in backend) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 202.8 Td
-(- use this as the bridge before JSON parsing) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 182.3 Td
-(Next after that) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 166.3 Td
-(Target: make Unreal display structured state.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 147.1 Td
-(- parse display-state JSON in Unreal) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 134.6 Td
-(- render warnings, errors, and object rows) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 122.1 Td
-(- still avoid full gameplay logic) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 101.6 Td
-(First stronger demo checkpoint) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 85.6 Td
-(Target: live backend-to-Unreal display.) Tj
-ET
-endstream
-endobj
-13 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
-endobj
-14 0 obj
-<< /Length 2515 >>
-stream
-1.000 1.000 1.000 rg
-0.0 0.0 612.0 792.0 re f
-0.020 0.170 0.310 rg
-0.0 742.0 612.0 50.0 re f
-0.960 0.580 0.120 rg
-0.0 742.0 612.0 5.0 re f
-0.890 0.960 1.000 rg
-0.0 0.0 10.0 792.0 re f
-BT
-/F3 8.7 Tf
-1.000 0.940 0.820 rg
-54.0 762.0 Td
-(PROJECT ROADMAP) Tj
-ET
-BT
-/F3 9.4 Tf
-1.000 1.000 1.000 rg
-166.0 762.0 Td
-(Roadmap) Tj
-ET
-BT
-/F1 8.5 Tf
-0.390 0.430 0.470 rg
-516.0 28.0 Td
-(5/5) Tj
-ET
-0.780 0.840 0.880 rg
-54.0 48.0 504.0 1.0 re f
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 718.0 Td
-(- backend WebSocket sends state) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 705.5 Td
-(- Unreal receives state) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 693.0 Td
-(- debug panel updates live) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 680.5 Td
-(- review summary still explains the session afterward) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 660.0 Td
-(Later POC checkpoint) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 644.0 Td
-(Target: make the demo easier to understand visually.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 624.8 Td
-(- simple Unreal scene shell) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 612.3 Td
-(- object placeholders) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 599.8 Td
-(- reviewed asset workflow through Blender) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 587.3 Td
-(- no generated assets trusted without review) Tj
-ET
-BT
-/F3 12.0 Tf
-0.020 0.290 0.520 rg
-54.0 566.8 Td
-(Future research checkpoints) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 550.8 Td
-(Target: explore the larger original project vision.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 531.6 Td
-(- generated assets) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 519.1 Td
-(- real physics experiments) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 506.6 Td
-(- sensing experiments) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 494.1 Td
-(- AI adaptation) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 481.6 Td
-(- validation framework expansion) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 469.1 Td
-(- deployment planning) Tj
-ET
-BT
-/F3 14.5 Tf
-0.020 0.290 0.520 rg
-54.0 446.6 Td
-(Rule of thumb) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 427.6 Td
-(If a feature changes scenario truth, validation, or review, build it in the backend first.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 408.4 Td
-(If a feature only displays state or captures input, it can live in a future client layer.) Tj
-ET
-BT
-/F1 10.2 Tf
-0.080 0.100 0.120 rg
-54.0 389.2 Td
-(That keeps the system explainable as it grows.) Tj
-ET
-endstream
-endobj
-15 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 14 0 R >>
-endobj
 xref
-0 16
+0 12
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
-0000000142 00000 n 
-0000000212 00000 n 
-0000000280 00000 n 
-0000000355 00000 n 
-0000001510 00000 n 
-0000001656 00000 n 
-0000006427 00000 n 
-0000006573 00000 n 
-0000011081 00000 n 
-0000011229 00000 n 
-0000015584 00000 n 
-0000015732 00000 n 
-0000018299 00000 n 
+0000000128 00000 n 
+0000000198 00000 n 
+0000000266 00000 n 
+0000000341 00000 n 
+0000001496 00000 n 
+0000001642 00000 n 
+0000006998 00000 n 
+0000007144 00000 n 
+0000010313 00000 n 
 trailer
-<< /Size 16 /Root 1 0 R >>
+<< /Size 12 /Root 1 0 R >>
 startxref
-18447
+10461
 %%EOF

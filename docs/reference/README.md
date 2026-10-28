@@ -1,21 +1,12 @@
-# Reference materials
+# Original reference materials
 
-This folder stores source/reference files that explain the larger project vision.
+`full-project-overview.docx` is the original full-platform north-star reference.
+It is retained as a source document, not silently rewritten to match the POC.
 
-## Files
+The current repo has grown beyond its first backend loop into hosted room planning,
+local Blender/Unreal workflows and implemented furniture automation. It still does
+not implement the complete adaptive training platform described by the reference.
 
-- `full-project-overview.docx`: original project overview document for the full emergency-response training platform vision
-
-## How to use this
-
-Treat this DOCX as the north-star reference.
-
-The current repo does not implement the full system yet. The repo is proving the first backend loop that the larger system will eventually need.
-
-In plain terms:
-
-```text
-Full vision = adaptive AI emergency-response training platform
-Current repo = first trusted backend/replay/review foundation
-```
-
+Use [full vision](../full-project-vision.md), [current evidence](../current-status.md)
+and the [gap map](../full-system-gap-map.md) to compare the destination with today's
+implemented and verified capabilities.

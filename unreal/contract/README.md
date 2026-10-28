@@ -1,22 +1,18 @@
-# Unreal Client Contract
+# Trainee session client contract
 
-This folder describes how a future Unreal client should talk to the backend.
+This folder specifies a thin WebSocket session client: start a session, send
+ordered trainee actions, receive state/findings/end messages and display them.
+The harness exercises that contract without a rendered Unreal scene.
 
-There is no Unreal scene here. This is just the contract.
+This is separate from the implemented local editor bridge used for map assembly,
+Chaos batches and recordings. The full trainee WebSocket/immersive gameplay client
+is still future integration work. [Unreal integration](../README.md).
 
-The future client has a small job:
+- [Session messages](client-contract.md)
+- [Client state machine](client-state-machine.md)
+- [Display contract](state-display-contract.md)
+- [Display schema](debug-display-state.schema.json) and [examples](examples/)
 
-- Open one WebSocket session to the backend.
-- Send contract-shaped `start_session` and `trainee_action` messages.
-- Receive state, validation results, and scenario end messages from the backend.
-- Display that state later, when an Unreal scene exists.
-
-The client must not own scenario transitions, validation rules, trainee scoring, logs, clinical interpretation, or operational protocol authority.
-
-## Files
-
-- `client-contract.md`: how the WebSocket session works.
-- `client-state-machine.md`: the smallest useful client-side state machine.
-- `state-display-contract.md`: what the first text-only Unreal debug panel should show.
-- `debug-display-state.schema.json`: JSON schema for the simplified text debug-display state.
-- `examples/`: example JSON messages for review and tests, including smoke-room and blocked-exit hallway display-state samples.
+The client does not own transitions, validation, scores, logs or review. The backend
+owns those records; engine observations and generated appearance are not clinical
+or operational truth. [Current status](../../docs/current-status.md).

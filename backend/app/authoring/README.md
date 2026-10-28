@@ -2,7 +2,7 @@
 
 This module models the first instructor-controlled scenario-generation workflow.
 
-It currently uses a local fixture. No AI model, external API, CS Launch service, or ARC job is connected.
+This module uses a local fixture; its suggestions call no model or ARC job. The real hosted room planner and persistent asset jobs live separately in `backend/app/studio/`. This README describes only legacy draft authoring.
 
 ## Authority rule
 
@@ -30,3 +30,6 @@ Approval in this module means the instructor accepted a draft for a later POC st
 - `POST /api/authoring/drafts/{draft_id}/reject` rejects the named current revision with a reason.
 
 Drafts and jobs are in memory. Restarting FastAPI clears them. Persistence, accounts, roles, ARC submission, and actual scenario publication remain future work.
+
+For repository-wide implementation and evidence, see [current status](../../../docs/current-status.md)
+and the [documentation index](../../../docs/README.md).

@@ -1,12 +1,14 @@
 # Hunyuan chair cleanup and texture batch
 
-Start with the successful shape run `8052814` (2026-10-18). Its raw GLB has 134,104 vertices and 268,228 triangles. Four collapsed triangles create nonmanifold edges; removing those four yields a watertight mesh with consistent winding and unchanged bounds. The preview shows a recognisable chair; partially filled backrest gaps remain a visual limitation. Scale and physics are still unverified.
+Start with the successful shape run `8052814` (2026-10-18). Its raw GLB has 134,104 vertices and 268,228 triangles. Four collapsed triangles create nonmanifold edges; removing those four yields a watertight mesh with consistent winding and unchanged bounds. The preview shows a recognisable chair; partially filled backrest gaps remain a visual limitation. This describes the original shape input. Subsequent Blender review and Unreal demonstrations are recorded in [current status](current-status.md).
 
 This batch preserves the raw run and writes a new texture result. The full-resolution cleaned mesh is retained as `chair-cleaned.glb`; an 80,000-face working copy is used for UV unwrapping and painting. Review that reduction visually before using it for the final demo. There is no remeshing of the chair during painting, and this batch does not regenerate shape.
 
+The texture runtime and chair paint job **8053348** completed successfully. The build steps below are for reproducing/setup, not required for ordinary variant jobs on the existing runtime. Preserve accepted outputs.
+
 ## Build
 
-From the repository root in Open OnDemand, switch to `codex/arc-hunyuan-textures` and run:
+From the repository root in Open OnDemand, switch to `main` and run:
 
 ```bash
 bash arc/scripts/check_hunyuan_texture_access.sh
@@ -45,4 +47,4 @@ A failure during preview generation must not trigger another paint inference run
 
 Download the textured GLB, preview, turntable, and manifest through Open OnDemand. Check wood appearance, seams, back surfaces, and whether reduction changed the chair silhouette. Once this passes, continue to Blender for physical scale, orientation, final cleanup, and simple collision geometry, then Unreal/Chaos. No mass, friction, physical scale, or collision behavior has been validated by generating a closed mesh or PBR maps.
 
-Prepared scripts have local syntax checks and direct mesh/export checks. Actual texture extension compilation and model execution still require ARC. The original geometry generation succeeded; texture generation is not yet a completed milestone.
+The chair shape and texture jobs completed; see [current evidence](current-status.md). New automatic SDXL/couch generation has a separate pending live check. A closed painted mesh does not establish calibrated physics or approval of another design.

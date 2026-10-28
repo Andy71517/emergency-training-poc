@@ -7,3 +7,6 @@ ignored by Git, except for this guide.
 Never add credentials, raw prompts containing private material, unreviewed
 assets, or generated outputs directly to source control. Commit only sanitized
 fixtures and contract examples under `schemas/`.
+
+For repository-wide implementation and evidence, see [current status](../docs/current-status.md)
+and the [documentation index](../docs/README.md).

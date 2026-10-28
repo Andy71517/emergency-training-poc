@@ -3,7 +3,7 @@
 << /Type /Catalog /Pages 2 0 R >>
 endobj
 2 0 obj
-<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R 23 0 R 25 0 R 27 0 R 29 0 R 31 0 R 33 0 R 35 0 R] /Count 15 >>
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R] /Count 8 >>
 endobj
 3 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
@@ -15,7 +15,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 6 0 obj
-<< /Length 1045 >>
+<< /Length 1032 >>
 stream
 0.975 0.988 1.000 rg
 0.0 0.0 792.0 612.0 re f
@@ -43,25 +43,25 @@ BT
 /F3 38.0 Tf
 1.000 1.000 1.000 rg
 54.0 374.0 Td
-(Emergency Training Simulator POC) Tj
+(FIELDWORK) Tj
 ET
 BT
 /F1 16.0 Tf
 0.860 0.930 0.980 rg
 54.0 334.0 Td
-(From full-system idea to a working backend-first proof) Tj
+(From natural language to reviewable environments) Tj
 ET
 BT
 /F3 14.0 Tf
 1.000 0.940 0.820 rg
 54.0 286.0 Td
-(Project update for Dr. Melissa Cameron) Tj
+(Project update for Dr. Melissa Cameron - October 28, 2026) Tj
 ET
 BT
 /F1 13.0 Tf
 0.860 0.930 0.980 rg
 54.0 226.0 Td
-(Backend truth first. Unreal display next. Immersion later.) Tj
+(Traceable plans. Reviewable assets. Measured next steps.) Tj
 ET
 BT
 /F1 8.8 Tf
@@ -73,7 +73,7 @@ BT
 /F1 8.8 Tf
 0.780 0.840 0.880 rg
 668.0 34.0 Td
-(1/15) Tj
+(1/8) Tj
 ET
 endstream
 endobj
@@ -81,7 +81,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
 endobj
 8 0 obj
-<< /Length 1655 >>
+<< /Length 1483 >>
 stream
 0.975 0.988 1.000 rg
 0.0 0.0 792.0 612.0 re f
@@ -101,19 +101,19 @@ BT
 /F3 25.0 Tf
 1.000 1.000 1.000 rg
 62.0 566.0 Td
-(The starting point was much bigger than this repo) Tj
+(The goal and the foundation) Tj
 ET
 BT
 /F1 9.5 Tf
 0.780 0.840 0.880 rg
 62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
+(Meeting deck / FIELDWORK progress / October 28, 2026) Tj
 ET
 BT
 /F3 8.8 Tf
 0.020 0.170 0.310 rg
 629.0 530.0 Td
-(WHY THIS SHAPE) Tj
+(FOUNDATION) Tj
 ET
 BT
 /F3 20.0 Tf
@@ -124,44 +124,32 @@ ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-86.0 460.0 Td
-(The original goal points toward a full adaptive training platform.) Tj
+96.0 460.0 Td
+(  - Goal: editable environments and adaptive emergency training.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 424.0 Td
-(  - Unreal-style immersive scenes) Tj
+96.0 432.0 Td
+(  - Backend owns accepted state, validation, logs and review.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 396.0 Td
-(  - AI-driven scenario changes) Tj
+96.0 404.0 Td
+(  - Two deterministic toy scenarios keep a repeatable baseline.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 368.0 Td
-(  - sensing and trainee action interpretation) Tj
+96.0 376.0 Td
+(  - Generated rooms and physics demos are separate evidence.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 340.0 Td
-(  - validation and instructor review) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 312.0 Td
-(  - physical objects, assets, and deployment later) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 276.0 Td
-(This POC is the first safe slice of that bigger idea.) Tj
+86.0 340.0 Td
+(Not clinical guidance, protocol authority or trainee scoring.) Tj
 ET
 0.780 0.760 0.700 rg
 62.0 44.0 668.0 1.2 re f
@@ -175,7 +163,7 @@ BT
 /F1 8.5 Tf
 0.420 0.450 0.480 rg
 668.0 27.0 Td
-(2/15) Tj
+(2/8) Tj
 ET
 endstream
 endobj
@@ -183,7 +171,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
 endobj
 10 0 obj
-<< /Length 1507 >>
+<< /Length 1475 >>
 stream
 0.975 0.988 1.000 rg
 0.0 0.0 792.0 612.0 re f
@@ -203,19 +191,19 @@ BT
 /F3 25.0 Tf
 1.000 1.000 1.000 rg
 62.0 566.0 Td
-(The first useful question was smaller) Tj
+(The room studio works with a reviewed chair) Tj
 ET
 BT
 /F1 9.5 Tf
 0.780 0.840 0.880 rg
 62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
+(Meeting deck / FIELDWORK progress / October 28, 2026) Tj
 ET
 BT
 /F3 8.8 Tf
 0.020 0.170 0.310 rg
 629.0 530.0 Td
-(WHY THIS SHAPE) Tj
+(ROOM STUDIO) Tj
 ET
 BT
 /F3 20.0 Tf
@@ -226,38 +214,32 @@ ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-86.0 460.0 Td
-(Before building the spectacle, I need the system to keep the truth straight.) Tj
+96.0 460.0 Td
+(  - Hosted ARC planner creates bounded room plans.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 424.0 Td
-(  - What action happened?) Tj
+96.0 432.0 Td
+(  - Seeded layouts, previews and persistent history.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 396.0 Td
-(  - What state changed?) Tj
+96.0 404.0 Td
+(  - Blender builds editable rooms and renders.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 368.0 Td
-(  - What was warned or rejected?) Tj
+96.0 376.0 Td
+(  - Unreal 5.8 bridge assembles maps and runs Chaos batches.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 340.0 Td
-(  - What can an instructor review afterward?) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 304.0 Td
-(That is why I started backend-first.) Tj
+86.0 340.0 Td
+(The user confirmed these workflows. Mixed furniture is the next integration.) Tj
 ET
 0.780 0.760 0.700 rg
 62.0 44.0 668.0 1.2 re f
@@ -271,7 +253,7 @@ BT
 /F1 8.5 Tf
 0.420 0.450 0.480 rg
 668.0 27.0 Td
-(3/15) Tj
+(3/8) Tj
 ET
 endstream
 endobj
@@ -279,7 +261,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
 endobj
 12 0 obj
-<< /Length 1548 >>
+<< /Length 1574 >>
 stream
 0.975 0.988 1.000 rg
 0.0 0.0 792.0 612.0 re f
@@ -299,19 +281,19 @@ BT
 /F3 25.0 Tf
 1.000 1.000 1.000 rg
 62.0 566.0 Td
-(My solo-dev strategy is checkpoints, not chaos) Tj
+(Describe a design, prepare an asset) Tj
 ET
 BT
 /F1 9.5 Tf
 0.780 0.840 0.880 rg
 62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
+(Meeting deck / FIELDWORK progress / October 28, 2026) Tj
 ET
 BT
 /F3 8.8 Tf
 0.020 0.170 0.310 rg
 629.0 530.0 Td
-(WHY THIS SHAPE) Tj
+(ASSET WORKFLOW) Tj
 ET
 BT
 /F3 20.0 Tf
@@ -323,37 +305,37 @@ BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
 86.0 460.0 Td
-(This is a huge ask for one person, so I am turning it into thin slices.) Tj
+(Description -> generated reference -> ARC Hunyuan shape/paint) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 424.0 Td
-(  - prove one loop at a time) Tj
+86.0 432.0 Td
+(-> retrieved model -> Blender MCP cleanup and convex proxies) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 396.0 Td
-(  - keep every slice demoable) Tj
+86.0 404.0 Td
+(-> editable .blend + Unreal FBX/material/collision package) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
 96.0 368.0 Td
-(  - delay expensive tools until they have a job) Tj
+(  - Frontend tracks jobs and reconnects to the same dispatch.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
 96.0 340.0 Td
-(  - keep the backend as the source of truth) Tj
+(  - Original source and provenance are retained.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-86.0 304.0 Td
-(Scope control is how the big idea stays buildable.) Tj
+96.0 312.0 Td
+(  - New designs remain review candidates.) Tj
 ET
 0.780 0.760 0.700 rg
 62.0 44.0 668.0 1.2 re f
@@ -367,7 +349,7 @@ BT
 /F1 8.5 Tf
 0.420 0.450 0.480 rg
 668.0 27.0 Td
-(4/15) Tj
+(4/8) Tj
 ET
 endstream
 endobj
@@ -375,7 +357,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
 endobj
 14 0 obj
-<< /Length 1618 >>
+<< /Length 1471 >>
 stream
 0.975 0.988 1.000 rg
 0.0 0.0 792.0 612.0 re f
@@ -395,19 +377,19 @@ BT
 /F3 25.0 Tf
 1.000 1.000 1.000 rg
 62.0 566.0 Td
-(What Sprint 0 created) Tj
+(Evidence has distinct levels) Tj
 ET
 BT
 /F1 9.5 Tf
 0.780 0.840 0.880 rg
 62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
+(Meeting deck / FIELDWORK progress / October 28, 2026) Tj
 ET
 BT
 /F3 8.8 Tf
 0.020 0.170 0.310 rg
 629.0 530.0 Td
-(WHAT EXISTS NOW) Tj
+(EVIDENCE) Tj
 ET
 BT
 /F3 20.0 Tf
@@ -418,44 +400,32 @@ ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-86.0 460.0 Td
-(The first pass built the project skeleton and boundaries.) Tj
+96.0 460.0 Td
+(  - Real generated chair, accepted repair and 19 convex pieces.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 424.0 Td
-(  - docs, architecture notes, and ADRs) Tj
+96.0 432.0 Td
+(  - User-confirmed chair, room and Chaos demonstrations.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 396.0 Td
-(  - message schemas and examples) Tj
+96.0 404.0 Td
+(  - Native MCP/Blender/CoACD fixture: 28 closed hulls.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 368.0 Td
-(  - toy scenarios and validation rules) Tj
+96.0 376.0 Td
+(  - 138 backend/ARC tests and frontend/CI checks passed.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 340.0 Td
-(  - backend placeholders, scripts, logs) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 312.0 Td
-(  - Unreal and asset pipeline placeholders) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 276.0 Td
-(This made the project organized before it became complex.) Tj
+86.0 340.0 Td
+(The fixture is not the couch. Tests are not a live GPU or engine run.) Tj
 ET
 0.780 0.760 0.700 rg
 62.0 44.0 668.0 1.2 re f
@@ -469,7 +439,7 @@ BT
 /F1 8.5 Tf
 0.420 0.450 0.480 rg
 668.0 27.0 Td
-(5/15) Tj
+(5/8) Tj
 ET
 endstream
 endobj
@@ -477,7 +447,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 14 0 R >>
 endobj
 16 0 obj
-<< /Length 1692 >>
+<< /Length 1444 >>
 stream
 0.975 0.988 1.000 rg
 0.0 0.0 792.0 612.0 re f
@@ -497,19 +467,19 @@ BT
 /F3 25.0 Tf
 1.000 1.000 1.000 rg
 62.0 566.0 Td
-(The first working loop is now real) Tj
+(The next live checks) Tj
 ET
 BT
 /F1 9.5 Tf
 0.780 0.840 0.880 rg
 62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
+(Meeting deck / FIELDWORK progress / October 28, 2026) Tj
 ET
 BT
 /F3 8.8 Tf
 0.020 0.170 0.310 rg
 629.0 530.0 Td
-(WHAT EXISTS NOW) Tj
+(NEXT CHECKS) Tj
 ET
 BT
 /F3 20.0 Tf
@@ -520,48 +490,32 @@ ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-86.0 460.0 Td
-(The backend can run the core POC loop end to end.) Tj
-ET
-0.920 0.960 0.980 rg
-78.0 420.0 642.0 16.0 re f
-BT
-/F2 9.5 Tf
-0.160 0.360 0.530 rg
-86.0 424.0 Td
-(    trainee action -> backend -> scenario state) Tj
-ET
-0.920 0.960 0.980 rg
-78.0 392.0 642.0 16.0 re f
-BT
-/F2 9.5 Tf
-0.160 0.360 0.530 rg
-86.0 396.0 Td
-(    -> validation -> client update -> log -> review) Tj
+96.0 460.0 Td
+(  - One-time SSH trust/agent setup and ARC checkout update.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-86.0 360.0 Td
-(What exists today:) Tj
+96.0 432.0 Td
+(  - First automated couch and actual generated-model review.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 324.0 Td
-(  - FastAPI WebSocket backend) Tj
+96.0 404.0 Td
+(  - Generic Unreal import, materials and collision cooking.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 296.0 Td
-(  - deterministic YAML scenarios) Tj
+96.0 376.0 Td
+(  - First live movement recording.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 268.0 Td
-(  - JSONL logs, replay, and review summaries) Tj
+86.0 340.0 Td
+(Then coordinate mixed-asset IDs, footprints and both assemblers.) Tj
 ET
 0.780 0.760 0.700 rg
 62.0 44.0 668.0 1.2 re f
@@ -575,7 +529,7 @@ BT
 /F1 8.5 Tf
 0.420 0.450 0.480 rg
 668.0 27.0 Td
-(6/15) Tj
+(6/8) Tj
 ET
 endstream
 endobj
@@ -583,7 +537,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 16 0 R >>
 endobj
 18 0 obj
-<< /Length 1617 >>
+<< /Length 1480 >>
 stream
 0.975 0.988 1.000 rg
 0.0 0.0 792.0 612.0 re f
@@ -603,19 +557,19 @@ BT
 /F3 25.0 Tf
 1.000 1.000 1.000 rg
 62.0 566.0 Td
-(The review summary became the strongest proof) Tj
+(Boundaries remain explicit) Tj
 ET
 BT
 /F1 9.5 Tf
 0.780 0.840 0.880 rg
 62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
+(Meeting deck / FIELDWORK progress / October 28, 2026) Tj
 ET
 BT
 /F3 8.8 Tf
 0.020 0.170 0.310 rg
 629.0 530.0 Td
-(WHAT EXISTS NOW) Tj
+(BOUNDARIES) Tj
 ET
 BT
 /F3 20.0 Tf
@@ -626,50 +580,32 @@ ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-86.0 460.0 Td
-(The demo does not just say "it ran.") Tj
+96.0 460.0 Td
+(  - Local single-user app; no production hosting or app login.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-86.0 424.0 Td
-(It explains what happened.) Tj
+96.0 432.0 Td
+(  - Cleanup cannot reconstruct arbitrary missing/fused parts.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 388.0 Td
-(  - action timeline) Tj
+96.0 404.0 Td
+(  - Collision proxies and demo values are not calibrated physics.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 360.0 Td
-(  - final state) Tj
+96.0 376.0 Td
+(  - No sensing, projection or validated real-time adaptation.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 332.0 Td
-(  - warnings and errors) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 304.0 Td
-(  - replay verification) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 276.0 Td
-(  - plain-English reviewer notes) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 240.0 Td
-(That is the start of instructor-facing value.) Tj
+96.0 348.0 Td
+(  - A generated room is not an approved training scenario.) Tj
 ET
 0.780 0.760 0.700 rg
 62.0 44.0 668.0 1.2 re f
@@ -683,7 +619,7 @@ BT
 /F1 8.5 Tf
 0.420 0.450 0.480 rg
 668.0 27.0 Td
-(7/15) Tj
+(7/8) Tj
 ET
 endstream
 endobj
@@ -691,7 +627,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 18 0 R >>
 endobj
 20 0 obj
-<< /Length 1565 >>
+<< /Length 1519 >>
 stream
 0.975 0.988 1.000 rg
 0.0 0.0 792.0 612.0 re f
@@ -711,19 +647,19 @@ BT
 /F3 25.0 Tf
 1.000 1.000 1.000 rg
 62.0 566.0 Td
-(The scenarios are small, but no longer flat) Tj
+(Review the whole result) Tj
 ET
 BT
 /F1 9.5 Tf
 0.780 0.840 0.880 rg
 62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
+(Meeting deck / FIELDWORK progress / October 28, 2026) Tj
 ET
 BT
 /F3 8.8 Tf
 0.020 0.170 0.310 rg
 629.0 530.0 Td
-(WHAT EXISTS NOW) Tj
+(REVIEW + FEEDBACK) Tj
 ET
 BT
 /F3 20.0 Tf
@@ -735,43 +671,31 @@ BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
 86.0 460.0 Td
-(The backend now tracks environmental cues.) Tj
+(Show saved room layouts, the accepted chair and recorded evidence.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 424.0 Td
-(  - smoke and visibility) Tj
+86.0 432.0 Td
+(Show the new asset controls without claiming a running couch job.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 396.0 Td
-(  - wooden chair blocking a path) Tj
+86.0 404.0 Td
+(Keep the deterministic session review as the repeatable fallback.) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 368.0 Td
-(  - door open or closed) Tj
+86.0 368.0 Td
+(Feedback: Is the evidence clear? Which complete environment should come next?) Tj
 ET
 BT
 /F1 14.2 Tf
 0.090 0.110 0.130 rg
-96.0 340.0 Td
-(  - occupant visibility) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 312.0 Td
-(  - hallway obstacle and exit-door state) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 276.0 Td
-(These are toy rules, not emergency guidance.) Tj
+86.0 332.0 Td
+(Current setup and evidence: docs/README.md and docs/current-status.md) Tj
 ET
 0.780 0.760 0.700 rg
 62.0 44.0 668.0 1.2 re f
@@ -785,755 +709,39 @@ BT
 /F1 8.5 Tf
 0.420 0.450 0.480 rg
 668.0 27.0 Td
-(8/15) Tj
+(8/8) Tj
 ET
 endstream
 endobj
 21 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 20 0 R >>
 endobj
-22 0 obj
-<< /Length 1570 >>
-stream
-0.975 0.988 1.000 rg
-0.0 0.0 792.0 612.0 re f
-0.020 0.170 0.310 rg
-0.0 508.0 792.0 104.0 re f
-0.960 0.580 0.120 rg
-0.0 508.0 792.0 7.0 re f
-0.890 0.960 1.000 rg
-0.0 0.0 16.0 612.0 re f
-1.000 1.000 1.000 rg
-62.0 70.0 668.0 414.0 re f
-0.960 0.580 0.120 rg
-62.0 70.0 6.0 414.0 re f
-1.000 0.940 0.820 rg
-618.0 524.0 112.0 22.0 re f
-BT
-/F3 25.0 Tf
-1.000 1.000 1.000 rg
-62.0 566.0 Td
-(A second scenario proved the engine can generalize) Tj
-ET
-BT
-/F1 9.5 Tf
-0.780 0.840 0.880 rg
-62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
-ET
-BT
-/F3 8.8 Tf
-0.020 0.170 0.310 rg
-629.0 530.0 Td
-(WHAT EXISTS NOW) Tj
-ET
-BT
-/F3 20.0 Tf
-1.000 0.940 0.820 rg
-700.0 580.0 Td
-(09) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 460.0 Td
-(The blocked-exit hallway scenario uses the same backend loop with different) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 432.0 Td
-(state.) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 396.0 Td
-(  - different environment) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 368.0 Td
-(  - different objects) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 340.0 Td
-(  - different warnings) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 312.0 Td
-(  - same deterministic engine) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 276.0 Td
-(This is a step toward a future scenario library.) Tj
-ET
-0.780 0.760 0.700 rg
-62.0 44.0 668.0 1.2 re f
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-62.0 27.0 Td
-(POC only - not clinical, operational, or production guidance) Tj
-ET
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-668.0 27.0 Td
-(9/15) Tj
-ET
-endstream
-endobj
-23 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 22 0 R >>
-endobj
-24 0 obj
-<< /Length 1488 >>
-stream
-0.975 0.988 1.000 rg
-0.0 0.0 792.0 612.0 re f
-0.020 0.170 0.310 rg
-0.0 508.0 792.0 104.0 re f
-0.960 0.580 0.120 rg
-0.0 508.0 792.0 7.0 re f
-0.890 0.960 1.000 rg
-0.0 0.0 16.0 612.0 re f
-1.000 1.000 1.000 rg
-62.0 70.0 668.0 414.0 re f
-0.960 0.580 0.120 rg
-62.0 70.0 6.0 414.0 re f
-1.000 0.940 0.820 rg
-618.0 524.0 112.0 22.0 re f
-BT
-/F3 25.0 Tf
-1.000 1.000 1.000 rg
-62.0 566.0 Td
-(Unreal is starting as a display client) Tj
-ET
-BT
-/F1 9.5 Tf
-0.780 0.840 0.880 rg
-62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
-ET
-BT
-/F3 8.8 Tf
-0.020 0.170 0.310 rg
-629.0 530.0 Td
-(WHAT COMES NEXT) Tj
-ET
-BT
-/F3 20.0 Tf
-1.000 0.940 0.820 rg
-700.0 580.0 Td
-(10) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 460.0 Td
-(Unreal should not become the simulator brain.) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 424.0 Td
-(Current path:) Tj
-ET
-0.920 0.960 0.980 rg
-78.0 384.0 642.0 16.0 re f
-BT
-/F2 9.5 Tf
-0.160 0.360 0.530 rg
-86.0 388.0 Td
-(    display JSON -> generated debug text -> Unreal panel) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 352.0 Td
-(Next path:) Tj
-ET
-0.920 0.960 0.980 rg
-78.0 312.0 642.0 16.0 re f
-BT
-/F2 9.5 Tf
-0.160 0.360 0.530 rg
-86.0 316.0 Td
-(    text file -> JSON parsing -> live backend WebSocket) Tj
-ET
-0.780 0.760 0.700 rg
-62.0 44.0 668.0 1.2 re f
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-62.0 27.0 Td
-(POC only - not clinical, operational, or production guidance) Tj
-ET
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-668.0 27.0 Td
-(10/15) Tj
-ET
-endstream
-endobj
-25 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 24 0 R >>
-endobj
-26 0 obj
-<< /Length 1552 >>
-stream
-0.975 0.988 1.000 rg
-0.0 0.0 792.0 612.0 re f
-0.020 0.170 0.310 rg
-0.0 508.0 792.0 104.0 re f
-0.960 0.580 0.120 rg
-0.0 508.0 792.0 7.0 re f
-0.890 0.960 1.000 rg
-0.0 0.0 16.0 612.0 re f
-1.000 1.000 1.000 rg
-62.0 70.0 668.0 414.0 re f
-0.960 0.580 0.120 rg
-62.0 70.0 6.0 414.0 re f
-1.000 0.940 0.820 rg
-618.0 524.0 112.0 22.0 re f
-BT
-/F3 25.0 Tf
-1.000 1.000 1.000 rg
-62.0 566.0 Td
-(Current architecture keeps the truth in one place) Tj
-ET
-BT
-/F1 9.5 Tf
-0.780 0.840 0.880 rg
-62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
-ET
-BT
-/F3 8.8 Tf
-0.020 0.170 0.310 rg
-629.0 530.0 Td
-(WHAT COMES NEXT) Tj
-ET
-BT
-/F3 20.0 Tf
-1.000 0.940 0.820 rg
-700.0 580.0 Td
-(11) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 460.0 Td
-(Backend owns:) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 424.0 Td
-(  - scenario state) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 396.0 Td
-(  - validation results) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 368.0 Td
-(  - logs and replay) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 340.0 Td
-(  - review summary) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 304.0 Td
-(Unreal displays state and later sends simple action requests.) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 268.0 Td
-(Assets, physics, AI, sensing, and deployment stay staged.) Tj
-ET
-0.780 0.760 0.700 rg
-62.0 44.0 668.0 1.2 re f
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-62.0 27.0 Td
-(POC only - not clinical, operational, or production guidance) Tj
-ET
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-668.0 27.0 Td
-(11/15) Tj
-ET
-endstream
-endobj
-27 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 26 0 R >>
-endobj
-28 0 obj
-<< /Length 1533 >>
-stream
-0.975 0.988 1.000 rg
-0.0 0.0 792.0 612.0 re f
-0.020 0.170 0.310 rg
-0.0 508.0 792.0 104.0 re f
-0.960 0.580 0.120 rg
-0.0 508.0 792.0 7.0 re f
-0.890 0.960 1.000 rg
-0.0 0.0 16.0 612.0 re f
-1.000 1.000 1.000 rg
-62.0 70.0 668.0 414.0 re f
-0.960 0.580 0.120 rg
-62.0 70.0 6.0 414.0 re f
-1.000 0.940 0.820 rg
-618.0 524.0 112.0 22.0 re f
-BT
-/F3 25.0 Tf
-1.000 1.000 1.000 rg
-62.0 566.0 Td
-(Timeline: realistic solo-dev checkpoints) Tj
-ET
-BT
-/F1 9.5 Tf
-0.780 0.840 0.880 rg
-62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
-ET
-BT
-/F3 8.8 Tf
-0.020 0.170 0.310 rg
-629.0 530.0 Td
-(WHAT COMES NEXT) Tj
-ET
-BT
-/F3 20.0 Tf
-1.000 0.940 0.820 rg
-700.0 580.0 Td
-(12) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 460.0 Td
-(Now:) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 424.0 Td
-(  - backend proof and review loop) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 396.0 Td
-(  - Unreal debug display started) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 360.0 Td
-(Next:) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 324.0 Td
-(  - Unreal reads text, then JSON, then WebSocket state) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 288.0 Td
-(Later:) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 252.0 Td
-(  - scene shell, reviewed assets, physics/AI/sensing experiments) Tj
-ET
-0.780 0.760 0.700 rg
-62.0 44.0 668.0 1.2 re f
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-62.0 27.0 Td
-(POC only - not clinical, operational, or production guidance) Tj
-ET
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-668.0 27.0 Td
-(12/15) Tj
-ET
-endstream
-endobj
-29 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 28 0 R >>
-endobj
-30 0 obj
-<< /Length 1591 >>
-stream
-0.975 0.988 1.000 rg
-0.0 0.0 792.0 612.0 re f
-0.020 0.170 0.310 rg
-0.0 508.0 792.0 104.0 re f
-0.960 0.580 0.120 rg
-0.0 508.0 792.0 7.0 re f
-0.890 0.960 1.000 rg
-0.0 0.0 16.0 612.0 re f
-1.000 1.000 1.000 rg
-62.0 70.0 668.0 414.0 re f
-0.960 0.580 0.120 rg
-62.0 70.0 6.0 414.0 re f
-1.000 0.940 0.820 rg
-618.0 524.0 112.0 22.0 re f
-BT
-/F3 25.0 Tf
-1.000 1.000 1.000 rg
-62.0 566.0 Td
-(What I am not claiming yet) Tj
-ET
-BT
-/F1 9.5 Tf
-0.780 0.840 0.880 rg
-62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
-ET
-BT
-/F3 8.8 Tf
-0.020 0.170 0.310 rg
-629.0 530.0 Td
-(DEMO + FEEDBACK) Tj
-ET
-BT
-/F3 20.0 Tf
-1.000 0.940 0.820 rg
-700.0 580.0 Td
-(13) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 460.0 Td
-(This is still a proof of concept.) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 424.0 Td
-(  - no real AI calls) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 396.0 Td
-(  - no clinical or protocol authority) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 368.0 Td
-(  - no real physics) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 340.0 Td
-(  - no generated assets) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 312.0 Td
-(  - no full Unreal scene) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 284.0 Td
-(  - no production deployment) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 248.0 Td
-(The boundary is deliberate.) Tj
-ET
-0.780 0.760 0.700 rg
-62.0 44.0 668.0 1.2 re f
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-62.0 27.0 Td
-(POC only - not clinical, operational, or production guidance) Tj
-ET
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-668.0 27.0 Td
-(13/15) Tj
-ET
-endstream
-endobj
-31 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 30 0 R >>
-endobj
-32 0 obj
-<< /Length 1579 >>
-stream
-0.975 0.988 1.000 rg
-0.0 0.0 792.0 612.0 re f
-0.020 0.170 0.310 rg
-0.0 508.0 792.0 104.0 re f
-0.960 0.580 0.120 rg
-0.0 508.0 792.0 7.0 re f
-0.890 0.960 1.000 rg
-0.0 0.0 16.0 612.0 re f
-1.000 1.000 1.000 rg
-62.0 70.0 668.0 414.0 re f
-0.960 0.580 0.120 rg
-62.0 70.0 6.0 414.0 re f
-1.000 0.940 0.820 rg
-618.0 524.0 112.0 22.0 re f
-BT
-/F3 25.0 Tf
-1.000 1.000 1.000 rg
-62.0 566.0 Td
-(Demo and feedback ask) Tj
-ET
-BT
-/F1 9.5 Tf
-0.780 0.840 0.880 rg
-62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
-ET
-BT
-/F3 8.8 Tf
-0.020 0.170 0.310 rg
-629.0 530.0 Td
-(DEMO + FEEDBACK) Tj
-ET
-BT
-/F3 20.0 Tf
-1.000 0.940 0.820 rg
-700.0 580.0 Td
-(14) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 460.0 Td
-(Demo:) Tj
-ET
-0.920 0.960 0.980 rg
-78.0 420.0 642.0 16.0 re f
-BT
-/F2 9.5 Tf
-0.160 0.360 0.530 rg
-86.0 424.0 Td
-(    python scripts/run_local_demo.py) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 388.0 Td
-(What I want feedback on:) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 352.0 Td
-(  - Is the review useful for instructors?) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 324.0 Td
-(  - Are the environmental cues clear?) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 296.0 Td
-(  - Is the solo-dev roadmap realistic?) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-96.0 268.0 Td
-(  - What scenario should come next?) Tj
-ET
-0.780 0.760 0.700 rg
-62.0 44.0 668.0 1.2 re f
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-62.0 27.0 Td
-(POC only - not clinical, operational, or production guidance) Tj
-ET
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-668.0 27.0 Td
-(14/15) Tj
-ET
-endstream
-endobj
-33 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 32 0 R >>
-endobj
-34 0 obj
-<< /Length 1314 >>
-stream
-0.975 0.988 1.000 rg
-0.0 0.0 792.0 612.0 re f
-0.020 0.170 0.310 rg
-0.0 508.0 792.0 104.0 re f
-0.960 0.580 0.120 rg
-0.0 508.0 792.0 7.0 re f
-0.890 0.960 1.000 rg
-0.0 0.0 16.0 612.0 re f
-1.000 1.000 1.000 rg
-62.0 70.0 668.0 414.0 re f
-0.960 0.580 0.120 rg
-62.0 70.0 6.0 414.0 re f
-1.000 0.940 0.820 rg
-618.0 524.0 112.0 22.0 re f
-BT
-/F3 25.0 Tf
-1.000 1.000 1.000 rg
-62.0 566.0 Td
-(Closing) Tj
-ET
-BT
-/F1 9.5 Tf
-0.780 0.840 0.880 rg
-62.0 539.0 Td
-(Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron) Tj
-ET
-BT
-/F3 8.8 Tf
-0.020 0.170 0.310 rg
-629.0 530.0 Td
-(DEMO + FEEDBACK) Tj
-ET
-BT
-/F3 20.0 Tf
-1.000 0.940 0.820 rg
-700.0 580.0 Td
-(15) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 460.0 Td
-(The project is evolving in the right order.) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 424.0 Td
-(First prove the loop.) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 388.0 Td
-(Then make it visible.) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 352.0 Td
-(Then make it immersive.) Tj
-ET
-BT
-/F1 14.2 Tf
-0.090 0.110 0.130 rg
-86.0 316.0 Td
-(One monster at a time.) Tj
-ET
-0.780 0.760 0.700 rg
-62.0 44.0 668.0 1.2 re f
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-62.0 27.0 Td
-(POC only - not clinical, operational, or production guidance) Tj
-ET
-BT
-/F1 8.5 Tf
-0.420 0.450 0.480 rg
-668.0 27.0 Td
-(15/15) Tj
-ET
-endstream
-endobj
-35 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 792 612] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 34 0 R >>
-endobj
 xref
-0 36
+0 22
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
-0000000213 00000 n 
-0000000283 00000 n 
-0000000351 00000 n 
-0000000426 00000 n 
-0000001522 00000 n 
-0000001668 00000 n 
-0000003374 00000 n 
-0000003520 00000 n 
-0000005079 00000 n 
-0000005227 00000 n 
-0000006827 00000 n 
-0000006975 00000 n 
-0000008645 00000 n 
-0000008793 00000 n 
-0000010537 00000 n 
-0000010685 00000 n 
-0000012354 00000 n 
-0000012502 00000 n 
-0000014119 00000 n 
-0000014267 00000 n 
-0000015889 00000 n 
-0000016037 00000 n 
-0000017577 00000 n 
-0000017725 00000 n 
-0000019329 00000 n 
-0000019477 00000 n 
-0000021062 00000 n 
-0000021210 00000 n 
-0000022853 00000 n 
-0000023001 00000 n 
-0000024632 00000 n 
-0000024780 00000 n 
-0000026146 00000 n 
+0000000163 00000 n 
+0000000233 00000 n 
+0000000301 00000 n 
+0000000376 00000 n 
+0000001459 00000 n 
+0000001605 00000 n 
+0000003139 00000 n 
+0000003285 00000 n 
+0000004812 00000 n 
+0000004960 00000 n 
+0000006586 00000 n 
+0000006734 00000 n 
+0000008257 00000 n 
+0000008405 00000 n 
+0000009901 00000 n 
+0000010049 00000 n 
+0000011581 00000 n 
+0000011729 00000 n 
+0000013300 00000 n 
 trailer
-<< /Size 36 /Root 1 0 R >>
+<< /Size 22 /Root 1 0 R >>
 startxref
-26294
+13448
 %%EOF

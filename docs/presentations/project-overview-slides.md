@@ -1,215 +1,83 @@
-# Emergency Training Simulator POC
+# FIELDWORK
 
-From full-system idea to a working backend-first proof
+From natural language to reviewable environments
 
-Project update for Dr. Melissa Cameron
-
----
-
-# The starting point was much bigger than this repo
-
-The original goal points toward a full adaptive training platform.
-
-- Unreal-style immersive scenes
-- AI-driven scenario changes
-- sensing and trainee action interpretation
-- validation and instructor review
-- physical objects, assets, and deployment later
-
-This POC is the first safe slice of that bigger idea.
+Project update for Dr. Melissa Cameron - October 28, 2026
 
 ---
 
-# The first useful question was smaller
+# The goal and the foundation
 
-Before building the spectacle, I need the system to keep the truth straight.
+- Goal: editable environments and adaptive emergency training.
+- Backend owns accepted state, validation, logs and review.
+- Two deterministic toy scenarios keep a repeatable baseline.
+- Generated rooms and physics demos are separate evidence.
 
-- What action happened?
-- What state changed?
-- What was warned or rejected?
-- What can an instructor review afterward?
-
-That is why I started backend-first.
+Not clinical guidance, protocol authority or trainee scoring.
 
 ---
 
-# My solo-dev strategy is checkpoints, not chaos
+# The room studio works with a reviewed chair
 
-This is a huge ask for one person, so I am turning it into thin slices.
+- Hosted ARC planner creates bounded room plans.
+- Seeded layouts, previews and persistent history.
+- Blender builds editable rooms and renders.
+- Unreal 5.8 bridge assembles maps and runs Chaos batches.
 
-- prove one loop at a time
-- keep every slice demoable
-- delay expensive tools until they have a job
-- keep the backend as the source of truth
-
-Scope control is how the big idea stays buildable.
+The user confirmed these workflows. Mixed furniture is the next integration.
 
 ---
 
-# What Sprint 0 created
+# Describe a design, prepare an asset
 
-The first pass built the project skeleton and boundaries.
+Description -> generated reference -> ARC Hunyuan shape/paint
+-> retrieved model -> Blender MCP cleanup and convex proxies
+-> editable .blend + Unreal FBX/material/collision package
 
-- docs, architecture notes, and ADRs
-- message schemas and examples
-- toy scenarios and validation rules
-- backend placeholders, scripts, logs
-- Unreal and asset pipeline placeholders
-
-This made the project organized before it became complex.
+- Frontend tracks jobs and reconnects to the same dispatch.
+- Original source and provenance are retained.
+- New designs remain review candidates.
 
 ---
 
-# The first working loop is now real
+# Evidence has distinct levels
 
-The backend can run the core POC loop end to end.
+- Real generated chair, accepted repair and 19 convex pieces.
+- User-confirmed chair, room and Chaos demonstrations.
+- Native MCP/Blender/CoACD fixture: 28 closed hulls.
+- 138 backend/ARC tests and frontend/CI checks passed.
 
-```text
-trainee action -> backend -> scenario state
--> validation -> client update -> log -> review
-```
-
-What exists today:
-
-- FastAPI WebSocket backend
-- deterministic YAML scenarios
-- JSONL logs, replay, and review summaries
+The fixture is not the couch. Tests are not a live GPU or engine run.
 
 ---
 
-# The review summary became the strongest proof
+# The next live checks
 
-The demo does not just say "it ran."
+- One-time SSH trust/agent setup and ARC checkout update.
+- First automated couch and actual generated-model review.
+- Generic Unreal import, materials and collision cooking.
+- First live movement recording.
 
-It explains what happened.
-
-- action timeline
-- final state
-- warnings and errors
-- replay verification
-- plain-English reviewer notes
-
-That is the start of instructor-facing value.
+Then coordinate mixed-asset IDs, footprints and both assemblers.
 
 ---
 
-# The scenarios are small, but no longer flat
+# Boundaries remain explicit
 
-The backend now tracks environmental cues.
-
-- smoke and visibility
-- wooden chair blocking a path
-- door open or closed
-- occupant visibility
-- hallway obstacle and exit-door state
-
-These are toy rules, not emergency guidance.
+- Local single-user app; no production hosting or app login.
+- Cleanup cannot reconstruct arbitrary missing/fused parts.
+- Collision proxies and demo values are not calibrated physics.
+- No sensing, projection or validated real-time adaptation.
+- A generated room is not an approved training scenario.
 
 ---
 
-# A second scenario proved the engine can generalize
+# Review the whole result
 
-The blocked-exit hallway scenario uses the same backend loop with different state.
+Show saved room layouts, the accepted chair and recorded evidence.
+Show the new asset controls without claiming a running couch job.
+Keep the deterministic session review as the repeatable fallback.
 
-- different environment
-- different objects
-- different warnings
-- same deterministic engine
+Feedback: Is the evidence clear? Which complete environment should come next?
 
-This is a step toward a future scenario library.
-
----
-
-# Unreal is starting as a display client
-
-Unreal should not become the simulator brain.
-
-Current path:
-
-```text
-display JSON -> generated debug text -> Unreal panel
-```
-
-Next path:
-
-```text
-text file -> JSON parsing -> live backend WebSocket
-```
-
----
-
-# Current architecture keeps the truth in one place
-
-Backend owns:
-
-- scenario state
-- validation results
-- logs and replay
-- review summary
-
-Unreal displays state and later sends simple action requests.
-
-Assets, physics, AI, sensing, and deployment stay staged.
-
----
-
-# Timeline: realistic solo-dev checkpoints
-
-Now:
-
-- backend proof and review loop
-- Unreal debug display started
-
-Next:
-
-- Unreal reads text, then JSON, then WebSocket state
-
-Later:
-
-- scene shell, reviewed assets, physics/AI/sensing experiments
-
----
-
-# What I am not claiming yet
-
-This is still a proof of concept.
-
-- no real AI calls
-- no clinical or protocol authority
-- no real physics
-- no generated assets
-- no full Unreal scene
-- no production deployment
-
-The boundary is deliberate.
-
----
-
-# Demo and feedback ask
-
-Demo:
-
-```powershell
-python scripts/run_local_demo.py
-```
-
-What I want feedback on:
-
-- Is the review useful for instructors?
-- Are the environmental cues clear?
-- Is the solo-dev roadmap realistic?
-- What scenario should come next?
-
----
-
-# Closing
-
-The project is evolving in the right order.
-
-First prove the loop.
-
-Then make it visible.
-
-Then make it immersive.
-
-One monster at a time.
+Current setup and evidence: docs/README.md and docs/current-status.md

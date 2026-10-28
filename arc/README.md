@@ -1,7 +1,16 @@
-# VT ARC first checkout
+# VT ARC generation and checkout
 
-This folder is a small, low-cost way to confirm that the assigned project
-account can use ARC before this project needs real compute.
+This folder contains the project's Slurm jobs, pinned generation scripts and lightweight connection checks. The initial checkout checks below remain useful for a new account; existing users should not rerun runtime builds just to update the app.
+
+Current routes:
+
+- [Description -> reference -> Hunyuan -> Blender MCP](../docs/asset-automation-runbook.md): new automatic asset lane, first live run pending SSH setup.
+- [Manual reference/variant package](../docs/furniture-variants-runbook.md): optional explicit ZIP handoff.
+- [Hunyuan shape](../docs/arc-hunyuan-runbook.md) and [paint](../docs/arc-hunyuan-texture-runbook.md): reproduce existing runtimes.
+- [Hosted room planner](../docs/arc-scenario-batch-runbook.md): API service, distinct from Slurm GPU access.
+- [Current evidence](../docs/current-status.md): real chair jobs, user-confirmed room workflow and remaining checks.
+
+Use `main`, preserve ignored `arc/.env`, and keep GPU inference/model downloads on allocated compute nodes. The web app runs locally, not on the ARC login node.
 
 These checks do **not** train a model, download model weights, or prove that the
 future generation pipeline works. They only answer:
@@ -80,7 +89,7 @@ error in the `.err` file.
 
 ## Run the tiny A100 check
 
-Only do this after the CPU check passes:
+Run this after storage/account access is confirmed. The optional CPU check is not required for a GPU-only allocation:
 
 ```bash
 bash arc/scripts/submit_checkout.sh gpu

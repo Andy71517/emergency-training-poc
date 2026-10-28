@@ -1,59 +1,43 @@
-# Emergency Training Simulator POC: one-page handout
+# FIELDWORK: project update - October 28, 2026
 
-Prepared for Dr. Melissa Cameron.
+October 28, 2026 - prepared for Dr. Melissa Cameron.
 
 ## What this is
 
-- Backend-first proof of concept for a future adaptive emergency-response training simulator.
-- Current goal: prove the event/state/validation/log/review loop before adding heavy tools.
-- Original vision includes AI, Unreal, sensing, validation, immersive environments, and deployment.
-- Solo-developer checkpoint toward a much larger full-system vision.
-- Scope control is how the larger idea stays buildable.
+- Local studio toward editable emergency environments.
+- Natural-language planning and asset preparation.
+- Backend-owned state, evidence and review.
 
 ## What works today
 
-- FastAPI WebSocket backend receives ordered trainee actions.
-- Deterministic scenario engine updates state from YAML.
-- POC validation returns `ok`, `warning`, or `error`.
-- JSONL logs support replay and post-scenario review.
-- Future Unreal display path can show backend-owned state as text.
-- JSON-to-debug-text bridge exists for the first Unreal panel.
+- Hosted ARC room plans and seeded chair layouts.
+- User-confirmed Blender rooms and Unreal Chaos demos.
+- Session rules, JSONL replay and instructor review.
 
 ## Current demo
 
-- Run `python scripts/run_local_demo.py`.
-- Shows happy path and warning/error path.
-- Replays session logs.
-- Prints review summaries that explain what happened.
-- Shows environmental cue status in plain English.
+- Run the web app with --port 8772.
+- Show saved layouts and the accepted chair.
+- New asset controls show actual connection/job state.
 
 ## Current scenario
 
-- Tiny smoke-room software scenario.
-- Blocked-exit hallway software scenario.
-- `wooden_chair_poc` may block the path.
-- `entry_door_poc` starts closed.
-- Hallway obstacle and exit-door cues are tracked.
-- Environment cues matter, but this is not real physics or field guidance.
+- Room demos reuse the reviewed wooden chair.
+- Chair/couch variants have an implemented asset lane.
+- Mixed-furniture room bindings remain next work.
 
 ## Boundaries
 
-- No real AI calls yet.
-- No clinical or protocol authority.
-- No generated 3D assets.
-- No Unreal scene or gameplay.
-- No sensors, cloud deployment, or production security yet.
+- First automated couch and generic engine import pending.
+- No clinical, protocol or calibrated physics claim.
+- No production hosting, sensing or live adaptation.
 
 ## Next direction
 
-- Make Unreal read the generated debug text file.
-- Then make Unreal parse display JSON.
-- Then connect Unreal to the backend WebSocket.
-- Keep the backend as the source of truth.
-- Keep replay/review as the strongest proof point.
-- Add simple scene/object visuals only after the display path is stable.
-- Use Blender/manual review before trusting generated assets.
+- Complete SSH setup; run and review the actual couch.
+- Check Unreal materials, collision cooking and recording.
+- Integrate reviewed mixed-furniture rooms.
 
 ## Main takeaway
 
-The system can track what happened, explain it afterward, and leave room for Unreal, AI, assets, sensing, and physics later.
+Natural language to reviewable assets is implemented; live acceptance and complete mixed rooms are the next checks.

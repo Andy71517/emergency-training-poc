@@ -10,3 +10,6 @@ For each attempted action, it:
 4. Runs validation.
 5. Writes the ordered log entry.
 6. Returns the message the client should see.
+
+For repository-wide implementation and evidence, see [current status](../../../docs/current-status.md)
+and the [documentation index](../../../docs/README.md).

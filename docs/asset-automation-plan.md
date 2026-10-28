@@ -1,3 +1,5 @@
+> **Historical checkpoint/plan:** retained as written for its date. For current implementation, evidence and setup, use [current status](current-status.md) and the [documentation index](README.md). Old branch, approval and next-action instructions below may be superseded.
+
 # Natural-language assets and frontend ARC jobs
 
 **October 26 update:** this bounded asset lane is implemented, including a real

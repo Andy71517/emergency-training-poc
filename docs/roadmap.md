@@ -1,256 +1,77 @@
 # Roadmap
 
-This roadmap separates the current POC path from the full-system path.
-
-That separation matters.
-
-The full project vision is large. The current repo should grow toward it carefully, one trusted layer at a time.
-
-For a direct comparison between the original full-system goals, the current repo, the remaining gaps, and the safest next experiments, see [full-system-gap-map.md](full-system-gap-map.md).
-
-## Solo-developer framing
-
-This is currently a solo-developer project.
-
-That means the roadmap should not be read as "build the whole final simulator next."
-
-It should be read as:
-
-```text
-large full-system vision
-  -> small proof
-  -> working checkpoint
-  -> reviewed result
-  -> next thin slice
-```
-
-The goal is steady progress without letting Unreal, generated assets, AI, sensing, physics, or deployment swallow the project before the foundation is ready.
-
-## Track 1: Current POC milestones
-
-These are the milestones for this repository right now.
-
-### Completed
-
-- Sprint 0 repo scaffolding
-- deterministic backend scenario loop
-- FastAPI WebSocket session endpoint
-- JSON message contracts
-- local JSONL session logs
-- replay and review scripts
-- one-command local demo
-- wooden chair environment cue
-- entry door environment cue
-- future Unreal client contract
-- text-only Unreal display preview
-- JSON-to-debug-text bridge for the first Unreal panel
-- first security baseline
-- local demo abuse guardrails
-- lightweight GitHub Actions CI
-- UX docs for Dr. Cameron as first audience
-- Dr. Cameron review rubric and scope-control rubric
-- full-system gap map
-- second deterministic toy scenario
-- improved post-scenario review format
-- project presentation package and PDF
-- local React presentation console backed by FastAPI
-- explicit smoke-room access and observation progress stages
-- mocked instructor-controlled scenario authoring and revision approval
-- focused review-summary modules
-- extracted and wired React view modules, shared types, and WebSocket helpers
-
-### Near-term
-
-- define the shared visual-physics command and observation contract
-- build a primitive browser-based chair movement/contact proof
-- keep scenario logic and acceptance meaning backend-owned
-- establish a minimal Unreal Engine 5.8 project after the web proof works
-
-### Later POC
-
-- add more environment objects with obvious state
-- add richer replay comparison reports
-- add configurable local scenarios
-- add thin Unreal WebSocket experiment only after file/JSON display is stable
-
-## Track 2: Funding-proof research
-
-Dr. Cameron's review changed the immediate research priority. Additional funding will need evidence for two parts of the larger vision:
-
-- AI-generated interactive scenario drafts
-- AI-generated assets that can be prepared for Unreal physics
-
-The approved platform direction is CS Launch for the web application, VT ARC for heavy AI generation, and a local or training-room workstation for Unreal. See [funding-proof-platform.md](architecture/funding-proof-platform.md).
-
-### First workflow proof
-
-- define generated-scenario and generation-job contracts — first in-memory version complete
-- add a mocked instructor authoring and approval flow to the existing React interface — first version complete
-- keep all model output clearly labeled as a draft
-- preserve the deterministic scenarios as regression and presentation baselines
-
-### Visual proof
-
-- use a hybrid path: browser 3D preview first, Unreal Engine 5.8 second
-- hold gravity and chair mass constant for the first bounded test
-- require measurable movement and a reported physical contact
-- send physics observations back for backend logging and review
-- use primitive geometry before waiting for an AI-generated asset
-- keep the web preview as a developer and presentation tool after Unreal exists
-
-### First ARC proof
-
-- confirm PI-project access and the supported job-submission path
-- compare a small set of scenario-generation and image-to-3D candidates
-- generate one smoke-room draft and one leather-chair asset candidate
-- process and review the chair in Blender
-- import an approved result into Unreal and configure basic collision and physics
-- measure queue, generation, cleanup, and import time
-
-### Later research
-
-- improve scenario variety and consistency checks
-- build reviewed asset manifests and versioning
-- automate the CS Launch-to-ARC handoff only through an approved method
-- test faster room-preparation generation
-- investigate active-session generation only after earlier latency is measured
-
-## Track 3: Full-system milestones
-
-These belong to the larger project vision.
-
-They should not be treated as current repo features yet.
-
-### Future AI layer
-
-- AI-assisted scenario generation
-- agentic scenario adaptation
-- model-based trainee action interpretation
-- AI-supported review summaries
-- validation of AI-generated outputs
-
-### Future validation layer
-
-- structured medical/protocol references
-- department-provided validated materials
-- rule-based and model-based validation
-- update process for changing guidelines
-- review workflow for validation data
-
-### Future immersive environment layer
-
-- Unreal scene development
-- projection mapping experiments
-- mannequin localization
-- projected patient/environment changes
-- synchronized audio/visual feedback
-
-### Future sensing layer
-
-- voice input
-- pose and gesture recognition
-- motion tracking
-- procedural action detection
-- sensor confidence and uncertainty handling
-
-### Future deployment layer
-
-- cloud services
-- hub-and-spoke architecture
-- Virginia Tech hub role
-- spoke-site deployment model
-- resilience and caching
-- multi-site instructor support
-
-## Recommended build order
-
-The safest build order is:
-
-1. trusted backend loop
-2. replay and review
-3. message contracts
-4. security and trust boundaries
-5. UX and instructor review flow
-6. future client display contract
-7. richer deterministic scenarios
-8. Unreal text/debug client
-9. mocked scenario-generation and approval workflow
-10. measured ARC scenario-generation experiment
-11. generated/reviewed leather-chair asset pipeline
-12. Unreal collision and physics experiment
-13. sensing experiments
-14. AI adaptation experiments
-15. validation framework expansion
-16. deployment architecture
-
-## Rough timeline
-
-This is a planning timeline, not a promise.
-
-The timing depends on solo-developer bandwidth, Unreal setup friction, compute access, Dr. Cameron's feedback, and how small the next slices stay.
-
-### Current checkpoint
-
-Status: active now.
-
-- backend loop works locally
-- replay/review summaries work
-- two deterministic toy scenarios exist
-- environmental cues are represented in backend state
-- Unreal text display path has started
-
-### Next checkpoint
-
-Target: prove backend-authorized movement and physical contact in a browser-based 3D preview.
-
-- define versioned physics configuration, command, and observation contracts
-- create a primitive chair, floor, and wall with real colliders
-- hold gravity and mass constant
-- apply one backend-authorized interaction
-- report movement, contact, final transform, and settling evidence
-
-### Parallel runtime checkpoint
-
-Target: make Unreal display structured state.
-
-- parse display-state JSON in Unreal
-- render warnings, errors, and object rows
-- still avoid full gameplay logic
-
-### First stronger demo checkpoint
-
-Target: live backend-to-Unreal display.
-
-- backend WebSocket sends state
-- Unreal receives state
-- debug panel updates live
-- review summary still explains the session afterward
-
-### Funding-proof asset checkpoint
-
-Target: measure one reviewed AI-to-Unreal asset path.
-
-- generate candidate leather-chair assets on ARC
-- review and process a selected candidate through Blender
-- import the approved asset into a simple Unreal scene
-- test collision and basic physics
-- record timing, hardware use, failures, and manual effort
-
-### Future research checkpoints
-
-Target: explore the larger original project vision.
-
-- generated assets
-- real physics experiments
-- sensing experiments
-- AI adaptation
-- validation framework expansion
-- deployment planning
-
-## Rule of thumb
-
-If a feature changes approved scenario truth, validation, or review, build its contract and authority boundary in the backend first.
-
-If a feature only displays state or captures input, it can live in a future client layer.
-
-That keeps the system explainable as it grows.
+Reviewed October 28, 2026. [Current status](current-status.md) supplies the evidence
+behind this roadmap. [Full-system gap map](full-system-gap-map.md) compares the
+implemented POC with the [long-term vision](full-project-vision.md).
+
+## Implemented foundation
+
+- Deterministic sessions, two toy scenarios, ordered WebSocket contracts, explicit
+  validation, JSONL replay/review and local guardrails.
+- React studio, hosted ARC room planner, validated seeded layouts, persistent
+  jobs/history, exact-input reuse and recoverable Trash.
+- Generated textured chair, reviewed Blender repair and 19-piece collision baseline;
+  user-confirmed Blender room assembly and Unreal 5.8 chair/room/Chaos demos.
+- Separate browser Rapier primitive proof and legacy fixture authoring/revision approval.
+- Furniture variant library, optional reference/request/result ZIP route, actual GLB viewer.
+- Description-based asset automation, SSH/Slurm dispatch/recovery and validated retrieval.
+- Blender MCP preparation, CPU convex decomposition, editable `.blend`, preview,
+  FBX/material package and a generic Unreal import helper.
+- Recording controls, saved-frame encoding/retry, artifact downloads and CI.
+
+The last three automation/recording areas have partial runtime evidence; see the
+next checks below. A completed implementation list is not a claim of live acceptance.
+
+## Next acceptance checkpoints
+
+1. One-time SSH/agent/host trust and ARC checkout update. Evidence: the app worker
+   check succeeds without passwords or weakened host verification.
+
+2. First automated charcoal couch. Evidence: actual Slurm ID, successful
+   image/shape/paint stages, validated lineage and inspected real model.
+
+3. Blender preparation of that actual couch. Evidence: inspected shape/materials,
+   reported dimensions, preserved source, collision fit and saved editable result.
+
+4. Generic Unreal furniture import. Evidence: actual engine import, material wiring,
+   size/hull/cooking checks and bounded contact inspection.
+
+5. First live movement recording. Evidence: actual engine frames/MP4, matching
+   observations and useful framing.
+
+6. Mixed-furniture rooms. Evidence: planner, reviewed asset resolver, footprints and
+   Blender/Unreal bindings agree on IDs/dimensions without silent substitutions.
+
+Reuse existing runtimes and accepted chair demos. Do not rebuild model environments
+or rerun generation merely to refresh documentation. Resume uncertain submissions
+using their saved dispatch rather than creating another GPU job.
+
+## Complete-environment direction
+
+The intended user flow is a room/scenario description that resolves reviewed assets,
+generates missing designs explicitly, places furniture using actual footprints,
+saves an editable Blender environment and assembles the same scene in Unreal.
+
+Individual asset automation is now implemented. The current room lane still uses
+the reviewed chair. The missing bridge is coordinated mixed-asset planning and
+binding, followed by end-to-end visual/engine acceptance. Scenario semantics,
+navigation, smoke/fire behavior and trainee interactions need their own contracts
+and experiments; a generated room is not automatically a training simulation.
+
+## Later research and deployment
+
+- Measure queue/inference/cleanup/import time and review effort across designs.
+- Improve model quality, provenance review, collision fit and asset reuse/versioning.
+- Connect instructor-reviewed scenario content to runtime behavior with explicit authority.
+- Expand physics measurements and independent validation before claiming realism.
+- Define sensing, confidence/privacy, mannequin and projection interfaces.
+- Validate real-time adaptation and domain-reviewed training content separately.
+- Plan CS Launch hosting, institution-approved ARC service access, authentication,
+  roles, retention and multi-site operation before moving beyond loopback.
+
+## Build strategy
+
+One solo-developer checkpoint should produce a concrete, reviewable result and
+preserve earlier working demos. Prefer measured evidence to completion percentages
+or calendar promises. The backend owns accepted state, validation and review;
+generation proposes artifacts and engines report observations.

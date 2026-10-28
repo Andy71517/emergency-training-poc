@@ -2,7 +2,7 @@
 
 This describes the future trainee experience.
 
-Right now, the trainee is represented by manual or scripted actions. There is no real UI, Unreal scene, sensor input, or gameplay layer yet.
+The session baseline supports manual, scripted and user-clicked web actions. The separate spatial studio has Blender/Unreal rooms and physics demonstrations. A connected immersive trainee client, sensor input and full gameplay are still future work. See [current status](../current-status.md).
 
 ## Current POC flow
 

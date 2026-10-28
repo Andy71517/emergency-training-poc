@@ -14,3 +14,6 @@ For now, these are deterministic software cues only. Door lock state, door type,
 These scenarios are software fixtures, not medical guidance, clinical validation, firefighter/EMT protocol, or certification material.
 
 Keep them versioned, reviewable, deterministic, and free of hidden executable logic.
+
+For repository-wide implementation and evidence, see [current status](../docs/current-status.md)
+and the [documentation index](../docs/README.md).

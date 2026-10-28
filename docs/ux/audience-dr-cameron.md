@@ -13,7 +13,7 @@ The demo should make these points clear:
 - Replay and review are the main proof points.
 - The scenario is intentionally small and deterministic.
 - Validation is POC rule checking, not real emergency guidance.
-- Unreal, assets, sensors, and physics are future layers, not current claims.
+- Show the working chair/room/Chaos evidence and distinguish the new asset lane's pending live checks. Sensing, projection and validated adaptation remain future work.
 - Security and trust boundaries are already being considered early.
 
 ## Tone
@@ -40,8 +40,8 @@ Do not imply:
 
 - clinical validity
 - official firefighter or EMT protocol authority
-- real physics
-- real AI decision-making
+- calibrated physical accuracy
+- validated real-time AI decision-making
 - production security
 - a completed Unreal client
 

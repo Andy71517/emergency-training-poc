@@ -1,68 +1,31 @@
 # Security roadmap
 
-This is the rough order security should grow in.
+The current local baseline includes session input/sequence limits, scoped studio
+artifacts, bounded packages, foreign-origin mutation checks, verified fixed SSH
+RPC and bounded Blender MCP/native workers. See the [threat model](poc-threat-model.md).
+These controls do not make a hosted multi-user service.
 
-The goal is not to add everything at once. The goal is to add the right protection when the project reaches that stage.
+## Strengthen local evidence
 
-## Stage 1: local POC baseline
+- Continue recovery/injection/package/worker regression checks.
+- Review dependencies, native parser boundaries and sanitized diagnostics.
+- Define practical manual retention/backups for growing local/ARC outputs.
+- Keep fixture/live/unverified evidence labels clear and credentials user-controlled.
 
-Status: started.
+## Before network hosting or delegated ARC access
 
-- define the trust boundary
-- reject weird IDs
-- reject unexpected fields
-- limit payload shape
-- keep logs in the intended folder
-- limit active local sessions
-- limit actions per session
-- return clearer WebSocket error codes
-- document what is not secure yet
+- Institution-approved worker identity, job ownership, delegation and quotas.
+- Application authentication, authorization/roles and per-user artifact boundaries.
+- TLS, network restrictions, isolated workers, secret management and audit trails.
+- Rate limits, storage/compute budgets and operational failure/recovery policy.
+- Retention, export/deletion and incident reporting.
 
-## Stage 2: stronger local demo
+CS Launch is a future target. A local personal SSH agent is not a hosted service
+credential architecture. The existing editor bridge is not the future authenticated
+trainee WebSocket client.
 
-Add:
+## Before real training or sensing data
 
-- simple time-based message throttling if the local demo needs it
-- dependency audit command
-- security-focused tests for replay and logs
-- safer demo config defaults
-
-## Stage 3: first Unreal connection
-
-Add:
-
-- explicit client version checks
-- stricter session start handshake
-- client capability declaration
-- reject unsupported client message versions
-- keep Unreal display-only by contract
-
-## Stage 4: private network prototype
-
-Only after local behavior is stable.
-
-Add:
-
-- authentication
-- authorization
-- TLS or trusted local network setup
-- real deployment config
-- production log handling plan
-- incident response notes
-
-## Stage 5: real training data review
-
-Only if the project ever handles real users or real training records.
-
-Add:
-
-- privacy review
-- data retention policy
-- access control
-- audit logging
-- data export/delete process
-- legal and institutional review as needed
-
-## Not yet
-
-Do not add production auth, cloud deployment, or complex security frameworks while the repo is still proving the local backend loop.
+Agree on consent, privacy, permitted data, retention/access, confidence handling,
+domain validation and independent evaluation with qualified reviewers. Keep real
+patient/trainee/operational data out of this POC until those decisions exist.

@@ -4,6 +4,10 @@
 
 Accepted as the direction for the funding-proof phase.
 
+## Implementation note - October 28, 2026
+
+Local hosted planning, SSH/Slurm asset control and Blender MCP preparation are now implemented; the first automatic couch and generic engine import remain live checks. CS Launch deployment/delegated access is still future work. See [current status](../current-status.md). The original decision below is retained as context.
+
 ## Context
 
 The next research phase needs long-running web services, high-memory GPU jobs, and an Unreal runtime. Putting all three jobs on one platform would make deployment harder and would not use the available Virginia Tech resources well.

@@ -1,120 +1,39 @@
 # Full-system gap map
 
-This map connects the original project overview to the current repo.
+Reviewed October 28, 2026. This map distinguishes working baselines, implemented
+paths needing acceptance and future research. [Evidence](current-status.md),
+[roadmap](roadmap.md), [full vision](full-project-vision.md).
 
-The short version:
+| Goal | Current implementation/evidence | Remaining gap and next check |
+| --- | --- | --- |
+| Natural-language rooms | Hosted ARC planning, seeded chair layouts, saved packages; user-confirmed live workflow | Mixed-asset resolution, footprints and bindings; broader scenario semantics |
+| Text-described furniture | SDXL reference -> Hunyuan shape/paint -> retrieved model; frontend dispatch/recovery implemented | First live automated couch/SDXL run after SSH and remote checkout setup |
+| Editable prepared assets | Real Blender MCP cleanup/CoACD/export verified on a synthetic fixture | Actual couch quality, collision fit and human review; arbitrary semantic repair remains unsolved |
+| Unreal furniture import | Generic FBX/UCX/material importer and package preflight | First actual engine import/cooking/material and contact checks |
+| Generated chair baseline | Real ARC chair shape/paint, accepted Blender repair/19 hulls, user-confirmed Unreal demo | Broader asset-quality/physics validation; no automatic approval for new designs |
+| Complete editable environments | Blender chair rooms and Unreal per-room maps; user-confirmed assembly | Mixed-furniture end-to-end Blender/Unreal environment generation |
+| Real physics | Browser primitive Rapier proof; user-confirmed bounded Unreal chair/Chaos room runs | Calibrated measurements, contact/fit validation and training relevance |
+| Visual recordings | Engine capture protocol, FFmpeg encoding/retry and saved downloads implemented | First live Unreal screenshot/MP4 validation; no browser live stream |
+| Interactive training sessions | Two deterministic toy scenarios, ordered actions, state/rule/log/review loop | Integrated immersive trainee client and domain-reviewed content |
+| AI scenario authoring | Real room planner plus separate legacy fixture draft/edit/approve module | Room plans are not approved executable training scenarios; connect publication and runtime semantics |
+| Adaptive scenarios | Deterministic transitions and seeded variation | Validated AI adaptation during a session, uncertainty and controlled changes |
+| Trainee interpretation/sensing | Manual/scripted/user-clicked actions | Voice/pose/sensor adapters, confidence, privacy and independent evaluation |
+| Patient/mannequin integration | Toy occupant state only | Medical model, localization, hardware integration and domain validation |
+| Hazard simulation/navigation | Layout cues and aisle/exit constraints | Fire/smoke/heat models, agents/navigation and evacuation validity |
+| Review and learning | Replayable JSONL, instructor discussion summaries, persistent spatial evidence | Expert annotations, approved evaluation methodology and learning feedback loop |
+| Projection mapping | Future architecture notes | Hardware, calibration, localization and physical safety validation |
+| Hosting/hub-and-spoke | Local single-user app; CS Launch/ARC/workstation split documented | Institutional deployment/access agreement, auth/roles, TLS, resilience and multi-site sync |
+| Production security | Bounded messages/packages, scoped artifacts, verified SSH and fixed workers | Multi-user authorization, quotas, retention, audit and operational hardening |
 
-> The current POC is not the full emergency-response training platform yet. It is the backend foundation that future AI, Unreal, sensing, validation, deployment, and asset work can connect to safely.
+## Evidence rule
 
-## How to read this
+Configured access is not a successful connection. A saved request is not a submitted
+job. A submitted job is not a returned model. A prepared package is not an accepted
+engine import. Engine motion is not calibrated physics or clinical training validity.
+Keep those states distinct in documentation and the user interface.
 
-Each row compares:
+## Next complete slice
 
-- what the full project eventually wants
-- what exists in the repo right now
-- what is still missing
-- the safest next experiment
-
-This is useful for Dr. Cameron because it shows the project is moving toward the larger vision without pretending the POC is already the final system.
-
-## Gap map
-
-| Full project goal | Current repo status | Main gap | Safest next experiment |
-| --- | --- | --- | --- |
-| AI-generated scenarios | Not implemented. The repo uses deterministic YAML scenarios. This is now a funding-proof priority. | No generation contract, model pipeline, ARC job, consistency checks, or instructor approval flow. | Build a mocked prompt-to-draft approval flow, then run a measured offline ARC experiment. |
-| Real-time scenario adaptation | Partly simulated through deterministic state transitions across checked-in scenarios. | No AI-driven adaptation, uncertainty, or dynamic branching beyond checked-in rules. | Compare the smoke-room and blocked-exit hallway scenarios, then add controlled branching only when review stays clear. |
-| Trainee action interpretation | Manual or scripted actions only. | No voice, camera, pose, object detection, or procedural inference. | Define a future sensing adapter contract before using real sensors. |
-| Multimodal sensing | Not implemented. | No audio/video capture, wearable input, sensor confidence, privacy plan, or data policy. | Write a sensing boundary doc and start with fake/stubbed sensor messages only. |
-| Immersive Unreal environment | Contract and text-display preview only. | No real Unreal scene, room, gameplay, lighting, smoke, or interaction. | Build a text-only Unreal debug display that reads backend-owned state. |
-| Projection mapping | Not implemented. | No projectors, calibration, tracking, room mapping, or hardware safety plan. | Wait until Unreal can display state clearly, then document projection requirements. |
-| Physical mannequin integration | Not implemented. | No mannequin state model, localization, tracking, or procedure detection. | Add a simple `mannequin_state` concept as metadata before touching hardware. |
-| Patient state changes | Minimal POC occupant state only. | No vitals, symptoms, responsiveness, injury model, or medical validation. | Add non-clinical toy patient-state fields only after the validation boundary is clearer. |
-| Environmental hazards | Simple backend cues only: chair, door, visibility, communication, monitoring, exit path, hallway obstacle, and exit door. | No real fire/smoke behavior, heat model, physics, or hazard simulation. | Add more deterministic environmental cues before real simulation. |
-| Verification and validation framework | POC rule-conformance only. | No validated clinical/protocol references, no domain-reviewed scoring, no AI-output validation. | Define a source-review workflow with Dr. Cameron before adding real validation material. |
-| Post-scenario review | Working POC review, replay summary, session comparison, and local presentation console. | Needs more instructor examples, saved-session browsing, and domain feedback on the reviewer workflow. | Review the console with Dr. Cameron and refine one instructor-facing workflow from that feedback. |
-| Continuous learning loop | Logs are written and replayed, but not used for learning. | No model improvement, analytics, or feedback loop yet. | Keep logs explainable first; later define what data could safely feed improvement. |
-| Hub-and-spoke deployment | Documented only as future architecture. | No cloud, regional hub, spoke sites, caching, failover, or distributed sync. | Stay local until auth, logging, state contracts, and deployment needs are clearer. |
-| Centralized instructor support | A local single-session presentation/review console now exists. | No authentication, roles, multi-session controls, live supervision, or multi-site support. | Keep the console local and test its review flow before considering broader instructor controls. |
-| Accessibility and tiered deployment | Mentioned in docs only. | No low-cost deployment profiles or hardware tiers. | Draft high-fidelity, medium, and low-cost configuration profiles later. |
-| Generated assets | Placeholder pipeline plus Blender/manual review workflow. This is now a funding-proof priority. | No measured ARC generation run, reviewed mesh, provenance decision, or Unreal import. | Generate one leather-chair candidate set, review it, and record the full path into Unreal. |
-| Real physics | Metadata preview only. Unreal Chaos is the intended runtime. | No imported generated body, collision, mass, friction, tipping, or force test. | Configure basic collision and physics for one approved chair; do not claim the generator itself simulates physics. |
-| Production security | Small local POC guardrails only. | No auth, TLS, user roles, real rate limiting, cloud hardening, or data governance. | Keep local security boundaries documented; add production security only when deployment becomes real. |
-
-## What is already proven
-
-The repo already proves the foundation loop:
-
-```text
-manual or scripted action
-  -> backend receives event
-  -> deterministic scenario state changes
-  -> validation checks POC rule conformance
-  -> client-ready state is produced
-  -> JSONL log is written
-  -> replay and review explain what happened
-```
-
-That foundation matters because every future layer needs a trusted state trail.
-
-If AI adapts a scenario later, the backend still needs to know what changed.
-
-If Unreal displays a room later, it still needs backend-owned state.
-
-If sensors detect trainee behavior later, those detections still need to become checked events.
-
-If validation becomes more serious later, the system still needs a clear log and review path.
-
-## What remains outside the stable POC
-
-These parts are important, but they are not safe to add first:
-
-- real AI calls, until the separate funding-proof contracts and review boundary are ready
-- clinical or protocol validation
-- generated 3D assets, except for a controlled and reviewed funding experiment
-- real physics, except for one bounded Unreal experiment with an approved asset
-- full Unreal gameplay
-- projection mapping
-- multimodal sensing
-- mannequin integration
-- hub-and-spoke networking
-- cloud deployment
-- production authentication
-- real trainee scoring
-
-The reason is simple: each one adds complexity and credibility risk.
-
-The current POC is strongest when it proves the trusted backend loop first.
-
-## Safest build order from here
-
-The next steps should stay small:
-
-1. Add this gap map. Done.
-2. Add a second deterministic scenario. Done.
-3. Build a text-only Unreal debug display. Done as a manual display path.
-4. Add the Blender/manual asset review checklist. Done.
-5. Mock the scenario-generation and instructor-approval workflow.
-6. Run a measured ARC scenario and leather-chair generation experiment.
-7. Import only a reviewed asset into Unreal for a bounded physics test.
-
-This order keeps the project understandable.
-
-It also makes the demo stronger because every future feature has a clear reason to exist.
-
-## Meeting framing for Dr. Cameron
-
-A useful way to explain this:
-
-> The original project overview describes the full destination. This repo is the first foundation layer. The gap map shows what exists today, what is missing, and what the safest next experiment should be for each future capability.
-
-Another useful version:
-
-> I am not trying to make the POC look bigger than it is. I am trying to make sure every next feature connects cleanly to the larger system.
-
-## Main takeaway
-
-The current repo does not yet contain the full AI-driven simulator.
-
-It does contain the first piece that the full simulator will need:
-
-> an explainable backend state loop with logs, replay, validation boundaries, and review.
+Run and inspect one actual couch through the automated lane, validate the prepared
+package in Unreal, then extend reviewed mixed-furniture room contracts and both
+assemblers together. Preserve the working chair and deterministic session baselines.

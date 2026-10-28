@@ -1,40 +1,19 @@
-# Security policy for this POC
+# Security policy
 
-This repo is a local proof of concept, not a production system.
+Only current `main` is maintained. FIELDWORK is a local single-user POC with hosted
+model requests, SSH/Slurm transport and native Blender/Unreal workers. It has no
+application login or production multi-user security model; keep it on loopback.
 
-That means the security goal right now is modest:
+Report issues privately to the repository owner when they could expose credentials,
+private files or access. Do not place secrets or exploit details in public issues.
+Useful reports include path/command injection, package/resource validation bypass,
+credential leakage, duplicate GPU submission, forged/stale evidence and dependency risks.
 
-Keep the demo safe enough to run locally, make trust boundaries clear, and avoid building habits that would become dangerous later.
+Current guardrails and remaining limitations are described in
+[security overview](docs/security/README.md) and [threat model](docs/security/poc-threat-model.md).
+Never disable TLS/SSH host verification as a workaround. Passwords, Duo, SSH private
+keys and passphrases stay in user-controlled authentication tools, not chat or the app.
 
-## Supported version
-
-Only the current `main` branch is maintained.
-
-## What to report
-
-If you find a security issue, open an issue or contact the repo owner directly.
-
-Useful things to report:
-
-- ways to write logs outside `logs/sessions/`
-- ways to bypass message validation
-- ways to make replay produce a different result from the original run
-- places where client input is treated as trusted truth
-- dependency or packaging risks
-
-## Current security limits
-
-This POC does not currently include:
-
-- authentication
-- authorization
-- TLS setup
-- user accounts
-- role-based access
-- cloud deployment security
-- production log retention
-- sensor security
-- Unreal client hardening
-
-Those belong in later slices, after the local backend loop is stable.
-
+There is no production authentication/authorization, public TLS deployment, role
+model, audited data-retention policy or clinical-data governance. Institution-approved
+hosting/delegation, sensing and real training data need separate design/review.

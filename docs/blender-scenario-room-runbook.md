@@ -1,5 +1,7 @@
 # First ARC-authored rooms — Blender 5.1.2 review
 
+This guide records the original three-room artifact and reconstruction evidence. The current frontend/worker route is [studio pipeline](studio-pipeline-runbook.md); user-confirmed later Unreal room/Chaos evidence is in [current status](current-status.md).
+
 ## Open the prepared result
 
 Extract three-classroom-layouts-blender.zip into its own folder. In Blender 5.1.2 save any current work, then File > Open > three-classroom-layouts.blend. The assembler has already run; no script execution or ARC job is needed.
@@ -26,4 +28,4 @@ This assembler is scoped to the generator's current contract: positive-Y centred
 
 Official bpy5.1.2 actual assembly, save/reopen, source hash unchanged, 36 chairs and 684 convex collider instances, embedded texture packing, world positions matching scene JSON within1e-5m and upright orientation. Twenty-seven sample rays through three doorway gaps clear; adjacent side-wall and lintel positive controls hit. Overview rendered and inspected. Python lint/compilation pass. This validates these specific rooms, not all possible future plan geometry or full collision/navigation behavior.
 
-Next: Andy reviews complete Blender result, then assemble the reviewed room specifications in Unreal with source asset binding, metre-to-centimetre conversion checks, complete room collision enclosure and named component-transform readback. Preserve the successful chair physics project. Unreal room assembly and evacuation-agent testing remain pending.
+Next: Andy reviews complete Blender result, then assemble the reviewed room specifications in Unreal with source asset binding, metre-to-centimetre conversion checks, complete room collision enclosure and named component-transform readback. Preserve the successful chair physics project. Unreal room assembly and Chaos batches were subsequently confirmed by the user. Evacuation agents and validated behavior remain outside this proof.

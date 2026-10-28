@@ -1,6 +1,6 @@
 # Message Flow
 
-This is the main path through the POC.
+This is the deterministic session path. Hosted room planning and the ARC/MCP asset lane have separate persisted job/artifact flows; see [system layers](system-layers.md) and [current status](../current-status.md).
 
 ```text
 fake/manual trainee

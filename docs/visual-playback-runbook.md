@@ -18,12 +18,12 @@ git pull --ff-only
 .\.venv\Scripts\python.exe -m pip install -e .
 npm --prefix web ci
 npm --prefix web run build
-.\.venv\Scripts\python.exe -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8765
+.\.venv\Scripts\python.exe -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8772
 ```
 
 3. Keep Unreal open. Stop any active simulation and save your current level.
 4. In Unreal, **Tools → Execute Python Script**, then select this checkout's `unreal/scripts/studio_bridge.py` again. This reloads the worker with recording support. It preserves the existing chair mesh binding when reloaded from the prior worker.
-5. Refresh http://127.0.0.1:8765. Select a batch whose rooms are already assembled, open **Unreal / Chaos**, and click **Record movement demo**.
+5. Refresh http://127.0.0.1:8772. Select a batch whose rooms are already assembled, open **Unreal / Chaos**, and click **Record movement demo**.
 6. Keep Unreal visible and let it cycle through the rooms. The target is roughly ten seconds per room, plus frame capture/encoding time. When the frontend says **Ready to watch**, play or download the clips below the controls.
 
 Existing batches can be reused. No `.env` changes or new chair download are needed. The Python install adds imageio-ffmpeg, including a video encoder in supported wheels; no separate FFmpeg application setup is normally required. Normal **Run Chaos batch** remains available without the added chair input or capture.

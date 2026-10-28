@@ -15,7 +15,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 6 0 obj
-<< /Length 6515 >>
+<< /Length 5267 >>
 stream
 1.000 1.000 1.000 rg
 0.0 0.0 792.0 612.0 re f
@@ -29,7 +29,7 @@ BT
 /F3 18.0 Tf
 1.000 1.000 1.000 rg
 42.0 578.0 Td
-(Emergency Training Simulator POC: one-page handout) Tj
+(FIELDWORK: project update - October 28, 2026) Tj
 ET
 BT
 /F3 8.8 Tf
@@ -79,55 +79,37 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 472.0 Td
-(- Backend-first proof of concept for a) Tj
+(- Local studio toward editable emergency) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 461.9 Td
-(  future adaptive emergency-response) Tj
+(  environments.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 450.0 Td
-(- Current goal: prove the) Tj
+(- Natural-language planning and asset) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 439.9 Td
-(  event/state/validation/log/review loop) Tj
+(  preparation.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 428.0 Td
-(- Original vision includes AI, Unreal,) Tj
+(- Backend-owned state, evidence and) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 417.9 Td
-(  sensing, validation, immersive) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-54.0 406.0 Td
-(- Solo-developer checkpoint toward a) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-54.0 395.9 Td
-(  much larger full-system vision.) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-54.0 384.0 Td
-(- Scope control is how the larger idea) Tj
+(  review.) Tj
 ET
 0.985 0.992 1.000 rg
 284.0 354.0 224.0 158.0 re f
@@ -145,55 +127,37 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 296.0 472.0 Td
-(- FastAPI WebSocket backend receives) Tj
+(- Hosted ARC room plans and seeded chair) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 296.0 461.9 Td
-(  ordered trainee actions.) Tj
+(  layouts.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 296.0 450.0 Td
-(- Deterministic scenario engine updates) Tj
+(- User-confirmed Blender rooms and) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 296.0 439.9 Td
-(  state from YAML.) Tj
+(  Unreal Chaos demos.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 296.0 428.0 Td
-(- POC validation returns ok, warning, or) Tj
+(- Session rules, JSONL replay and) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 296.0 417.9 Td
-(  error.) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-296.0 406.0 Td
-(- JSONL logs support replay and post-) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-296.0 395.9 Td
-(  scenario review.) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-296.0 384.0 Td
-(- Future Unreal display path can show) Tj
+(  instructor review.) Tj
 ET
 0.985 0.992 1.000 rg
 526.0 354.0 224.0 158.0 re f
@@ -211,49 +175,31 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 472.0 Td
-(- Run python scripts/run_local_demo.py.) Tj
+(- Run the web app with --port 8772.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 460.1 Td
-(- Shows happy path and warning/error) Tj
+(- Show saved layouts and the accepted) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 450.0 Td
-(  path.) Tj
+(  chair.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 438.1 Td
-(- Replays session logs.) Tj
+(- New asset controls show actual) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-538.0 426.2 Td
-(- Prints review summaries that explain) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-538.0 416.1 Td
-(  what happened.) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-538.0 404.2 Td
-(- Shows environmental cue status in) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-538.0 394.1 Td
-(  plain English.) Tj
+538.0 428.0 Td
+(  connection/job state.) Tj
 ET
 0.985 0.992 1.000 rg
 42.0 138.0 224.0 158.0 re f
@@ -271,43 +217,37 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 256.0 Td
-(- Tiny smoke-room software scenario.) Tj
+(- Room demos reuse the reviewed wooden) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-54.0 244.1 Td
-(- Blocked-exit hallway software) Tj
+54.0 245.9 Td
+(  chair.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 54.0 234.0 Td
-(  scenario.) Tj
+(- Chair/couch variants have an) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-54.0 222.1 Td
-(- wooden_chair_poc may block the path.) Tj
+54.0 223.9 Td
+(  implemented asset lane.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-54.0 210.2 Td
-(- entry_door_poc starts closed.) Tj
+54.0 212.0 Td
+(- Mixed-furniture room bindings remain) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-54.0 198.3 Td
-(- Hallway obstacle and exit-door cues) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-54.0 188.2 Td
-(  are tracked.) Tj
+54.0 201.9 Td
+(  next work.) Tj
 ET
 0.985 0.992 1.000 rg
 284.0 138.0 224.0 158.0 re f
@@ -325,37 +265,37 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 296.0 256.0 Td
-(- No real AI calls yet.) Tj
+(- First automated couch and generic) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-296.0 244.1 Td
-(- No clinical or protocol authority.) Tj
+296.0 245.9 Td
+(  engine import pending.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-296.0 232.2 Td
-(- No generated 3D assets.) Tj
+296.0 234.0 Td
+(- No clinical, protocol or calibrated) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-296.0 220.3 Td
-(- No Unreal scene or gameplay.) Tj
+296.0 223.9 Td
+(  physics claim.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-296.0 208.4 Td
-(- No sensors, cloud deployment, or) Tj
+296.0 212.0 Td
+(- No production hosting, sensing or live) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-296.0 198.3 Td
-(  production security yet.) Tj
+296.0 201.9 Td
+(  adaptation.) Tj
 ET
 0.985 0.992 1.000 rg
 526.0 138.0 224.0 158.0 re f
@@ -373,67 +313,49 @@ BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 256.0 Td
-(- Make Unreal read the generated debug) Tj
+(- Complete SSH setup; run and review the) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 245.9 Td
-(  text file.) Tj
+(  actual couch.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 234.0 Td
-(- Then make Unreal parse display JSON.) Tj
+(- Check Unreal materials, collision) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-538.0 222.1 Td
-(- Then connect Unreal to the backend) Tj
+538.0 223.9 Td
+(  cooking and recording.) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
 538.0 212.0 Td
-(  WebSocket.) Tj
+(- Integrate reviewed mixed-furniture) Tj
 ET
 BT
 /F1 8.2 Tf
 0.080 0.100 0.120 rg
-538.0 200.1 Td
-(- Keep the backend as the source of) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-538.0 190.0 Td
-(  truth.) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-538.0 178.1 Td
-(- Keep replay/review as the strongest) Tj
-ET
-BT
-/F1 8.2 Tf
-0.080 0.100 0.120 rg
-538.0 168.0 Td
-(  proof point.) Tj
+538.0 201.9 Td
+(  rooms.) Tj
 ET
 BT
 /F3 9.2 Tf
 0.020 0.170 0.310 rg
 55.0 64.0 Td
-(The system can track what happened, explain it afterward, and leave room for Unreal, AI, assets, sensing, and) Tj
+(Natural language to reviewable assets is implemented; live acceptance and complete mixed rooms are the next) Tj
 ET
 BT
 /F3 9.2 Tf
 0.020 0.170 0.310 rg
 55.0 53.8 Td
-(physics later.) Tj
+(checks.) Tj
 ET
 endstream
 endobj
@@ -449,9 +371,9 @@ xref
 0000000185 00000 n 
 0000000253 00000 n 
 0000000328 00000 n 
-0000006894 00000 n 
+0000005646 00000 n 
 trailer
 << /Size 8 /Root 1 0 R >>
 startxref
-7040
+5792
 %%EOF

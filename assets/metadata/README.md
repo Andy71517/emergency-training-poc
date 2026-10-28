@@ -1,22 +1,17 @@
-# Asset Metadata
+# Asset metadata
 
-Future asset metadata can live here.
+Record source/model revisions, prompt/reference lineage, hashes, actual dimensions,
+reviewer decisions and intended use. Current app manifests/reports are saved with
+each variant under ignored `logs/studio/asset-library/`; this folder contains
+human-readable guidance and versioned toy object notes.
 
-Useful metadata may include the source tool or model, prompt or source reference, creation date, license/provenance notes, checks, reviewer, review status, and promoted file checksum.
+- [Review workflow](asset-review-workflow.md)
+- [Review template](asset-review-template.md)
+- [Blender checklist](blender-review-checklist.md)
+- [Wooden-chair baseline and toy object](wooden-chair-poc.md)
+- [Entry door](entry-door-poc.md), [bookshelf](collapsed-bookshelf-poc.md), [hallway exit](hallway-exit-door-poc.md)
 
-Start here:
-
-- `asset-review-workflow.md`: how a future candidate moves from generated to reviewed
-- `asset-review-template.md`: copy this for future candidate metadata
-- `blender-review-checklist.md`: manual Blender checks before promotion
-
-Current object notes:
-
-- `wooden-chair-poc.md`
-- `entry-door-poc.md`
-- `collapsed-bookshelf-poc.md`
-- `hallway-exit-door-poc.md`
-
-For the first future environmental-object candidate, a wooden chair is still the safest first generated-asset test. Useful notes would include intended scale, collision shape, mass assumptions, material assumptions, and whether it is only visual or ready for physics testing.
-
-The current POC has no generated assets to record.
+The chair has real generation/review/engine evidence. The door/bookshelf notes
+remain deterministic scenario metadata and do not imply generated meshes. See
+[current status](../../docs/current-status.md) and the
+[asset workflow](../../docs/asset-automation-runbook.md).

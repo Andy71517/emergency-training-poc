@@ -1,198 +1,122 @@
-# Emergency Training Simulator POC
+# FIELDWORK: Emergency Training Simulator POC
 
-Current visual asset workflow: [description → ARC → Blender MCP → Unreal package](docs/asset-automation-runbook.md).
-See the [October 26 handoff](docs/arc-handoff-2026-10-26.md) for verified work and the
-remaining one-time SSH setup/live-generation checkpoint. The deterministic demo
-described below remains a separate baseline.
+FIELDWORK combines a local scenario studio, ARC-assisted room planning, generated
+furniture preparation, and Blender/Unreal review tools. A separate deterministic
+training-session demo provides ordered actions, rule checks, logs, replay, and review.
 
-This repo is a small proof of concept for a much larger emergency-response training simulator vision.
+The long-term goal is natural language to complete editable environments and an
+adaptive emergency-training experience. The current room workflow reuses one reviewed
+wooden chair. The new chair/couch asset workflow prepares individual designs; mixed
+furniture rooms are not connected yet.
 
-The long-term project goal is an AI-driven, adaptive emergency-response training platform with immersive environments, trainee sensing, validation, and scalable deployment.
+## Current capabilities
 
-The goal of this repo is not to build that final product yet. The goal is to prove one simple foundation loop: a trainee does something, the backend receives it, the scenario state changes in a predictable way, the result gets checked, the client receives the new state, and the session is logged for review.
+| Workflow | What exists | Evidence and remaining boundary |
+| --- | --- | --- |
+| Scenario studio | Hosted ARC planner, validated plans, seeded room layouts, SVG previews, saved batches, replay, Trash/Restore | User confirmed live planning and the chair room workflow. Model errors do not silently fall back to fixtures. |
+| Furniture generation | Description -> SDXL reference on ARC -> Hunyuan shape/paint -> retrieved model | Implemented SSH/Slurm workflow; first live automated couch run remains blocked on one-time SSH setup and remote checkout update. |
+| Blender MCP | Fixed preparation tools, conservative cleanup, convex collision pieces, packed editable `.blend`, preview, FBX/textures/import package | Real Blender 5.1.2/MCP/CoACD preparation passed on a synthetic fixture. This is not evidence of a generated couch. |
+| Unreal 5.8 | Chair demo, room assembly, editor bridge, ten-second Chaos batches, recording controls | User confirmed chair/room/Chaos runs. First live recording and generic furniture importer/collision cooking remain unverified. |
+| Session baseline | Two deterministic YAML scenarios, WebSocket actions/state, JSONL logs, replay and instructor review | Separate from spatial room generation and physics. These are software fixtures, not validated emergency guidance. |
 
-This is not a real training system, medical tool, firefighting authority, or incident-response system.
+Start with the [documentation index](docs/README.md) and [current status](docs/current-status.md).
+The [October 26 handoff](docs/arc-handoff-2026-10-26.md) records the latest implementation
+evidence. Documentation was reconciled on **October 28, 2026**; that date does not
+imply a new GPU or Unreal run.
 
-## The loop we are proving
+## Install and run locally
 
-```text
-manual/stubbed trainee action
-  -> backend receives event
-  -> scenario engine updates state
-  -> validation rules check the transition
-  -> final scenario state is produced
-  -> client-facing state message is available
-  -> event and outcome are logged for review
-```
-
-Right now this uses one tiny scenario, a FastAPI WebSocket, deterministic Python code, and local JSONL logs. Future AI pieces might help create or adapt scenarios later, but this first version does not need real AI calls.
-
-For the full north-star project vision, see [docs/full-project-vision.md](docs/full-project-vision.md). For the split between current POC work and future full-system work, see [docs/roadmap.md](docs/roadmap.md). For a direct comparison between the original full-system goals and the current repo, see [docs/full-system-gap-map.md](docs/full-system-gap-map.md).
-
-Dr. Cameron's latest funding feedback makes AI-generated scenario drafts and AI-generated, physics-ready asset research the next proof priorities. The deterministic demo remains the trusted baseline. The approved platform direction uses CS Launch for the future web application, VT ARC for heavy generation jobs, and a local or training-room workstation for Unreal and physics. See [docs/architecture/funding-proof-platform.md](docs/architecture/funding-proof-platform.md).
-
-The proposed first real ARC-to-Blender-to-Unreal pipeline is approval-gated and deliberately narrow: one scenario draft, one chair asset, and one repeatable Unreal physics proof. See [docs/arc-blender-unreal-pipeline-plan.md](docs/arc-blender-unreal-pipeline-plan.md).
-
-## Setup and run
-
-Use Python 3.11 or newer.
+Use Python 3.11+ and Node.js 22.13+ within the 22.x line (the CI version). From the repository root in PowerShell:
 
 ```powershell
+git switch main
+git pull --ff-only
 python -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install -e ".[dev]"
-python -m uvicorn backend.app.main:app --reload
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+npm.cmd --prefix web ci
+.\.venv\Scripts\python.exe scripts/run_web_demo.py --port 8772
 ```
 
-For the cleanest end-to-end walkthrough, run the one-command local demo:
+Open [http://127.0.0.1:8772](http://127.0.0.1:8772). The helper builds the frontend
+and serves the app/API together. On a fresh checkout, copy `backend/.env.example`
+to `backend/.env` and configure only the capabilities you need. Preserve an existing
+private file. Inspect local changes before switching/updating; do not discard them.
+Use one backend process without reload/multiple workers during generation.
+
+Port **8772** is the documented one-port workflow. `run_web_demo.py` still defaults
+to **8765** if `--port` is omitted; the Vite development proxy also targets 8765.
+If a port is occupied, identify its owner or choose another free port rather than
+stopping an unrelated application.
+
+| Private local setting | Purpose |
+| --- | --- |
+| `ARC_LLM_API_KEY`, `ARC_LLM_MODEL` | Hosted room planner; key stays backend-only |
+| `BLENDER_EXECUTABLE` | Installed local Blender executable |
+| `CHAIR_BLEND` | Reviewed, collision-complete chair used by existing room workers |
+| `ARC_SSH_TARGET`, `ARC_REMOTE_REPO` | Verified SSH host/alias and absolute ARC checkout path for GPU asset jobs |
+
+The hosted planner key does not grant SSH or Slurm access. Never enter passwords,
+Duo codes, private keys, or passphrases into the app or chat. Follow the
+[asset automation setup guide](docs/asset-automation-runbook.md) for one-time SSH
+trust/agent setup and updating the ARC checkout. Open OnDemand remains a setup and
+recovery option; routine jobs are designed to use the frontend after SSH works.
+
+## Choose a workflow
+
+- [Room studio and local workers](docs/studio-pipeline-runbook.md): prompt, layouts, Blender rooms, Unreal bridge, Chaos evidence.
+- [Description to furniture](docs/asset-automation-runbook.md): automatic reference, ARC job, model retrieval, Blender MCP and Unreal package.
+- [Existing reference / manual handoff](docs/furniture-variants-runbook.md): optional PNG and request/result ZIP route.
+- [Recorded movement demos](docs/visual-playback-runbook.md): saved frames/clips, with the first live engine recording still to verify.
+- [Deterministic session demo](docs/demo-script.md): `python scripts/run_local_demo.py` or `python scripts/run_menu_demo.py --fast`.
+
+For frontend development, run FastAPI on 8765 and Vite on its printed local URL:
 
 ```powershell
-python scripts/run_local_demo.py
+.\.venv\Scripts\python.exe -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8765
 ```
 
-It starts the backend if needed, runs demo sessions, replays the logs, prints review summaries, and shows the wooden-chair environment preview with physics disabled and enabled.
+In a second terminal: `npm.cmd --prefix web run dev`. See [web/README.md](web/README.md).
 
-For a guided, presentation-friendly backend walkthrough with menu choices, run:
+## Checks
 
 ```powershell
-python scripts/run_menu_demo.py
+.\.venv\Scripts\python.exe -m pytest -q backend/tests arc/tests
+.\.venv\Scripts\python.exe -m ruff check backend scripts
+.\.venv\Scripts\python.exe -m compileall -q backend scripts arc/scripts unreal/scripts docs/presentations/build_pdf.py
+.\.venv\Scripts\python.exe scripts/check_json_files.py
+npm.cmd --prefix web run lint
+npm.cmd --prefix web run build
 ```
 
-This default presentation mode announces a brief 2.5-second pause before each run, keeps the first review concise, and offers to show the full action sequence. When running all four paths, it asks before moving to the next one so the audience can catch up or exit early.
-
-For developer checks with no intentional delay or between-run prompts, run:
-
-```powershell
-python scripts/run_menu_demo.py --fast
-```
-
-Both modes use the same deterministic backend behavior and JSONL logs. The menu can run happy and warning paths for both toy scenarios, replay or summarize saved logs, compare two reviews, show backend status, list scenarios, and accept a small custom action sequence.
-
-## Local presentation webpage
-
-The one-page React demo turns the four guided backend-owned paths and review summaries into a meeting-friendly visual console. It adds presentation pacing, a live action trail, plain-English state changes, and an expandable action-by-action review without changing scenario ownership or validation rules.
-
-The webpage now also includes the first mocked **Scenario and Asset Studio** workflow. An instructor can request a local fixture suggestion, edit every scenario-content field, save a new revision, reject the suggestion, or explicitly approve the exact revision they reviewed. The mock is deliberately labeled: it makes no AI, API, CS Launch, or ARC call. It tests the authority and review experience before real model integration.
-
-The four guided paths remain scripted so the live presentation is predictable. The webpage also has a separate **seeded exploration** mode: the backend creates a varied sequence of simulated-trainee inputs and displays the seed needed to reproduce it. This is deterministic pseudo-random exploration, not AI generation or real trainee behavior.
-
-A **user-controlled smoke-room path** lets a person choose one action at a time. Every choice goes through the same backend session, deterministic rules, state updates, JSONL logging, and final instructor review as the guided paths. It demonstrates the shape of a future trainee interaction, but it is not protocol instruction, validated assessment, or trainee scoring.
-
-For the recommended meeting setup, run one local command:
-
-```powershell
-python scripts/run_web_demo.py
-```
-
-Then open `http://127.0.0.1:8765`. This builds the React page and serves it from FastAPI on one local port, reducing moving parts during a presentation.
-
-While actively editing the frontend, use the classic two-terminal development workflow. Start FastAPI on port `8765`:
-
-```powershell
-python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8765
-```
-
-Then start Vite on port `5173`:
-
-```powershell
-cd web
-npm install
-npm run dev
-```
-
-Open the local URL printed by Vite. This development mode keeps each service independently restartable and provides live frontend updates. Both workflows are entirely local and use the same FastAPI-owned state, WebSocket contract, and review endpoints.
-
-The repo now has two deterministic toy scenarios: a smoke-room scenario and a blocked-exit hallway scenario. They track simple environment cues like scans, doors, obstacles, communication, visibility, environment monitoring, exit path status, and occupant handling. The smoke-room path also frames explicit access and observation progress states, so actions remain blocked until the toy scene makes them available. If the trainee skips a cue or attempts an unavailable action, the backend returns a POC warning or error and the review explains what happened in plain English.
-
-In another terminal, run the fake trainee demo:
-
-```powershell
-python scripts/run_fake_trainee.py
-```
-
-To test the future Unreal client contract, without building an Unreal scene:
-
-```powershell
-python scripts/run_unreal_contract_harness.py
-```
-
-Run tests, create a fresh session log, and inspect it:
-
-```powershell
-python -m pytest -q
-python -m ruff check backend scripts
-python -m compileall -q backend scripts docs\presentations\build_pdf.py docs\reports\build_report_pdf.py
-python scripts\check_json_files.py
-python scripts/run_menu_demo.py --fast
-python scripts/replay_session.py logs/sessions/YOUR_CURRENT_SESSION.jsonl
-python scripts/summarize_log.py logs/sessions/YOUR_CURRENT_SESSION.jsonl
-```
-
-Clients start by sending `{"message_type":"start_session"}` to `/ws/sessions/{session_id}`. After that, they send ordered `trainee_action` messages. Generated session logs live under `logs/sessions/` and are ignored by Git.
-
-## Documentation PDFs
-
-Markdown files are the editable source. The submission packet PDFs are the clean shareable copies for Dr. Cameron, reviewers, clients, or future teammates.
-
-The official packet should stay small. Right now it contains four PDFs:
-
-- project overview report
-- one-page handout
-- roadmap
-- full project vision
-
-When an important packet-facing Markdown doc changes, rebuild the packet:
-
-```powershell
-python scripts/build_doc_pdfs.py
-```
-
-The meeting deck and submit-ready report also have their own polished PDF builders:
-
-```powershell
-python docs/presentations/build_pdf.py
-python docs/reports/build_report_pdf.py
-```
-
-## What this repo is not doing
-
-These statements describe the working code today. The new funding-proof track will explore a few of them as isolated, measured experiments; they are not implemented merely because they now appear on the roadmap.
-
-- Real LLM or external API calls
-- Clinical validation or EMT/firefighter protocol authority
-- Production security, scaling, deployment, or cloud infrastructure
-- Hub-and-spoke networking
-- Projection mapping
-- Multimodal sensing
-- A full Unreal scene
-- Generated 3D assets
-- Real physics simulation
-- Autonomous evaluation of real responders
-
-## Security baseline
-
-The backend now has a small POC security baseline. It rejects strange IDs, unexpected message fields, path-like scenario names, oversized/nested payloads, too many active sessions, and too many actions in one session.
-
-This does not make the app production-secure. There is still no authentication, authorization, TLS, rate limiting, cloud deployment, or real data handling policy.
-
-Start with [docs/security/README.md](docs/security/README.md) for the current trust boundary.
+Check ARC `.sh`/`.sbatch` syntax with Bash; on Windows use Git Bash rather than a
+WSL launcher receiving Windows paths. The last implementation checkpoint passed
+138 backend/ARC tests and GitHub CI. [CI details](docs/development/ci.md) distinguish
+offline tests from actual GPU, Blender, and engine execution.
 
 ## Repository map
 
-- `backend/`: FastAPI backend, deterministic engine, validation, logging, and tests
-- `schemas/`: JSON message contracts and examples
-- `scenarios/`: small scenario definitions
-- `validation/`: rule files for the toy scenario
-- `docs/`: scope, architecture notes, ADRs, and demo flow
-- `docs/development/`: local development and lightweight CI notes
-- `docs/reference/`: source/reference docs for the larger project vision
-- `docs/reports/`: denser submit-ready written reports and report PDFs
-- `docs/submission-packet/`: official small generated PDF packet for sharing or submission
-- `docs/security/`: POC threat model, client trust boundary, and security roadmap
-- `docs/ux/`: trainee, reviewer, and demo experience notes
-- `scripts/`: local demo, replay, summary, and contract helpers
-- `logs/`: local JSONL session logs, ignored by Git
-- `unreal/`: future Unreal client contract and placeholder folder
-- `assets/`: placeholder folders and review docs for a future generated/reviewed asset pipeline
+| Folder | Responsibility |
+| --- | --- |
+| [backend](backend/README.md) | FastAPI, persistent studio/assets/jobs, remote transport, MCP preparation, session engine and review |
+| [web](web/README.md) | React studio, asset library, previews, workers, legacy tools and physics lab |
+| [arc](arc/README.md) | Configuration, Slurm jobs, pinned generation scripts and portable packages |
+| [scripts](scripts/README.md) | Local demos, Blender workers, validation and PDF builders |
+| [unreal](unreal/README.md) | Editor scripts/bridge, furniture importer and separate session-client contracts |
+| [schemas](schemas/README.md) | Session, scene, physics and pipeline contracts/examples |
+| [scenarios](scenarios/README.md), [validation](validation/README.md) | Deterministic toy scenarios and explicit rules |
+| [assets](assets/README.md), [artifacts](artifacts/README.md) | Review guidance and ignored local binary outputs |
+| [logs](logs/README.md) | Ignored session/physics/studio data, SQLite, worker results and recordings |
+| [docs](docs/README.md) | Current guides, architecture, roadmap, reports, presentations and dated history |
 
-Start with [docs/full-project-vision.md](docs/full-project-vision.md), [docs/overview.md](docs/overview.md), [docs/roadmap.md](docs/roadmap.md), and [docs/full-system-gap-map.md](docs/full-system-gap-map.md).
+## Boundaries and sharing
+
+This remains a local, single-user POC. There is no application login, multi-user
+authorization, production deployment, clinical/protocol validation, trainee sensing,
+projection mapping, or validated real-time adaptation. Cleanup cannot reconstruct
+arbitrary missing/fused parts. Collision proxies and demo physics assumptions need
+visual and engine review; they do not establish physical accuracy.
+
+See [security guidance](docs/security/README.md), [scope](docs/poc-scope.md),
+[gap map](docs/full-system-gap-map.md), and [full vision](docs/full-project-vision.md).
+Markdown is the editable documentation source. Rebuild the report/deck and four-file
+submission packet after changing their sources; see [reports](docs/reports/README.md).

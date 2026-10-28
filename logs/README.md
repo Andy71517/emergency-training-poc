@@ -1,13 +1,21 @@
-# Local Session Logs
+# Local logs and saved workspace
 
-The backend writes session logs as JSONL: one JSON object per line.
+| Location | Contents |
+| --- | --- |
+| `sessions/` | Ordered JSONL actions, findings and snapshots for replay/review |
+| `physics/` | Browser primitive proof authorizations/observations |
+| `studio/` | SQLite jobs/assets, plans/packages, Blender outputs, engine commands/results and recordings |
+| `studio/asset-library/` | Variant requests, references, imported models, preparation runs and reports |
 
-Logs live under `logs/sessions/`. They include attempted actions, validation results, and state snapshots in order, so a session can be replayed or summarized later.
+These files are ignored by Git. Back up important evidence before removing local
+data. Session state is in memory while session JSONL persists; studio jobs/assets
+persist across backend restarts.
 
-Keep `logs/sessions/` small: retain one current happy and warning run for each toy scenario, and remove routine duplicates after testing. The menu only lists this current folder.
+Batch Delete moves a record to recoverable Trash. It does not free disk space,
+delete reusable assets or remove maps from an external Unreal project. There is
+no permanent-delete control in the app. Do not delete worker data during active jobs.
 
-Selected milestone logs may be moved into local folders under `logs/archive/`. Archived logs document POC progress, but older snapshots may not strictly replay against today's scenario definitions. Use their saved summaries for historical review. Use Git—not session logs—to restore older code or scenario behavior.
-
-Future logs may contain sensitive training observations. Keep current and archived logs local. They are ignored by Git by default and generally should not be committed.
-
-`.gitkeep` only exists so the folder is present in the repo.
+Use synthetic identifiers and non-sensitive prompts; never put credentials, patient,
+trainee or real operational data in logs or support screenshots. Read native worker
+logs locally and sanitize before sharing. [Data handling](../docs/security/logging-and-data-handling.md),
+[history](../docs/batch-history-and-assets.md), [current status](../docs/current-status.md).

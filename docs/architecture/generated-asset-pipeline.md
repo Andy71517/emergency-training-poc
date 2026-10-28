@@ -1,34 +1,55 @@
-# Future Generated-Asset Pipeline
+# Generated-asset pipeline
 
-**Status:** documentation only. No assets are generated now.
+The repository now has real chair generation evidence and an implemented
+description-based asset lane. [Current status](../current-status.md) distinguishes
+the accepted chair, native fixture checks and unrun automated couch.
 
-A later experiment might use Hunyuan 3D or similar tools to create candidate meshes. Those files should be treated as drafts until they pass review.
+```text
+description + target dimensions + seed
+  -> pinned SDXL reference on an allocated ARC GPU
+  -> Hunyuan shape -> paint
+  -> bound package, request/model/reference hashes and scheduler evidence
+  -> local asset library and actual GLB review
+  -> Blender MCP: preserved source -> conservative cleanup -> convex proxies
+  -> packed editable .blend + preview + FBX/textures/UCX/import package
+  -> visual review -> actual Unreal import/cooking/behavior check
+  -> reviewed binding for reuse, when its downstream contract supports it
+```
 
-The first future POC object should be a simple wooden chair. A chair is realistic for the kinds of rooms this simulator cares about, and it gives future physics tests something useful to collide with, move, tip, or block.
+Hunyuan remains image-conditioned. Text drives a real generated reference in the
+automatic lane; it is metadata in the optional manual-image route. Reference
+generation is an internal intermediate, not a requirement to supply pictures.
 
-The scenario also tracks a simple entry door. The door's open/closed state can affect the deterministic backend flow now, while lock state, type, hinge, collision, mass, and force direction details stay as future-facing metadata.
+## Preparation and review
 
-For physics later, mass is not enough by itself. Gravity needs a real physics body, collision shape, scene transform, material/friction settings, and an engine that updates the object over time. The current repo only records preview metadata.
+The backend owns verified SSH transport and saved dispatch recovery. A real stdio
+MCP server exposes only scoped `inspect_asset` and `prepare_asset` tools. It runs
+fixed scripts, not arbitrary generated code or an open remote Blender socket.
 
-A future asset flow should include:
+Blender preserves imported source objects, minimally welds/dissolves/recalculates
+the working copy, scales uniformly by target height and centers/grounds it. CPU
+CoACD creates bounded convex proxies, which are checked and named for UCX export.
+Actual dimensions, material limitations and FBX roundtrip evidence are reported.
+The process cannot invent missing legs or reliably reopen arbitrary fused geometry.
 
-- generation
-- metadata capture
-- manual Blender review
-- format checks
-- human safety and content review
-- optimization
-- provenance and licensing review
-- explicit promotion into a reviewed folder
+The `.blend` is editable source; Unreal uses FBX and explicit textures/collision.
+Generic package checks are not engine cooking evidence. Provenance checks bind
+files to requests; they are not independent proof of visual quality or licensing
+suitability. Retain source notices and human review decisions.
 
-A generated file is not approved just because it exists. Scenario correctness should never depend on visual details from generated assets.
+## Storage and room integration
 
-Use [environment-object-contract.md](environment-object-contract.md) for the backend object fields.
+Current library artifacts live under ignored `logs/studio/asset-library/` with
+SQLite records. ARC binaries/models/outputs stay in project storage. The asset
+folders in Git contain review guidance, not the full binary library.
 
-Use these asset docs before any generated object is promoted:
+The reviewed wooden chair is the existing room/Chaos binding. New chair/couch
+designs remain review candidates and do not enter room assembly automatically.
+Mixed-furniture IDs, footprints, registry revision, Blender instances and Unreal
+bindings must be extended together.
 
-- `assets/metadata/asset-review-workflow.md`
-- `assets/metadata/asset-review-template.md`
-- `assets/metadata/blender-review-checklist.md`
-
-The checklist exists now so the project is ready for a future asset experiment. It does not mean any generated asset has been created, reviewed, or approved.
+- [Automation runbook](../asset-automation-runbook.md)
+- [Manual variant route](../furniture-variants-runbook.md)
+- [Review workflow](../../assets/metadata/asset-review-workflow.md)
+- [Blender checklist](../../assets/metadata/blender-review-checklist.md)
+- [Object contract](environment-object-contract.md)

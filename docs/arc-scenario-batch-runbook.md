@@ -1,8 +1,10 @@
-# ARC prompt-to-plan batch — first live run
+# Hosted ARC prompt-to-plan CLI
 
-Prerequisite: hosted API access succeeded with gpt-oss-120b on October 18. Use the existing codex/unreal58-chair-demo branch. This is a lightweight API client and layout builder, not GPU inference on a login node; no sbatch job or Python dependency installation is needed.
+Prerequisite: hosted API access succeeded with gpt-oss-120b on October 18. Use the existing main branch. This is a lightweight API client and layout builder, not GPU inference on a login node; no sbatch job or Python dependency installation is needed.
 
-## First run
+The frontend room studio is the normal entry point; this CLI remains useful for explicit experiments and saved-plan replay. Hosted planning and downstream chair room assembly have user-confirmed runtime evidence. See [current status](current-status.md) and [studio guide](studio-pipeline-runbook.md).
+
+## Explicit CLI run
 
 ```bash
 cd "$HOME/emergency-training-poc"
@@ -44,9 +46,9 @@ Replace the example paths with actual paths. Replay uses variant conditions/coun
 - request.json: original prompt, seed, model/source metadata and response-content digest. Raw reasoning and API credentials are not retained.
 - room_NNN.json: spatial draft, metre coordinates, Z-up, named rotation fields, doorway and explicit geometric check.
 - preview.html / room_NNN.svg: whole-batch review.
-- asset-registry.json: chair identity, assumed dimensions, generation provenance. Binary assets are not included or bound yet.
-- manifest.json: hashes/stage. Blender and Unreal assembly flags remain false.
+- asset-registry.json: chair identity, assumed dimensions, generation provenance. Binary assets are excluded from the portable package; local workers validate the configured reviewed-chair binding.
+- manifest.json: hashes/stage. Generation alone does not prove assembly; actual worker outputs/reports are separate evidence.
 
-This first generator does not yet assemble Blender rooms, import Unreal rooms, generate new assets or simulate evacuations. After the actual ARC plan/previews are returned, bind the reviewed chair binaries/hashes and implement the Blender/Unreal consumers against the verified package. Existing deterministic backend and mock authoring endpoint are unchanged. No output is automatically approved or published to them.
+This CLI emits the plan/layout package. Implemented local Blender and Unreal consumers operate downstream through the studio or manual package route. Fresh furniture generation is a separate asset workflow; evacuation behavior is not simulated or validated by layout generation. The deterministic session engine and legacy mock authoring endpoint are separate; room plans are not automatically published training scenarios.
 
-Validation before first live run: offline invalid-plan tests, duplicate/nonfinite JSON rejection, 540 layouts across room sizes/seeds and conditions, over-capacity rejection, deterministic replay, file digests and no-overwrite behavior. Compilation/lint pass. The live structured-planning response remains unverified until Andy executes it.
+Validation before first live run: offline invalid-plan tests, duplicate/nonfinite JSON rejection, 540 layouts across room sizes/seeds and conditions, over-capacity rejection, deterministic replay, file digests and no-overwrite behavior. Compilation/lint pass. The user subsequently confirmed live frontend planning and room assembly. Retain the actual plan/request/worker records for each new run rather than inferring semantic compliance from that earlier success.

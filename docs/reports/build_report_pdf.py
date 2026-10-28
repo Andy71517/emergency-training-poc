@@ -6,11 +6,10 @@ produces a more report-like PDF than the slide deck export.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from pathlib import Path
 import re
 import textwrap
-
+from dataclasses import dataclass
+from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPORT_MD = HERE / "project-overview-report.md"
@@ -42,6 +41,7 @@ class Line:
 
 
 def _clean(text: str) -> str:
+    text = text.replace("`", "")
     replacements = {
         "\u2018": "'",
         "\u2019": "'",
@@ -81,6 +81,7 @@ def _text(x: float, y: float, line: Line) -> list[str]:
 
 
 def markdown_to_lines(markdown: str) -> list[Line]:
+    markdown = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", markdown)
     output: list[Line] = []
     in_code = False
     paragraph: list[str] = []
@@ -214,7 +215,7 @@ def cover_stream(total_pages: int) -> bytes:
             MARGIN_X,
             PAGE_HEIGHT - 144,
             Line(
-                "Backend-first foundation toward the full adaptive training platform",
+                "Room studio and asset automation toward adaptive training",
                 size=11,
                 color=(0.78, 0.84, 0.88),
             ),
@@ -228,12 +229,12 @@ def cover_stream(total_pages: int) -> bytes:
         *_text(
             MARGIN_X,
             426,
-            Line("Current repo focus: trusted backend loop, replay, and review.", size=12.5),
+            Line("Current focus: rooms, assets, native preparation and evidence.", size=12.5),
         ),
         *_text(
             MARGIN_X,
             400,
-            Line("Full direction: AI adaptation, immersive environments, sensing, and validation.", size=12.5),
+            Line("Updated October 28, 2026; live acceptance boundaries remain explicit.", size=12.5),
         ),
         *_text(
             MARGIN_X,

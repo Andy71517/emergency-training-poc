@@ -1,51 +1,31 @@
 # Logging and data handling
 
-The POC writes local JSONL session logs under:
+| Location | Data |
+| --- | --- |
+| `logs/sessions/` | JSONL messages, attempted actions, findings, ordered state snapshots and IDs |
+| `logs/physics/` | Browser proof configuration, authorization and reported observations |
+| `logs/studio/` | SQLite job/asset records, prompts/plans, files, previews, native reports/logs, engine command/results and recordings |
+| ARC project storage | Model cache, generated references/models, dispatch journal, stage manifests and scheduler logs |
+| External Unreal project | Maps/assets, saved engine reports and generated content |
 
-```text
-logs/sessions/
-```
+Use synthetic identifiers and non-sensitive briefs. Do not use real trainee,
+patient, medical, emergency or private operational data in this POC. A spatial
+generation prompt is sent to the configured provider; it is not purely local.
 
-JSONL means one JSON object per line. It is useful for replay because each event can be read in order.
+Keep private `.env` files, API keys, SSH private keys, passphrases and Duo codes out
+of Git, prompts, browser storage, request ZIPs and screenshots. Credential filtering
+reduces accidental leakage; it is not a comprehensive secret-discovery service.
+Inspect native logs locally and sanitize paths, identifiers and content before sharing.
 
-## Current log contents
+These local data folders and raw ARC results are ignored by Git. Commit sanitized
+contracts/fixtures and review guidance, not generated models/weights or private data.
+Back up important evidence before manual cleanup. Retention is manual; there is no
+automatic archival/production deletion policy.
 
-Logs may include:
+Batch Trash is recoverable and retains files. It does not erase asset-library data,
+ARC outputs or external Unreal maps. Do not remove active worker folders. Future
+multi-user deployment needs access controls, consent, retention/deletion, quotas,
+audit and provider data-handling decisions before real data is introduced.
 
-- timestamp
-- session ID
-- scenario ID
-- sequence number
-- event type
-- inbound trainee action message
-- validation result
-- state snapshot
-
-## Current privacy rule
-
-Do not put real personal, medical, patient, trainee, or operational data into this POC.
-
-The demo uses stubbed data only.
-
-## Git rule
-
-Session logs should usually not be committed.
-
-The repo keeps `logs/sessions/` ignored so local demo runs do not accidentally become repo history.
-
-## Future questions
-
-Before this becomes anything beyond local demo work, I need answers for:
-
-- What data is allowed in logs?
-- How long should logs be kept?
-- Who can read logs?
-- How are logs deleted?
-- Should logs be anonymized?
-- Should review summaries hide raw event details?
-- How do I handle real trainee names, if they ever appear?
-
-## Simple rule for now
-
-Use fake IDs. Keep logs local. Do not store real emergency, patient, or trainee data.
-
+[Storage guide](../../logs/README.md), [history](../batch-history-and-assets.md),
+[security overview](README.md).

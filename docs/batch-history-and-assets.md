@@ -1,4 +1,4 @@
-# Batch history, duplicates and new assets — 2026-10-18
+# Batch history, duplicates and asset integration
 
 ## Implemented: storage and deletion
 
@@ -18,21 +18,21 @@ Validation: full backend tests, frontend build/lint and browser flow for duplica
 
 ## Asset pipeline roadmap and remaining room integration
 
-The current generator supports only the prepared wooden chair. A couch or other requested furniture is currently rejected as unsupported rather than silently replaced with a chair. ARC LLM planning and ARC GPU asset generation are different services; the hosted LLM key alone does not submit a GPU job.
+The current room generator supports only the prepared wooden chair. The separate description-based furniture lane is implemented; see [asset automation](asset-automation-runbook.md) and [current status](current-status.md). A couch or other requested furniture is currently rejected as unsupported rather than silently replaced with a chair. ARC LLM planning and ARC GPU asset generation are different services; the hosted LLM key alone does not submit a GPU job.
 
 Start with one couch through the established Hunyuan lane:
 
 1. Extract furniture needs from the natural-language brief. Look up a compatible reviewed asset first.
 2. When missing, create a visible asset request. Obtain an input image from an upload or a separately verified image-generation route; Hunyuan's current pipeline is image-to-3D.
-3. Run shape/texturing on ARC, using the approved allocation. Direct frontend submission requires a configured ARC connection/job adapter; that is not provided by the existing LLM API key.
+3. Run shape/texturing on ARC, using the approved allocation. Direct frontend submission now uses the implemented SSH/Slurm adapter after one-time setup; the hosted LLM key does not provide that access.
 4. Prepare the result in Blender: inspect appearance, repair obvious defects, establish dimensions/orientation/pivot, simplify geometry and create suitable collision shapes. New asset types cannot inherit the chair's 19-piece collision template blindly.
 5. Review and register the asset with an ID, previews, files, dimensions, provenance and physics assumptions. Reuse it across subsequent room batches.
 6. Extend the scene plan/layout contract, Blender assembly and Unreal import/binding together so mixed furniture footprints and asset IDs are handled consistently.
 
 A couch should be generated/reviewed once and instanced many times. Regeneration should be explicit when a different appearance is requested. Room-plan caches must include the asset-library/contract revision once the single-chair schema changes. Do not label missing assets as ready or assemble substitutes without disclosing them.
 
-Remaining end-to-end acceptance target: a prompt asking for a room with a couch and chairs uses the registered chair, creates or reuses a couch asset, lays out both using their actual recorded dimensions, assembles them in Blender/Unreal, and records a visual test. The approved library batch implements portable generation requests, result import and visual Blender staging. General mesh repair, asset-specific collisions, mixed-asset room planning and generalized physics properties remain follow-up work after the actual couch output is reviewed.
+Remaining end-to-end acceptance target: a prompt asking for a room with a couch and chairs uses the registered chair, creates or reuses a couch asset, lays out both using their actual recorded dimensions, assembles them in Blender/Unreal, and records a visual test. The asset lane now implements description/reference generation, fixed remote dispatch, result retrieval and real Blender MCP cleanup/convex collision/export. The actual couch and generic engine import remain live acceptance checks. Arbitrary semantic repair, mixed-asset room planning and generalized physics properties remain further work.
 
 ## Implemented asset-library batch
 
-The first variant library and ARC request/result route is now implemented. See [Furniture variants runbook](furniture-variants-runbook.md) for the current Windows/ARC steps and exact scope. Chairs and couches support named variants rather than one model per family. The prepared charcoal two-seat couch is a reference image until its ARC job returns; new designs are not yet eligible for room placement. Blender staging is available after import. Collision review and mixed-variant room assembly follow inspection of the actual new output.
+The first variant library and ARC request/result route is now implemented. See [Furniture variants runbook](furniture-variants-runbook.md) for the current Windows/ARC steps and exact scope. Chairs and couches support named variants rather than one model per family. The prepared charcoal two-seat couch is a reference image until its ARC job returns; new designs are not yet eligible for room placement. Blender MCP cleanup/collision/export is available after import. Human collision-fit review, actual engine import/cooking and mixed-variant room assembly remain distinct follow-up checks.

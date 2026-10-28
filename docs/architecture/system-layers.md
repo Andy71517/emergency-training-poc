@@ -1,19 +1,28 @@
-# System Layers
+# System layers
 
-This project is split into small layers so each part has one clear job.
+[Current status](../current-status.md) records which layers have live evidence.
 
-## Current backend slice
+| Layer | Current responsibility |
+| --- | --- |
+| React studio | Prompts, previews, jobs/assets/history, review/downloads and fixed worker controls |
+| FastAPI API | Validated HTTP/WebSocket boundaries; no browser authority over state or shell commands |
+| Studio service | SQLite jobs/assets, hosted model planning, seeded scene packages, reuse, Trash, worker evidence and recordings |
+| ARC transport/generation | Backend-owned SSH RPC; persistent dispatch journal; Slurm SDXL/Hunyuan job; bounded result retrieval |
+| Blender MCP/local workers | Fixed asset inspection/preparation tools and room assembly; copied source, convex decomposition, exports and reports |
+| Unreal editor bridge | Local command-file polling; map assembly, Chaos observations and recording work in the user's external project |
+| Session engine | In-memory ordered actions, deterministic YAML transitions and explicit toy-rule validation |
+| Logging/review | JSONL sessions/physics, SQLite studio state, replay and human-readable evidence |
+| Legacy authoring | Separate in-memory fixture suggestions, edits and revision-specific approval |
 
-1. **API layer** receives WebSocket messages and rejects messages that do not match the contract.
-2. **Session manager** keeps actions in order for one session.
-3. **Scenario engine** applies the next state change from scenario data.
-4. **Validation layer** checks POC rules and returns `ok`, `warning`, or `error`.
-5. **Models and contracts** keep events, state, and messages shaped consistently.
-6. **Logger** writes each step to local JSONL for replay and review.
-7. **Client message layer** sends state back in a format any client can read.
+The studio persists under ignored `logs/studio/`; sessions remain in memory while
+their JSONL records are saved. The two persistence models are intentional and
+should not be described as a database-free application.
 
-The first slice uses in-memory sessions and local files. That is enough for the POC.
+Model plans are data, not code. The backend owns accepted plans, action ordering,
+state, validation and review. Engines report physical observations; people review
+generated assets and training meaning. The editor bridge is separate from the
+future trainee WebSocket client.
 
-## Future areas
-
-Unreal rendering, remote networking, sensing, AI-assisted authoring, asset generation, and projection deployment are future work. They should connect through clear contracts instead of owning scenario logic.
+CS Launch hosting, multi-site networking, sensing, projection and real-time AI
+adaptation remain future work. Current asset/room worker details are in the
+[asset runbook](../asset-automation-runbook.md) and [studio guide](../studio-pipeline-runbook.md).

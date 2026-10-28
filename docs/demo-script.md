@@ -1,6 +1,6 @@
 # Demo Script
 
-Use this flow to show the POC without overselling it.
+This guide exercises the deterministic session baseline. Its chair physics preview is metadata only; the separate browser Rapier and Unreal/Blender workflows are documented in [current status](current-status.md) and the [current presentation route](presentations/final-demo-run-of-show.md).
 
 ## One-command local demo
 

@@ -1,11 +1,13 @@
-# Generated Candidates
+# Generated candidates
 
-Future generated files may be staged here temporarily.
+Optional ignored local staging for unreviewed files. The current app writes
+generated variants under `logs/studio/asset-library/`; ARC models/outputs stay in
+project storage. This folder is not the live asset registry.
 
-If a first object candidate is needed later, prefer a simple wooden chair. Do not generate or commit it until the asset pipeline is intentionally being tested.
+A real generated chair baseline exists. A new design is still a review candidate
+until its geometry, scale, materials, provenance and collision fit are inspected.
+Do not commit large models/weights or treat a saved request as generated output.
 
-Anything in this folder should be treated as unreviewed. A file is not approved for client use just because it exists here.
-
-Before a candidate can move forward, create metadata from `../metadata/asset-review-template.md` and review it with `../metadata/blender-review-checklist.md`.
-
-Do not use generated candidates directly in Unreal.
+Use the [review workflow](../metadata/asset-review-workflow.md),
+[template](../metadata/asset-review-template.md) and
+[current evidence](../../docs/current-status.md).

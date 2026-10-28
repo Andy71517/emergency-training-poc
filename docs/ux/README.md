@@ -1,38 +1,22 @@
-# UX overview
+# User experience
 
-UX means user experience.
+The current interface is a local scenario studio with asset/job review, persistent
+history and fixed worker controls. Legacy deterministic sessions, review, fixture
+authoring and primitive physics remain accessible through **Legacy POC tools**.
 
-For this POC, UX does not mean building a polished app screen yet.
+The user should see the whole result and its actual status: request, submitted job,
+returned model, prepared candidate and engine observations are distinct. Reference
+images are an internal intermediate in the description-based lane. Advanced paths,
+keys and native logs should stay out of ordinary product flows.
 
-It means answering simpler questions first:
+- [First audience](audience-dr-cameron.md)
+- [Project review rubric](dr-cameron-review-rubric.md)
+- [Trainee flow](trainee-flow.md)
+- [Instructor/reviewer flow](instructor-reviewer-flow.md)
+- [Demo goals](demo-ux-goals.md)
+- [Session review format](review-summary-format.md)
+- [UX principles](ux-principles.md)
 
-- What is the trainee trying to do?
-- What does the instructor or reviewer need to understand afterward?
-- What should the demo make obvious?
-- What should stay hidden until the system is ready?
-
-The current answer is backend-first:
-
-The trainee/client sends actions. The backend owns scenario truth. The review explains what happened.
-
-## First audience
-
-The first audience is Dr. Cameron.
-
-That means the UX should help explain the project as an on-campus job/research-style progress update:
-
-- clear purpose
-- honest scope
-- working proof point
-- careful next steps
-- no overclaiming
-
-## Files
-
-- `audience-dr-cameron.md`: how to frame the demo for the first reviewer
-- `dr-cameron-review-rubric.md`: how to review the current POC and its intentional boundaries
-- `trainee-flow.md`: what the trainee experience should become
-- `instructor-reviewer-flow.md`: what the instructor/reviewer should be able to inspect
-- `demo-ux-goals.md`: what the current demo should communicate
-- `review-summary-format.md`: how post-scenario review should explain what happened
-- `ux-principles.md`: simple design rules for future UI/client work
+The backend owns accepted plans/state/findings and saved evidence. Models propose,
+engines report and humans review. A polished screen is not evidence of completed
+generation or validated training. [Current status](../current-status.md).

@@ -1,6 +1,6 @@
 # Manual Blender review checklist
 
-**Status:** future asset review checklist. No assets are reviewed yet.
+**Status:** active human-review checklist. The accepted wooden chair is the existing baseline; new variants still require their own review. Automatic MCP preparation does not complete this checklist. See [current status](../../docs/current-status.md).
 
 Generated assets should not go straight into Unreal.
 
@@ -31,7 +31,7 @@ No asset should be treated as approved just because it exists in `assets/generat
 5. Inspect materials.
 6. Decide whether the asset is visual-only, collision-candidate, needs changes, or rejected.
 7. Record the decision in an asset metadata file.
-8. Only promote the file to `assets/reviewed/` after explicit approval.
+8. Record an explicit review decision before promotion or downstream binding. Current app variants live under ignored studio storage; copying a file into `assets/reviewed/` does not register it for room use.
 
 ## Required checks
 

@@ -1,10 +1,6 @@
 # Demo UX goals
 
-The current demo should make the backend loop easy to see.
-
-The goal is not to impress people with visuals yet.
-
-The goal is to make the proof obvious.
+The current demo should make whole room/asset results and their evidence easy to inspect. The deterministic action/log/review loop remains a repeatable baseline. Use [current status](../current-status.md) and the [current presentation](../presentations/final-demo-run-of-show.md) to distinguish live results, fixtures and outstanding checks.
 
 ## Main demo message
 
@@ -31,7 +27,7 @@ Dr. Cameron should be able to notice:
 - the scope is controlled
 - the demo is repeatable
 - the review output is understandable
-- future Unreal/asset/physics work has a reasonable path
+- current room/asset/engine evidence and remaining acceptance checks are clear
 - the project is not claiming medical or operational authority
 
 ## Demo success criteria

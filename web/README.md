@@ -1,60 +1,62 @@
-# Local Presentation Webpage
+# FIELDWORK web app
 
-This React, TypeScript, Vite, and Tailwind interface presents the existing deterministic backend demo in a cleaner one-page format.
+React, TypeScript, Vite and Tailwind present the local scenario studio and asset
+library. FastAPI owns jobs, accepted plans, session state and saved evidence.
+[Current status](../docs/current-status.md).
 
-It does not own scenario state. The browser fetches four guided paths from FastAPI, sends their actions through the existing WebSocket contract, and then displays the backend-generated session review.
+## Current surfaces
 
-The guided expected and review paths are intentionally scripted so a presentation can be repeated reliably. A separate **seeded exploration** developer tool asks the backend to generate a varied simulated-trainee action sequence. Its visible seed makes the exact sequence reproducible. This mode is deterministic pseudo-random exploration—not AI generation and not real trainee behavior.
+- **Create scenario:** hosted ARC room planning, validated seeded chair layouts,
+  previews, saved batches and replay with a different seed.
+- **Asset library:** chair/couch designs; description-based ARC generation with
+  persistent progress/reconnection; optional PNG/request/result ZIP route; actual
+  GLB inspection and Blender MCP preparation downloads.
+- **Pipeline stages / Connections:** background Blender rooms, editor bridge,
+  Unreal assembly/Chaos reports, saved recordings and private local worker paths.
+- **Recent batches / Trash:** exact-input reuse and recoverable deletion; files
+  and external Unreal maps are retained.
+- **Legacy POC tools:** guided/user-controlled deterministic sessions, seeded
+  exploration, review/replay, fixture authoring and the primitive Rapier physics lab.
 
-Every completed path ends with a backend-generated instructor review message. It collects recorded evidence and suggests a discussion prompt, while clearly stating that it is not a grade, validated rubric, or operational judgment.
+The hosted room planner is real. The legacy authoring suggestion remains a labeled
+fixture. A generated furniture review candidate is not automatically eligible for
+the existing chair-only room planner. See the [asset runbook](../docs/asset-automation-runbook.md).
 
-The **user-controlled** path opens an action-selection screen instead of running a script. Each button sends one action through the normal WebSocket contract and shows the backend response immediately. Finishing the run produces the same instructor finale and full review used by the other paths.
+## One-port app
 
-## Run locally
-
-For the recommended one-port presentation workflow, run from the repository root:
-
-```powershell
-python scripts/run_web_demo.py
-```
-
-Open `http://127.0.0.1:8765`. FastAPI serves the built page and owns all scenario state.
-
-For frontend development, start FastAPI on port `8765`:
-
-```powershell
-python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8765
-```
-
-In a second terminal:
+From the repository root after installing the backend and Node dependencies:
 
 ```powershell
-cd web
-npm install
-npm run dev
+npm.cmd --prefix web ci
+.\.venv\Scripts\python.exe scripts/run_web_demo.py --port 8772
 ```
 
-Vite serves the webpage on port `5173` and locally proxies `/api`, `/health`, and `/ws` to FastAPI on port `8765`. This two-port mode is recommended only while developing the frontend.
+Open `http://127.0.0.1:8772`. FastAPI serves `web/dist` and the API on the same origin.
+Omitting `--port` uses the helper's default 8765. Do not stop an unrelated app if
+that port is occupied. A build alone does not start the backend.
 
-Use `npm run build` for a production build and `npm run lint` for frontend linting.
+## Frontend development
 
-## Visual physics lab
+Run FastAPI on 127.0.0.1:8765, then `npm.cmd --prefix web run dev` in another terminal.
+Vite prints its URL (normally 5173) and proxies `/api`, `/health` and `/ws` to 8765.
+This proxy does not follow the one-port app's `--port` option.
 
-Open **Visual physics lab** in the top bar. With FastAPI running, press **Run physics
-proof** to request a backend authorization. The primitive chair receives one
-40 N·s impulse in Rapier, then the browser sends its measured movement, contact,
-floor clearance, final transform, and timing to FastAPI. The backend writes a
-JSONL evidence record under `logs/physics/` and returns the bounded verdict.
-**Reset scene** makes a fresh rigid body for another run; **Show collision
-shapes** is a developer view. No generated mesh or Unreal engine is involved
-in this first visual development proof.
+```powershell
+npm.cmd --prefix web run lint
+npm.cmd --prefix web run build
+```
 
-This remains a deterministic proof of concept. Its results are not clinical validation, operational guidance, protocol authority, or real trainee scoring.
+Node 22.13+ within the 22.x line matches the Vite/ESLint engine requirements and CI. Use `npm ci` for the checked-in lockfile; PowerShell users can
+use `npm.cmd` to avoid script-execution-policy issues. Large physics chunks produce
+a size advisory, not a failed build.
 
-## Funding-proof direction
+## Evidence and privacy
 
-The current console remains the deterministic session and review baseline. A mocked instructor workflow now lets a user request a scenario suggestion, see visible local job stages, edit all scenario content, and approve or reject a specific revision.
+Browser Rapier runs a primitive rigid-body proof and sends observations to the
+backend. Unreal Chaos is a separate engine workflow. Neither establishes clinical
+validity or calibrated real-world physics. Saved Blender renders and MP4s can be
+viewed without open editors; there is no live Unreal browser stream.
 
-This uses fake local job progress and fixture data. No real model call is hidden behind the interface. The AI role is suggestion only; the instructor owns the title, goals, environment, duration, cues, actions, transitions, end conditions, assets, constraints, notes, and approval decision. After the workflow is reviewed, CS Launch can host the long-running application while VT ARC handles approved generation jobs. Unreal remains the eventual trainee runtime and physics environment.
-
-See `docs/architecture/funding-proof-platform.md` for the full platform split and safety boundaries.
+Passwords, Duo, SSH private keys and passphrases never belong in frontend fields.
+The hosted model key stays backend-only. Keep this single-user app on loopback.
+[Security](../docs/security/README.md), [room guide](../docs/studio-pipeline-runbook.md).

@@ -1,36 +1,42 @@
-# Future Unreal Client
+# Unreal integration
 
-Unreal is a future presentation and input client. It is not the source of truth.
+This folder contains Unreal 5.8 editor scripts and contracts. The working binary
+project, generated maps/assets and engine outputs live outside Git; this checkout
+does not include a complete `.uproject` or generated content.
 
-Later, Unreal may render scenario state and send trainee actions back to the backend. The backend still owns ordering, state changes, validation results, and logs.
+## Current editor workflow
 
-The first Unreal slice should be a text-only debug display. It should render the backend-owned phase, validation status, warnings/errors, and environment object rows from `contract/debug-display-state.schema.json`.
+- `scripts/setup_unreal58_chair_demo.py` imports/binds the reviewed chair baseline.
+- `scripts/prepare_unreal58_chair_presentation.py` prepares its presentation scene.
+- `scripts/assemble_unreal58_rooms.py` creates per-room maps from validated room packages.
+- `scripts/studio_bridge.py` polls the local checkout's command directory for fixed
+  assemble/simulate/record work. Load once per editor session and keep Unreal open.
+- `scripts/import_furniture_package.py` is bundled into the new generic furniture
+  package; checks hashes, imports FBX/UCX, wires supported materials and checks size/hulls.
 
-This repo does not include an Unreal project, scene, gameplay logic, networking topology, projection mapping, sensing integration, or 3D content. `EmergencyTrainingClient/` is only a reserved location.
+The user confirmed the existing chair demo, room assembly and ten-second Chaos
+batches. First live recording and the new generic furniture import/collision cooking
+remain unverified. New variants are not yet bound into chair-only room assembly.
+See [current evidence](../docs/current-status.md).
 
-`EmergencyTrainingClient/` now includes a tiny starter scaffold for that future debug display:
+## Guides
 
-- local sample display-state JSON
-- a panel-field config
-- beginner notes for the first Unreal implementation pass
+- [Studio/editor bridge](../docs/studio-pipeline-runbook.md)
+- [Chair demo](../docs/unreal58-chair-demo-runbook.md)
+- [Room batches](../docs/unreal58-room-batch-runbook.md)
+- [Movement recording](../docs/visual-playback-runbook.md)
+- [Furniture preparation and import](../docs/asset-automation-runbook.md)
 
-It is still not a full Unreal project.
+Unreal imports the prepared FBX/textures/collision package. The `.blend` remains
+the editable source. Hull naming/convexity checks are preparation evidence; actual
+engine collision cooking and behavior must be checked in Unreal.
 
-The next Unreal step is sample JSON first:
+## Separate session-client contract
 
-- create a blank Blueprint project
-- read one checked-in display-state JSON file
-- show a text-only debug panel
-- keep all scenario authority in the backend
+[contract/](contract/README.md) describes backend-owned session state and ordered
+trainee actions. [EmergencyTrainingClient/](EmergencyTrainingClient/README.md) is
+the earlier text-display scaffold, not the current external chair demo project.
+The local editor job bridge does not implement that trainee WebSocket client.
 
-See [EmergencyTrainingClient/Docs/read-sample-json-debug-panel.md](EmergencyTrainingClient/Docs/read-sample-json-debug-panel.md).
-
-The thin client contract lives here:
-
-- [contract/client-contract.md](contract/client-contract.md)
-- [contract/client-state-machine.md](contract/client-state-machine.md)
-- [contract/state-display-contract.md](contract/state-display-contract.md)
-- [contract/debug-display-state.schema.json](contract/debug-display-state.schema.json)
-- [contract/examples/](contract/examples/)
-
-Keep scenario authority, validation, logging, and review generation in the backend.
+The backend owns scenario transitions, validation, logs and review. Unreal supplies
+rendering and engine observations; those are not operational guidance or trainee scores.

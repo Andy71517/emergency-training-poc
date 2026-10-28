@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved direction for the next visual-development phase.
+The primitive browser Rapier proof is implemented, and separate reviewed-chair Unreal/Chaos demos have user-confirmed runtime evidence. This document retains the original bounded primitive test specification; it does not certify the new furniture importer or claim browser/Unreal equivalence. See [current evidence](../current-status.md).
 
 The project will use a hybrid path:
 
@@ -145,9 +145,9 @@ The client reports observations. The backend records those observations and deci
 
 The browser and Unreal do not independently decide training validity, protocol correctness, or trainee scores.
 
-## Shared client contract needed
+## Shared client contract
 
-Before the visual implementation, add versioned structures for:
+The implemented primitive proof has versioned models under `backend/app/physics/`. Its contract covers:
 
 - object and asset identity
 - dimensions, scale, initial position, and initial rotation

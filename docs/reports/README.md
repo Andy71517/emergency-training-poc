@@ -1,34 +1,26 @@
-# Reports
+# Reports and submission packet
 
-This folder contains denser written reports for submission or longer review.
+The report source and PDF now describe the current studio, asset workflow, evidence
+levels and remaining checks as of October 28, 2026. [Current status](../current-status.md)
+is the operational evidence index; older handoffs remain dated history.
 
-This is separate from `docs/presentations/`.
-
-Use:
-
-- `docs/presentations/` for meeting slides and speaker notes
-- `docs/reports/` for submit-ready written material
-
-## Files
-
-- `project-overview-report.md`: editable report source
-- `emergency-training-poc-report.pdf`: generated report PDF
-- `build_report_pdf.py`: small no-dependency report PDF builder
-
-The report PDF is denser than the meeting deck. It is meant to be submitted or read directly, while the presentation PDF is meant to be talked through in a meeting.
-
-## Rebuild the report PDF
+- [Report source](project-overview-report.md)
+- [Standalone report PDF](emergency-training-poc-report.pdf)
+- [Presentation package](../presentations/README.md)
 
 From the repo root:
 
 ```powershell
 python docs/reports/build_report_pdf.py
-```
-
-For the small generated submission packet, run:
-
-```powershell
+python docs/presentations/build_pdf.py
 python scripts/build_doc_pdfs.py
 ```
 
-Use the report builder for the standalone polished report. Use the packet builder when you want the official four-PDF packet to submit or share. Folder READMEs stay readable on GitHub and do not need PDF copies.
+The last command rebuilds the four-file packet in `docs/submission-packet/`:
+project report, one-page handout, roadmap and full vision. It replaces that generated
+packet's PDFs. Markdown is the editable source; inspect the exported pages after
+changes. Folder READMEs stay on GitHub and do not need PDF copies.
+
+The report/deck are communication artifacts, not independent runtime evidence.
+They must preserve the distinction between tested code, fixture preparation,
+user-confirmed baseline and outstanding live GPU/engine checks.

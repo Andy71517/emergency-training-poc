@@ -14,3 +14,6 @@ Current rule files:
 - `blocked_exit_hallway_v0_rules.yaml`
 
 These rule files are deterministic POC fixtures. They are not clinical validation, official emergency guidance, or certification scoring.
+
+For repository-wide implementation and evidence, see [current status](../docs/current-status.md)
+and the [documentation index](../docs/README.md).

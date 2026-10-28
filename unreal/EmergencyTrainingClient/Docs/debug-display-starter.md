@@ -1,3 +1,5 @@
+> **Scaffold tutorial:** these instructions cover only the early session-display experiment. Current chair/room editor scripts and runtime evidence are described in [Unreal integration](../../README.md) and [current status](../../../docs/current-status.md).
+
 # Debug Display Starter
 
 This is the first tiny Unreal-facing implementation note.

@@ -26,3 +26,6 @@ Follow-up:
   `apptainer --nv` and a project-stored Alpine smoke image.
 - Follow-up: build the pinned TRELLIS.2 environment before downloading model
   weights or generating a chair candidate.
+
+For repository-wide implementation and evidence, see [current status](../../docs/current-status.md)
+and the [documentation index](../../docs/README.md).

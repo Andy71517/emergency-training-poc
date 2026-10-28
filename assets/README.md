@@ -1,15 +1,21 @@
-# Asset Pipeline Placeholder
+# Assets and review
 
-No assets are generated right now.
+The project has a real generated/reviewed wooden-chair baseline and a reusable
+chair/couch variant library. Source-controlled folders here hold review guidance;
+the large binary assets are not bundled in Git.
 
-These folders reserve space for a future asset review flow, possibly for candidate output from Hunyuan 3D or similar tools.
+- Current app library: ignored `logs/studio/asset-library/` plus SQLite records.
+- ARC weights/generated outputs: configured project storage.
+- Accepted chair Blender file: private `CHAIR_BLEND` path on the workstation.
+- [generated/](generated/README.md): optional local staging, unreviewed by default.
+- [reviewed/](reviewed/README.md): optional explicitly promoted local assets.
+- [metadata/](metadata/README.md): provenance/review guidance and toy object notes.
 
-When the project needs a first simple environmental-object candidate, use a wooden chair. It is more likely to appear in emergency-response training spaces than an abstract test object, and it will be more useful later for basic collision and physics checks.
+Use [description-based automation](../docs/asset-automation-runbook.md) or the
+[manual reference route](../docs/furniture-variants-runbook.md). The existing room
+demo uses the reviewed wooden chair. New variants need actual review and coordinated
+room bindings; library presence or successful Blender preparation does not approve them.
 
-Generated candidates and reviewed assets must stay separate. Before a future asset is used, it should have metadata, licensing/provenance review, technical checks, optimization, human review, and explicit approval.
-
-Generated assets should also pass the manual Blender review checklist in `assets/metadata/blender-review-checklist.md` before they are promoted.
-
-Use `assets/metadata/asset-review-workflow.md` for the future review flow and `assets/metadata/asset-review-template.md` for future candidate metadata.
-
-Visual assets should never define scenario rules. The backend owns scenario logic.
+[Current evidence](../docs/current-status.md),
+[review workflow](metadata/asset-review-workflow.md),
+[Blender checklist](metadata/blender-review-checklist.md).

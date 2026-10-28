@@ -1,132 +1,52 @@
 # Asset review workflow
 
-**Status:** planning workflow only. No generated or reviewed assets exist yet.
+The reviewed wooden chair is the current room baseline. New designs produced by
+the [asset workflow](../../docs/asset-automation-runbook.md) remain candidates.
+Automatic preparation is useful evidence, not automatic promotion.
 
-This workflow explains how a future generated asset should move through the repo.
+## 1. Generate or collect a candidate
 
-The main rule:
+Use a description-driven ARC dispatch or the optional manual reference/package
+route. Current app files live under ignored `logs/studio/asset-library/`; ARC files
+stay in project storage. `assets/generated/` is optional local staging, not the registry.
+Keep the original GLB and generation lineage immutable.
 
-> Nothing generated goes straight into Unreal.
+## 2. Record provenance
 
-## Folder flow
+Keep request/description/reference identity, model/source revisions, seed/settings,
+Slurm evidence, returned file hashes and notices. Use the
+[metadata template](asset-review-template.md) for the human decision and limitations.
+Hashes bind a package to a request; they do not decide licensing suitability or quality.
 
-Use this path later:
+## 3. Prepare and inspect in Blender
 
-```text
-generated candidate
-  -> assets/generated/
-  -> Blender/manual review
-  -> metadata decision
-  -> assets/reviewed/ only if approved
-  -> future Unreal import only after review
-```
+The scoped MCP worker preserves source objects, cleans a copy conservatively,
+uniformly matches height, grounds/centers, creates convex proxies and exports an
+editable `.blend` plus Unreal package. Inspect the whole result using the
+[checklist](blender-review-checklist.md): shape, missing/fused parts, orientation,
+actual dimensions, pivot/floor contact, UVs/materials and collision coverage/gaps.
+Automated cleanup cannot reconstruct arbitrary missing geometry.
 
-## Step 1: create or collect a candidate
+## 4. Validate the intended engine use
 
-A candidate might come from:
+Unreal imports FBX/textures/UCX, not `.blend` directly. Verify the actual material
+binding, size, hull count and collision cooking in the target engine, then inspect
+bounded contact/stability behavior. The generic importer still needs its first
+live acceptance check; chair-baseline evidence does not cover a new couch.
 
-- Hunyuan 3D or a similar model
-- a manually made Blender object
-- a licensed asset source
-- a placeholder object made for testing
+## 5. Record a human decision
 
-Put unreviewed candidate files in:
+Use an explicit decision such as candidate, needs changes, reviewed visual only,
+reviewed collision candidate or rejected. Record exact revision/checksums, reviewer,
+intended use and unresolved limits. These review labels are guidance, not a claim
+that the app automatically publishes or approves new assets.
 
-```text
-assets/generated/
-```
+## 6. Bind for reuse only when supported
 
-Do not commit large generated files unless the project is intentionally testing the asset pipeline.
+Current room workers use the reviewed chair. Mixed furniture requires coordinated
+planner IDs, asset lookup/footprints, Blender instances and Unreal bindings. A
+prepared design is not room-compatible merely because its ZIP exists. Optional
+promotion into `assets/reviewed/` does not change the application's registry.
 
-## Step 2: record source metadata
-
-Before review, create or update a metadata file.
-
-Use:
-
-```text
-assets/metadata/asset-review-template.md
-```
-
-Record:
-
-- asset name
-- source or generation tool
-- prompt/source reference
-- date
-- license/provenance notes
-- intended use
-- reviewer
-- review status
-
-## Step 3: inspect in Blender
-
-Open the asset in Blender and use:
-
-```text
-assets/metadata/blender-review-checklist.md
-```
-
-Check:
-
-- scale
-- orientation
-- origin/pivot
-- floor contact
-- mesh quality
-- materials
-- obvious generated weirdness
-- collision-readiness
-- Unreal import readiness
-
-## Step 4: decide status
-
-Use one of these:
-
-- `candidate`
-- `needs_changes`
-- `reviewed_visual_only`
-- `reviewed_collision_candidate`
-- `rejected`
-
-If the asset is only visual, say that clearly.
-
-If it might be useful for collision later, still say physics has not been validated.
-
-## Step 5: promote only after review
-
-Only move an asset to:
-
-```text
-assets/reviewed/
-```
-
-after source/provenance, Blender, and human review are complete.
-
-Reviewed does not mean medically accurate, operationally accurate, physically accurate, or training-approved.
-
-It only means the asset passed this repo's POC asset-quality gate.
-
-## Step 6: future Unreal import
-
-Unreal import comes after review.
-
-The first Unreal import should still be boring:
-
-- one object
-- one blank scene
-- no gameplay
-- no physics claims
-- backend still owns scenario state
-
-## What this workflow avoids
-
-This avoids:
-
-- random generated files in the repo
-- assets with unclear origin
-- broken meshes entering Unreal
-- visual details being mistaken for scenario truth
-- fake realism
-- accidental overclaiming
-
+Reviewed means a bounded POC quality decision, not clinical, operational, physical
+or training certification. [Current status](../../docs/current-status.md).

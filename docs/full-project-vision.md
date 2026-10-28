@@ -4,7 +4,7 @@ This document summarizes the full project goal from `docs/reference/full-project
 
 The full project is bigger than the current POC.
 
-The current repo is the first small foundation step toward that larger system.
+The current repo now combines the deterministic foundation with hosted room planning, Blender/Unreal chair workflows and implemented asset automation. See [current status](current-status.md) for evidence and outstanding live checks.
 
 For a side-by-side map of full-system goals, current repo status, open gaps, and safe next experiments, see [full-system-gap-map.md](full-system-gap-map.md).
 
@@ -63,7 +63,7 @@ The full system eventually includes AI and agentic AI that can:
 - update environmental hazards
 - support post-scenario review
 
-The current repo does not call real AI models yet.
+The room studio calls ARC's hosted model. Description-based SDXL/Hunyuan asset generation is implemented but still needs its first live automated couch run. These authoring/generation paths do not implement validated AI adaptation during a trainee session.
 
 For now, deterministic code stands in for future adaptation so the backend loop can be tested and trusted first.
 
@@ -96,7 +96,7 @@ The full system may eventually include immersive rooms with:
 - synchronized audio/visual updates
 - physical mannequin integration
 
-The current repo does not build projection mapping, generated assets, or a full Unreal scene.
+The repo has generated-chair evidence, Blender room assembly and Unreal 5.8 scene scripts/Chaos demonstrations. Projection mapping, complete mixed-furniture environments and integrated trainee gameplay remain future work.
 
 ## Sensing vision
 
@@ -148,7 +148,7 @@ The practical strategy is:
 3. make Unreal display backend-owned state
 4. add simple visuals only after the display path works
 5. review assets manually before trusting generated content
-6. explore physics, sensing, AI, validation, and deployment after the foundation is stable
+6. validate the new asset/engine lane and mixed rooms, then extend sensing, adaptation, domain validation and deployment through measured checkpoints
 
 This keeps the project realistic without shrinking the long-term goal.
 
@@ -158,15 +158,15 @@ The full project vision includes future capabilities that are not implemented he
 
 Do not describe the current repo as having:
 
-- real AI scenario generation
+- validated AI adaptation during active training
 - clinical validation
 - official EMT/firefighter protocol authority
 - hub-and-spoke deployment
 - projection mapping
 - multimodal sensing
 - full Unreal gameplay
-- generated 3D assets
-- real physics simulation
+- arbitrary automated semantic mesh repair
+- calibrated real-world physics or validated training effectiveness
 - cloud deployment
 
 The current POC is valuable because it is smaller, testable, replayable, and honest.

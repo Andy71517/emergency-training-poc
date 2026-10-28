@@ -1,11 +1,15 @@
-# Reviewed Assets
+# Reviewed assets
 
-Future approved assets belong here.
+Optional local destination for explicitly promoted assets. The accepted wooden
+chair used by room demos is held at the configured workstation `CHAIR_BLEND` path;
+its binary is not included here. The app's variant records live in ignored studio
+storage and are not automatically promoted by copying files into this folder.
 
-An asset should only move here after human review, provenance/licensing review, format checks, performance checks, and explicit approval.
+Promotion needs human geometry/material/scale review, provenance/license review
+and appropriate engine/performance/collision checks. Record the exact revision,
+checksums, reviewer, limitations and intended use. New variants remain unavailable
+to chair-only room assembly until bindings support them.
 
-There are no reviewed assets in the current POC.
-
-Reviewed means the asset passed the repo's POC asset-quality gate.
-
-It does not mean the asset is medically accurate, operationally accurate, physically accurate, or approved for real training.
+Reviewed means a bounded POC quality decision, not medical, operational, physical
+or training certification. [Review workflow](../metadata/asset-review-workflow.md),
+[current status](../../docs/current-status.md).

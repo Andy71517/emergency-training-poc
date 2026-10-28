@@ -1,10 +1,10 @@
 # ARC Hunyuan chair: geometry first
 
-This lane uses Hunyuan3D 2.1 to generate one chair from the reference already on ARC. It has its own environment, cache, output directories, and provenance. TRELLIS.2 remains available after DINOv3 access is granted. The first Hunyuan job generates geometry only; its preview uses a plain shaded material. PBR texture generation is the next milestone after we inspect the mesh.
+This lane uses Hunyuan3D 2.1 to generate one chair from the reference already on ARC. It has its own environment, cache, output directories, and provenance. TRELLIS.2 remains available after DINOv3 access is granted. The first Hunyuan job generates geometry only; its preview uses a plain shaded material. PBR texture generation subsequently completed in job 8053348. Shape job 8052814 and later Blender/Unreal evidence are recorded in [current status](current-status.md). The commands below reproduce the original shape lane; existing runtimes need no rebuild for routine jobs.
 
 ## Before submitting
 
-In an Open OnDemand terminal, from the repository root, fetch and switch to `codex/arc-hunyuan-chair`. Preserve local changes if `git status` shows any. The ignored `arc/.env` is reused. Confirm `ARC_ACCOUNT=research-mel`, `ARC_GPU_PARTITION=a100_normal_q`, and `ARC_GPU_QOS=tc_a100_normal_base` privately; do not paste the whole file.
+In an Open OnDemand terminal, from the repository root, fetch and switch to `main`. Preserve local changes if `git status` shows any. The ignored `arc/.env` is reused. Confirm `ARC_ACCOUNT=research-mel`, `ARC_GPU_PARTITION=a100_normal_q`, and `ARC_GPU_QOS=tc_a100_normal_base` privately; do not paste the whole file.
 
 ```bash
 source arc/scripts/load_arc_config.sh
@@ -51,8 +51,8 @@ If rendering fails after `chair.glb` is written, preserve it and regenerate the 
 
 Use Open OnDemand Files to download the preview/turntable and GLB from the output folder. Inspect the actual result before declaring the lane successful. The first gate is a recognisable chair, usable legs/backrest, and an inspectable GLB. Its physical scale, collision geometry, mass, friction, and Unreal behavior have not been validated.
 
-## Next milestones
+## Downstream review
 
-After the geometry passes visual review, add Hunyuan's texture runtime and generate PBR materials in a subsequent batch. Then do Blender scale/orientation/topology cleanup and create simple collision geometry. Finally import into Unreal and demonstrate Chaos gravity, collision, tipping, and a simple scenario. Keep the existing browser demo and deterministic backend connected to this plan without treating them as proof of ARC generation.
+The original chair passed subsequent texture generation, Blender repair/collision review and user-confirmed Unreal demonstrations. For new designs, use [asset automation](asset-automation-runbook.md) or [manual variants](furniture-variants-runbook.md), then inspect the actual preparation and engine result. Browser/session behavior is separate from ARC generation evidence.
 
-The model has a Tencent community license, not an unrestricted global license. The current license excludes the EU, UK, and South Korea, restricts some downstream uses, and requires disclosure for public AI-generated content. This work is a US-based research demo; recheck terms before wider deployment or distribution. See [official license](https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1/blob/main/LICENSE), [setup](https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1), and [model files](https://huggingface.co/tencent/Hunyuan3D-2.1/tree/main/hunyuan3d-dit-v2-1).
+The model uses a Tencent community license. Keep the exact upstream license/notices with generated outputs and review the applicable terms before wider deployment or distribution; generation success is not a licensing decision. See [official license](https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1/blob/main/LICENSE), [setup](https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1), and [model files](https://huggingface.co/tencent/Hunyuan3D-2.1/tree/main/hunyuan3d-dit-v2-1).

@@ -1,4 +1,6 @@
-# Asset automation and Blender MCP â€” October 26, 2026
+# Asset automation and Blender MCP - October 26, 2026
+
+> Documentation navigation was refreshed October 28: [current status](current-status.md) and [index](README.md). Evidence below remains the October 26 implementation checkpoint, not a new live run.
 
 ## Current batch
 

@@ -7,10 +7,9 @@ without adding another dependency to the POC.
 
 from __future__ import annotations
 
-from pathlib import Path
 import re
 import textwrap
-
+from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 SLIDES_MD = HERE / "project-overview-slides.md"
@@ -150,15 +149,11 @@ def _text(
 
 
 def _phase_label(page_number: int, total_pages: int) -> str:
-    if page_number == 1:
-        return "PROJECT UPDATE"
-    if page_number <= 4:
-        return "WHY THIS SHAPE"
-    if page_number <= 9:
-        return "WHAT EXISTS NOW"
-    if page_number <= 12:
-        return "WHAT COMES NEXT"
-    return "DEMO + FEEDBACK"
+    labels = (
+        "PROJECT UPDATE", "FOUNDATION", "ROOM STUDIO", "ASSET WORKFLOW",
+        "EVIDENCE", "NEXT CHECKS", "BOUNDARIES", "REVIEW + FEEDBACK",
+    )
+    return labels[page_number - 1] if 1 <= page_number <= len(labels) else "PROJECT UPDATE"
 
 
 def _cover_stream(title: str, body: list[str], total_pages: int) -> bytes:
@@ -211,7 +206,7 @@ def _cover_stream(title: str, body: list[str], total_pages: int) -> bytes:
         *_text(
             x=54,
             y=PAGE_HEIGHT - 386,
-            value="Backend truth first. Unreal display next. Immersion later.",
+            value="Traceable plans. Reviewable assets. Measured next steps.",
             font="F1",
             size=13,
             color=(0.86, 0.93, 0.98),
@@ -269,7 +264,7 @@ def _content_stream(title: str, body: list[str], page_number: int, total_pages: 
         *_text(
             x=MARGIN_X,
             y=PAGE_HEIGHT - 73,
-            value="Meeting deck / backend-first local proof / prepared for Dr. Melissa Cameron",
+            value="Meeting deck / FIELDWORK progress / October 28, 2026",
             font="F1",
             size=9.5,
             color=(0.78, 0.84, 0.88),
